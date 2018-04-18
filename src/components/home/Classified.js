@@ -12,7 +12,6 @@ const { Content } = Layout;
 class Classified extends Component {
   constructor(props) {
     super(props);
-    // api/transactions/aggregations/?aggregations=activity_count%2Cincoming_fund%2Cdisbursement&group_by=sector&order_by=activity_count&convert_to=usd&page_size=600&page=1&hierarchy=1&reporting_organisation_identifier=XM-DAC-47066&activity_status=2%2C3%2C4
     this.state = {
       params: {
         aggregations: 'activity_count,incoming_fund,disbursement',
