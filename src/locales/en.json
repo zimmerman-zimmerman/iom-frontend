@@ -1,0 +1,32 @@
+{
+  "main.menu.home": "Home",
+  "main.menu.donors": "Donors",
+  "main.menu.countries": "Countries",
+  "main.menu.services": "Our Services",
+  "main.menu.projects": "Projects",
+  "main.menu.about": "About",
+
+  "banner.title": "IOM Transparency Portal",
+  "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",
+  "banner.detail": "Track money flow from donation to employment. Understanding our mission is the first step to give value to our projects and keep them alive.",
+  "banner.text.text": "In 2016 IOM spent US$ 1,602,307,417 in over 100 countries around the world in seven different service areas.",
+
+  "home.funding.come.title": "Where the Funding Come From",
+  "home.funding.come.button": "See All Publisher Donors",
+  "home.funding.goes.title": "Where the Funding Goes",
+  "home.funding.goes.button": "See All Publisher Services",
+  "home.classified.title": "How the expenditures are classified",
+  "home.classified.button": "See All Published Projects",
+
+  "footer.contact": "Contact us",
+  "footer.follow": "Follow us",
+  "footer.copyright": "© 2018 Migration data portal",
+  "footer.term": "Term of use",
+  "footer.disclaimer": "Disclaimer",
+  "footer.address": "17 Route des Morillos",
+  "footer.city": "1218 Grand-Saconnex",
+  "footer.country": "Switzerland",
+  "footer.phone": "Tel. +41.22.717.9111",
+  "footer.website": "IOM website",
+  "footer.website.url": "www.iom.int"
+}

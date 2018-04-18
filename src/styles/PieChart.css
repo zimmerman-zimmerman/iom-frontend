@@ -1,0 +1,50 @@
+.PieChart {
+    padding: 30px 30px 10px 30px;
+}
+
+.PieChart .Title {
+    font-size: 18px;
+    color: #262626;
+    text-align: center;
+}
+
+.PieChart ul {
+    list-style-type:none;
+    padding: 0;
+}
+
+.PieChart ul li .antd-pro-charts--pie-dot {
+    border-radius: 8px;
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+    top: -1px;
+    height: 8px;
+    width: 8px
+}
+
+.PieChart ul li:after {
+    content: "";
+    margin: 10px 0 10px 0;
+    display: block;
+    border-bottom: 1px solid #ededed;
+}
+
+.g2-tooltip-list li:after {
+    border-bottom: none !important;
+}
+
+.PieChart .antd-pro-charts--pie-total,
+.PieChart ul li .ant-divider,
+.PieChart ul li .antd-pro-charts--pie-percent,
+.PieChart ul li .antd-pro-charts--pie-value{
+    display: none;
+}
+
+.PieChart .antd-pro-charts--pie-legendTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 280px;
+    display: inline-block;
+}
