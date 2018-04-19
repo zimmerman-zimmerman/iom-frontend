@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Breadcrumb, Row, Col, Card, Input, Collapse, Select, DatePicker, Badge, Divider } from 'antd'
+import { Layout, Breadcrumb, Row, Col, Card, Input, Collapse, Select, DatePicker, Badge } from 'antd';
 import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import MainHeader from '../MainHeader';
 import GeoMap from './GeoMap';
+import CountriesTable from './CountriesTable';
 import * as actions from '../../actions';
 import '../../styles/Countries.css';
+import MainFooter from '../MainFooter';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 const Search = Input.Search;
 const Panel = Collapse.Panel;
 const Option = Select.Option;
@@ -49,7 +51,6 @@ class Countries extends Component {
     const { transactionsAggregations } = this.props;
     const data = _.get(transactionsAggregations, 'data');
     const showMap = _.get(data, 'results[0].recipient_country.code');
-    console.log(data);
     return (
       <Layout className='Countries'>
         <Header className="Path-38381">
@@ -180,9 +181,17 @@ class Countries extends Component {
                   <Card className="ShadowBox" style={{height: 450}}/>
                 </Col>
               </Row>
+              <Row>
+                <Col span={24} style={{marginTop: 20}}>
+                  <CountriesTable data={showMap ? _.get(data, 'results') : null}/>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Content>
+        <Footer className="MainFooter">
+          <MainFooter/>
+        </Footer>
       </Layout>
     );
   }

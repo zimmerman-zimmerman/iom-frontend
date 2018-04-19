@@ -51,3 +51,13 @@
     border-bottom: solid 1px #d0d0d0;
     padding-bottom: 15px;
 }
+
+.Countries .CountriesTable tr > th {
+    background: white;
+    font-weight: bold;
+    color: #0033a1;
+}
+
+.Countries .ant-pagination {
+
+}
