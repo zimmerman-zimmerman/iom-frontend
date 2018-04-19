@@ -35,22 +35,50 @@ class Countries extends Component {
     };
   }
 
+  requestFilterRegions(dispatch, params) {
+    const paramsRegion = params;
+    paramsRegion.group_by = 'recipient_region';
+    dispatch(actions.transactionsAggregationsRegionsRequest(paramsRegion))
+  }
+
+  requestFilterCountries(dispatch, params) {
+    const paramsCountry = params;
+    paramsCountry.group_by = 'recipient_country';
+    dispatch(actions.transactionsAggregationsCountriesRequest(paramsCountry))
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
     if (dispatch) {
       if (params) {
         dispatch(actions.transactionsAggregationsRequest(params));
+        this.requestFilterRegions(dispatch, params);
+        this.requestFilterCountries(dispatch, params);
       } else {
         dispatch(actions.transactionsAggregationsInitial());
+        dispatch(actions.transactionsAggregationsRegionsInitial());
+        dispatch(actions.transactionsAggregationsCountriesInitial());
       }
     }
   }
 
   render() {
-    const { transactionsAggregations } = this.props;
+    const {
+      transactionsAggregations,
+      transactionsAggregationsRegions,
+      transactionsAggregationsCountries
+    } = this.props;
     const data = _.get(transactionsAggregations, 'data');
     const showMap = _.get(data, 'results[0].recipient_country.code');
+    const filterRegions = _.get(transactionsAggregationsRegions, 'data.results');
+    let regionOptions = !_.isEmpty(filterRegions) ?
+      filterRegions.map(item => <Option key={item.recipient_region.code}>
+        {item.recipient_region.name}</Option>) : null;
+    const filterCountries = _.get(transactionsAggregationsCountries, 'data.results');
+    const countryOptions = !_.isEmpty(filterCountries) ?
+      filterCountries.map(item => <Option key={item.recipient_country.code}>
+        {item.recipient_country.name}</Option>) : null;
     return (
       <Layout className='Countries'>
         <Header className="Path-38381">
@@ -75,38 +103,38 @@ class Countries extends Component {
               </Row>
               <Row>
                 <Col span={22} style={{ marginTop: 15 }}>
-                  <h3>35 Countries</h3>
+                  <h3>{ showMap ? data.results.length : 0} Countries</h3>
                 </Col>
               </Row>
               <Row>
                 <Col span={22} className="Border Bottom">
-                  <Badge count={20} style={{ backgroundColor: '#f7c989' }}/> Filters
+                  <Badge count={0} style={{ backgroundColor: '#f7c989' }}/> Filter(s)
                 </Col>
               </Row>
               <Row>
                 <Col span={22}>
                   <Collapse bordered={false}>
                     <Panel header="Geo-location" key="1">
-                      <Row>
-                        <Col span={24}>
-                          <Select showSearch style={{ width: '100%' }} placeholder="Select a region">
-                            <Option value="as">Asia</Option>
-                            <Option value="af">Africa</Option>
-                            <Option value="al">America Latin</Option>
-                          </Select>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col span={24} style={{ marginTop: 10 }}>
-                          <Select showSearch style={{ width: '100%' }}
-                                  placeholder="Select a country"
-                                  className="Select">
-                            <Option value="ss">Sudan South</Option>
-                            <Option value="km">Kamerun</Option>
-                            <Option value="ng">Nigeria</Option>
-                          </Select>
-                        </Col>
-                      </Row>
+                      { regionOptions ?
+                        <Row>
+                          <Col span={24}>
+                            <Select showSearch style={{width: '100%'}} placeholder="Select a region">
+                              { regionOptions }
+                            </Select>
+                          </Col>
+                        </Row> : null
+                      }
+                      { countryOptions ?
+                        <Row>
+                          <Col span={24} style={{ marginTop: 10 }}>
+                            <Select showSearch style={{ width: '100%' }}
+                                    placeholder="Select a country"
+                                    className="Select">
+                              { countryOptions }
+                            </Select>
+                          </Col>
+                        </Row> : null
+                      }
                     </Panel>
                     <Panel header="Project types" key="2">
                       <Row>
@@ -143,8 +171,6 @@ class Countries extends Component {
                       </Row>
                     </Panel>
                     <Panel header="Donors" key="5">
-                    </Panel>
-                    <Panel header="Funding amount" key="6">
                     </Panel>
                   </Collapse>
                 </Col>
@@ -200,7 +226,9 @@ class Countries extends Component {
 
 const mapStateToProps = (state, ) => {
   return {
-    transactionsAggregations: state.transactionsAggregations
+    transactionsAggregations: state.transactionsAggregations,
+    transactionsAggregationsRegions: state.transactionsAggregationsRegions,
+    transactionsAggregationsCountries: state.transactionsAggregationsCountries,
   }
 };
 

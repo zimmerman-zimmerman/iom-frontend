@@ -85,3 +85,59 @@ export function transactionsAggregationsFailed(error) {
     error: error
   }
 }
+
+export const TRANSACTIONS_AGGREGATIONS_REGIONS_INITIAL = 'TRANSACTIONS_AGGREGATIONS_REGIONS_INITIAL';
+export const TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST = 'TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST';
+export const TRANSACTIONS_AGGREGATIONS_REGIONS_SUCCESS = 'TRANSACTIONS_AGGREGATIONS_REGIONS_SUCCESS';
+export const TRANSACTIONS_AGGREGATIONS_REGIONS_FAILED = 'TRANSACTIONS_AGGREGATIONS_REGIONS_FAILED';
+export function transactionsAggregationsRegionsInitial() {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_REGIONS_INITIAL
+  }
+}
+export function transactionsAggregationsRegionsRequest(values) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST,
+    values: values
+  }
+}
+export function transactionsAggregationsRegionsSuccess(data) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_REGIONS_SUCCESS,
+    data: data
+  }
+}
+export function transactionsAggregationsRegionsFailed(error) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_REGIONS_FAILED,
+    error: error
+  }
+}
+
+export const TRANSACTIONS_AGGREGATIONS_COUNTRIES_INITIAL = 'TRANSACTIONS_AGGREGATIONS_COUNTRIES_INITIAL';
+export const TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST = 'TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST';
+export const TRANSACTIONS_AGGREGATIONS_COUNTRIES_SUCCESS = 'TRANSACTIONS_AGGREGATIONS_COUNTRIES_SUCCESS';
+export const TRANSACTIONS_AGGREGATIONS_COUNTRIES_FAILED = 'TRANSACTIONS_AGGREGATIONS_COUNTRIES_FAILED';
+export function transactionsAggregationsCountriesInitial() {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_COUNTRIES_INITIAL
+  }
+}
+export function transactionsAggregationsCountriesRequest(values) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST,
+    values: values
+  }
+}
+export function transactionsAggregationsCountriesSuccess(data) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_COUNTRIES_SUCCESS,
+    data: data
+  }
+}
+export function transactionsAggregationsCountriesFailed(error) {
+  return {
+    type: TRANSACTIONS_AGGREGATIONS_COUNTRIES_FAILED,
+    error: error
+  }
+}

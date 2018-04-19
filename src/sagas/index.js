@@ -30,6 +30,24 @@ export function* transactionsAggregationsRequest(action) {
   }
 }
 
+export function* transactionsAggregationsRegionsRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.transactionsAggregationsRegionsSuccess(response));
+  } catch (error) {
+    yield put(actions.transactionsAggregationsRegionsFailed(error));
+  }
+}
+
+export function* transactionsAggregationsCountriesRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.transactionsAggregationsCountriesSuccess(response));
+  } catch (error) {
+    yield put(actions.transactionsAggregationsCountriesFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest(
@@ -38,6 +56,8 @@ function* sagas() {
     ),
     takeLatest('ACTIVITIES_REQUEST', activitiesRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_REQUEST', transactionsAggregationsRequest),
+    takeLatest('TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST', transactionsAggregationsRegionsRequest),
+    takeLatest('TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST', transactionsAggregationsCountriesRequest),
   ]
 }
 
