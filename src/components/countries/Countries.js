@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Breadcrumb, Row, Col, Card } from 'antd'
+import { Layout, Breadcrumb, Row, Col, Card, Input, Collapse, Select, DatePicker, Badge, Divider } from 'antd'
 import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom'
@@ -11,6 +11,10 @@ import * as actions from '../../actions';
 import '../../styles/Countries.css';
 
 const { Header, Content } = Layout;
+const Search = Input.Search;
+const Panel = Collapse.Panel;
+const Option = Select.Option;
+const { RangePicker } = DatePicker;
 
 class Countries extends Component {
   constructor(props) {
@@ -57,8 +61,93 @@ class Countries extends Component {
             <Breadcrumb.Item>Countries</Breadcrumb.Item>
             <Breadcrumb.Item className="Active">Funding by countries</Breadcrumb.Item>
           </Breadcrumb>
-          <Row>
+          <Row style={{marginTop: 15}} className="Search">
             <Col span={5}>
+              <Row>
+                <Col span={24}>
+                  <Row>
+                    <Col span={22}>
+                      <Search placeholder="Search" enterButton/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={22} style={{ marginTop: 15 }}>
+                  <h3>35 Countries</h3>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={22} className="Border Bottom">
+                  <Badge count={20} style={{ backgroundColor: '#f7c989' }}/> Filters
+                </Col>
+              </Row>
+              <Row>
+                <Col span={22}>
+                  <Collapse bordered={false}>
+                    <Panel header="Geo-location" key="1">
+                      <Row>
+                        <Col span={24}>
+                          <Select showSearch style={{ width: '100%' }} placeholder="Select a region">
+                            <Option value="as">Asia</Option>
+                            <Option value="af">Africa</Option>
+                            <Option value="al">America Latin</Option>
+                          </Select>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col span={24} style={{ marginTop: 10 }}>
+                          <Select showSearch style={{ width: '100%' }}
+                                  placeholder="Select a country"
+                                  className="Select">
+                            <Option value="ss">Sudan South</Option>
+                            <Option value="km">Kamerun</Option>
+                            <Option value="ng">Nigeria</Option>
+                          </Select>
+                        </Col>
+                      </Row>
+                    </Panel>
+                    <Panel header="Project types" key="2">
+                      <Row>
+                        <Col span={24}>
+                          <Select showSearch style={{ width: '100%' }}
+                                  placeholder="Select a project type"
+                                  className="Select">
+                            <Option value="ed">Education</Option>
+                            <Option value="ag">Agriculture</Option>
+                          </Select>
+                        </Col>
+                      </Row>
+                    </Panel>
+                    <Panel header="Project status" key="3">
+                      <Row>
+                        <Col span={24}>
+                          <Select showSearch style={{ width: '100%' }}
+                                  placeholder="Select a status"
+                                  className="Select"
+                                  mode="multiple"
+                          >
+                            <Option value="2">Completion</Option>
+                            <Option value="3">Implementation</Option>
+                            <Option value="4">Post Completion </Option>
+                          </Select>
+                        </Col>
+                      </Row>
+                    </Panel>
+                    <Panel header="Start - end date" key="4">
+                      <Row>
+                        <Col span={24}>
+                          <RangePicker/>
+                        </Col>
+                      </Row>
+                    </Panel>
+                    <Panel header="Donors" key="5">
+                    </Panel>
+                    <Panel header="Funding amount" key="6">
+                    </Panel>
+                  </Collapse>
+                </Col>
+              </Row>
             </Col>
             <Col span={19}>
               <Row>

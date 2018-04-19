@@ -36,3 +36,18 @@
 .Countries .Content .ShadowBox {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
+
+.Countries input, .Countries .Select, .Countries .ant-select-selection, .Countries .ant-input {
+    border-radius: 0;
+}
+
+.Countries .Search button {
+    background-color: #418fde;
+    border-color: #418fde;
+    padding: 0 10px;
+}
+
+.Countries .Border.Bottom {
+    border-bottom: solid 1px #d0d0d0;
+    padding-bottom: 15px;
+}
