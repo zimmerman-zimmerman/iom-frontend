@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Breadcrumb, Row, Col, Card, Input, Collapse, Select, DatePicker, Badge, Spin } from 'antd';
+import { Layout, Breadcrumb, Row, Col, Input, Collapse, Select, DatePicker, Badge, Spin } from 'antd';
 import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import CountriesTable from './CountriesTable';
 import * as actions from '../../actions';
 import '../../styles/Countries.css';
 import MainFooter from '../MainFooter';
+import Summary from './Summary';
 
 const { Header, Content, Footer } = Layout;
 const Search = Input.Search;
@@ -47,7 +48,7 @@ class Countries extends Component {
       delete filters.values[fieldName];
     }
     if (!_.isEmpty(values)) {
-      filters.values[fieldName] = _.isObject(values[0]) ? values.join() : values;
+      filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
     filters.changed = true;
     this.setState({filters: filters});
@@ -161,7 +162,9 @@ class Countries extends Component {
                 </Row>
                 <Row>
                   <Col span={22} style={{ marginTop: 15 }}>
-                    <h3>{ showMap ? data.results.length : 0} Countries</h3>
+                    <h3>
+                      { showMap ? data.results.length > 1 ? `${data.results.length} Countries` : `1 Country` : null}
+                    </h3>
                   </Col>
                 </Row>
                 <Row>
@@ -283,7 +286,7 @@ class Countries extends Component {
                     </div>
                   </Col>
                   <Col span={5}>
-                    <Card className="ShadowBox" style={{height: 450}}/>
+                    <Summary data={showMap ? _.get(data, 'results') : null}/>
                   </Col>
                 </Row>
                 <Row>
