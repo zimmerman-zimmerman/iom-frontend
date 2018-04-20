@@ -47,7 +47,7 @@ class Countries extends Component {
       delete filters.values[fieldName];
     }
     if (!_.isEmpty(values)) {
-      filters.values[fieldName] = values.join();
+      filters.values[fieldName] = _.isObject(values[0]) ? values.join() : values;
     }
     filters.changed = true;
     this.setState({filters: filters});
@@ -151,7 +151,10 @@ class Countries extends Component {
                   <Col span={24}>
                     <Row>
                       <Col span={22}>
-                        <Search placeholder="Search" enterButton/>
+                        <Search placeholder="Search"
+                                onSearch={value => this.addFilters('q', value)}
+                                enterButton
+                        />
                       </Col>
                     </Row>
                   </Col>
