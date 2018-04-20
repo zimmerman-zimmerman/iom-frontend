@@ -48,6 +48,33 @@ export function* transactionsAggregationsCountriesRequest(action) {
   }
 }
 
+export function* transactionsAggregationsActivityStatusRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.transactionsAggregationsActivityStatusSuccess(response));
+  } catch (error) {
+    yield put(actions.transactionsAggregationsActivityStatusFailed(error));
+  }
+}
+
+export function* transactionsAggregationsSectorRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.transactionsAggregationsSectorSuccess(response));
+  } catch (error) {
+    yield put(actions.transactionsAggregationsSectorFailed(error));
+  }
+}
+
+export function* transactionsAggregationsParticipatingOrganisationRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.transactionsAggregationsParticipatingOrganisationSuccess(response));
+  } catch (error) {
+    yield put(actions.transactionsAggregationsParticipatingOrganisationFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest(
@@ -58,6 +85,12 @@ function* sagas() {
     takeLatest('TRANSACTIONS_AGGREGATIONS_REQUEST', transactionsAggregationsRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST', transactionsAggregationsRegionsRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST', transactionsAggregationsCountriesRequest),
+    takeLatest('TRANSACTIONS_AGGREGATIONS_ACTIVITY_STATUS_REQUEST', transactionsAggregationsActivityStatusRequest),
+    takeLatest('TRANSACTIONS_AGGREGATIONS_SECTOR_REQUEST', transactionsAggregationsSectorRequest),
+    takeLatest(
+      'TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_REQUEST',
+      transactionsAggregationsParticipatingOrganisationRequest
+    ),
   ]
 }
 
