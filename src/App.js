@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import './styles/App.css';
+import './styles/App.less';
 
 import Home from './components/home/Home';
 import Donors from './components/Donors';

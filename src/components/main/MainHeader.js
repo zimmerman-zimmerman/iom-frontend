@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col } from 'antd';
 
 import MainMenu from './MainMenu';
-import logo from '../assets/logo.svg';
+import MainShare from './MainShare';
+import logo from '../../assets/logo.svg';
+import '../../styles/main/MainHeader.scss';
 
 class MainHeader extends Component {
   render() {
     return (
-      <Row>
+      <Row className="MainHeader">
         <Col span={9}>
           <img src={logo} alt="logo" className="Logo"/>
         </Col>
@@ -19,14 +21,7 @@ class MainHeader extends Component {
           </Row>
         </Col>
         <Col span={3}>
-          <Row>
-            <Col span={24} className="Share">
-              <Button shape="circle" icon="twitter"/>
-              <Button shape="circle" icon="facebook"/>
-              <Button shape="circle" icon="wifi" style={{transform: "rotate(50deg)"}}/>
-              <Button shape="circle" icon="share-alt"/>
-            </Col>
-          </Row>
+          <MainShare/>
         </Col>
       </Row>
     )

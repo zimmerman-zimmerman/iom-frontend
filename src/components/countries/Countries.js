@@ -5,13 +5,14 @@ import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom';
 
-import MainHeader from '../MainHeader';
+import MainHeader from '../main/MainHeader';
 import GeoMap from './GeoMap';
 import CountriesTable from './CountriesTable';
 import * as actions from '../../actions';
 import '../../styles/Countries.css';
 import MainFooter from '../MainFooter';
 import Summary from './Summary';
+import Filters from "./Filters";
 
 const { Header, Content, Footer } = Layout;
 const Search = Input.Search;
@@ -200,6 +201,7 @@ class Countries extends Component {
                             </Col>
                           </Row> : null
                         }
+                        <Filters/>
                       </Panel>
                       <Panel header="Project types" key="2">
                         <Row>

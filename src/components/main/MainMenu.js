@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { withRouter } from 'react-router-dom';
 import {connect} from "react-redux";
 
-import '../styles/MainMenu.css';
+import '../../styles/main/MainMenu.scss';
 
 class MainMenu extends Component {
   handleClick = (e) => {

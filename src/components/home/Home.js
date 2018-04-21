@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 import '../../styles/Home.css';
 
 import * as actions from '../../actions';
-import MainHeader from '../MainHeader';
+import MainHeader from '../main/MainHeader';
 import Banner from '../Banner';
 import BannerText from '../BannerText';
 import PieChart from '../PieChart';

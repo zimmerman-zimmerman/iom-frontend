@@ -188,13 +188,22 @@ module.exports = {
               },
             ],
           },
-          // SCSS support
+          // SASS support
           {
             test: /\.scss$/,
             loaders: [
               require.resolve("style-loader"),
               require.resolve("css-loader"),
               require.resolve("sass-loader")
+            ]
+          },
+          // LESS Support
+          {
+            test: /\.less$/,
+            loaders: [
+              require.resolve("style-loader"),
+              require.resolve("css-loader"),
+              require.resolve("less-loader")
             ]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
