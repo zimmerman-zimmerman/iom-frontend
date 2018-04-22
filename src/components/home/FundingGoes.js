@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
 import * as actions from '../../actions';
-import PieChart from '../PieChart';
+import PieChart from './PieChart';
 
 const { Content } = Layout;
 
