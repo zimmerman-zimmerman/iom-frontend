@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout, Breadcrumb, Row, Col, Spin } from 'antd';
+import { Layout, Row, Col, Spin } from 'antd';
 import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
-import { Link } from 'react-router-dom';
 
 import MainHeader from '../main/MainHeader';
 import GeoMap from './GeoMap';
@@ -14,6 +13,7 @@ import Summary from './Summary';
 import Filters from "./filters/Filters";
 import BaseFilter from "./filters/BaseFilter";
 import '../../styles/Countries.css';
+import CountriesBreadcrumb from "./CountriesBreadcrumb";
 
 const { Header, Content, Footer } = Layout;
 
@@ -38,11 +38,7 @@ class Countries extends BaseFilter {
             <MainHeader/>
           </Header>
           <Content className="Content">
-            <Breadcrumb className="Breadcrumb" separator=">">
-              <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-              <Breadcrumb.Item>Countries</Breadcrumb.Item>
-              <Breadcrumb.Item className="Active">Funding by countries</Breadcrumb.Item>
-            </Breadcrumb>
+            <CountriesBreadcrumb/>
             <Row style={{marginTop: 15}} className="Search">
               <Col span={5}>
                 <Filters data={data}/>
