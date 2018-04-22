@@ -5,15 +5,15 @@ import _ from 'lodash';
 import { FormattedMessage } from "react-intl";
 
 import MainHeader from '../main/MainHeader';
-import GeoMap from './GeoMap';
+import GeoMap from './maps/GeoMap';
 import CountriesTable from './CountriesTable';
 import * as actions from '../../actions';
 import MainFooter from '../MainFooter';
 import Summary from './Summary';
 import Filters from "./filters/Filters";
 import BaseFilter from "./filters/BaseFilter";
-import '../../styles/Countries.css';
 import CountriesBreadcrumb from "./CountriesBreadcrumb";
+import '../../styles/Countries.css';
 
 const { Header, Content, Footer } = Layout;
 
