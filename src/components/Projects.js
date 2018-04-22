@@ -9,7 +9,7 @@ class Projects extends Component {
   render() {
     return (
       <Layout>
-        <Header className="Path-38381">
+        <Header className="Header">
           <MainHeader/>
         </Header>
       </Layout>

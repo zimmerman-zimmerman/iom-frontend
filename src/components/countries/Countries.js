@@ -34,7 +34,7 @@ class Countries extends BaseFilter {
     return (
       <Spin spinning={loading}>
         <Layout className='Countries'>
-          <Header className="Path-38381">
+          <Header className="Header">
             <MainHeader/>
           </Header>
           <Content className="Content">

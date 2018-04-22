@@ -8,7 +8,7 @@ import MainFooter from '../MainFooter';
 import FundingCome from './FundingCome';
 import FundingGoes from './FundingGoes';
 import Classified from './Classified';
-import '../../styles/Home.css';
+import '../../styles/home/Home.scss';
 
 const { Header, Content, Footer } = Layout;
 
@@ -16,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <Layout className="Home">
-        <Header className="Path-38381">
+        <Header className="Header">
           <MainHeader/>
         </Header>
         <Content>
