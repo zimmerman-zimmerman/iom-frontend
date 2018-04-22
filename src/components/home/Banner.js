@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Row, Col, Card } from 'antd';
 import { FormattedMessage } from "react-intl";
 
-import '../styles/home/Banner.css';
+import '../../styles/home/Banner.css';
 
 const { Content } = Layout;
 

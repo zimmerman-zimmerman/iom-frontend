@@ -8,7 +8,7 @@ import MainHeader from '../main/MainHeader';
 import GeoMap from './maps/GeoMap';
 import CountriesTable from './CountriesTable';
 import * as actions from '../../actions';
-import MainFooter from '../MainFooter';
+import MainFooter from '../main/MainFooter';
 import Summary from './Summary';
 import Filters from "./filters/Filters";
 import BaseFilter from "./filters/BaseFilter";

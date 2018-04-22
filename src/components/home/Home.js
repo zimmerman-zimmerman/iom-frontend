@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
 
 import MainHeader from '../main/MainHeader';
-import Banner from '../Banner';
-import BannerText from '../BannerText';
-import MainFooter from '../MainFooter';
+import Banner from './Banner';
+import BannerText from './BannerText';
+import MainFooter from '../main/MainFooter';
 import FundingCome from './FundingCome';
 import FundingGoes from './FundingGoes';
 import Classified from './Classified';
