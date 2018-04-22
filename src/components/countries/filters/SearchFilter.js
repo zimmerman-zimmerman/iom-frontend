@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'antd';
 
 import BaseFilter from "./BaseFilter";
-
+import {connect} from "react-redux";
 
 const Search = Input.Search;
 
@@ -16,7 +16,10 @@ class SearchFilter extends BaseFilter {
       />
     )
   }
-
 }
 
-export default SearchFilter;
+const mapStateToProps = (state, props) => {
+  return {}
+};
+
+export default connect(mapStateToProps)(SearchFilter);

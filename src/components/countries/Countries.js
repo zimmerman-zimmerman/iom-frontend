@@ -66,7 +66,7 @@ class Countries extends BaseFilter {
                 </Row>
                 <Row>
                   <Col span={19}>
-                    <div className="ShadowBox">
+                    <div className="ShadowBox" style={{height: 450}}>
                       { showMap ?
                         <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
                                 tabName="activities"

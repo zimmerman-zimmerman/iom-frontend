@@ -3,6 +3,7 @@ import { DatePicker } from 'antd';
 
 import BaseFilter from "./BaseFilter";
 import _ from "lodash";
+import {connect} from "react-redux";
 
 const { RangePicker } = DatePicker;
 
@@ -29,4 +30,8 @@ class StartEndDateFilter extends BaseFilter {
 
 }
 
-export default StartEndDateFilter;
+const mapStateToProps = (state, props) => {
+  return {}
+};
+
+export default connect(mapStateToProps)(StartEndDateFilter);

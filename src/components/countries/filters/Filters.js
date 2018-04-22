@@ -33,6 +33,7 @@ class Filters extends Component {
                   placeholder={
                     intl.formatMessage({id: 'countries.filters.search.placeholder', defaultMessage: 'Search'})
                   }
+                  fieldName="q"
                 />
               </Col>
             </Row>
@@ -83,7 +84,7 @@ class Filters extends Component {
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
-                      id: 'countries.filters.project.type.placeholder', defaultMessage: 'Select project type'
+                      id: 'countries.filters.project.types.placeholder', defaultMessage: 'Select project type'
                     })
                   }
                   reducerName="transactionsAggregationsSector"
