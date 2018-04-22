@@ -36,6 +36,11 @@
   "countries.summary": "Summary",
   "countries.summary.total": "Total budget",
   "countries.summary.projects": "Projects",
+  "countries.table.country": "Country name",
+  "countries.table.budget": "Budget",
+  "countries.table.count": "Project count",
+  "countries.table.region": "Region",
+
 
   "footer.contact": "Contact us",
   "footer.follow": "Follow us",

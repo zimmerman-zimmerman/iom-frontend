@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'antd';
 import _ from 'lodash';
 import d3 from "d3/d3";
+import { injectIntl, intlShape } from "react-intl";
 
 class CountriesTable extends Component {
   addKey(dataSource) {
@@ -13,23 +14,23 @@ class CountriesTable extends Component {
     return data;
   }
   render() {
-    const { data } = this.props;
+    const { intl, data } = this.props;
     const columns = [{
-      title: 'Country name',
+      title: intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'}),
       dataIndex: 'recipient_country',
       key: 'recipient_country',
       render: recipient_country => <span>{recipient_country.name}</span>,
     }, {
-      title: 'Budget',
+      title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
       render: value => <span>{d3.format(".2s")(value).replace(/G/, "B")}</span>
     }, {
-      title: 'Projects count',
+      title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',
       key: 'count',
     },{
-      title: 'Region',
+      title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
       dataIndex: 'recipient_country',
       key: 'region',
       render: recipient_country => <span>{recipient_country.region.name}</span>,
@@ -40,4 +41,8 @@ class CountriesTable extends Component {
   }
 }
 
-export default CountriesTable;
+CountriesTable.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(CountriesTable);
