@@ -41,7 +41,7 @@ class Countries extends BaseFilter {
             <CountriesBreadcrumb/>
             <Row style={{marginTop: 15}} className="Search">
               <Col span={5}>
-                <Filters data={data}/>
+                <Filters data={data} rootComponent={this}/>
               </Col>
               <Col span={19}>
                 <Row>

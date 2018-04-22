@@ -28,8 +28,8 @@ class BaseFilter extends Component {
   }
 
   handleChange(values) {
-    const { fieldName } = this.props;
-    const { filters } = this.state;
+    const { fieldName, rootComponent } = this.props;
+    const { filters } = rootComponent.state;
     if (_.get(filters.values, fieldName)) {
       delete filters.values[fieldName];
     }
@@ -37,18 +37,21 @@ class BaseFilter extends Component {
       filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
     filters.changed = true;
-    this.setState({filters: filters});
+    rootComponent.setState({filters: filters});
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { filters } = this.state;
-    if (filters.changed) {
-      const { params } = this.state;
-      this.actionRequest(
-        _.extend({}, params, filters.values), 'recipient_country', actions.transactionsAggregationsRequest
-      );
-      filters.changed = false;
-      this.setState({filters: filters})
+    const rootComponent = _.get(this.props, 'rootComponent');
+    if (rootComponent) {
+      const { filters } = rootComponent.state;
+      if (filters.changed) {
+        const {params} = this.state;
+        this.actionRequest(
+          _.extend({}, params, filters.values), 'recipient_country', actions.transactionsAggregationsRequest
+        );
+        filters.changed = false;
+        rootComponent.setState({filters: filters})
+      }
     }
   }
 }

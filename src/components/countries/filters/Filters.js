@@ -22,7 +22,8 @@ class Filters extends Component {
   }
 
   render() {
-    const { intl } = this.props;
+    const { intl, rootComponent } = this.props;
+    const filterCount = _.size(_.get(rootComponent, 'state.filters.values'));
     return(
       <Content className="Filters">
         <Row>
@@ -30,6 +31,7 @@ class Filters extends Component {
             <Row>
               <Col span={22}>
                 <SearchFilter
+                  rootComponent={rootComponent}
                   placeholder={
                     intl.formatMessage({id: 'countries.filters.search.placeholder', defaultMessage: 'Search'})
                   }
@@ -48,7 +50,10 @@ class Filters extends Component {
         </Row>
         <Row>
           <Col span={22} className="BorderBottom">
-            <Badge count={0} showZero={true} style={{ backgroundColor: '#f7c989' }}/>
+            <Badge count={filterCount}
+                   showZero={true}
+                   style={{ backgroundColor: '#f7c989' }}
+            />
             <span style={{marginLeft: 5}}>
               <FormattedMessage id="countries.filters.count" defaultMessage="Filter(s)"/>
             </span>
@@ -61,6 +66,7 @@ class Filters extends Component {
                      key="1"
               >
                 <Filter
+                  rootComponent={rootComponent}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -81,6 +87,7 @@ class Filters extends Component {
                      key="2"
               >
                 <Filter
+                  rootComponent={rootComponent}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -101,6 +108,7 @@ class Filters extends Component {
                      key="3"
               >
                 <Filter
+                  rootComponent={rootComponent}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -120,7 +128,7 @@ class Filters extends Component {
               )}
                      key="4"
               >
-                <StartEndDateFilter/>
+                <StartEndDateFilter rootComponent={rootComponent}/>
               </Panel>
               <Panel header={intl.formatMessage({
                 id: 'countries.filters.participating.organisation', defaultMessage: 'Donors'}
@@ -128,6 +136,7 @@ class Filters extends Component {
                      key="5"
               >
                 <Filter
+                  rootComponent={rootComponent}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
