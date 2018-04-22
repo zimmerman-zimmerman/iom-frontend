@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Spin } from 'antd';
 import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
@@ -46,31 +46,33 @@ class Classified extends Component {
       data.push({x: x, y: y})
     });
     return (
-      <Layout>
-        <Content className="Graphs">
-          <Row style={{minHeight: 389}}>
-            <Col span={24}>
-              <PieChart
-                title={
-                  <FormattedMessage id="home.classified.title"
-                                    defaultMessage="How the expenditures are classified"
-                  />
-                }
-                data={_.slice(data, 0, 5)} height={180}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="Pad">
-              <Button className="Button">
-                <FormattedMessage id="home.classified.button"
-                                  defaultMessage="See All Published Projects"
+      <Spin spinning={transactionsAggregations.request}>
+        <Layout>
+          <Content className="Graphs">
+            <Row style={{minHeight: 389}}>
+              <Col span={24}>
+                <PieChart
+                  title={
+                    <FormattedMessage id="home.classified.title"
+                                      defaultMessage="How the expenditures are classified"
+                    />
+                  }
+                  data={_.slice(data, 0, 5)} height={180}
                 />
-              </Button>
-            </Col>
-          </Row>
-        </Content>
-      </Layout>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24} className="Pad">
+                <Button className="Button">
+                  <FormattedMessage id="home.classified.button"
+                                    defaultMessage="See All Published Projects"
+                  />
+                </Button>
+              </Col>
+            </Row>
+          </Content>
+        </Layout>
+      </Spin>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Spin } from 'antd';
 import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
@@ -45,31 +45,33 @@ class FundingCome extends Component {
       data.push({x: x, y: y})
     });
     return (
-      <Layout>
-        <Content className="Graphs">
-          <Row>
-            <Col span={24}>
-              <PieChart
-                title={
-                  <FormattedMessage id="home.funding.come.title"
-                                    defaultMessage="Where the Funding Come From"
-                  />
-                }
-                data={_.slice(data, 0, 5)} height={180}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="Pad">
-              <Button className="Button">
-                <FormattedMessage id="home.funding.come.button"
-                                  defaultMessage="See All Publisher Donors"
+      <Spin spinning={transactionsAggregationsParticipatingOrganisation.request}>
+        <Layout>
+          <Content className="Graphs">
+            <Row>
+              <Col span={24}>
+                <PieChart
+                  title={
+                    <FormattedMessage id="home.funding.come.title"
+                                      defaultMessage="Where the Funding Come From"
+                    />
+                  }
+                  data={_.slice(data, 0, 5)} height={180}
                 />
-              </Button>
-            </Col>
-          </Row>
-        </Content>
-      </Layout>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24} className="Pad">
+                <Button className="Button">
+                  <FormattedMessage id="home.funding.come.button"
+                                    defaultMessage="See All Publisher Donors"
+                  />
+                </Button>
+              </Col>
+            </Row>
+          </Content>
+        </Layout>
+      </Spin>
     )
   }
 }
