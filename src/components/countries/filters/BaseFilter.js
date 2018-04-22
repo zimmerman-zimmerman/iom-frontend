@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import _ from "lodash";
 
-import * as actions from "../../actions";
+import * as actions from "../../../actions/index";
 
 class BaseFilter extends Component {
   constructor(props) {

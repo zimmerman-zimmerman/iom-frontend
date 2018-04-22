@@ -1,15 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
-import { Select } from 'antd';
+import { Select, Spin, Layout } from 'antd';
 import { connect } from "react-redux";
 
 import BaseFilter from "./BaseFilter";
 
 const Option = Select.Option;
+const { Content } = Layout;
 
 class Filter extends BaseFilter {
   componentDidMount() {
-    console.log(this.props);
     const { dispatch, actionRequest, groupBy } = this.props;
     const { params } = this.state;
     if (dispatch) {
@@ -17,14 +17,16 @@ class Filter extends BaseFilter {
     }
   }
 
-  options(results, optionKeyName, optionValueName) {
+  options(results) {
+    const { optionKeyName, optionValueName } = this.props;
     return results.map(item => <Option key={_.get(item, optionKeyName)}>{_.get(item, optionValueName)}</Option>)
   }
 
-  select(placeholder, options) {
+  select(options) {
+    const { placeholder, style } = this.props;
     return (
       <Select showSearch
-              style={{ width: '100%' }}
+              style={style}
               placeholder={placeholder}
               className="Select"
               mode="multiple"
@@ -35,16 +37,23 @@ class Filter extends BaseFilter {
   }
 
   render() {
-    const { placeholder, state, optionKeyName, optionValueName } = this.props;
-    const results = _.get(state, 'data.results');
-    const options = !_.isEmpty(results) ? this.options(results, optionKeyName, optionValueName) : null;
-    return options ? this.select(placeholder, options) : null;
+    const { reducer, style } = this.props;
+    const results = _.get(reducer, 'data.results');
+    const options = !_.isEmpty(results) ? this.options(results) : null;
+    return (
+      <Spin spinning={reducer.request}>
+        <Content style={style}>
+          {options ? this.select(options) : null}
+        </Content>
+      </Spin>
+    )
   }
 }
 
 const mapStateToProps = (state, props) => {
+  const { reducerName } = props;
   return {
-    state: _.get(state, _.get(props, 'reducerName'))
+    reducer: _.get(state, reducerName)
   }
 };
 
