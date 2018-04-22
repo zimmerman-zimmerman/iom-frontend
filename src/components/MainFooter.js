@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Row, Col, Button, Divider } from 'antd';
 import { FormattedMessage } from "react-intl";
 
-import '../styles/MainFooter.css';
+import '../styles/main/MainFooter.css';
 
 class MainFooter extends Component {
   render() {
