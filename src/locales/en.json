@@ -33,6 +33,9 @@
   "countries.filters.participating.organisation": "Donors",
   "countries.filters.participating.organisation.placeholder": "Select donor",
   "countries.filters.start.end.date": "Start - end date",
+  "countries.summary": "Summary",
+  "countries.summary.total": "Total budget",
+  "countries.summary.projects": "Projects",
 
   "footer.contact": "Contact us",
   "footer.follow": "Follow us",

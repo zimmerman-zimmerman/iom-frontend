@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Divider, Row, Col } from 'antd';
 import d3 from "d3/d3";
+import { FormattedMessage } from "react-intl";
 
 class Summary extends Component {
   render() {
@@ -15,7 +16,7 @@ class Summary extends Component {
     }
     return (
       <Card className="ShadowBox" style={{height: 450}}>
-        <h4>Summary</h4>
+        <h4><FormattedMessage id="countries.summary" defaultMessage="Summary"/></h4>
         <Divider className="Divider"/>
         <Row>
           <Col span={24}>
@@ -24,7 +25,7 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col span={24} style={{color: '#959595', fontSize: 11}}>
-            Total budget
+            <FormattedMessage id="countries.summary.total" defaultMessage="Total budget"/>
           </Col>
         </Row>
         <Row style={{marginTop: 15}}>
@@ -34,7 +35,7 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col span={24} style={{color: '#959595', fontSize: 11}}>
-            Projects
+            <FormattedMessage id="countries.summary.projects" defaultMessage="Projects"/>
           </Col>
         </Row>
       </Card>
