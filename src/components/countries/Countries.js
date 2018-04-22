@@ -13,7 +13,7 @@ import Summary from './Summary';
 import Filters from "./filters/Filters";
 import BaseFilter from "./filters/BaseFilter";
 import CountriesBreadcrumb from "./CountriesBreadcrumb";
-import '../../styles/Countries.css';
+import '../../styles/countries/Countries.scss';
 
 const { Header, Content, Footer } = Layout;
 
