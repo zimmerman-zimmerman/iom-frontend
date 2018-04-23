@@ -9,8 +9,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import reducers from './reducers';
-import sagas from './sagas';
+import reducers from './services/reducers';
+import sagas from './services/sagas';
 import './index.css';
 import App from './App';
 

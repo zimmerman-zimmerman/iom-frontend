@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Layout } from 'antd';
 
-import '../../styles/main/MainShare.scss';
+import './styles/MainShare.scss';
 
 const { Content } = Layout;
 

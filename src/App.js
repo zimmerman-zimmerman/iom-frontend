@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './styles/App.less';
 
-import Home from './components/home/Home';
-import Donors from './components/Donors';
-import Countries from './components/countries/Countries';
-import Services from "./components/Services";
-import Projects from "./components/Projects";
-import About from "./components/About";
+import Home from './scenes/home/Home';
+import Donors from './scenes/donors/Donors';
+import Countries from './scenes/countries/Countries';
+import Services from "./scenes/services/Services";
+import Projects from "./scenes/projects/Projects";
+import About from "./scenes/about/About";
 
 class App extends Component {
   render() {

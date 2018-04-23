@@ -31,16 +31,6 @@ function handleRequest(url, values=null, method='post') {
   return fetch(url, request).then(handleResponse)
 }
 
-export function transactionAggregationByParticipatingOrganisationRequest(reportingOrganisationIdentifier) {
-  const path = '/api/transactions/aggregations/?format=json&aggregations=value&group_by=participating_organisation&' +
-    'order_by=-value&convert_to=usd&page_size=10&page=1&' +
-    'reporting_organisation_identifier='.concat(reportingOrganisationIdentifier);
-  return fetch(process.env.REACT_APP_OIPA_HOST.concat(path), {
-    method: 'get'
-  }).then(handleResponse)
-}
-
-
 function hostURL(url) {
   return process.env.REACT_APP_OIPA_HOST.concat(url)
 }
