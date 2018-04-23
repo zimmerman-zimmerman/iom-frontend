@@ -40,7 +40,9 @@
   "countries.table.budget": "Budget",
   "countries.table.count": "Project count",
   "countries.table.region": "Region",
-
+  "countries.breadcrumb.home": "Home",
+  "countries.breadcrumb.countries": "Countries",
+  "countries.breadcrumb.funding": "Funding by countries",
 
   "footer.contact": "Contact us",
   "footer.follow": "Follow us",
