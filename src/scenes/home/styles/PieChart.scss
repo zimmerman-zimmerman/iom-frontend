@@ -1,0 +1,55 @@
+@import "../../../styles/variables";
+
+.PieChart {
+  padding: 30px 30px 10px 30px;
+  min-height: 479px;
+  max-height: 479px;
+  .Title {
+    font-size: 18px;
+    color: #262626;
+    text-align: center;
+    min-height: 40px;
+    max-height: 40px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      .antd-pro-charts--pie-dot {
+        border-radius: 8px;
+        display: inline-block;
+        margin-right: 8px;
+        position: relative;
+        top: -1px;
+        height: 8px;
+        width: 8px
+      }
+      &:after {
+        content: "";
+        margin: 10px 0 10px 0;
+        display: block;
+        border-bottom: $borderLight;
+      }
+      .ant-divider, .antd-pro-charts--pie-percent, .antd-pro-charts--pie-value {
+        display: none;
+      }
+    }
+  }
+  .g2-tooltip-list {
+    li {
+      &:after {
+        border-bottom: none !important;
+      }
+    }
+  }
+  .antd-pro-charts--pie-legendTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 90%;
+    display: inline-block;
+  }
+  .antd-pro-charts--pie-total {
+    display: none;
+  }
+}

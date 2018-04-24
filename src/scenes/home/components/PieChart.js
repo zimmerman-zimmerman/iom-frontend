@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Pie } from 'ant-design-pro/lib/Charts';
 
-import '../styles/PieChart.css';
+import '../styles/PieChart.scss';
 
 class PieChart extends Component {
   render() {

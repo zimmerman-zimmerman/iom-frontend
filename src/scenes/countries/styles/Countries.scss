@@ -1,10 +1,12 @@
+@import "../../../styles/variables";
+
 .Countries {
   .Content {
     padding: 0 50px;
     background: white;
     .Breadcrumb {
       padding: 7px 0;
-      border-bottom: solid 1px #d0d0d0;
+      border-bottom: $border;
       margin-bottom: 5px;
       color: #262626;
       font-size: 12px;
@@ -19,19 +21,19 @@
       padding-bottom: 20px;
     }
     .ShadowBox {
-      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      box-shadow: $boxShadow;
     }
     .Search button {
       padding: 0 10px;
     }
     .Border.Bottom {
-      border-bottom: solid 1px #d0d0d0;
+      border-bottom: $border;
       padding-bottom: 15px;
     }
     .CountriesTable tr > th {
       background: white;
       font-weight: bold;
-      color: #0033a1;
+      color: $blue;
     }
     .Divider {
       margin: 15px 0;
