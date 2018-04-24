@@ -1,6 +1,8 @@
+@import "../../../styles/variables";
+
 .Filters {
   .BorderBottom {
-    border-bottom: solid 1px #d0d0d0;
+    border-bottom: $border;
     padding-bottom: 15px;
   }
 }
