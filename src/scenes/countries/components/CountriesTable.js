@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import _ from 'lodash';
 import d3 from "d3/d3";
 import { injectIntl, intlShape } from "react-intl";
+import { Link } from 'react-router-dom';
 
 class CountriesTable extends Component {
   addKey(dataSource) {
@@ -13,13 +14,15 @@ class CountriesTable extends Component {
     });
     return data;
   }
+
   render() {
     const { intl, data } = this.props;
     const columns = [{
       title: intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'}),
       dataIndex: 'recipient_country',
       key: 'recipient_country',
-      render: recipient_country => <span>{recipient_country.name}</span>,
+      render: recipient_country =>
+        <Link to={`/countries/${recipient_country.code.toLowerCase()}`}>{recipient_country.name}</Link>,
     }, {
       title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',

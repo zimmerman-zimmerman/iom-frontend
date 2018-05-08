@@ -8,7 +8,7 @@ class BaseFilter extends Component {
       params: {
         aggregations: 'activity_count,incoming_fund,disbursement,value',
         group_by: '',
-        order_by: '-activity_count',
+        order_by: '-value',
         convert_to: 'usd',
         hierarchy: 1,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
@@ -39,14 +39,14 @@ class BaseFilter extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const rootComponent = _.get(this.props, 'rootComponent');
+    const rootComponent = _.get(this.props, 'rootComponent')
     const filterRequest = _.get(this.props, 'filterRequest');
     if (rootComponent) {
       const { filters } = rootComponent.state;
       if (filters.changed) {
         const {params} = this.state;
         this.actionRequest(
-          _.extend({}, params, filters.values), 'recipient_country', filterRequest
+          _.extend({}, params, filters.values), 'participating_organisation', filterRequest
         );
         filters.changed = false;
         rootComponent.setState({filters: filters})

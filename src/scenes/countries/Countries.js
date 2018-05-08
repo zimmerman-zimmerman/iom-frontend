@@ -22,17 +22,20 @@ class Countries extends BaseFilter {
     const { dispatch } = this.props;
     const { params } = this.state;
     if (dispatch) {
-      this.actionRequest(params, 'recipient_country', actions.transactionsAggregationsRequest);
+      if (params) {
+        this.actionRequest(params, 'recipient_country', actions.countriesRequest);
+      } else {
+        dispatch(actions.countriesInitial());
+      }
     }
   }
 
   render() {
-    const { transactionsAggregations } = this.props;
-    const data = _.get(transactionsAggregations, 'data');
+    const { countries } = this.props;
+    const data = _.get(countries, 'data');
     const showMap = _.get(data, 'results[0].recipient_country.code');
-    const loading = _.get(transactionsAggregations,'request');
     return (
-      <Spin spinning={loading}>
+      <Spin spinning={countries.request}>
         <Layout className='Countries'>
           <Header className="Header">
             <MainHeader/>
@@ -41,7 +44,7 @@ class Countries extends BaseFilter {
             <CountriesBreadcrumb/>
             <Row style={{marginTop: 15}} className="Search">
               <Col span={5}>
-                <Filters data={data} rootComponent={this}/>
+                <Filters data={data} rootComponent={this} filterRequest={actions.countriesRequest}/>
               </Col>
               <Col span={19}>
                 <Row>
@@ -94,7 +97,7 @@ class Countries extends BaseFilter {
 
 const mapStateToProps = (state, ) => {
   return {
-    transactionsAggregations: state.transactionsAggregations
+    countries: state.countries
   }
 };
 

@@ -1,17 +1,17 @@
-.MainFooter {
+.MainFooter, .Footer {
     color: white;
     background-color: #0033a1;
 }
 
-.MainFooter .Title {
+.MainFooter .Title, .Footer .Title {
     color: white;
     font-size: 17px;
 }
 
-.MainFooter button {
+.MainFooter button, .Footer button {
     color: #0033a1;
 }
 
-.MainFooter button:hover {
+.MainFooter button:hover, .Footer button:hover {
     color: #35b6b4;
 }

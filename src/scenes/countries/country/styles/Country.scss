@@ -1,0 +1,103 @@
+@import "../../../../styles/variables";
+
+.Country {
+  .Content {
+    padding: 0px 50px;
+    background: white;
+    .Breadcrumb {
+      padding: 7px 0;
+      color: #262626;
+      font-size: 12px;
+      .Active  {
+        color: #418fde;
+      }
+    }
+  }
+  .BannerCountry {
+    margin-bottom: 30px;
+    .Left, .Right {
+      height: 290px;
+      padding: 10px 50px;
+      .Menu {
+        margin-top: 10px;
+        background-color: #efefef;
+        border-bottom: none;
+        line-height: 30px;
+        li {
+          color: #5d5d5d;
+          border-bottom: none;
+          &.ant-menu-item-selected {
+            color: #1471ce;
+            border-bottom: 2px solid #1471ce;
+          }
+        }
+      }
+      .Description {
+        margin-top: 20px;
+        color: #1471ce;
+        font-weight: 600;
+      }
+      a {
+        font-weight: 600;
+        color: #1471ce;
+      }
+    }
+    .Left {
+      background-color: #efefef;
+      .Name {
+        color: #1471ce;
+      }
+    }
+    .Right {
+      background-color: #54c8c3;
+      padding-top: 20px;
+      color: white;
+      font-weight: 600;
+      h2 {
+        color: white;
+      }
+    }
+  }
+  .TablesDonors, .TableProjects, .ContactInfo {
+    padding-right: 20px;
+    .Title span {
+      color: #1f4283;
+      padding-left: 7px;
+    }
+    .Email, .Website {
+      padding-left: 7px;
+    }
+    .Table {
+      th {
+        background: white;
+        color: #1f4283;
+      }
+      th.columnMoney, td.columnMoney {
+        text-align: right !important;
+      }
+      .Donors {
+        width: 17%;
+      }
+      .Title {
+        width: 26%;
+      }
+      .Budget {
+        text-align: right;
+      }
+    }
+  }
+  .SectorsMap {
+    .Title span {
+      color: #1f4283;
+    }
+  }
+  .TableProjects {
+    margin-bottom: 30px;
+  }
+  .ContactInfo {
+    margin-bottom: 30px;
+  }
+}
+.gm-style-cc {
+  display:none;
+}
