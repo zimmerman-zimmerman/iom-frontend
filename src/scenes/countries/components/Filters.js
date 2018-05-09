@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col, Badge, Collapse } from 'antd';
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
-import _ from "lodash";
+import  _ from 'lodash';
 
-import SearchFilter from './SearchFilter';
-import StartEndDateFilter from './StartEndDateFilter';
-import Filter from './Filter';
-import * as actions from "../../../../services/actions";
+import SearchFilter from '../../../components/filters/SearchFilter';
+import StartEndDateFilter from '../../../components/filters/StartEndDateFilter';
+import Filter from '../../../components/filters/Filter';
+import * as actions from "../../../services/actions/index";
+
+import '../styles/Filters.scss';
 
 const { Content } = Layout;
 const Panel = Collapse.Panel;
 
 class Filters extends Component {
-  countDonors() {
+  countCountries() {
     const { data } = this.props;
     const count = _.get(data, 'results.length') ?  data.results.length : 0;
-    const text = count > 1 ? <FormattedMessage id="donors.filters.donors" defaultMessage="Donors"/>
-      : <FormattedMessage id="donors.filters.donor" defaultMessage="Donor"/>;
+    const text = count > 1 ? <FormattedMessage id="countries.filters.countries" defaultMessage="Countries"/>
+      : <FormattedMessage id="countries.filters.country" defaultMessage="Country"/>;
     return (<Content>{count} {text}</Content>)
   }
 
   render() {
-    const { intl, rootComponent, filterRequest } = this.props;
+    const { intl, rootComponent } = this.props;
     const filterCount = _.size(_.get(rootComponent, 'state.filters.values'));
-    return (
+    return(
       <Content className="Filters">
         <Row>
           <Col span={24}>
@@ -31,7 +33,6 @@ class Filters extends Component {
               <Col span={22}>
                 <SearchFilter
                   rootComponent={rootComponent}
-                  filterRequest={filterRequest}
                   placeholder={
                     intl.formatMessage({id: 'countries.filters.search.placeholder', defaultMessage: 'Search'})
                   }
@@ -44,15 +45,18 @@ class Filters extends Component {
         <Row>
           <Col span={22} style={{marginTop: 15}}>
             <h3 style={{height: 30}}>
-              {this.countDonors()}
+              {this.countCountries()}
             </h3>
           </Col>
         </Row>
         <Row>
           <Col span={22} className="BorderBottom">
-            <Badge className="Badge" count={filterCount} showZero={true}/>
+            <Badge count={filterCount}
+                   showZero={true}
+                   style={{ backgroundColor: '#f7c989' }}
+            />
             <span style={{marginLeft: 5}}>
-              <FormattedMessage id="donors.filters.count" defaultMessage="Filter(s)"/>
+              <FormattedMessage id="countries.filters.count" defaultMessage="Filter(s)"/>
             </span>
           </Col>
         </Row>
@@ -64,7 +68,6 @@ class Filters extends Component {
               >
                 <Filter
                   rootComponent={rootComponent}
-                  filterRequest={filterRequest}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -80,13 +83,12 @@ class Filters extends Component {
                 />
               </Panel>
               <Panel header={intl.formatMessage({
-                id: 'countries.filters.project.types', defaultMessage: 'Project types'}
-              )}
+                  id: 'countries.filters.project.types', defaultMessage: 'Project types'}
+                )}
                      key="2"
               >
                 <Filter
                   rootComponent={rootComponent}
-                  filterRequest={filterRequest}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -108,7 +110,6 @@ class Filters extends Component {
               >
                 <Filter
                   rootComponent={rootComponent}
-                  filterRequest={filterRequest}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
@@ -128,7 +129,7 @@ class Filters extends Component {
               )}
                      key="4"
               >
-                <StartEndDateFilter rootComponent={null}/>
+                <StartEndDateFilter rootComponent={rootComponent}/>
               </Panel>
               <Panel header={intl.formatMessage({
                 id: 'countries.filters.participating.organisation', defaultMessage: 'Donors'}
@@ -137,7 +138,6 @@ class Filters extends Component {
               >
                 <Filter
                   rootComponent={rootComponent}
-                  filterRequest={filterRequest}
                   style={{width: '100%'}}
                   placeholder={
                     intl.formatMessage({
