@@ -9,7 +9,9 @@ const { RangePicker } = DatePicker;
 
 class StartEndDateFilter extends BaseFilter {
   handleChange(values) {
-    const { filters } = this.state;
+    // const { filters } = this.state;
+    const { rootComponent } = this.props;
+    const { filters } = rootComponent.state;
     if (_.get(filters.values, 'start_date_gte') || _.get(filters.values, 'end_date_lte') ) {
       delete filters.values['start_date_gte'];
       delete filters.values['end_date_lte'];

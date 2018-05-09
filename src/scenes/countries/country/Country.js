@@ -8,7 +8,7 @@ import CountryBreadcrumb from './CountryBreadcrumb';
 import BannerCountry from './components/BannerCountry';
 import './styles/Country.scss';
 import {connect} from "react-redux";
-import BaseFilter from "../components/filters/BaseFilter";
+import BaseFilter from "../../../components/filters/BaseFilter";
 import * as actions from "../../../services/actions";
 import TableDonors from "./components/TableDonors";
 import CountryMap from "./components/CountryMap";

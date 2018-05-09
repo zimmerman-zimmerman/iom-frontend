@@ -10,8 +10,8 @@ import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';
 import MainFooter from '../../components/main/MainFooter';
 import Summary from './components/Summary';
-import Filters from "./components/filters/Filters";
-import BaseFilter from "./components/filters/BaseFilter";
+import Filters from "./components/Filters";
+import BaseFilter from '../../components/filters/BaseFilter';
 import CountriesBreadcrumb from "./components/CountriesBreadcrumb";
 import './styles/Countries.scss';
 
@@ -44,7 +44,7 @@ class Countries extends BaseFilter {
             <CountriesBreadcrumb/>
             <Row style={{marginTop: 15}} className="Search">
               <Col span={5}>
-                <Filters data={data} rootComponent={this} filterRequest={actions.countriesRequest}/>
+                <Filters data={data} rootComponent={this}/>
               </Col>
               <Col span={19}>
                 <Row>
@@ -94,6 +94,10 @@ class Countries extends BaseFilter {
   }
 }
 
+Countries.defaultProps = {
+  groupBy: 'recipient_country',
+  filterRequest: actions.countriesRequest,
+};
 
 const mapStateToProps = (state, ) => {
   return {
