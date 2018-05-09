@@ -46,7 +46,7 @@ class BaseFilter extends Component {
       if (filters.changed) {
         const {params} = this.state;
         this.actionRequest(
-          _.extend({}, params, filters.values), 'participating_organisation', filterRequest
+          _.extend({}, params, filters.values), rootComponent.props.groupBy, filterRequest
         );
         filters.changed = false;
         rootComponent.setState({filters: filters})

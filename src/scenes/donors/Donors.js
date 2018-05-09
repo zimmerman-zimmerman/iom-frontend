@@ -67,6 +67,10 @@ class Donors extends BaseFilter {
   }
 }
 
+Donors.defaultProps = {
+  groupBy: 'participating_organisation'
+};
+
 const mapStateToProps = (state, ) => {
   return {
     donors: state.donors
