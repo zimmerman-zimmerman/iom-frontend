@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
 import * as actions from '../../../services/actions/index';
-import PieChart from './PieChart';
+import PieReCharts from './PieReCharts';
 
 const { Content } = Layout;
 
@@ -15,7 +15,7 @@ class FundingGoes extends Component {
     this.state = {
       params: {
         fields: 'id,iati_identifier,reporting_organisation,activity_dates,aggregations,sectors,title',
-        ordering: '-start_date',
+        ordering: '-aggregations.activity.budget_value',
         hierarchy: 1,
         activity_status: '2,3,4',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
@@ -28,34 +28,35 @@ class FundingGoes extends Component {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
-        dispatch(actions.activitiesRequest(params));
+        dispatch(actions.homeActivitiesRequest(params));
       } else {
-        dispatch(actions.activitiesInitial());
+        dispatch(actions.homeActivitiesInitial());
       }
     }
   }
 
   render() {
-    const { activities } = this.props;
+    const { homeActivities } = this.props;
     const data = [];
-    _.forEach(_.get(activities, 'data.results'), function(item){
-      const x = _.get(item, 'title.narratives[0].text');
-      const y = _.get(item, 'aggregations.activity.budget_value');
-      data.push({x: x, y: y})
+    _.forEach(_.get(homeActivities, 'data.results'), function(item){
+      data.push({
+        name: _.get(item, 'title.narratives[0].text'),
+        value: _.get(item, 'aggregations.activity.budget_value')
+      })
     });
     return (
-      <Spin spinning={activities.request}>
+      <Spin spinning={homeActivities.request}>
         <Layout>
           <Content className="Graphs">
             <Row>
               <Col span={24}>
-                <PieChart
+                <PieReCharts
                   title={
                     <FormattedMessage id="home.funding.goes.title"
                                       defaultMessage="Where the Funding Goes"
                     />
                   }
-                  data={_.slice(data, 0, 5)} height={180}
+                  data={_.slice(data, 0, 5)}
                 />
               </Col>
             </Row>
@@ -77,7 +78,7 @@ class FundingGoes extends Component {
 
 const mapStateToProps = (state, ) => {
   return {
-    activities: state.activities
+    homeActivities: state.homeActivities
   }
 };
 

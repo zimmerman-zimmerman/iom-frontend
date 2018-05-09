@@ -1,0 +1,38 @@
+@import "../styles/variables";
+
+.Content {
+  padding: 0 50px;
+  .Breadcrumb {
+    padding: 7px 0;
+    border-bottom: $border;
+    color: $breadcrumbColor;
+    font-size: 12px;
+    .Active {
+      color: $breadcrumbColorActive;
+    }
+  }
+  .Search button {
+    padding: 0 10px;
+  }
+  .Border.Bottom {
+    border-bottom: $border;
+    padding-bottom: 15px;
+  }
+  .Filters .Badge .ant-badge-count {
+    background-color: #f7c989;
+  }
+  tr > th {
+    background: white;
+    font-weight: bold;
+    color: $blue;
+  }
+  h2 {
+    color: #737373;
+  }
+  .Pagination {
+    margin: 8px 0;
+  }
+}
+.Footer {
+  margin-top: 15px;
+}

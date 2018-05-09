@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 
 import MainMenu from './MainMenu';
 import MainShare from './MainShare';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/iom-logo.svg';
 import './styles/MainHeader.scss';
 
 class MainHeader extends Component {

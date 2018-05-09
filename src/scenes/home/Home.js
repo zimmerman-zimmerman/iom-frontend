@@ -8,6 +8,7 @@ import MainFooter from '../../components/main/MainFooter';
 import FundingCome from './components/FundingCome';
 import FundingGoes from './components/FundingGoes';
 import Classified from './components/Classified';
+
 import './styles/Home.scss';
 
 const { Header, Content, Footer } = Layout;

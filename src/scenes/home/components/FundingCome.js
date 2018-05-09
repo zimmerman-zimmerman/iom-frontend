@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
 import * as actions from '../../../services/actions/index';
-import PieChart from './PieChart';
+import PieReCharts from './PieReCharts';
 
 const { Content } = Layout;
 
@@ -29,34 +29,35 @@ class FundingCome extends Component {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
-        dispatch(actions.transactionsAggregationsParticipatingOrganisationRequest(params));
+        dispatch(actions.homeDonorsRequest(params));
       } else {
-        dispatch(actions.transactionsAggregationsParticipatingOrganisationInitial());
+        dispatch(actions.homeDonorsInitial());
       }
     }
   }
 
   render() {
-    const { transactionsAggregationsParticipatingOrganisation } = this.props;
+    const { homeDonors } = this.props;
     const data = [];
-    _.forEach(_.get(transactionsAggregationsParticipatingOrganisation, 'data.results'), function(item){
-      const x = _.get(item, 'participating_organisation');
-      const y = _.get(item, 'value');
-      data.push({x: x, y: y})
+    _.forEach(_.get(homeDonors, 'data.results'), function(item){
+      data.push({
+        name: _.get(item, 'participating_organisation'),
+        value: _.get(item, 'value'),
+      });
     });
     return (
-      <Spin spinning={transactionsAggregationsParticipatingOrganisation.request}>
+      <Spin spinning={homeDonors.request}>
         <Layout>
           <Content className="Graphs">
             <Row>
               <Col span={24}>
-                <PieChart
+                <PieReCharts
                   title={
                     <FormattedMessage id="home.funding.come.title"
                                       defaultMessage="Where the Funding Come From"
                     />
                   }
-                  data={_.slice(data, 0, 5)} height={180}
+                  data={_.slice(data, 0, 5)}
                 />
               </Col>
             </Row>
@@ -78,7 +79,7 @@ class FundingCome extends Component {
 
 const mapStateToProps = (state, ) => {
   return {
-    transactionsAggregationsParticipatingOrganisation: state.transactionsAggregationsParticipatingOrganisation
+    homeDonors: state.homeDonors
   }
 };
 

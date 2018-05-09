@@ -12,12 +12,19 @@ class MainMenu extends Component {
   };
 
   render() {
-    const {location} = this.props;
+    const { match} = this.props;
+    let rootPath = match.path;
+    switch (rootPath) {
+      case '/donors/:code':
+        rootPath = '/donors';
+        break;
+      default:
+    }
     return (
       <Menu onClick={this.handleClick}
             className="MainMenu"
             mode="horizontal"
-            defaultSelectedKeys={[location.pathname]}
+            defaultSelectedKeys={[rootPath]}
       >
         <Menu.Item key="/">
           <FormattedMessage id="main.menu.home" defaultMessage="Home"/>

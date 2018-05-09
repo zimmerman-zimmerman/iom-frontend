@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
 import * as actions from '../../../services/actions/index';
-import PieChart from './PieChart';
+import PieReCharts from './PieReCharts';
 
 const { Content } = Layout;
 
@@ -14,9 +14,9 @@ class Classified extends Component {
     super(props);
     this.state = {
       params: {
-        aggregations: 'activity_count,incoming_fund,disbursement',
+        aggregations: 'activity_count,incoming_fund,disbursement,value',
         group_by: 'sector',
-        order_by: 'activity_count',
+        order_by: '-value',
         convert_to: 'usd',
         hierarchy: 1,
         activity_status: '2,3,4',
@@ -30,28 +30,26 @@ class Classified extends Component {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
-        dispatch(actions.transactionsAggregationsRequest(params));
+        dispatch(actions.homeSectorsRequest(params));
       } else {
-        dispatch(actions.transactionsAggregationsInitial());
+        dispatch(actions.homeSectorsInitial());
       }
     }
   }
 
   render() {
-    const { transactionsAggregations } = this.props;
+    const { homeSectors } = this.props;
     const data = [];
-    _.forEach(_.get(transactionsAggregations, 'data.results'), function(item){
-      const x = _.get(item, 'sector.name');
-      const y = _.get(item, 'activity_count');
-      data.push({x: x, y: y})
+    _.forEach(_.get(homeSectors, 'data.results'), function(item){
+      data.push({name: _.get(item, 'sector.name'), value: _.get(item, 'value')})
     });
     return (
-      <Spin spinning={transactionsAggregations.request}>
+      <Spin spinning={homeSectors.request}>
         <Layout>
           <Content className="Graphs">
             <Row style={{minHeight: 389}}>
               <Col span={24}>
-                <PieChart
+                <PieReCharts
                   title={
                     <FormattedMessage id="home.classified.title"
                                       defaultMessage="How the expenditures are classified"
@@ -79,7 +77,7 @@ class Classified extends Component {
 
 const mapStateToProps = (state, ) => {
   return {
-    transactionsAggregations: state.transactionsAggregations
+    homeSectors: state.homeSectors
   }
 };
 
