@@ -4,7 +4,7 @@ import { Layout, Row, Col } from 'antd';
 import MainHeader from '../../../components/main/MainHeader';
 import MainFooter from '../../../components/main/MainFooter';
 import DonorBreadcrumbs from "./components/DonorBreadcrumb";
-import BaseFilter from '../components/filters/BaseFilter';
+import BaseFilter from '../../../components/filters/BaseFilter';
 import _ from "lodash";
 import * as actions from "../../../services/actions";
 import {connect} from "react-redux";

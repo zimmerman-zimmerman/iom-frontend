@@ -5,8 +5,8 @@ import _ from 'lodash';
 
 import MainHeader from '../../components/main/MainHeader';
 import DonorsBreadcrumb from './components/DonorsBreadcrumb';
-import Filters from './components/filters/Filters';
-import BaseFilter from './components/filters/BaseFilter';
+import Filters from './components/Filters';
+import BaseFilter from '../../components/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
@@ -39,11 +39,7 @@ class Donors extends BaseFilter {
           <DonorsBreadcrumb/>
           <Row style={{marginTop: 15}} className="Search">
             <Col span={5}>
-              <Filters data={data}
-                       rootComponent={this}
-                       rootGroupBy="participating_organisation"
-                       filterRequest={actions.donorsRequest}
-              />
+              <Filters data={data} rootComponent={this}/>
             </Col>
             <Col span={19}>
               <Row>
@@ -66,6 +62,11 @@ class Donors extends BaseFilter {
     );
   }
 }
+
+Donors.defaultProps = {
+  groupBy: 'participating_organisation',
+  filterRequest: actions.donorsRequest,
+};
 
 const mapStateToProps = (state, ) => {
   return {
