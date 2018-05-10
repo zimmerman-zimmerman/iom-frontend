@@ -51,7 +51,6 @@ class Projects extends Component {
   };
 
   render() {
-    //console.log(this.props);
     const { intl, activities } = this.props;
     const data = _.get(activities, 'data.results');
     const total = _.get(activities, 'data.count');

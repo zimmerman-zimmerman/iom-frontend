@@ -1,5 +1,9 @@
 @import "../styles/variables";
 
+#root > div {
+  height: 100vh;
+}
+
 .Content {
   padding: 0 50px;
   .Breadcrumb {
