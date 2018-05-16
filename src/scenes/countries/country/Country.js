@@ -1,6 +1,10 @@
 import React from 'react';
-import { Layout, Spin, Row, Col } from 'antd';
-import _ from 'lodash';
+import Layout from 'antd/es/layout';
+import Spin from 'antd/es/spin';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import get from 'lodash/get';
+import extend from 'lodash/extend';
 
 import MainHeader from '../../../components/main/MainHeader';
 import MainFooter from '../../../components/main/MainFooter';
@@ -21,16 +25,16 @@ class Country extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
-    const code = _.get(this.props, 'match.params.code');
+    const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
       if (params) {
         this.actionRequest(
-          _.extend({}, params, {recipient_country: code.toUpperCase()}),
+          extend({}, params, {recipient_country: code.toUpperCase()}),
           'recipient_country',
           actions.countryRequest
         );
         this.actionRequest(
-          _.extend({}, params, {recipient_country: code.toUpperCase()}),
+          extend({}, params, {recipient_country: code.toUpperCase()}),
           'participating_organisation',
           actions.countryDonorsRequest
         );
@@ -42,9 +46,9 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const pathname = _.get(this.props, 'location.pathname');
-    const country = _.get(this.props, 'country.data.results[0]');
-    const donors = _.get(this.props, 'countryDonors.data.results');
+    const pathname = get(this.props, 'location.pathname');
+    const country = get(this.props, 'country.data.results[0]');
+    const donors = get(this.props, 'countryDonors.data.results');
     return (
       <Spin spinning={false}>
         <Layout className='Country'>
@@ -68,7 +72,7 @@ class Country extends BaseFilter {
             </Row>
           </Content>
           <Content className="Content">
-            <TableProjects countryCode={ _.get(this.props, 'match.params.code')}/>
+            <TableProjects countryCode={ get(this.props, 'match.params.code')}/>
           </Content>
           <Content className="Content">
             <ContactInfo pathname={pathname}/>

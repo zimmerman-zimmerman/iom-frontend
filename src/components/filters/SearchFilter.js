@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from 'antd';
+import Input from 'antd/es/input';
 import { connect } from 'react-redux';
 
 import BaseFilter from "./BaseFilter";

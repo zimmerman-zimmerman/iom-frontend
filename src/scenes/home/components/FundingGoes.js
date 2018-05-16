@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Button, Spin } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Button from 'antd/es/button';
+import Spin from 'antd/es/spin';
 import { FormattedMessage } from "react-intl";
-import _ from "lodash";
+import get from "lodash/get";
+import forEach from 'lodash/forEach';
+import slice from 'lodash/slice';
 
 import * as actions from '../../../services/actions/index';
 import PieReCharts from './PieReCharts';
@@ -38,10 +44,10 @@ class FundingGoes extends Component {
   render() {
     const { homeActivities } = this.props;
     const data = [];
-    _.forEach(_.get(homeActivities, 'data.results'), function(item){
+    forEach(get(homeActivities, 'data.results'), function(item){
       data.push({
-        name: _.get(item, 'title.narratives[0].text'),
-        value: _.get(item, 'aggregations.activity.budget_value')
+        name: get(item, 'title.narratives[0].text'),
+        value: get(item, 'aggregations.activity.budget_value')
       })
     });
     return (
@@ -56,7 +62,7 @@ class FundingGoes extends Component {
                                       defaultMessage="Where the Funding Goes"
                     />
                   }
-                  data={_.slice(data, 0, 5)}
+                  data={slice(data, 0, 5)}
                 />
               </Col>
             </Row>

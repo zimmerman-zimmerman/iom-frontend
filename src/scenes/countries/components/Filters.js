@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Badge, Collapse } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Badge from 'antd/es/badge';
+import Collapse from 'antd/es/collapse';
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
-import  _ from 'lodash';
+import size from 'lodash/size';
+import get from 'lodash/get';
 
 import SearchFilter from '../../../components/filters/SearchFilter';
 import StartEndDateFilter from '../../../components/filters/StartEndDateFilter';
@@ -16,7 +21,7 @@ const Panel = Collapse.Panel;
 class Filters extends Component {
   countCountries() {
     const { data } = this.props;
-    const count = _.get(data, 'results.length') ?  data.results.length : 0;
+    const count = get(data, 'results.length') ?  data.results.length : 0;
     const text = count > 1 ? <FormattedMessage id="countries.filters.countries" defaultMessage="Countries"/>
       : <FormattedMessage id="countries.filters.country" defaultMessage="Country"/>;
     return (<Content>{count} {text}</Content>)
@@ -24,7 +29,7 @@ class Filters extends Component {
 
   render() {
     const { intl, rootComponent } = this.props;
-    const filterCount = _.size(_.get(rootComponent, 'state.filters.values'));
+    const filterCount = size(get(rootComponent, 'state.filters.values'));
     return(
       <Content className="Filters">
         <Row>

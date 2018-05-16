@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
-import d3 from "d3/d3";
+import Table from 'antd/es/table';
+import { format } from "d3-format";
 import _ from "lodash";
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
@@ -22,7 +22,6 @@ class DonorsTable extends Component {
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       render: (participating_organisation, row, index) => {
-        //console.log(row);
         return (
           <Link to={`/donors/${row.participating_organisation_ref.toLowerCase()}`}>
             {participating_organisation}
@@ -33,7 +32,7 @@ class DonorsTable extends Component {
       title: intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      render: value => <span>{d3.format(".2s")(value).replace(/G/, "B")}</span>
+      render: value => <span>{format(".2s")(value).replace(/G/, "B")}</span>
     }, {
       title: intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',

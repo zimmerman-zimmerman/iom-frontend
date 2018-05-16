@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Table } from 'antd';
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import _ from "lodash";
-import d3 from "d3/d3";
+import { format } from "d3-format";
 
 const { Content } = Layout;
 
@@ -28,7 +28,7 @@ class TableDonors extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'columnMoney',
-      render: value => <span>{d3.format(',.2f')(value)}</span>
+      render: value => <span>{format(',.2f')(value)}</span>
     }];
     return (
       <Content className="TablesDonors">

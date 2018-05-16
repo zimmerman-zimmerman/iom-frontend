@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Button, Spin } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Button from 'antd/es/button';
+import Spin from 'antd/es/spin';
 import { FormattedMessage } from "react-intl";
-import _ from "lodash";
+import forEach from "lodash/forEach";
+import get from 'lodash/get';
+import slice from 'lodash/slice';
 
 import * as actions from '../../../services/actions/index';
 import PieReCharts from './PieReCharts';
@@ -40,8 +46,8 @@ class Classified extends Component {
   render() {
     const { homeSectors } = this.props;
     const data = [];
-    _.forEach(_.get(homeSectors, 'data.results'), function(item){
-      data.push({name: _.get(item, 'sector.name'), value: _.get(item, 'value')})
+    forEach(get(homeSectors, 'data.results'), function(item){
+      data.push({name: get(item, 'sector.name'), value: get(item, 'value')})
     });
     return (
       <Spin spinning={homeSectors.request}>
@@ -55,7 +61,7 @@ class Classified extends Component {
                                       defaultMessage="How the expenditures are classified"
                     />
                   }
-                  data={_.slice(data, 0, 5)} height={180}
+                  data={slice(data, 0, 5)} height={180}
                 />
               </Col>
             </Row>

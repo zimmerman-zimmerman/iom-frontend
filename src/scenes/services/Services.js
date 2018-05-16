@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import Layout from 'antd/es/layout';
 
 import MainHeader from '../../components/main/MainHeader';
 

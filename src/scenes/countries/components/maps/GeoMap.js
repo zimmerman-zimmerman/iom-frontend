@@ -4,7 +4,8 @@ import L from "leaflet";
 import { namedGeoJson } from "./country_data";
 import { Map, TileLayer, ZoomControl } from "react-leaflet";
 import _ from "lodash";
-import d3 from "d3/d3";
+import { format } from "d3-format";
+import { scaleLinear } from 'd3-scale'
 import { withRouter } from "react-router";
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
@@ -121,12 +122,12 @@ class GeoMap extends Component {
   }
 
   getLegendValues(maxValue, minValue) {
-    const format = maxValue > 10 ? ".2s" : maxValue > 0.1 ? ".2f" : ".4f";
-    var x = d3.scale.linear().domain([minValue, maxValue * 1.2]);
+    const formatValue = maxValue > 10 ? ".2s" : maxValue > 0.1 ? ".2f" : ".4f";
+    var x = scaleLinear().domain([minValue, maxValue * 1.2]);
     return x.ticks(6).map(o => {
       return {
         value: o,
-        text: d3.format(format)(o)
+        text: format(formatValue)(o)
       };
     });
   }
@@ -136,8 +137,7 @@ class GeoMap extends Component {
   }
 
   onEachFeature(feature, layer) {
-    const getColor = d3.scale
-      .linear()
+    const getColor = scaleLinear()
       .domain([this.state.minValue, this.state.midValue, this.state.maxValue])
       .range(colors);
 
@@ -165,7 +165,7 @@ class GeoMap extends Component {
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              <b>Total budget:</b> USD {d3.format(".2s")(feature.properties.budgetValue).replace(/G/, "B")}
+              <b>Total budget:</b> USD {format(".2s")(feature.properties.budgetValue).replace(/G/, "B")}
             </label>
           </div>
           <div>
@@ -205,8 +205,7 @@ class GeoMap extends Component {
 
   render() {
     const { center, bounds, geoJSONData, mapColour, legendValues } = this.state;
-    const getColor = d3.scale
-      .linear()
+    const getColor = scaleLinear()
       .domain([this.state.minValue, this.state.midValue, this.state.maxValue])
       .range(colors);
 

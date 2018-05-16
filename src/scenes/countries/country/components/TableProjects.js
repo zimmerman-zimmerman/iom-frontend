@@ -4,7 +4,7 @@ import * as actions from "../../../../services/actions";
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import {connect} from "react-redux";
 import _ from "lodash";
-import d3 from "d3/d3";
+import { format } from "d3-format";
 
 const { Content } = Layout;
 
@@ -61,7 +61,7 @@ class TableProjects extends Component {
       dataIndex: 'aggregations.activity.budget_value',
       className: 'Budget',
       key: 'budget',
-      render: value => <span>{d3.format(',.2f')(value)}</span>
+      render: value => <span>{format(',.2f')(value)}</span>
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'}),
       dataIndex: 'activity_status.name',

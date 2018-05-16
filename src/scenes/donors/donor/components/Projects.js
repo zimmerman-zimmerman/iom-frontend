@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Table, Pagination, Spin } from 'antd';
+import Layout from 'antd/es/layout';
+import Table from 'antd/es/table';
+import Pagination from 'antd/es/pagination';
+import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 
 import * as actions from '../../../../services/actions';

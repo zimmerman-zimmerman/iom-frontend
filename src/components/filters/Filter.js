@@ -1,6 +1,10 @@
 import React from 'react';
-import _ from 'lodash';
-import { Select, Spin, Layout } from 'antd';
+import get from 'lodash';
+import isEmpty from 'lodash';
+import Select from 'antd/es/select';
+import Spin from 'antd/es/spin';
+import Layout from 'antd/es/layout';
+
 import { connect } from "react-redux";
 
 import BaseFilter from "./BaseFilter";
@@ -19,7 +23,7 @@ class Filter extends BaseFilter {
 
   options(results) {
     const { optionKeyName, optionValueName } = this.props;
-    return results.map(item => <Option key={_.get(item, optionKeyName)}>{_.get(item, optionValueName)}</Option>)
+    return results.map(item => <Option key={get(item, optionKeyName)}>{get(item, optionValueName)}</Option>)
   }
 
   select(options) {
@@ -38,8 +42,8 @@ class Filter extends BaseFilter {
 
   render() {
     const { reducer, style } = this.props;
-    const results = _.get(reducer, 'data.results');
-    const options = !_.isEmpty(results) ? this.options(results) : null;
+    const results = get(reducer, 'data.results');
+    const options = !isEmpty(results) ? this.options(results) : null;
     return (
       <Spin spinning={reducer.request}>
         <Content style={style}>
@@ -53,7 +57,7 @@ class Filter extends BaseFilter {
 const mapStateToProps = (state, props) => {
   const { reducerName } = props;
   return {
-    reducer: _.get(state, reducerName)
+    reducer: get(state, reducerName)
   }
 };
 

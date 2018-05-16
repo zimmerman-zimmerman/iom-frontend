@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'antd';
+import Menu from 'antd/es/menu';
 import { FormattedMessage } from "react-intl";
 import { withRouter } from 'react-router-dom';
 import {connect} from "react-redux";

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
-import _ from 'lodash';
-import d3 from "d3/d3";
+import Table from 'antd/es/table';
+import get from 'lodash/get';
+import { format } from "d3-format";
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ class CountriesTable extends Component {
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
-      item.key = _.get(item, 'recipient_country.code');
+      item.key = get(item, 'recipient_country.code');
       data.push(item);
     });
     return data;
@@ -27,7 +27,7 @@ class CountriesTable extends Component {
       title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      render: value => <span>{d3.format(".2s")(value).replace(/G/, "B")}</span>
+      render: value => <span>{format(".2s")(value).replace(/G/, "B")}</span>
     }, {
       title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',

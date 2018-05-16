@@ -1,5 +1,7 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 
 import MainHeader from '../../../components/main/MainHeader';
 import MainFooter from '../../../components/main/MainFooter';
@@ -9,6 +11,8 @@ import _ from "lodash";
 import * as actions from "../../../services/actions";
 import {connect} from "react-redux";
 import Projects from "./components/Projects";
+import './styles/Donor.scss';
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -21,7 +25,7 @@ class Donor extends BaseFilter {
       this.actionRequest(
         _.extend({}, params, {participating_organisation_ref: code.toUpperCase()}),
         'participating_organisation',
-        actions.donorsRequest
+        actions.donorRequest
       );
     } else {
       actions.donorInitial();
@@ -32,7 +36,7 @@ class Donor extends BaseFilter {
     const code = _.get(this.props, 'match.params.code');
     const data = _.get(this.props, 'donor.data.results[0]');
     return (
-      <Layout>
+      <Layout className="Donor">
         <Header className="Header">
           <MainHeader/>
         </Header>
@@ -41,7 +45,7 @@ class Donor extends BaseFilter {
         </Content>
         <Content className="Content">
           <Row>
-            <Col span={24}>
+            <Col span={24} className="Title">
               <h2 style={{marginTop: 5, marginBottom: 5}}>{data ? data.participating_organisation : null}</h2>
             </Col>
           </Row>

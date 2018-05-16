@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import ReactCountryFlag from "react-country-flag";
-import { Layout } from 'antd';
+import Layout from 'antd/es/layout';
 
 
 const { Content } = Layout;

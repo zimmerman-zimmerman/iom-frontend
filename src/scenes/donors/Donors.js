@@ -1,7 +1,9 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import {connect} from 'react-redux';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import MainHeader from '../../components/main/MainHeader';
 import DonorsBreadcrumb from './components/DonorsBreadcrumb';
@@ -29,7 +31,7 @@ class Donors extends BaseFilter {
 
   render() {
     const { donors } = this.props;
-    const data = _.get(donors, 'data');
+    const data = get(donors, 'data');
     return (
       <Layout>
         <Header className="Header">
@@ -44,7 +46,7 @@ class Donors extends BaseFilter {
             <Col span={19}>
               <Row>
                 <Col span={24}>
-                  <DonorsTreeMap data={_.get(data, 'results') ? data.results : []}/>
+                  <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>
                 </Col>
               </Row>
               <Row>

@@ -1,22 +1,22 @@
 import React from 'react';
-import { DatePicker } from 'antd';
+import DatePicker from 'antd/es/date-picker';
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
+import {connect} from "react-redux";
 
 import BaseFilter from "./BaseFilter";
-import _ from "lodash";
-import {connect} from "react-redux";
 
 const { RangePicker } = DatePicker;
 
 class StartEndDateFilter extends BaseFilter {
   handleChange(values) {
-    // const { filters } = this.state;
     const { rootComponent } = this.props;
     const { filters } = rootComponent.state;
-    if (_.get(filters.values, 'start_date_gte') || _.get(filters.values, 'end_date_lte') ) {
+    if (get(filters.values, 'start_date_gte') || get(filters.values, 'end_date_lte') ) {
       delete filters.values['start_date_gte'];
       delete filters.values['end_date_lte'];
     }
-    if (!_.isEmpty(values)) {
+    if (!isEmpty(values)) {
       filters.values['start_date_gte'] = values[0].format('YYYY-MM-DD');
       filters.values['end_date_lte'] = values[1].format('YYYY-MM-DD');
     }

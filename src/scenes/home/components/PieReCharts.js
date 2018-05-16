@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
-import d3 from "d3";
-import _ from "lodash";
-import { Card, Layout } from 'antd';
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
+
+import { format } from "d3-format";
+import get from "lodash/get";
+import sumBy from "lodash/sumBy";
+import Layout from 'antd/es/layout';
+import Card from 'antd/es/card';
 
 import '../styles/PieReCharts.scss';
 
@@ -10,16 +13,16 @@ const { Content } = Layout;
 
 const CustomToolTip = props => {
   const { Content } = Layout;
-  const data = _.get(props, 'payload[0].payload');
-  const total = data ? _.sumBy(_.get(props, 'content._self.props.data'), 'value') : null;
+  const data = get(props, 'payload[0].payload');
+  const total = data ? sumBy(get(props, 'content._self.props.data'), 'value') : null;
   const percent = data ? parseFloat(data.value / total * 100).toFixed(2) : null;
   const textPercent = data ? percent.toString().concat('%') : null;
   return data ?
     <Card style={{width: 250}}>
       <Content>
         <h5>{data.name}</h5>
-        <h5>{d3.format(",.2f")(data.value)}</h5>
-        <h5>({textPercent} of {d3.format(",.2f")(total)})</h5>
+        <h5>{format(",.2f")(data.value)}</h5>
+        <h5>({textPercent} of {format(",.2f")(total)})</h5>
       </Content>
     </Card> : null;
 };

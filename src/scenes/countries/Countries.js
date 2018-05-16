@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Spin } from 'antd';
-import _ from 'lodash';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Spin from 'antd/es/spin';
+import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
 
 import MainHeader from '../../components/main/MainHeader';
@@ -32,8 +35,8 @@ class Countries extends BaseFilter {
 
   render() {
     const { countries } = this.props;
-    const data = _.get(countries, 'data');
-    const showMap = _.get(data, 'results[0].recipient_country.code');
+    const data = get(countries, 'data');
+    const showMap = get(data, 'results[0].recipient_country.code');
     return (
       <Spin spinning={countries.request}>
         <Layout className='Countries'>
@@ -74,12 +77,12 @@ class Countries extends BaseFilter {
                     </div>
                   </Col>
                   <Col span={5}>
-                    <Summary data={showMap ? _.get(data, 'results') : null}/>
+                    <Summary data={showMap ? get(data, 'results') : null}/>
                   </Col>
                 </Row>
                 <Row>
                   <Col span={24} style={{marginTop: 20}}>
-                    <CountriesTable data={showMap ? _.get(data, 'results') : null}/>
+                    <CountriesTable data={showMap ? get(data, 'results') : null}/>
                   </Col>
                 </Row>
               </Col>
