@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Button, Divider } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Button from 'antd/es/button';
+import Divider from 'antd/es/divider';
 import { FormattedMessage } from "react-intl";
 
 import './styles/MainFooter.css';

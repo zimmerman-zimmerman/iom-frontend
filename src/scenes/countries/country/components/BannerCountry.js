@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Menu, Icon } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Menu from 'antd/es/menu';
+import Icon from 'antd/es/icon';
 import ReactCountryFlag from "react-country-flag";
 import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom';
-import d3 from "d3/d3";
+import { format } from "d3-format";
 
 const { Content } = Layout;
 
@@ -71,7 +75,7 @@ class BannerCountry extends Component {
                         </Row>
                         <Row>
                           <Col span={24}>
-                            {d3.format(',')(data.value)}
+                            {format(',')(data.value)}
                           </Col>
                         </Row>
                         <Row style={{marginTop: 20}}>
@@ -83,7 +87,7 @@ class BannerCountry extends Component {
                         </Row>
                         <Row>
                           <Col span={24}>
-                            {d3.format(',')(data.incoming_fund)}
+                            {format(',')(data.incoming_fund)}
                           </Col>
                         </Row>
                         <Row style={{marginTop: 20}}>
@@ -95,7 +99,7 @@ class BannerCountry extends Component {
                         </Row>
                         <Row>
                           <Col span={24}>
-                            {d3.format(',')(data.activity_count)}
+                            {format(',')(data.activity_count)}
                           </Col>
                         </Row>
                       </Col>
@@ -111,7 +115,7 @@ class BannerCountry extends Component {
                     </Row>
                     <Row>
                       <Col span={24}>
-                        {d3.format(',')(data.disbursement)}
+                        {format(',')(data.disbursement)}
                       </Col>
                     </Row>
                     <Row style={{marginTop: 20}}>

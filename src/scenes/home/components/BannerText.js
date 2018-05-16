@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import { FormattedMessage } from "react-intl";
 
 import '../styles/BannerText.scss';

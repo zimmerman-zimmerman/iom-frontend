@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'recharts';
-import _ from 'lodash';
+import sumBy from 'lodash/sumBy';
 
 export default class DonorsTreeMapItem extends Component {
   static displayName = 'DonorsTreeMapItem';
@@ -22,7 +22,7 @@ export default class DonorsTreeMapItem extends Component {
 
   render() {
     const { root, depth, x, y, width, height, index, bgColors, participating_organisation, value } = this.props;
-    const total = _.sumBy(root.children, 'value');
+    const total = sumBy(root.children, 'value');
     const percent = parseFloat(value / total * 100).toFixed(2);
     const fontSize = percent.toString().concat('%')
     return (

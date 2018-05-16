@@ -1,11 +1,13 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
-import _ from "lodash";
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 
 import MainHeader from '../../../components/main/MainHeader';
 import MainFooter from '../../../components/main/MainFooter';
 import DonorBreadcrumbs from "./components/DonorBreadcrumb";
-import BaseFilter from '../components/filters/BaseFilter';
+import BaseFilter from '../../../components/filters/BaseFilter';
+import _ from "lodash";
 import * as actions from "../../../services/actions";
 import {connect} from "react-redux";
 import Projects from "./components/Projects";
@@ -33,7 +35,6 @@ class Donor extends BaseFilter {
   render() {
     const code = _.get(this.props, 'match.params.code');
     const data = _.get(this.props, 'donor.data.results[0]');
-    console.log(data);
     return (
       <Layout className="Donor">
         <Header className="Header">

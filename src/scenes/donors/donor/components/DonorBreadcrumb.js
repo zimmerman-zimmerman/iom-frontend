@@ -1,11 +1,11 @@
 import React from 'react';
-import { Breadcrumb } from 'antd';
+import Breadcrumb from 'antd/es/breadcrumb';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
-import _ from 'lodash';
+import get from 'lodash/get';
 
 const DonorBreadcrumbs = props => {
-  const data = _.get(props, 'donor');
+  const data = get(props, 'donor');
   return (
     <Breadcrumb className="Breadcrumb" separator=">">
       <Breadcrumb.Item>

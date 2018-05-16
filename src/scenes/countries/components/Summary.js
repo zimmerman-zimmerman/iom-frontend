@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Divider, Row, Col } from 'antd';
-import d3 from "d3/d3";
+import Card from 'antd/es/card';
+import Divider from 'antd/es/divider';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import { format } from "d3-format";
 import { FormattedMessage } from "react-intl";
 
 class Summary extends Component {
@@ -20,7 +23,7 @@ class Summary extends Component {
         <Divider className="Divider"/>
         <Row>
           <Col span={24}>
-            {d3.format(".2s")(totalBudget).replace(/G/, "B")}
+            {format(".2s")(totalBudget).replace(/G/, "B")}
           </Col>
         </Row>
         <Row>

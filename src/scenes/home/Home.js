@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col } from 'antd';
-
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import MainHeader from '../../components/main/MainHeader';
 import Banner from './components/Banner';
 import BannerText from './components/BannerText';

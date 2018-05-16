@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 
 import MainMenu from './MainMenu';
 import MainShare from './MainShare';

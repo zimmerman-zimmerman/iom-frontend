@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Layout } from 'antd';
+import Layout from 'antd/es/layout';
+import Button from 'antd/es/button';
 
 import './styles/MainShare.scss';
 

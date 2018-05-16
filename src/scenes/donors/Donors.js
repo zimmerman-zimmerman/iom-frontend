@@ -1,12 +1,14 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import {connect} from 'react-redux';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import MainHeader from '../../components/main/MainHeader';
 import DonorsBreadcrumb from './components/DonorsBreadcrumb';
-import Filters from './components/filters/Filters';
-import BaseFilter from './components/filters/BaseFilter';
+import Filters from './components/Filters';
+import BaseFilter from '../../components/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
@@ -29,7 +31,7 @@ class Donors extends BaseFilter {
 
   render() {
     const { donors } = this.props;
-    const data = _.get(donors, 'data');
+    const data = get(donors, 'data');
     return (
       <Layout>
         <Header className="Header">
@@ -39,16 +41,12 @@ class Donors extends BaseFilter {
           <DonorsBreadcrumb/>
           <Row style={{marginTop: 15}} className="Search">
             <Col span={5}>
-              <Filters data={data}
-                       rootComponent={this}
-                       rootGroupBy="participating_organisation"
-                       filterRequest={actions.donorsRequest}
-              />
+              <Filters data={data} rootComponent={this}/>
             </Col>
             <Col span={19}>
               <Row>
                 <Col span={24}>
-                  <DonorsTreeMap data={_.get(data, 'results') ? data.results : []}/>
+                  <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>
                 </Col>
               </Row>
               <Row>
@@ -66,6 +64,11 @@ class Donors extends BaseFilter {
     );
   }
 }
+
+Donors.defaultProps = {
+  groupBy: 'participating_organisation',
+  filterRequest: actions.donorsRequest,
+};
 
 const mapStateToProps = (state, ) => {
   return {
