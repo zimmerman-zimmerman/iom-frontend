@@ -1,6 +1,6 @@
 import React from 'react';
-import get from 'lodash';
-import isEmpty from 'lodash';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import Select from 'antd/es/select';
 import Spin from 'antd/es/spin';
 import Layout from 'antd/es/layout';
@@ -43,6 +43,7 @@ class Filter extends BaseFilter {
   render() {
     const { reducer, style } = this.props;
     const results = get(reducer, 'data.results');
+    console.log(results);
     const options = !isEmpty(results) ? this.options(results) : null;
     return (
       <Spin spinning={reducer.request}>
