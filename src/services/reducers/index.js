@@ -9,6 +9,7 @@ import {
   COUNTRY_INITIAL, COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILED,
   COUNTRY_DONORS_INITIAL, COUNTRY_DONORS_REQUEST, COUNTRY_DONORS_SUCCESS, COUNTRY_DONORS_FAILED,
   COUNTRY_ACTIVITIES_INITIAL, COUNTRY_ACTIVITIES_REQUEST, COUNTRY_ACTIVITIES_SUCCESS, COUNTRY_ACTIVITIES_FAILED,
+  PROJECTS_INITIAL, PROJECTS_REQUEST, PROJECTS_SUCCESS, PROJECTS_FAILED,
   ACTIVITIES_INITIAL, ACTIVITIES_REQUEST, ACTIVITIES_SUCCESS, ACTIVITIES_FAILED,
   TRANSACTIONS_AGGREGATIONS_INITIAL, TRANSACTIONS_AGGREGATIONS_REQUEST,
   TRANSACTIONS_AGGREGATIONS_SUCCESS, TRANSACTIONS_AGGREGATIONS_FAILED,
@@ -533,6 +534,61 @@ function countryActivities(state=initial, action) {
   }
 }
 
+function projects(state=initial, action) {
+  switch (action.type) {
+    case PROJECTS_INITIAL:
+      return update(state, {
+        values: {$set: null},
+        request: {$set: false},
+        success: {$set: false},
+        data: {$set: null},
+        error: {
+          status: {$set: null},
+          statusText: {$set: null},
+          result: {$set: null},
+        },
+      });
+    case PROJECTS_REQUEST:
+      return update(state, {
+        values: {$set: action.values},
+        request: {$set: true},
+        success: {$set: false},
+        data: {$set: null},
+        error: {
+          status: {$set: null},
+          statusText: {$set: null},
+          result: {$set: null},
+        },
+      });
+    case PROJECTS_SUCCESS:
+      return update(state, {
+        values: {$set: null},
+        request: {$set: false},
+        success: {$set: true},
+        data: {$set: action.data},
+        error: {
+          status: {$set: null},
+          statusText: {$set: null},
+          result: {$set: {}},
+        },
+      });
+    case PROJECTS_FAILED:
+      return update(state, {
+        values: {$set: null},
+        request: {$set: false},
+        success: {$set: false},
+        data: {$set: null},
+        error: {
+          status: {$set: action.error.status},
+          statusText: {$set: action.error.statusText},
+          result: {$set: action.error.result},
+        },
+      });
+    default:
+      return state;
+  }
+}
+
 function activities(state=initial, action) {
   switch (action.type) {
     case ACTIVITIES_INITIAL:
@@ -928,6 +984,7 @@ const reducers = {
   country,
   countryDonors,
   countryActivities,
+  projects,
   activities,
   transactionsAggregations,
   transactionsAggregationsRegions,

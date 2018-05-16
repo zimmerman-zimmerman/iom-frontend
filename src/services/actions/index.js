@@ -250,6 +250,34 @@ export function countryActivitiesFailed(error) {
   }
 }
 
+export const PROJECTS_INITIAL = 'PROJECTS_INITIAL';
+export const PROJECTS_REQUEST = 'PROJECTS_REQUEST';
+export const PROJECTS_SUCCESS = 'PROJECTS_SUCCESS';
+export const PROJECTS_FAILED = 'PROJECTS_FAILED';
+export function projectsInitial() {
+  return {
+    type: PROJECTS_INITIAL
+  }
+}
+export function projectsRequest(values) {
+  return {
+    type: PROJECTS_REQUEST,
+    values: values
+  }
+}
+export function projectsSuccess(data) {
+  return {
+    type: PROJECTS_SUCCESS,
+    data: data
+  }
+}
+export function projectsFailed(error) {
+  return {
+    type: PROJECTS_FAILED,
+    error: error
+  }
+}
+
 export const ACTIVITIES_INITIAL = 'ACTIVITIES_INITIAL';
 export const ACTIVITIES_REQUEST = 'ACTIVITIES_REQUEST';
 export const ACTIVITIES_SUCCESS = 'ACTIVITIES_SUCCESS';
