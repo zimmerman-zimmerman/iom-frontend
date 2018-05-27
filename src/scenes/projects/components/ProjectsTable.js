@@ -58,6 +58,7 @@ class ProjectsTable extends BaseFilter {
       title: intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'}),
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
+      width: '15%',
       render: recipient_countries => <span>{recipient_countries[0].country.name}</span>,
     }];
     return (
