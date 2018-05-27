@@ -3,14 +3,14 @@ import Layout from 'antd/es/layout';
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 
-import MainHeader from '../../../components/main/MainHeader';
-import MainFooter from '../../../components/main/MainFooter';
+import MainHeader from '../../components/main/MainHeader';
+import MainFooter from '../../components/main/MainFooter';
 import DonorBreadcrumbs from "./components/DonorBreadcrumb";
-import BaseFilter from '../../../components/filters/BaseFilter';
+import BaseFilter from '../../components/filters/BaseFilter';
 import _ from "lodash";
-import * as actions from "../../../services/actions";
+import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";
-import Projects from "./components/Projects";
+import DonorProjects from "./components/DonorProjects";
 import './styles/Donor.scss';
 
 
@@ -51,7 +51,7 @@ class Donor extends BaseFilter {
           </Row>
           <Row>
             <Col span={24}>
-              <Projects code={code}/>
+              <DonorProjects code={code}/>
             </Col>
           </Row>
         </Content>

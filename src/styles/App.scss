@@ -1,9 +1,5 @@
 @import "../styles/variables";
 
-#root > div {
-  height: 100vh;
-}
-
 .Content {
   padding: 0 50px;
   .Breadcrumb {
@@ -36,7 +32,24 @@
   .Pagination {
     margin: 8px 0;
   }
+  .leaflet-control-attribution.leaflet-control {
+    display: none;
+  }
+  .ShadowBox {
+    box-shadow: $boxShadow;
+  }
+  tbody > tr > td {
+    word-break: normal !important;
+  }
+  .Filters {
+    button {
+      background-color: #418fde;
+    }
+  }
 }
 .Footer {
   margin-top: 15px;
+}
+.gm-style-cc {
+  display:none;
 }

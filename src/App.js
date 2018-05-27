@@ -8,11 +8,12 @@ import AsyncComponent from './components/AsyncComponent';
 
 const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
 const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
-const AsyncDonor = AsyncComponent(() => import('./scenes/donors/donor/Donor'));
+const AsyncDonor = AsyncComponent(() => import('./scenes/donor/Donor'));
 const AsyncCountries = AsyncComponent(() => import('./scenes/countries/Countries'));
-const AsyncCountry = AsyncComponent(() => import('./scenes/countries/country/Country'));
+const AsyncCountry = AsyncComponent(() => import('./scenes/country/Country'));
 const AsyncServices = AsyncComponent(() => import('./scenes/services/Services'));
-const AsyncProjects = AsyncComponent(() => import('./scenes/services/Services'));
+const AsyncProjects = AsyncComponent(() => import('./scenes/projects/Projects'));
+const AsyncProject = AsyncComponent(() => import('./scenes/project/Project'));
 const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path="/countries/:code" component={AsyncCountry}/>
           <Route exact path="/services" component={AsyncServices}/>
           <Route exact path="/projects" component={AsyncProjects}/>
+          <Route exact path="/projects/:id" component={AsyncProject}/>
           <Route exact path="/about" component={AsyncAbout}/>
         </Switch>
       </Router>

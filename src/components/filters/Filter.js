@@ -43,7 +43,6 @@ class Filter extends BaseFilter {
   render() {
     const { reducer, style } = this.props;
     const results = get(reducer, 'data.results');
-    console.log(results);
     const options = !isEmpty(results) ? this.options(results) : null;
     return (
       <Spin spinning={reducer.request}>

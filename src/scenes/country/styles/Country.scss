@@ -1,10 +1,11 @@
-@import "../../../../styles/variables";
+@import "../../../styles/variables";
 
 .Country {
   .Content {
     padding: 0px 50px;
     background: white;
     .Breadcrumb {
+      border-bottom: none;
       padding: 7px 0;
       color: #262626;
       font-size: 12px;
@@ -97,7 +98,4 @@
   .ContactInfo {
     margin-bottom: 30px;
   }
-}
-.gm-style-cc {
-  display:none;
 }

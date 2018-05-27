@@ -5,13 +5,13 @@ import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
+import get from 'lodash/get';
 
-import * as actions from '../../../../services/actions';
-import _ from "lodash";
+import * as actions from '../../../services/actions/index';
 
 const { Content } = Layout;
 
-class Projects extends Component {
+class DonorProjects extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,9 +30,9 @@ class Projects extends Component {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
-        dispatch(actions.activitiesRequest(params));
+        dispatch(actions.donorProjectsRequest(params));
       } else {
-        dispatch(actions.activitiesInitial());
+        dispatch(actions.donorProjectsInitial());
       }
     }
   }
@@ -40,7 +40,7 @@ class Projects extends Component {
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
-      item.key = _.get(item, 'id');
+      item.key = get(item, 'id');
       data.push(item);
     });
     return data;
@@ -50,13 +50,13 @@ class Projects extends Component {
     const { dispatch } = this.props;
     const { params } = this.state;
     params.page = page;
-    dispatch(actions.activitiesRequest(params));
+    dispatch(actions.donorProjectsRequest(params));
   };
 
   render() {
-    const { intl, activities } = this.props;
-    const data = _.get(activities, 'data.results');
-    const total = _.get(activities, 'data.count');
+    const { intl, donorProjects } = this.props;
+    const data = get(donorProjects, 'data.results');
+    const total = get(donorProjects, 'data.count');
     const columns = [{
       title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
       dataIndex: 'title.narratives[0].text',
@@ -85,7 +85,7 @@ class Projects extends Component {
       key: 'sector'
     }];
     return (
-      <Spin spinning={activities.request}>
+      <Spin spinning={donorProjects.request}>
         <Content className="Projects">
           <Table className="Table"
                  dataSource={data ? this.addKey(data) : null}
@@ -101,12 +101,12 @@ class Projects extends Component {
 
 const mapStateToProps = (state, ) => {
   return {
-    activities: state.activities
+    donorProjects: state.donorProjects
   }
 };
 
-Projects.propTypes = {
+DonorProjects.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default connect(mapStateToProps)(injectIntl(Projects));
+export default connect(mapStateToProps)(injectIntl(DonorProjects));

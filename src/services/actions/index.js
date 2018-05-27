@@ -138,6 +138,34 @@ export function donorFailed(error) {
   }
 }
 
+export const DONOR_PROJECTS_INITIAL = 'DONOR_PROJECTS_INITIAL';
+export const DONOR_PROJECTS_REQUEST = 'DONOR_PROJECTS_REQUEST';
+export const DONOR_PROJECTS_SUCCESS = 'DONOR_PROJECTS_SUCCESS';
+export const DONOR_PROJECTS_FAILED = 'DONOR_PROJECTS_FAILED';
+export function donorProjectsInitial() {
+  return {
+    type: DONOR_PROJECTS_INITIAL
+  }
+}
+export function donorProjectsRequest(values) {
+  return {
+    type: DONOR_PROJECTS_REQUEST,
+    values: values
+  }
+}
+export function donorProjectsSuccess(data) {
+  return {
+    type: DONOR_PROJECTS_SUCCESS,
+    data: data
+  }
+}
+export function donorProjectsFailed(error) {
+  return {
+    type: DONOR_PROJECTS_FAILED,
+    error: error
+  }
+}
+
 export const COUNTRIES_INITIAL = 'COUNTRIES_INITIAL';
 export const COUNTRIES_REQUEST = 'COUNTRIES_REQUEST';
 export const COUNTRIES_SUCCESS = 'COUNTRIES_SUCCESS';
@@ -278,30 +306,58 @@ export function projectsFailed(error) {
   }
 }
 
-export const ACTIVITIES_INITIAL = 'ACTIVITIES_INITIAL';
-export const ACTIVITIES_REQUEST = 'ACTIVITIES_REQUEST';
-export const ACTIVITIES_SUCCESS = 'ACTIVITIES_SUCCESS';
-export const ACTIVITIES_FAILED = 'ACTIVITIES_FAILED';
-export function activitiesInitial() {
+export const PROJECT_INITIAL = 'PROJECT_INITIAL';
+export const PROJECT_REQUEST = 'PROJECT_REQUEST';
+export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';
+export const PROJECT_FAILED = 'PROJECT_FAILED';
+export function projectInitial() {
   return {
-    type: ACTIVITIES_INITIAL
+    type: PROJECT_INITIAL
   }
 }
-export function activitiesRequest(values) {
+export function projectRequest(id) {
   return {
-    type: ACTIVITIES_REQUEST,
-    values: values
+    type: PROJECT_REQUEST,
+    id: id
   }
 }
-export function activitiesSuccess(data) {
+export function projectSuccess(data) {
   return {
-    type: ACTIVITIES_SUCCESS,
+    type: PROJECT_SUCCESS,
     data: data
   }
 }
-export function activitiesFailed(error) {
+export function projectFailed(error) {
   return {
-    type: ACTIVITIES_FAILED,
+    type: PROJECT_FAILED,
+    error: error
+  }
+}
+
+export const PROJECT_LOCATION_INITIAL = 'PROJECT_LOCATION_INITIAL';
+export const PROJECT_LOCATION_REQUEST = 'PROJECT_LOCATION_REQUEST';
+export const PROJECT_LOCATION_SUCCESS = 'PROJECT_LOCATION_SUCCESS';
+export const PROJECT_LOCATION_FAILED = 'PROJECT_LOCATION_FAILED';
+export function projectLocationInitial() {
+  return {
+    type: PROJECT_LOCATION_INITIAL
+  }
+}
+export function projectLocationRequest(code) {
+  return {
+    type: PROJECT_LOCATION_REQUEST,
+    code: code
+  }
+}
+export function projectLocationSuccess(data) {
+  return {
+    type: PROJECT_LOCATION_SUCCESS,
+    data: data
+  }
+}
+export function projectLocationFailed(error) {
+  return {
+    type: PROJECT_LOCATION_FAILED,
     error: error
   }
 }

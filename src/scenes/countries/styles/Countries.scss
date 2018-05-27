@@ -20,9 +20,6 @@
     .Description {
       padding-bottom: 20px;
     }
-    .ShadowBox {
-      box-shadow: $boxShadow;
-    }
     .Search button {
       padding: 0 10px;
     }
@@ -32,9 +29,6 @@
     }
     .Divider {
       margin: 15px 0;
-    }
-    .leaflet-control-attribution.leaflet-control {
-      display: none;
     }
   }
 }

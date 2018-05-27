@@ -47,6 +47,15 @@ export function* donorRequest(action) {
   }
 }
 
+export function* donorProjectsRequest(action) {
+  try {
+    const response = yield call(api.activitiesRequest, action.values);
+    yield put(actions.donorProjectsSuccess(response));
+  } catch (error) {
+    yield put(actions.donorProjectsFailed(error));
+  }
+}
+
 export function* countriesRequest(action) {
   try {
     const response = yield call(api.transactionsAggregationsRequest, action.values);
@@ -92,12 +101,21 @@ export function* projectsRequest(action) {
   }
 }
 
-export function* activitiesRequest(action) {
+export function* projectRequest(action) {
   try {
-    const response = yield call(api.activitiesRequest, action.values);
-    yield put(actions.activitiesSuccess(response));
+    const response = yield call(api.activityRequest, action.id);
+    yield put(actions.projectSuccess(response));
   } catch (error) {
-    yield put(actions.activitiesFailed(error));
+    yield put(actions.projectFailed(error));
+  }
+}
+
+export function* projectLocationRequest(action) {
+  try {
+    const response = yield call(api.countryRequest, action.code);
+    yield put(actions.projectLocationSuccess(response));
+  } catch (error) {
+    yield put(actions.projectLocationFailed(error));
   }
 }
 
@@ -162,12 +180,15 @@ function* sagas() {
     takeLatest('HOME_SECTORS_REQUEST', homeSectorsRequest),
     takeLatest('DONORS_REQUEST', donorsRequest),
     takeLatest('DONOR_REQUEST', donorRequest),
+    takeLatest('DONOR_PROJECTS_REQUEST', donorProjectsRequest),
     takeLatest('COUNTRIES_REQUEST', countriesRequest),
     takeLatest('COUNTRY_REQUEST', countryRequest),
     takeLatest('COUNTRY_DONORS_REQUEST', countryDonorsRequest),
     takeLatest('COUNTRY_ACTIVITIES_REQUEST', countryActivitiesRequest),
     takeLatest('PROJECTS_REQUEST', projectsRequest),
-    takeLatest('ACTIVITIES_REQUEST', activitiesRequest),
+    takeLatest('PROJECTS_REQUEST', projectsRequest),
+    takeLatest('PROJECT_REQUEST', projectRequest),
+    takeLatest('PROJECT_LOCATION_REQUEST', projectLocationRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_REQUEST', transactionsAggregationsRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_REGIONS_REQUEST', transactionsAggregationsRegionsRequest),
     takeLatest('TRANSACTIONS_AGGREGATIONS_COUNTRIES_REQUEST', transactionsAggregationsCountriesRequest),

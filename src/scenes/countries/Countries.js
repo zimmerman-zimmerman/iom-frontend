@@ -8,7 +8,7 @@ import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
 
 import MainHeader from '../../components/main/MainHeader';
-import GeoMap from './components/maps/GeoMap';
+import GeoMap from '../../components/maps/GeoMap';
 import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';
 import MainFooter from '../../components/main/MainFooter';

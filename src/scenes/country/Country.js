@@ -6,16 +6,16 @@ import Col from 'antd/es/col';
 import get from 'lodash/get';
 import extend from 'lodash/extend';
 
-import MainHeader from '../../../components/main/MainHeader';
-import MainFooter from '../../../components/main/MainFooter';
-import CountryBreadcrumb from './CountryBreadcrumb';
+import MainHeader from '../../components/main/MainHeader';
+import MainFooter from '../../components/main/MainFooter';
+import CountryBreadcrumb from './components/CountryBreadcrumb';
 import BannerCountry from './components/BannerCountry';
 import './styles/Country.scss';
 import {connect} from "react-redux";
-import BaseFilter from "../../../components/filters/BaseFilter";
-import * as actions from "../../../services/actions";
+import BaseFilter from "../../components/filters/BaseFilter";
+import * as actions from "../../services/actions";
 import TableDonors from "./components/TableDonors";
-import CountryMap from "./components/CountryMap";
+import CountryMap from "../../components/maps/CountryMap";
 import TableProjects from "./components/TableProjects";
 import ContactInfo from './components/ContactInfo';
 
@@ -48,6 +48,7 @@ class Country extends BaseFilter {
   render() {
     const pathname = get(this.props, 'location.pathname');
     const country = get(this.props, 'country.data.results[0]');
+    console.log(country);
     const donors = get(this.props, 'countryDonors.data.results');
     return (
       <Spin spinning={false}>
@@ -67,7 +68,7 @@ class Country extends BaseFilter {
                 <TableDonors data={donors}/>
               </Col>
               <Col span={12}>
-                <CountryMap data={country}/>
+                <CountryMap data={get(country, 'recipient_country')}/>
               </Col>
             </Row>
           </Content>

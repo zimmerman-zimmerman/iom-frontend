@@ -40,6 +40,14 @@ function formatJSON(values) {
   return values;
 }
 
+export function countryRequest(code) {
+  return handleRequest(hostURL(`/api/countries/${code}`), formatJSON({}), 'get');
+}
+
+export function activityRequest(id) {
+  return handleRequest(hostURL(`/api/activities/${id}`), formatJSON({}), 'get');
+}
+
 export function activitiesRequest(values) {
   return handleRequest(hostURL('/api/activities/'), formatJSON(values), 'get');
 }
