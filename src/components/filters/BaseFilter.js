@@ -24,7 +24,9 @@ class BaseFilter extends Component {
   actionRequest(params, groupBy, request) {
     const { dispatch } = this.props;
     const lParams = params;
-    lParams.group_by = groupBy;
+    if (groupBy) {
+      lParams.group_by = groupBy;
+    }
     dispatch(request(lParams))
   }
 
@@ -34,10 +36,10 @@ class BaseFilter extends Component {
     if (get(filters.values, fieldName)) {
       delete filters.values[fieldName];
     }
-    if (!isEmpty(values)) {
+    if (!isEmpty(values) || values) {
       filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
-    filters.changed = true;
+    filters.changed = true
     this.setState({filters: filters});
   }
 
@@ -47,7 +49,7 @@ class BaseFilter extends Component {
       const { filters } = rootComponent.state;
       const { groupBy, filterRequest } = rootComponent.props;
       if (filters.changed) {
-        const { params } = this.state;
+        const { params } = rootComponent.state;
         this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
         filters.changed = false;
         rootComponent.setState({filters: filters})

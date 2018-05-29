@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Table } from 'antd';
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
-import _ from "lodash";
+import get from "lodash/get";
 import { format } from "d3-format";
 
 const { Content } = Layout;
@@ -10,7 +10,7 @@ class TableDonors extends Component {
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
-      item.key = _.get(item, 'participating_organisation_ref');
+      item.key = get(item, 'participating_organisation_ref');
       data.push(item);
     });
     return data;
@@ -22,6 +22,7 @@ class TableDonors extends Component {
       title: intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
+      width: '60%',
       render: name => <span>{name}</span>
     }, {
       title: intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'}),

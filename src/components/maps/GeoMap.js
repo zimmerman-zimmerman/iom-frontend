@@ -11,7 +11,7 @@ import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import ReactCountryFlag from "react-country-flag";
 
-import '../../styles/geomap.scss';
+import '../../styles/GeoMap.scss';
 
 const colors = ["#CDDC39", "#4CAF50", "#795548"];
 

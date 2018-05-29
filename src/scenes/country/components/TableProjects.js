@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Table } from 'antd';
-import * as actions from "../../../../services/actions";
+import * as actions from "../../../services/actions/index";
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import {connect} from "react-redux";
 import _ from "lodash";
