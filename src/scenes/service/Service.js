@@ -1,6 +1,8 @@
 import React from 'react';
 import Spin from 'antd/es/spin';
 import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import extend from 'lodash/extend';
@@ -44,7 +46,11 @@ class Service extends BaseFilter {
             <Layout>
               <Content>
                 <ServiceBanner data={get(service, 'data.results[0]')}/>
-                <ServiceDonors/>
+                <Row>
+                  <Col span={12}>
+                    <ServiceDonors sectorId={get(this.props, 'match.params.id')}/>
+                  </Col>
+                </Row>
                 <Footer className="MainFooter">
                   <MainFooter/>
                 </Footer>

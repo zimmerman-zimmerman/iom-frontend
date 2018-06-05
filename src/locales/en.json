@@ -126,7 +126,7 @@
   "service.banner.right.source": "IATI Registry",
   "service.table.donors.title": "Where the funds come from",
   "service.table.header.donor": "Donor",
-  "service.table.total": "Total donor funding value",
+  "service.table.header.total": "Total donor funding value",
   "service.table.project.type.title": "Where the funds go",
   "service.table.header.type": "Project type",
   "service.table.header.value": "Total funding value",

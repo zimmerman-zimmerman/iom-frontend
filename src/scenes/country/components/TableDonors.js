@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Layout, Table } from 'antd';
+import Layout from 'antd/es/layout';
+import Table from 'antd/es/table';
 import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import get from "lodash/get";
 import { format } from "d3-format";

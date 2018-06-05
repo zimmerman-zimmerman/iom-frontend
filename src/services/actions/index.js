@@ -362,6 +362,34 @@ export function serviceFailed(error) {
   }
 }
 
+export const SERVICE_DONORS_INITIAL = 'SERVICE_DONORS_INITIAL';
+export const SERVICE_DONORS_REQUEST = 'SERVICE_DONORS_REQUEST';
+export const SERVICE_DONORS_SUCCESS = 'SERVICE_DONORS_SUCCESS';
+export const SERVICE_DONORS_FAILED = 'SERVICE_DONORS_FAILED';
+export function serviceDonorsInitial() {
+  return {
+    type: SERVICE_DONORS_INITIAL
+  }
+}
+export function serviceDonorsRequest(values) {
+  return {
+    type: SERVICE_DONORS_REQUEST,
+    values: values
+  }
+}
+export function serviceDonorsSuccess(data) {
+  return {
+    type: SERVICE_DONORS_SUCCESS,
+    data: data
+  }
+}
+export function serviceDonorsFailed(error) {
+  return {
+    type: SERVICE_DONORS_FAILED,
+    error: error
+  }
+}
+
 export const PROJECT_INITIAL = 'PROJECT_INITIAL';
 export const PROJECT_REQUEST = 'PROJECT_REQUEST';
 export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';

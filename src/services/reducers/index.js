@@ -12,6 +12,7 @@ import {
   COUNTRY_ACTIVITIES_INITIAL, COUNTRY_ACTIVITIES_REQUEST, COUNTRY_ACTIVITIES_SUCCESS, COUNTRY_ACTIVITIES_FAILED,
   SERVICES_INITIAL, SERVICES_REQUEST, SERVICES_SUCCESS, SERVICES_FAILED,
   SERVICE_INITIAL, SERVICE_REQUEST, SERVICE_SUCCESS, SERVICE_FAILED,
+  SERVICE_DONORS_INITIAL, SERVICE_DONORS_REQUEST, SERVICE_DONORS_SUCCESS, SERVICE_DONORS_FAILED,
   PROJECTS_INITIAL, PROJECTS_REQUEST, PROJECTS_SUCCESS, PROJECTS_FAILED,
   PROJECT_INITIAL, PROJECT_REQUEST, PROJECT_SUCCESS, PROJECT_FAILED,
   PROJECT_LOCATION_INITIAL, PROJECT_LOCATION_REQUEST, PROJECT_LOCATION_SUCCESS, PROJECT_LOCATION_FAILED,
@@ -279,6 +280,21 @@ function service(state=initial, action) {
   }
 }
 
+function serviceDonors(state=initial, action) {
+  switch (action.type) {
+    case SERVICE_DONORS_INITIAL:
+      return updateInitial(state, action);
+    case SERVICE_DONORS_REQUEST:
+      return updateRequest(state, action);
+    case SERVICE_DONORS_SUCCESS:
+      return updateSuccess(state, action);
+    case SERVICE_DONORS_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 function projects(state=initial, action) {
   switch (action.type) {
     case PROJECTS_INITIAL:
@@ -427,6 +443,7 @@ const reducers = {
   countryActivities,
   services,
   service,
+  serviceDonors,
   projects,
   project,
   projectLocation,
