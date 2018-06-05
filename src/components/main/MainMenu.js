@@ -21,6 +21,9 @@ class MainMenu extends Component {
       case '/projects/:id':
         rootPath = '/projects';
         break;
+      case '/services/:id':
+        rootPath = '/services';
+        break;
       default:
     }
     return (

@@ -306,6 +306,62 @@ export function projectsFailed(error) {
   }
 }
 
+export const SERVICES_INITIAL = 'SERVICES_INITIAL';
+export const SERVICES_REQUEST = 'SERVICES_REQUEST';
+export const SERVICES_SUCCESS = 'SERVICES_SUCCESS';
+export const SERVICES_FAILED = 'SERVICES_FAILED';
+export function servicesInitial() {
+  return {
+    type: SERVICES_INITIAL
+  }
+}
+export function servicesRequest(values) {
+  return {
+    type: SERVICES_REQUEST,
+    values: values
+  }
+}
+export function servicesSuccess(data) {
+  return {
+    type: SERVICES_SUCCESS,
+    data: data
+  }
+}
+export function servicesFailed(error) {
+  return {
+    type: SERVICES_FAILED,
+    error: error
+  }
+}
+
+export const SERVICE_INITIAL = 'SERVICE_INITIAL';
+export const SERVICE_REQUEST = 'SERVICE_REQUEST';
+export const SERVICE_SUCCESS = 'SERVICE_SUCCESS';
+export const SERVICE_FAILED = 'SERVICE_FAILED';
+export function serviceInitial() {
+  return {
+    type: SERVICE_INITIAL
+  }
+}
+export function serviceRequest(values) {
+  return {
+    type: SERVICE_REQUEST,
+    values: values
+  }
+}
+export function serviceSuccess(data) {
+  return {
+    type: SERVICE_SUCCESS,
+    data: data
+  }
+}
+export function serviceFailed(error) {
+  return {
+    type: SERVICE_FAILED,
+    error: error
+  }
+}
+
 export const PROJECT_INITIAL = 'PROJECT_INITIAL';
 export const PROJECT_REQUEST = 'PROJECT_REQUEST';
 export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';
