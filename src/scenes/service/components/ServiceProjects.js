@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Layout from 'antd/es/layout';
-import Table from 'antd/es/table';
+import Spin from 'antd/es/spin';
+
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import * as actions from '../../../services/actions';
 import { connect } from 'react-redux';
-import { format } from 'd3-format';
 import get from 'lodash/get';
+
+import BaseFilter from '../../../components/filters/BaseFilter';
+import ProjectsTable from '../components/ProjectsTable';
 
 const { Content } = Layout;
 
-class ServiceProjects extends Component {
+class ServiceProjects extends BaseFilter {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +25,9 @@ class ServiceProjects extends Component {
         sector: get(props, 'sectorId'),
         page_size: 5,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
-      }
+      },
+      update: false,
+      filters: {values: {}, changed: false},
     };
   }
 
@@ -38,53 +43,25 @@ class ServiceProjects extends Component {
     }
   }
 
-  addKey(dataSource) {
-    let data = [];
-    dataSource.forEach(function(item) {
-      item.key = get(item, 'id');
-      data.push(item);
-    });
-    return data;
-  }
-
   render() {
-    const { intl, serviceProjects } = this.props;
-    const data = get(serviceProjects, 'data.results');
-    const columns = [{
-      title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
-      dataIndex: 'title.narratives[0].text',
-      key: 'title.narratives[0].text',
-      width: '45%',
-      render: name => <span>{name}</span>
-    }, {
-      title: intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'}),
-      dataIndex: 'aggregations.activity.budget_value',
-      key: 'aggregations.activity.budget_value',
-      className: 'columnMoney',
-      render: value => <span>{format(',.2f')(value)}</span>
-    }, {
-      title: intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'}),
-      dataIndex: 'humanitarian',
-      key: 'humanitarian',
-      render: value =>
-        <span>{value ? intl.formatMessage({id: 'service.projects.yes', defaultMessage: 'Yes'}) :
-          intl.formatMessage({id: 'service.projects.no', defaultMessage: 'No'})}
-        </span>
-    }];
+    const { serviceProjects } = this.props;
     return(
-      <Content className="Content">
-        <h3 className="Title">
-          <FormattedMessage id="service.projects.title" defaultMessage="Where the funds go"/>
-        </h3>
-        <Table dataSource={data ? this.addKey(data) : null}
-               columns={columns}
-               loading={serviceProjects.request}
-               pagination={false}
-        />
-      </Content>
+      <Spin spinning={serviceProjects.request}>
+        <Content className="Content">
+          <h3 className="Title">
+            <FormattedMessage id="service.projects.title" defaultMessage="Where the funds go"/>
+          </h3>
+          <ProjectsTable data={get(this.props.serviceProjects, 'data')} fieldName="page" rootComponent={this}/>
+        </Content>
+      </Spin>
     )
   }
 }
+
+ServiceProjects.defaultProps = {
+  groupBy: null,
+  filterRequest: actions.serviceProjectsRequest,
+};
 
 ServiceProjects.propTypes = {
   intl: intlShape.isRequired
