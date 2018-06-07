@@ -37,13 +37,13 @@ class ServiceDonors extends BaseFilter {
     const { intl, serviceDonors } = this.props;
     const data = get(serviceDonors, 'data.results');
     const columns = [{
-      title: intl.formatMessage({id: 'service.table.header.donor', defaultMessage: 'Donor'}),
+      title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       width: '60%',
       render: name => <span>{name}</span>
     }, {
-      title: intl.formatMessage({id: 'service.table.header.total', defaultMessage: 'Total donor funding value'}),
+      title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
       dataIndex: 'value',
       key: 'value',
       className: 'columnMoney',
@@ -52,7 +52,7 @@ class ServiceDonors extends BaseFilter {
     return(
       <Content className="Content">
         <h3 className="Title">
-          <FormattedMessage id="service.table.donors.title" defaultMessage="Where the funds come from"/>
+          <FormattedMessage id="service.donors.title" defaultMessage="Where the funds come from"/>
         </h3>
         <Table dataSource={data ? this.addKey(data) : null}
                columns={columns}

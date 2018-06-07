@@ -13,6 +13,8 @@ import MainFooter from '../../components/main/MainFooter';
 import ServiceBreadcrumb from './components/ServiceBreadcrumb';
 import ServiceBanner from './components/ServiceBanner';
 import ServiceDonors from './components/ServiceDonors';
+import ServiceProjects from './components/ServiceProjects';
+import ServiceCountries from './components/ServiceCountries';
 
 import './styles/Service.scss';
 import * as actions from "../../services/actions";
@@ -33,6 +35,7 @@ class Service extends BaseFilter {
 
   render() {
     const { service } = this.props;
+    const sectorId = get(this.props, 'match.params.id');
     return (
       <Spin spinning={service.request}>
         <Layout className="Service">
@@ -48,7 +51,15 @@ class Service extends BaseFilter {
                 <ServiceBanner data={get(service, 'data.results[0]')}/>
                 <Row>
                   <Col span={12}>
-                    <ServiceDonors sectorId={get(this.props, 'match.params.id')}/>
+                    <ServiceDonors sectorId={sectorId}/>
+                  </Col>
+                  <Col span={12}>
+                    <ServiceProjects sectorId={sectorId}/>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <ServiceCountries sectorId={sectorId}/>
                   </Col>
                 </Row>
                 <Footer className="MainFooter">

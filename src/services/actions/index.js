@@ -390,6 +390,62 @@ export function serviceDonorsFailed(error) {
   }
 }
 
+export const SERVICE_PROJECTS_INITIAL = 'SERVICE_PROJECTS_INITIAL';
+export const SERVICE_PROJECTS_REQUEST = 'SERVICE_PROJECTS_REQUEST';
+export const SERVICE_PROJECTS_SUCCESS = 'SERVICE_PROJECTS_SUCCESS';
+export const SERVICE_PROJECTS_FAILED = 'SERVICE_PROJECTS_FAILED';
+export function serviceProjectsInitial() {
+  return {
+    type: SERVICE_PROJECTS_INITIAL
+  }
+}
+export function serviceProjectsRequest(values) {
+  return {
+    type: SERVICE_PROJECTS_REQUEST,
+    values: values
+  }
+}
+export function serviceProjectsSuccess(data) {
+  return {
+    type: SERVICE_PROJECTS_SUCCESS,
+    data: data
+  }
+}
+export function serviceProjectsFailed(error) {
+  return {
+    type: SERVICE_PROJECTS_FAILED,
+    error: error
+  }
+}
+
+export const SERVICE_COUNTRIES_INITIAL = 'SERVICE_COUNTRIES_INITIAL';
+export const SERVICE_COUNTRIES_REQUEST = 'SERVICE_COUNTRIES_REQUEST';
+export const SERVICE_COUNTRIES_SUCCESS = 'SERVICE_COUNTRIES_SUCCESS';
+export const SERVICE_COUNTRIES_FAILED = 'SERVICE_COUNTRIES_FAILED';
+export function serviceCountriesInitial() {
+  return {
+    type: SERVICE_COUNTRIES_INITIAL
+  }
+}
+export function serviceCountriesRequest(values) {
+  return {
+    type: SERVICE_COUNTRIES_REQUEST,
+    values: values
+  }
+}
+export function serviceCountriesSuccess(data) {
+  return {
+    type: SERVICE_COUNTRIES_SUCCESS,
+    data: data
+  }
+}
+export function serviceCountriesFailed(error) {
+  return {
+    type: SERVICE_COUNTRIES_FAILED,
+    error: error
+  }
+}
+
 export const PROJECT_INITIAL = 'PROJECT_INITIAL';
 export const PROJECT_REQUEST = 'PROJECT_REQUEST';
 export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';

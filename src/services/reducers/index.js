@@ -13,6 +13,8 @@ import {
   SERVICES_INITIAL, SERVICES_REQUEST, SERVICES_SUCCESS, SERVICES_FAILED,
   SERVICE_INITIAL, SERVICE_REQUEST, SERVICE_SUCCESS, SERVICE_FAILED,
   SERVICE_DONORS_INITIAL, SERVICE_DONORS_REQUEST, SERVICE_DONORS_SUCCESS, SERVICE_DONORS_FAILED,
+  SERVICE_PROJECTS_INITIAL, SERVICE_PROJECTS_REQUEST, SERVICE_PROJECTS_SUCCESS, SERVICE_PROJECTS_FAILED,
+  SERVICE_COUNTRIES_INITIAL, SERVICE_COUNTRIES_REQUEST, SERVICE_COUNTRIES_SUCCESS, SERVICE_COUNTRIES_FAILED,
   PROJECTS_INITIAL, PROJECTS_REQUEST, PROJECTS_SUCCESS, PROJECTS_FAILED,
   PROJECT_INITIAL, PROJECT_REQUEST, PROJECT_SUCCESS, PROJECT_FAILED,
   PROJECT_LOCATION_INITIAL, PROJECT_LOCATION_REQUEST, PROJECT_LOCATION_SUCCESS, PROJECT_LOCATION_FAILED,
@@ -295,6 +297,36 @@ function serviceDonors(state=initial, action) {
   }
 }
 
+function serviceProjects(state=initial, action) {
+  switch (action.type) {
+    case SERVICE_PROJECTS_INITIAL:
+      return updateInitial(state, action);
+    case SERVICE_PROJECTS_REQUEST:
+      return updateRequest(state, action);
+    case SERVICE_PROJECTS_SUCCESS:
+      return updateSuccess(state, action);
+    case SERVICE_PROJECTS_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
+function serviceCountries(state=initial, action) {
+  switch (action.type) {
+    case SERVICE_COUNTRIES_INITIAL:
+      return updateInitial(state, action);
+    case SERVICE_COUNTRIES_REQUEST:
+      return updateRequest(state, action);
+    case SERVICE_COUNTRIES_SUCCESS:
+      return updateSuccess(state, action);
+    case SERVICE_COUNTRIES_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 function projects(state=initial, action) {
   switch (action.type) {
     case PROJECTS_INITIAL:
@@ -444,6 +476,8 @@ const reducers = {
   services,
   service,
   serviceDonors,
+  serviceProjects,
+  serviceCountries,
   projects,
   project,
   projectLocation,
