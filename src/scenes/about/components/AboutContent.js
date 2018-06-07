@@ -21,7 +21,7 @@ const AboutContent = () => {
     key: 'action',
     render: (text, record) => (
       <span>
-        <a href="javascript:;" className="ant-dropdown-link">
+        <a href="/" className="ant-dropdown-link">
           <Icon type="download" />
         </a>
       </span>
