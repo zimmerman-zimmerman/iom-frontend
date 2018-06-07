@@ -46,10 +46,28 @@
       background-color: #418fde;
     }
   }
+  th.Money, td.Money {
+    text-align: right !important;
+  }
+  .ServiceTable {
+    margin-bottom: 30px;
+  }
+}
+.Banner .Field {
+  margin-top: 20px;
 }
 .Footer {
   margin-top: 15px;
 }
+.Title {
+  color: #1f4283;
+}
 .gm-style-cc {
   display:none;
+}
+th.columnMoney, td.columnMoney {
+  text-align: right !important;
+}
+.Content.Top {
+  margin: 30px 0;
 }

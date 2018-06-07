@@ -9,7 +9,7 @@ class BaseFilter extends Component {
     super(props);
     this.state = {
       params: {
-        aggregations: 'activity_count,incoming_fund,disbursement,value',
+        aggregations: 'activity_count,incoming_fund,disbursement,expenditure,value',
         group_by: '',
         order_by: '-value',
         convert_to: 'usd',
