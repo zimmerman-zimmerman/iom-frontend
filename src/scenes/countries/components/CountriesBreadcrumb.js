@@ -9,7 +9,7 @@ class CountriesBreadcrumb extends Component {
       <Breadcrumb className="Breadcrumb" separator=">">
         <Breadcrumb.Item>
           <Link to="/">
-            <FormattedMessage id="countries.breadcrumb.home" defaultMessage="Home"/>
+            <FormattedMessage id="breadcrumb.home" defaultMessage="Home"/>
           </Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>

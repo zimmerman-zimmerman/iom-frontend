@@ -5,6 +5,7 @@
   "main.menu.services": "Our Services",
   "main.menu.projects": "Projects",
   "main.menu.about": "About",
+  "breadcrumb.home": "Home",
 
   "banner.title": "IOM Transparency Portal",
   "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",
@@ -166,6 +167,8 @@
   "project.location.contact.email": "Email:",
   "project.location.contact.address": "Address:",
   "project.location.contact.website": "Website:",
+
+  "about.breadcrumb.about": "About",
 
   "footer.contact": "Contact us",
   "footer.follow": "Follow us",
