@@ -59,7 +59,7 @@
 .Footer {
   margin-top: 15px;
 }
-.Title {
+h2.Title, .Title {
   color: #1f4283;
 }
 .gm-style-cc {
@@ -70,4 +70,7 @@ th.columnMoney, td.columnMoney {
 }
 .Content.Top {
   margin: 30px 0;
+}
+.About .ant-table-thead th {
+  background-color: #fafafa !important;
 }
