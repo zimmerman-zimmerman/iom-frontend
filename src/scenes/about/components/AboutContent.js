@@ -14,7 +14,7 @@ const AboutContent = () => {
     title: 'Document',
     dataIndex: 'document',
     key: 'document',
-    width: '80%',
+    width: '95%',
     render: text => <span>{text}</span>,
   }, {
     title: '',
