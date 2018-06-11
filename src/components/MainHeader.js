@@ -123,10 +123,6 @@ const styles = {
     color: 'white',
     fontSize: 40,
   },
-  menus: {
-    float: 'right',
-    borderBottom: 'none',
-  },
   share: {
     float: 'right',
     '& $button': {
