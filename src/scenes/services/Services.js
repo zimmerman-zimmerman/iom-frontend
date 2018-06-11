@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 
 import BaseFilter from '../../components/filters/BaseFilter';
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import DonorsBreadcrumb from '../donors/components/DonorsBreadcrumb';
 import Filters from './components/Filters';

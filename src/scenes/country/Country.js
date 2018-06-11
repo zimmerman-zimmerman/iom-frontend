@@ -6,7 +6,7 @@ import Col from 'antd/es/col';
 import get from 'lodash/get';
 import extend from 'lodash/extend';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import CountryBreadcrumb from './components/CountryBreadcrumb';
 import BannerCountry from './components/BannerCountry';

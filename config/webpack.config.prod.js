@@ -211,6 +211,7 @@ module.exports = {
                 extractTextPluginOptions
               )
             ),
+            include: /flexboxgrid/
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // Support SASS

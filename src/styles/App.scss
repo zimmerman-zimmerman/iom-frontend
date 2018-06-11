@@ -1,76 +1,17 @@
-@import "../styles/variables";
-
-.Content {
-  padding: 0 50px;
-  .Breadcrumb {
-    padding: 7px 0;
-    border-bottom: $border;
-    color: $breadcrumbColor;
-    font-size: 12px;
-    .Active {
-      color: $breadcrumbColorActive;
+@media only screen and (min-width: 1100px) {
+  .container-fluid {
+    padding: 0 50px !important;
+  }
+}
+/* Override Ant Menu Style */
+.ant-menu {
+  * {
+    border-bottom: none !important;
+  }
+  li {
+    text-transform: uppercase;
+    &.ant-menu-item-selected {
+      border-bottom: 4px solid #35b6b4 !important;
     }
   }
-  .Search button {
-    padding: 0 10px;
-  }
-  .Border.Bottom {
-    border-bottom: $border;
-    padding-bottom: 15px;
-  }
-  .Filters .Badge .ant-badge-count {
-    background-color: #f7c989;
-  }
-  tr > th {
-    background: white;
-    font-weight: bold;
-    color: $blue;
-  }
-  h2 {
-    color: #737373;
-  }
-  .Pagination {
-    margin: 8px 0;
-  }
-  .leaflet-control-attribution.leaflet-control {
-    display: none;
-  }
-  .ShadowBox {
-    box-shadow: $boxShadow;
-  }
-  tbody > tr > td {
-    word-break: normal !important;
-  }
-  .Filters {
-    button {
-      background-color: #418fde;
-    }
-  }
-  th.Money, td.Money {
-    text-align: right !important;
-  }
-  .ServiceTable {
-    margin-bottom: 30px;
-  }
-}
-.Banner .Field {
-  margin-top: 20px;
-}
-.Footer {
-  margin-top: 15px;
-}
-h2.Title, .Title {
-  color: #1f4283;
-}
-.gm-style-cc {
-  display:none;
-}
-th.columnMoney, td.columnMoney {
-  text-align: right !important;
-}
-.Content.Top {
-  margin: 30px 0;
-}
-.About .ant-table-thead th {
-  background-color: #fafafa !important;
 }

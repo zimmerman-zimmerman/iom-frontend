@@ -8,7 +8,7 @@ import extend from "lodash/extend";
 import { FormattedMessage } from "react-intl";
 import Spin from 'antd/es/spin';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import BaseFilter from "../../components/filters/BaseFilter";
 import Filters from "./components/Filters";
 import * as actions from "../../services/actions";

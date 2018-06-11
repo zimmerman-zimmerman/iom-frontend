@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'antd/es/layout';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import AboutBreadcrumb from './components/AboutBreadcrumb';
 import AboutContent from './components/AboutContent';

@@ -3,7 +3,7 @@ import Layout from 'antd/es/layout';
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import DonorBreadcrumbs from "./components/DonorBreadcrumb";
 import BaseFilter from '../../components/filters/BaseFilter';

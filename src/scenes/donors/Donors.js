@@ -5,7 +5,7 @@ import Col from 'antd/es/col';
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import DonorsBreadcrumb from './components/DonorsBreadcrumb';
 import Filters from './components/Filters';
 import BaseFilter from '../../components/filters/BaseFilter';

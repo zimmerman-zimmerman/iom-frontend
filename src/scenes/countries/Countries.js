@@ -7,7 +7,7 @@ import Spin from 'antd/es/spin';
 import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import GeoMap from '../../components/maps/GeoMap';
 import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';

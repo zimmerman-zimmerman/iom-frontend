@@ -8,7 +8,7 @@ import get from 'lodash/get';
 import extend from 'lodash/extend';
 
 import BaseFilter from '../../components/filters/BaseFilter';
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import ServiceBreadcrumb from './components/ServiceBreadcrumb';
 import ServiceBanner from './components/ServiceBanner';

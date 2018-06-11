@@ -4,7 +4,7 @@ import Layout from 'antd/es/layout';
 import Spin from 'antd/es/spin';
 import get from 'lodash/get';
 
-import MainHeader from '../../components/main/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/main/MainFooter';
 import * as actions from "../../services/actions/index";
 import ProjectBreadcrumb from "./components/ProjectBreadcrumb";
