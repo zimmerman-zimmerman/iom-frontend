@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import Menu from 'antd/es/menu';
 import Button from 'antd/es/button';
 import MdMenu from 'react-icons/lib/md/menu';
 import FaFacebook from 'react-icons/lib/fa/facebook';
@@ -9,7 +8,6 @@ import FaFeed from 'react-icons/lib/fa/feed';
 import injectSheet from 'react-jss';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from "react-intl";
 
 import { size as screenSize } from '../helpers/screen';
 import { variables as styleVariables } from '../helpers/style';
@@ -25,7 +23,6 @@ class MainHeader extends Component {
 
   render() {
     const { classes, match } = this.props;
-
     let urlPath = match.path;
     switch (urlPath) {
       case '/donors/:code':
@@ -39,6 +36,15 @@ class MainHeader extends Component {
         break;
       default:
     }
+
+    const menuItems = [
+      {key: '/', id: 'main.menu.home', defaultMessage: 'Home'},
+      {key: '/donors', id: 'main.menu.donors', defaultMessage: 'Donors'},
+      {key: '/countries', id: 'main.menu.countries', defaultMessage: 'Countries'},
+      {key: '/services', id: 'main.menu.services', defaultMessage: 'Our Services'},
+      {key: '/projects', id: 'main.menu.projects', defaultMessage: 'Projects'},
+      {key: '/about', id: 'main.menu.about', defaultMessage: 'About'},
+    ];
 
     const Logo = (props) => {
       if (props.size === 'xs') {
@@ -57,43 +63,6 @@ class MainHeader extends Component {
         </Row>
       )
     };
-
-    const Menus = () => {
-      return (
-        <Menu className={classes.menus}
-              mode="horizontal"
-              defaultSelectedKeys={[urlPath]}
-        >
-          <Menu.Item key="/">
-            <FormattedMessage id="main.menu.home" defaultMessage="Home" />
-          </Menu.Item>
-          <Menu.Item key="/donors">
-            <FormattedMessage id="main.menu.donors" defaultMessage="Donors" />
-          </Menu.Item>
-          <Menu.Item key="/countries">
-            <FormattedMessage id="main.menu.countries" defaultMessage="Countries" />
-          </Menu.Item>
-          <Menu.Item key="/services">
-            <FormattedMessage id="main.menu.services" defaultMessage="Our Services" />
-          </Menu.Item>
-          <Menu.Item key="/projects">
-            <FormattedMessage id="main.menu.projects" defaultMessage="Projects" />
-          </Menu.Item>
-          <Menu.Item key="/about">
-            <FormattedMessage id="main.menu.about" defaultMessage="About" />
-          </Menu.Item>
-        </Menu>
-      )
-    };
-
-    const menuItems = [
-      {key: '/', id: 'main.menu.home', defaultMessage: 'Home'},
-      {key: '/donors', id: 'main.menu.donors', defaultMessage: 'Donors'},
-      {key: '/countries', id: 'main.menu.countries', defaultMessage: 'Countries'},
-      {key: '/services', id: 'main.menu.services', defaultMessage: 'Our Services'},
-      {key: '/projects', id: 'main.menu.projects', defaultMessage: 'Projects'},
-      {key: '/about', id: 'main.menu.about', defaultMessage: 'About'},
-    ];
 
     const Share = (props) => {
       const { size } = props;
@@ -117,7 +86,7 @@ class MainHeader extends Component {
             <Logo size={size}/>
           </Col>
           <Col xs={6} md={6} lg={9}>
-            {size === 'lg' ? <MenuHeader items={menuItems} /> : null}
+            {size === 'lg' ? <MenuHeader items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
           </Col>
           {size === 'lg'? <Col lg={2}><Share size={size} /></Col> : null}
