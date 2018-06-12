@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 
 import MainHeader from '../../components/MainHeader';
 import MainBreadcrumd from '../../components/MainBreadcrumb';
 import Trans from '../../locales/Trans';
+import {size as screenSize} from "../../helpers/screen";
 
 class Home extends Component {
   render() {
@@ -13,7 +15,12 @@ class Home extends Component {
     return (
       <Fragment>
         <MainHeader />
-        <MainBreadcrumd items={breadcrumbItems} separator=">" />
+        <MediaQuery minWidth={screenSize.tablet.minWidth} maxWidth={screenSize.tablet.maxWidth}>
+          <MainBreadcrumd items={breadcrumbItems} separator=">" size="md" />
+        </MediaQuery>
+        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+          <MainBreadcrumd items={breadcrumbItems} separator=">" size="lg" />
+        </MediaQuery>
       </Fragment>
     );
   }
