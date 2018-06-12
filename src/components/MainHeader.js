@@ -12,7 +12,8 @@ import { withRouter } from 'react-router-dom';
 import { size as screenSize } from '../helpers/screen';
 import { variables as styleVariables } from '../helpers/style';
 
-import MenuHeader from './MenuHeader';
+import Trans from '../locales/Trans';
+import MainMenu from './MainMenu';
 import logo from '../assets/iom-logo.svg';
 import logoOnly from '../assets/iom-logo-only.svg';
 
@@ -38,12 +39,12 @@ class MainHeader extends Component {
     }
 
     const menuItems = [
-      {key: '/', id: 'main.menu.home', defaultMessage: 'Home'},
-      {key: '/donors', id: 'main.menu.donors', defaultMessage: 'Donors'},
-      {key: '/countries', id: 'main.menu.countries', defaultMessage: 'Countries'},
-      {key: '/services', id: 'main.menu.services', defaultMessage: 'Our Services'},
-      {key: '/projects', id: 'main.menu.projects', defaultMessage: 'Projects'},
-      {key: '/about', id: 'main.menu.about', defaultMessage: 'About'},
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
+      {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
+      {url: '/services', text: <Trans id='main.menu.services' text='Our Services' />},
+      {url: '/projects', text: <Trans id='main.menu.projects' text='Projects' />},
+      {url: '/about', text: <Trans id='main.menu.about' text='About' />},
     ];
 
     const Logo = (props) => {
@@ -86,7 +87,7 @@ class MainHeader extends Component {
             <Logo size={size}/>
           </Col>
           <Col xs={6} md={6} lg={9}>
-            {size === 'lg' ? <MenuHeader items={menuItems} urlPath={urlPath} /> : null}
+            {size === 'lg' ? <MainMenu items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
           </Col>
           {size === 'lg'? <Col lg={2}><Share size={size} /></Col> : null}
