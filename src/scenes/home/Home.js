@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive';
 
 import MainHeader from '../../components/MainHeader';
 import MainBreadcrumd from '../../components/MainBreadcrumb';
+import MainFooter from '../../components/MainFooter';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 
@@ -21,6 +22,7 @@ class Home extends Component {
         <MediaQuery minWidth={screenSize.desktop.minWidth}>
           <MainBreadcrumd items={breadcrumbItems} separator=">" size="lg" />
         </MediaQuery>
+        <MainFooter/>
       </Fragment>
     );
   }
