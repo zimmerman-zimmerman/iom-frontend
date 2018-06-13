@@ -59,7 +59,7 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
       width: '15%',
-      render: recipient_countries => <span>{recipient_countries[0].country.name}</span>,
+      render: recipient_countries => <span>{get(recipient_countries, '[0].country.name')}</span>,
     }];
     return (
       <Content className="ProjectsTable">
