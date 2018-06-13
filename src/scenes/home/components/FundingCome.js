@@ -25,7 +25,6 @@ class FundingCome extends Component {
         group_by: 'participating_organisation',
         order_by: '-value',
         convert_to: 'usd',
-        activity_status: '2,3,4',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       }
     };

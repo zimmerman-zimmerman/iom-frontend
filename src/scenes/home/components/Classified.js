@@ -25,7 +25,6 @@ class Classified extends Component {
         order_by: '-value',
         convert_to: 'usd',
         hierarchy: 1,
-        activity_status: '2,3,4',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       }
     };
