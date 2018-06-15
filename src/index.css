@@ -6,3 +6,6 @@ body {
 * {
   font-family: "Open Sans";
 }
+#root {
+  min-width: 1400px;
+}
