@@ -114,7 +114,7 @@ class MainHeader extends Component {
 const styles = {
   header: {
     backgroundColor: styleVariables.blue,
-    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.59)',
   },
   logo: {
     padding: '5px 0',

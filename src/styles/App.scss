@@ -3,6 +3,14 @@
     padding: 0 50px !important;
   }
 }
+@media only screen and (max-width: 767px) {
+  h1 {
+    font-size: 130%;
+  }
+  h2 {
+    font-size: 100%;
+  }
+}
 /* Override Ant Menu Style */
 .ant-menu {
   * {
