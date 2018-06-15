@@ -3,19 +3,15 @@ import MediaQuery from 'react-responsive';
 
 import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/MainFooter';
-import MainBreadcrumb from '../../components/MainBreadcrumb';
 import BannerImage from '../../components/BannerImage';
 import BannerText from '../../components/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
+import FundingCome from './components/FundingCome';
 
 class Home extends Component {
   render() {
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='breadcrumb.home' text='Home' />, active: false},
-      {url: '*', text: <Trans id='about.breadcrumb.about' text='About' />, active: true},
-    ];
     const title = <Trans id="banner.title" text="Title"/>;
     const description = <Trans id="banner.description" text="Description"/>;
     const detail = <Trans id="banner.detail" text="Detail"/>;
@@ -42,9 +38,10 @@ class Home extends Component {
         </MediaQuery>
         <MediaQuery minWidth={screenSize.desktop.minWidth}>
           <Banner height={500} size="lg" />
-          <MainBreadcrumb items={breadcrumbItems} separator=">" size="lg" />
         </MediaQuery>
+        <FundingCome/>
         <MainFooter/>
+
       </Fragment>
     );
   }

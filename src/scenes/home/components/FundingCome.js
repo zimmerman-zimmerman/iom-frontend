@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
-import Button from 'antd/es/button';
 import Spin from 'antd/es/spin';
-import { FormattedMessage } from "react-intl";
 import forEach from "lodash/forEach";
 import get from 'lodash/get';
-import slice from 'lodash/slice';
-
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import MediaQuery from 'react-responsive';
 
 import * as actions from '../../../services/actions/index';
-import PieReCharts from './PieReCharts';
+import PieRadialChart from '../../../components/PieRadialChart';
+import {size as screenSize} from '../../../helpers/screen';
+import ContainerPieRadialChart from '../containers/ContainerPieRadialChart';
 
-const { Content } = Layout;
 
 class FundingCome extends Component {
   constructor(props) {
@@ -25,7 +21,7 @@ class FundingCome extends Component {
         group_by: 'participating_organisation',
         order_by: '-value',
         convert_to: 'usd',
-        activity_status: '2,3,4',
+        page_size: 5,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       }
     };
@@ -52,33 +48,18 @@ class FundingCome extends Component {
         value: get(item, 'value'),
       });
     });
+    const colors = ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'];
     return (
       <Spin spinning={homeDonors.request}>
-        <Layout>
-          <Content className="Graphs">
-            <Row>
-              <Col span={24}>
-                <PieReCharts
-                  title={
-                    <FormattedMessage id="home.funding.come.title"
-                                      defaultMessage="Where the Funding Come From"
-                    />
-                  }
-                  data={slice(data, 0, 5)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col span={24} className="Pad">
-                <Button className="Button">
-                  <FormattedMessage id="home.funding.come.button"
-                                    defaultMessage="See All Publisher Donors"
-                  />
-                </Button>
-              </Col>
-            </Row>
-          </Content>
-        </Layout>
+        <Grid fluid>
+          <Row middle="xs">
+            <Col xs={12}>
+              <ContainerPieRadialChart height={400} data={data} prefix="USD" fillColor="#8884d8"
+                                       innerRadius={0} colors={colors}
+              />
+            </Col>
+          </Row>
+        </Grid>
       </Spin>
     )
   }
