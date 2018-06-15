@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import forEach from "lodash/forEach";
 import get from 'lodash/get';
 import slice from 'lodash/slice';
+import { Link } from 'react-router-dom';
 
 
 import * as actions from '../../../services/actions/index';
@@ -69,11 +70,13 @@ class FundingCome extends Component {
             </Row>
             <Row>
               <Col span={24} className="Pad">
-                <Button className="Button">
-                  <FormattedMessage id="home.funding.come.button"
-                                    defaultMessage="See All Publisher Donors"
-                  />
-                </Button>
+                <Link to={`/donors`}>
+                  <Button className="Button">
+                    <FormattedMessage id="home.funding.come.button"
+                                      defaultMessage="See All Publisher Donors"
+                    />
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </Content>
