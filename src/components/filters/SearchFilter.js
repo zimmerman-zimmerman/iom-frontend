@@ -13,6 +13,7 @@ class SearchFilter extends BaseFilter {
       <Search placeholder={placeholder}
               onSearch={(value) => this.handleChange(value)}
               enterButton
+              className="SearchFilter"
       />
     )
   }
