@@ -16,7 +16,8 @@ HomeDonors.defaultProps = {
   },
   request: actions.homeDonorsRequest,
   initial: actions.homeDonorsInitial,
-  valueField: 'participating_organisation',
+  nameField: 'participating_organisation',
+  valueField: 'value',
 };
 
 const mapStateToProps = (state, ) => {

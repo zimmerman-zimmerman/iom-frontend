@@ -10,6 +10,7 @@ import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
 import HomeDonors from './containers/HomeDonors';
+import HomeActivities from './containers/HomeActivities';
 
 class Home extends Component {
   render() {
@@ -46,7 +47,7 @@ class Home extends Component {
               <HomeDonors />
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeDonors />
+              <HomeActivities />
             </Col>
             <Col xs={12} md={4} lg={4}>
               <HomeDonors />

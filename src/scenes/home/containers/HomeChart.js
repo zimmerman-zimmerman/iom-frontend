@@ -3,9 +3,9 @@ import Spin from 'antd/es/spin';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
-import { injectIntl, intlShape } from "react-intl";
+import { injectIntl, intlShape } from 'react-intl';
 import { Row, Col } from 'react-flexbox-grid';
-import injectSheet from "react-jss";
+import injectSheet from 'react-jss';
 import List from 'antd/es/list';
 import Badge from 'antd/es/badge';
 import Button from 'antd/es/button';
@@ -35,12 +35,12 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, valueField } = this.props;
+    const { reducer, localeTitle, intl, nameField, valueField } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
-        name: get(item, valueField),
-        value: get(item, 'value'),
+        name: get(item, nameField),
+        value: get(item, valueField),
       });
     });
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
@@ -143,8 +143,11 @@ const styles = {
     },
     '& .ant-list-item-meta-title': {
       textOverflow: 'ellipsis',
-      webkitLineClamp: 2,
-      webkitBoxOrient: 'vertical',
+      '-webkit-line-clamp': 2,
+      '-webkit-box-orient': 'vertical',
+      overflow: 'hidden',
+      maxHeight: 45,
+      maxWidth: '95%',
     }
   },
   linkButton: {
@@ -159,10 +162,8 @@ const styles = {
   }
 };
 
-
 HomeChart.propTypes = {
   intl: intlShape.isRequired
 };
-
 
 export default injectIntl(HomeChart);
