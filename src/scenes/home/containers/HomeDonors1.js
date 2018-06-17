@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import Spin from 'antd/es/spin';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
-import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
 
-
 import * as actions from '../../../services/actions/index';
-import {size as screenSize} from '../../../helpers/screen';
-import PieRadialChart from '../../../components/PieRadialChart';
+import HomeChart from './HomeChart';
 
 class HomeDonors extends Component {
   constructor(props) {
@@ -29,11 +26,11 @@ class HomeDonors extends Component {
   resize = () => this.forceUpdate();
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize)
+    window.removeEventListener('resize', this.resize);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', this.resize);
     const { dispatch } = this.props;
     const { params } = this.state;
     if (dispatch) {
@@ -54,35 +51,10 @@ class HomeDonors extends Component {
         value: get(item, 'value'),
       });
     });
-    const colors = ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'];
-    const fillColor = '#8884d8';
-    const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
-    const height = window.innerWidth / 3;
-    const ResponsivePieRadialChart = (props) => {
-      const { height, data, prefixLegend, fillColor, innerRadius, colors } = props;
-      return (
-        <div style={{height: height}}>
-          <PieRadialChart data={data} prefixLegend={prefixLegend} fillColor={fillColor} innerRadius={innerRadius}
-                          colors={colors}
-          />
-        </div>
-      )
-    };
+    const title = intl.formatMessage({id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'});
     return (
       <Spin spinning={homeDonors.request}>
-        <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-          <div style={{height: height}}>
-          <ResponsivePieRadialChart widthDivider={1.5} fillColor={fillColor} prefixLegen={prefixLegend} data={data} colors={colors} />
-          </div>
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.tablet.minWidth} >
-          <div style={{height: height}}>
-          <ResponsivePieRadialChart height={height} widthDivider={3} fillColor={fillColor} prefixLegen={prefixLegend}
-                                    data={data} colors={colors} innerRadius={height / 3.7}
-
-          />
-          </div>
-        </MediaQuery>
+        <HomeChart title={title} data={data}/>
       </Spin>
     )
   }
