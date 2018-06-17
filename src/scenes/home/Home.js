@@ -9,7 +9,7 @@ import BannerText from '../../components/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
-import HomeDonors from './containers/HomeDonors';
+import HomeChart from './containers/HomeChart';
 
 class Home extends Component {
   render() {
@@ -43,13 +43,13 @@ class Home extends Component {
         <Grid fluid>
           <Row middle="xs">
             <Col xs={12} md={4} lg={4}>
-              <HomeDonors/>
+              <HomeChart/>
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeDonors/>
+              <HomeChart/>
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeDonors/>
+              <HomeChart/>
             </Col>
           </Row>
         </Grid>
