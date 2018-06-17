@@ -7,7 +7,6 @@ import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from "react-jss";
 
-import { pieRadialChart as pieRadialChartStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
 
