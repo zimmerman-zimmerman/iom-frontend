@@ -11,3 +11,8 @@ export const breadcrumb = {
   sizeFont: 12,
   height: 30
 };
+
+export const pieRadialChart = {
+  colors: ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'],
+  fillColor: '#8884d8'
+}

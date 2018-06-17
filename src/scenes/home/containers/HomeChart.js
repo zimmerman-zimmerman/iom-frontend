@@ -7,6 +7,7 @@ import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from "react-jss";
 
+import { pieRadialChart as pieRadialChartStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
 
@@ -38,8 +39,6 @@ class HomeChart extends Component {
         value: get(item, 'value'),
       });
     });
-    const colors = ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'];
-    const fillColor = '#8884d8';
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
     const title = intl.formatMessage(localeTitle);
     const Title = (props) => {
@@ -57,8 +56,8 @@ class HomeChart extends Component {
       const {widthDivider } = props;
       const height = window.innerWidth / widthDivider;
       return (
-        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
-                                  innerRadius={height / 3.7} colors={colors}
+        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend}
+                                  innerRadius={height / 3.7}
         />
       )
     };

@@ -4,8 +4,10 @@ import {format} from "d3-format";
 import get from "lodash/get";
 import Card from 'antd/es/card';
 
+import { pieRadialChart as style } from "../helpers/style";
+
 const PieRadialChart = (props) => {
-  const {data, colors, prefixLegend, fillColor, innerRadius} = props;
+  const {data, prefixLegend, innerRadius} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
@@ -20,10 +22,10 @@ const PieRadialChart = (props) => {
           data={data}
           outerRadius={innerRadius + 45}
           innerRadius={innerRadius}
-          fill={fillColor}
+          fill={style.fillColor}
           dataKey="value"
         >
-          {data.map((entry, index) => <Cell fill={colors[index % colors.length]} key={index}/>)}
+          {data.map((entry, index) => <Cell fill={style.colors[index % style.colors.length]} key={index}/>)}
         </Pie>
         <Tooltip content={<CustomToolTip/>}/>
       </PieChart>
