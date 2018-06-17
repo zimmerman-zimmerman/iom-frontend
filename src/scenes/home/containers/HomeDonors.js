@@ -2,7 +2,7 @@ import HomeChart from './HomeChart';
 import * as actions from '../../../services/actions/index';
 import { connect } from 'react-redux';
 
-class HomeDonors  extends HomeChart {}
+class HomeDonors extends HomeChart {}
 
 HomeDonors.defaultProps = {
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},

@@ -6,7 +6,12 @@ import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from "react-jss";
+import List from 'antd/es/list';
+import Badge from 'antd/es/badge';
+import Button from 'antd/es/button';
+import { Link } from 'react-router-dom';
 
+import { pieRadialChart as pieRadialChartStyle, variables as variablesStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
 
@@ -60,6 +65,43 @@ class HomeChart extends Component {
         />
       )
     };
+    const ListItems = (props) => {
+      const { classes } = props;
+      return (
+        <Row middle="xs" start="xs" className={classes.listItems}>
+          <Col xs={12}>
+            <List
+              itemLayout="horizontal"
+              dataSource={data}
+              renderItem={(item, index) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
+                    title={item.name}
+                  />
+                </List.Item>
+              )}
+            />
+          </Col>
+        </Row>
+      )
+    };
+    const StyledListItems = injectSheet(styles)(ListItems);
+    const LinkButton = (props) => {
+      const { classes } = props;
+      return (
+        <Row middle="xs" start="xs" className={classes.linkButton}>
+          <Col xs={12}>
+            <Link to={`/donors`}>
+              <Button>
+                See All Publisher Donors
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      )
+    };
+    const StyledLinkButton = injectSheet(styles)(LinkButton);
     return (
       <Spin spinning={reducer.request}>
         <StyledTitle />
@@ -73,6 +115,8 @@ class HomeChart extends Component {
             </MediaQuery>
           </Col>
         </Row>
+        <StyledListItems />
+        <StyledLinkButton />
       </Spin>
     )
   }
@@ -82,6 +126,36 @@ const styles = {
   title: {
     padding: '30px 20px 0 20px',
     fontSize: 18,
+  },
+  listItems: {
+    padding: '0 40px 30px 40px',
+    '& .ant-badge-dot': {
+      height: 8,
+      width: 8,
+    },
+    '& .ant-list-item-meta-avatar': {
+      marginTop: 7,
+      marginLeft: 5,
+    },
+    '& .ant-list-item-meta': {
+      minHeight: 40,
+      maxHeight: 40,
+    },
+    '& .ant-list-item-meta-title': {
+      textOverflow: 'ellipsis',
+      webkitLineClamp: 2,
+      webkitBoxOrient: 'vertical',
+    }
+  },
+  linkButton: {
+    padding: '0 40px 30px 40px',
+    '& .ant-btn': {
+      width: '100%',
+      color: 'white',
+      textTransform: 'uppercase',
+      backgroundColor: variablesStyle.blue,
+      border: 'none',
+    }
   }
 };
 
