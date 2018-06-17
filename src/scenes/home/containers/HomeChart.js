@@ -42,15 +42,6 @@ class HomeChart extends Component {
     const fillColor = '#8884d8';
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
     const title = intl.formatMessage(localeTitle);
-    const LocalResponsivePieRadialChart = (props) => {
-      const {widthDivider } = props;
-      const height = window.innerWidth / widthDivider;
-      return (
-        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
-                                  innerRadius={height / 3.7} colors={colors}
-        />
-      )
-    };
     const Title = (props) => {
       const { classes } = props;
       return (
@@ -62,16 +53,25 @@ class HomeChart extends Component {
       )
     };
     const StyledTitle = injectSheet(styles)(Title);
+    const PieRadialChart = (props) => {
+      const {widthDivider } = props;
+      const height = window.innerWidth / widthDivider;
+      return (
+        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
+                                  innerRadius={height / 3.7} colors={colors}
+        />
+      )
+    };
     return (
       <Spin spinning={reducer.request}>
         <StyledTitle />
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
             <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-              <LocalResponsivePieRadialChart widthDivider={1.5}/>
+              <PieRadialChart widthDivider={1.5}/>
             </MediaQuery>
             <MediaQuery minWidth={screenSize.tablet.minWidth}>
-              <LocalResponsivePieRadialChart widthDivider={3.5}/>
+              <PieRadialChart widthDivider={3.5}/>
             </MediaQuery>
           </Col>
         </Row>
