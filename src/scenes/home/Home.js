@@ -11,6 +11,7 @@ import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
 import HomeDonors from './containers/HomeDonors';
 import HomeActivities from './containers/HomeActivities';
+import HomeSectors from './containers/HomeSectors';
 
 class Home extends Component {
   render() {
@@ -50,7 +51,7 @@ class Home extends Component {
               <HomeActivities />
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeDonors />
+              <HomeSectors />
             </Col>
           </Row>
         </Grid>

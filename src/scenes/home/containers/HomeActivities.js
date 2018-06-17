@@ -17,6 +17,7 @@ HomeActivities.defaultProps = {
   initial: actions.homeActivitiesInitial,
   nameField: 'title.narratives[0].text',
   valueField: 'aggregations.activity.budget_value',
+  localeButtonText: {id: 'home.funding.goes.button', defaultMessage: 'See All Publisher Donors'}
 };
 
 const mapStateToProps = (state, ) => {

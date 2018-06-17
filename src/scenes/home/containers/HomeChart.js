@@ -35,7 +35,7 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, nameField, valueField } = this.props;
+    const { reducer, localeTitle, intl, nameField, valueField, localeButtonText } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
@@ -68,7 +68,7 @@ class HomeChart extends Component {
     const ListItems = (props) => {
       const { classes } = props;
       return (
-        <Row middle="xs" start="xs" className={classes.listItems}>
+        <Row start="xs" className={classes.listItems}>
           <Col xs={12}>
             <List
               itemLayout="horizontal"
@@ -87,6 +87,7 @@ class HomeChart extends Component {
       )
     };
     const StyledListItems = injectSheet(styles)(ListItems);
+    const buttonText = intl.formatMessage(localeButtonText);
     const LinkButton = (props) => {
       const { classes } = props;
       return (
@@ -94,7 +95,7 @@ class HomeChart extends Component {
           <Col xs={12}>
             <Link to={`/donors`}>
               <Button>
-                See All Publisher Donors
+                {buttonText}
               </Button>
             </Link>
           </Col>
@@ -128,6 +129,7 @@ const styles = {
     fontSize: 18,
   },
   listItems: {
+    height: 350,
     padding: '0 40px 30px 40px',
     '& .ant-badge-dot': {
       height: 8,
@@ -147,7 +149,7 @@ const styles = {
       '-webkit-box-orient': 'vertical',
       overflow: 'hidden',
       maxHeight: 45,
-      maxWidth: '95%',
+      maxWidth: '100%',
     }
   },
   linkButton: {

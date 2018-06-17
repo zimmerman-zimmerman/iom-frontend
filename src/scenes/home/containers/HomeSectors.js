@@ -2,29 +2,30 @@ import HomeChart from './HomeChart';
 import * as actions from '../../../services/actions/index';
 import { connect } from 'react-redux';
 
-class HomeDonors extends HomeChart {}
+class HomeSectors extends HomeChart {}
 
-HomeDonors.defaultProps = {
+HomeSectors.defaultProps = {
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
   params: {
-    aggregations: 'value',
-    group_by: 'participating_organisation',
+    aggregations: 'activity_count,incoming_fund,disbursement,value',
+    group_by: 'sector',
     order_by: '-value',
     convert_to: 'usd',
+    hierarchy: 1,
     page_size: 5,
     reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
   },
-  request: actions.homeDonorsRequest,
-  initial: actions.homeDonorsInitial,
-  nameField: 'participating_organisation',
+  request: actions.homeSectorsRequest,
+  initial: actions.homeSectorsInitial,
+  nameField: 'sector.name',
   valueField: 'value',
-  localeButtonText: {id: 'home.funding.come.button', defaultMessage: 'See All Publisher Donors'}
+  localeButtonText: {id: 'home.classified.button', defaultMessage: 'See All Publisher Donors'}
 };
 
 const mapStateToProps = (state, ) => {
   return {
-    reducer: state.homeDonors
+    reducer: state.homeSectors
   }
 };
 
-export default connect(mapStateToProps)(HomeDonors);
+export default connect(mapStateToProps)(HomeSectors);
