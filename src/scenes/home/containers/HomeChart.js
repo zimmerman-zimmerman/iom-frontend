@@ -5,6 +5,7 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
+import { Row, Col } from 'react-flexbox-grid';
 
 
 import * as actions from '../../../services/actions/index';
@@ -46,7 +47,7 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { homeDonors, intl } = this.props;
+    const { homeDonors, localeTitle, intl } = this.props;
     const data = [];
     forEach(get(homeDonors, 'data.results'), function(item){
       data.push({
@@ -57,6 +58,7 @@ class HomeChart extends Component {
     const colors = ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'];
     const fillColor = '#8884d8';
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
+    const title = intl.formatMessage(localeTitle);
     const LocalResponsivePieRadialChart = (props) => {
       const {widthDivider } = props;
       const height = window.innerWidth / widthDivider;
@@ -68,12 +70,21 @@ class HomeChart extends Component {
     };
     return (
       <Spin spinning={homeDonors.request}>
-        <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-          <LocalResponsivePieRadialChart widthDivider={1.5} />
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.tablet.minWidth} >
-          <LocalResponsivePieRadialChart widthDivider={3} />
-        </MediaQuery>
+        <Row middle="xs" start="xs" center="xs">
+          <Col xs={12}>
+            {title}
+          </Col>
+        </Row>
+        <Row middle="xs" start="xs" center="xs">
+          <Col xs={12}>
+            <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
+              <LocalResponsivePieRadialChart widthDivider={1.5} />
+            </MediaQuery>
+            <MediaQuery minWidth={screenSize.tablet.minWidth} >
+              <LocalResponsivePieRadialChart widthDivider={3} />
+            </MediaQuery>
+          </Col>
+        </Row>
       </Spin>
     )
   }
