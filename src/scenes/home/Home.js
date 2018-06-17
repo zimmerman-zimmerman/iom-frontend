@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import MediaQuery from 'react-responsive';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MainHeader from '../../components/MainHeader';
 import MainFooter from '../../components/MainFooter';
@@ -8,7 +9,7 @@ import BannerText from '../../components/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
-import FundingCome from './components/FundingCome';
+import HomeDonors from './containers/HomeDonors';
 
 class Home extends Component {
   render() {
@@ -39,9 +40,20 @@ class Home extends Component {
         <MediaQuery minWidth={screenSize.desktop.minWidth}>
           <Banner height={500} size="lg" />
         </MediaQuery>
-        <FundingCome/>
+        <Grid fluid>
+          <Row middle="xs">
+            <Col xs={12} md={4} lg={4}>
+              <HomeDonors/>
+            </Col>
+            <Col xs={12} md={4} lg={4}>
+              <HomeDonors/>
+            </Col>
+            <Col xs={12} md={4} lg={4}>
+              <HomeDonors/>
+            </Col>
+          </Row>
+        </Grid>
         <MainFooter/>
-
       </Fragment>
     );
   }

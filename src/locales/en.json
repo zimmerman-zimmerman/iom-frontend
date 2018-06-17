@@ -1,4 +1,6 @@
 {
+  "currency.usd": "USD",
+
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",
   "main.menu.countries": "Countries",
@@ -12,6 +14,7 @@
   "banner.detail": "Track money flow from donation to employment. Understanding our mission is the first step to give value to our projects and keep them alive.",
   "banner.text.text": "In 2016 IOM spent US$ 1,602,307,417 in over 100 countries around the world in seven different service areas.",
 
+  "home.donors.title": "Where the Funding Come From",
   "home.funding.come.title": "Where the Funding Come From",
   "home.funding.come.button": "See All Publisher Donors",
   "home.funding.goes.title": "Where the Funding Goes",

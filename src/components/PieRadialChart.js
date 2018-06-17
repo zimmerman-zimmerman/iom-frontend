@@ -5,12 +5,12 @@ import get from "lodash/get";
 import Card from 'antd/es/card';
 
 const PieRadialChart = (props) => {
-  const {data, colors, prefix, fillColor, innerRadius} = props;
+  const {data, colors, prefixLegend, fillColor, innerRadius} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
       <Card className="transparent-white">
-        {prefix} {format(",.2f")(data.value)}
+        {prefixLegend} {format(",.2f")(data.value)}
       </Card> : null;
   };
   return (
@@ -18,6 +18,7 @@ const PieRadialChart = (props) => {
       <PieChart>
         <Pie
           data={data}
+          outerRadius={innerRadius + 45}
           innerRadius={innerRadius}
           fill={fillColor}
           dataKey="value"
