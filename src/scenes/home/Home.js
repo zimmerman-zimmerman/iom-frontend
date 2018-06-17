@@ -9,7 +9,7 @@ import BannerText from '../../components/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
-import HomeChart from './containers/HomeChart';
+import HomeDonors from './containers/HomeDonors';
 
 class Home extends Component {
   render() {
@@ -43,13 +43,13 @@ class Home extends Component {
         <Grid fluid>
           <Row middle="xs">
             <Col xs={12} md={4} lg={4}>
-              <HomeChart localeTitle={{id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'}} />
+              <HomeDonors />
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeChart localeTitle={{id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'}} />
+              <HomeDonors />
             </Col>
             <Col xs={12} md={4} lg={4}>
-              <HomeChart localeTitle={{id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'}} />
+              <HomeDonors />
             </Col>
           </Row>
         </Grid>

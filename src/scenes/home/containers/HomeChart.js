@@ -8,25 +8,10 @@ import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from "react-jss";
 
-import * as actions from '../../../services/actions/index';
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
 
 class HomeChart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      params: {
-        aggregations: 'value',
-        group_by: 'participating_organisation',
-        order_by: '-value',
-        convert_to: 'usd',
-        page_size: 5,
-        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
-      }
-    };
-  }
-
   resize = () => this.forceUpdate();
 
   componentWillUnmount() {
@@ -35,13 +20,12 @@ class HomeChart extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
-    const { dispatch } = this.props;
-    const { params } = this.state;
+    const { dispatch, params, request, initial } = this.props;
     if (dispatch) {
       if (params) {
-        dispatch(actions.homeDonorsRequest(params));
+        dispatch(request(params));
       } else {
-        dispatch(actions.homeDonorsInitial());
+        dispatch(initial());
       }
     }
   }
