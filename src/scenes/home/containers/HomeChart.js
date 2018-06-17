@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Spin from 'antd/es/spin';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
-import injectSheet from "react-jss";
 
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
@@ -31,11 +29,11 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { homeDonors, localeTitle, intl } = this.props;
+    const { reducer, localeTitle, intl, valueField } = this.props;
     const data = [];
-    forEach(get(homeDonors, 'data.results'), function(item){
+    forEach(get(reducer, 'data.results'), function(item){
       data.push({
-        name: get(item, 'participating_organisation'),
+        name: get(item, valueField),
         value: get(item, 'value'),
       });
     });
@@ -53,7 +51,7 @@ class HomeChart extends Component {
       )
     };
     return (
-      <Spin spinning={homeDonors.request}>
+      <Spin spinning={reducer.request}>
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
             <h2>{title} {title}</h2>
@@ -78,19 +76,5 @@ HomeChart.propTypes = {
   intl: intlShape.isRequired
 };
 
-const mapStateToProps = (state, ) => {
-  return {
-    homeDonors: state.homeDonors
-  }
-};
 
-const styles = {
-  button: {
-    backgroundColor: 'yellow'
-  },
-  label: {
-    fontWeight: 'bold'
-  }
-};
-
-export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(HomeChart)));
+export default injectIntl(HomeChart);

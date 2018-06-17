@@ -1,7 +1,8 @@
 import HomeChart from './HomeChart';
 import * as actions from '../../../services/actions/index';
+import { connect } from 'react-redux';
 
-const HomeDonors = HomeChart;
+class HomeDonors  extends HomeChart {}
 
 HomeDonors.defaultProps = {
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
@@ -15,8 +16,13 @@ HomeDonors.defaultProps = {
   },
   request: actions.homeDonorsRequest,
   initial: actions.homeDonorsInitial,
-
+  valueField: 'participating_organisation',
 };
 
+const mapStateToProps = (state, ) => {
+  return {
+    reducer: state.homeDonors
+  }
+};
 
-export default HomeDonors;
+export default connect(mapStateToProps)(HomeDonors);
