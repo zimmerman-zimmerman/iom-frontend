@@ -57,12 +57,12 @@ class HomeDonors extends Component {
     const colors = ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'];
     const fillColor = '#8884d8';
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
-    const height = window.innerWidth / 3;
     const ResponsivePieRadialChart = (props) => {
-      const { height, data, prefixLegend, fillColor, innerRadius, colors } = props;
+      const { data, prefixLegend, fillColor, widthDivider, colors } = props;
+      const height = window.innerWidth / widthDivider;
       return (
         <div style={{height: height}}>
-          <PieRadialChart data={data} prefixLegend={prefixLegend} fillColor={fillColor} innerRadius={innerRadius}
+          <PieRadialChart data={data} prefixLegend={prefixLegend} fillColor={fillColor} innerRadius={height / 3.7}
                           colors={colors}
           />
         </div>
@@ -71,17 +71,14 @@ class HomeDonors extends Component {
     return (
       <Spin spinning={homeDonors.request}>
         <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-          <div style={{height: height}}>
-          <ResponsivePieRadialChart widthDivider={1.5} fillColor={fillColor} prefixLegen={prefixLegend} data={data} colors={colors} />
-          </div>
+          <ResponsivePieRadialChart widthDivider={1.5} fillColor={fillColor} prefixLegen={prefixLegend}
+                                    data={data} colors={colors}
+          />
         </MediaQuery>
         <MediaQuery minWidth={screenSize.tablet.minWidth} >
-          <div style={{height: height}}>
-          <ResponsivePieRadialChart height={height} widthDivider={3} fillColor={fillColor} prefixLegen={prefixLegend}
-                                    data={data} colors={colors} innerRadius={height / 3.7}
-
+          <ResponsivePieRadialChart widthDivider={3} fillColor={fillColor} prefixLegen={prefixLegend}
+                                    data={data} colors={colors}
           />
-          </div>
         </MediaQuery>
       </Spin>
     )
