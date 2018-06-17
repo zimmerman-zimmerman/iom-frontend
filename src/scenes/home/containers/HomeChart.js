@@ -6,7 +6,7 @@ import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
-
+import injectSheet from "react-jss";
 
 import * as actions from '../../../services/actions/index';
 import {size as screenSize} from '../../../helpers/screen';
@@ -72,7 +72,7 @@ class HomeChart extends Component {
       <Spin spinning={homeDonors.request}>
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
-            {title}
+            <h2>{title} {title}</h2>
           </Col>
         </Row>
         <Row middle="xs" start="xs" center="xs">
@@ -100,4 +100,13 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-export default connect(mapStateToProps)(injectIntl(HomeChart));
+const styles = {
+  button: {
+    backgroundColor: 'yellow'
+  },
+  label: {
+    fontWeight: 'bold'
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(HomeChart)));
