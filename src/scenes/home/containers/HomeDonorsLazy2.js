@@ -58,21 +58,27 @@ class HomeDonors extends Component {
     const fillColor = '#8884d8';
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
     const LocalResponsivePieRadialChart = (props) => {
-      const {widthDivider } = props;
+      const { data, prefixLegend, fillColor, widthDivider, colors } = props;
       const height = window.innerWidth / widthDivider;
       return (
-        <ResponsivePieRadialChart height={height} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
-                                  innerRadius={height / 3.7} colors={colors}
-        />
+        <div style={{height: height}}>
+          <ResponsivePieRadialChart height={height} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
+                                    innerRadius={height / 3.7} colors={colors}
+          />
+        </div>
       )
     };
     return (
       <Spin spinning={homeDonors.request}>
         <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-          <LocalResponsivePieRadialChart widthDivider={1.5} />
+          <LocalResponsivePieRadialChart widthDivider={1.5} fillColor={fillColor} prefixLegen={prefixLegend}
+                                    data={data} colors={colors}
+          />
         </MediaQuery>
         <MediaQuery minWidth={screenSize.tablet.minWidth} >
-          <LocalResponsivePieRadialChart widthDivider={3} />
+          <LocalResponsivePieRadialChart widthDivider={3} fillColor={fillColor} prefixLegen={prefixLegend}
+                                    data={data} colors={colors}
+          />
         </MediaQuery>
       </Spin>
     )
