@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from "react-intl";
 import { Row, Col } from 'react-flexbox-grid';
+import injectSheet from "react-jss";
 
 import {size as screenSize} from '../../../helpers/screen';
 import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
@@ -45,25 +46,32 @@ class HomeChart extends Component {
       const {widthDivider } = props;
       const height = window.innerWidth / widthDivider;
       return (
-        <ResponsivePieRadialChart height={height} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
+        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend} fillColor={fillColor}
                                   innerRadius={height / 3.7} colors={colors}
         />
       )
     };
-    return (
-      <Spin spinning={reducer.request}>
-        <Row middle="xs" start="xs" center="xs">
+    const Title = (props) => {
+      const { classes } = props;
+      return (
+        <Row middle="xs" start="xs" center="xs" className={classes.title}>
           <Col xs={12}>
-            <h2>{title} {title}</h2>
+            {title} {title}
           </Col>
         </Row>
+      )
+    };
+    const StyledTitle = injectSheet(styles)(Title);
+    return (
+      <Spin spinning={reducer.request}>
+        <StyledTitle />
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
             <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-              <LocalResponsivePieRadialChart widthDivider={1.5} />
+              <LocalResponsivePieRadialChart widthDivider={1.5}/>
             </MediaQuery>
-            <MediaQuery minWidth={screenSize.tablet.minWidth} >
-              <LocalResponsivePieRadialChart widthDivider={3} />
+            <MediaQuery minWidth={screenSize.tablet.minWidth}>
+              <LocalResponsivePieRadialChart widthDivider={3.5}/>
             </MediaQuery>
           </Col>
         </Row>
@@ -71,6 +79,14 @@ class HomeChart extends Component {
     )
   }
 }
+
+const styles = {
+  title: {
+    padding: '30px 20px 0 20px',
+    fontSize: 18,
+  }
+};
+
 
 HomeChart.propTypes = {
   intl: intlShape.isRequired
