@@ -8,7 +8,7 @@ class ServicesCharts extends Component {
     return (
       <ResponsiveContainer width='100%' aspect={16.0/9.0}>
         { data !== null ?
-          <BarChart width={600} height={300} data={data}
+          <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="sector.name"/>
