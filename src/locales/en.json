@@ -7,6 +7,7 @@
   "main.menu.about": "About",
   "breadcrumb.home": "Home",
   "currency.usd": "USD",
+  "currency.usd.symbol": "$",
 
   "banner.title": "IOM Transparency Portal",
   "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",

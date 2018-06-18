@@ -17,7 +17,7 @@ class DonorsTable extends Component {
 
   render() {
     const { intl, data } = this.props;
-    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'})
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
