@@ -6,7 +6,6 @@
     padding: 7px 0;
     border-bottom: $border;
     color: $breadcrumbColor;
-    font-size: 12px;
     .Active {
       color: $breadcrumbColorActive;
     }
@@ -76,4 +75,10 @@ th.columnMoney, td.columnMoney {
 }
 .SearchFilter {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+.ant-table-thead th {
+  font-weight: bold;
+}
+.recharts-tooltip-wrapper {
+  opacity: 0.85;
 }

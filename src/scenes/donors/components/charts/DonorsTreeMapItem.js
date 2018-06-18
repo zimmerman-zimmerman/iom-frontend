@@ -47,7 +47,6 @@ export default class DonorsTreeMapItem extends Component {
             stroke="none"
             fontSize={fontSize}
             width={width}
-            fillOpacity={0.5}
           >
             {participating_organisation}
           </Text> )

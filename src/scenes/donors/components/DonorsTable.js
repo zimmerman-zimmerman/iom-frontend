@@ -17,10 +17,12 @@ class DonorsTable extends Component {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'})
     const columns = [{
       title: intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
+      width: '50%',
       render: (participating_organisation, row, index) => {
         return (
           <Link to={`/donors/${row.participating_organisation_ref.toLowerCase()}`}>
@@ -32,7 +34,8 @@ class DonorsTable extends Component {
       title: intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      render: value => <span>{format(".2s")(value).replace(/G/, "B")}</span>
+      className: 'Money',
+      render: value => <span>{usd} {format(",.2f")(value)}</span>
     }, {
       title: intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',
