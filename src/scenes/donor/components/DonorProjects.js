@@ -6,8 +6,10 @@ import Pagination from 'antd/es/pagination';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
+import { FormattedMessage } from "react-intl";
 
 import * as actions from '../../../services/actions/index';
+import {format} from "d3-format";
 
 const { Content } = Layout;
 
@@ -57,11 +59,12 @@ class DonorProjects extends Component {
     const { intl, donorProjects } = this.props;
     const data = get(donorProjects, 'data.results');
     const total = get(donorProjects, 'data.count');
+    const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{
       title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
       dataIndex: 'title.narratives[0].text',
       className: 'Donors',
-      width: '50%',
+      width: '30%',
       key: 'donors'
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.start', defaultMessage: 'Start date'}),
@@ -70,9 +73,15 @@ class DonorProjects extends Component {
       key: 'start'
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.end', defaultMessage: 'End date'}),
-      dataIndex: 'activity_dates[3].iso_date',
+      dataIndex: 'activity_dates[2].iso_date',
       className: 'EndDate',
       key: 'end'
+    },{
+      title: intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'}),
+      dataIndex: 'aggregations.activity.budget_value',
+      className: 'Money',
+      key: 'budget',
+      render: (value) => <span>{usd} {format(",.2f")(value)}</span>
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'}),
       dataIndex: 'activity_status.name',
@@ -82,7 +91,8 @@ class DonorProjects extends Component {
       title: intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'}),
       dataIndex: 'sectors[0].sector.name',
       className: 'Sector',
-      key: 'sector'
+      key: 'sector',
+      render: (name, record) => <span>{get(record, 'sectors[0].sector.code')} {name}</span>
     }];
     return (
       <Spin spinning={donorProjects.request}>
