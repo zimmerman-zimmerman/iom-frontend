@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class HomeActivities extends HomeChart {}
 
 HomeActivities.defaultProps = {
-  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
   params: {
     fields: 'id,iati_identifier,reporting_organisation,activity_dates,aggregations,sectors,title',
     ordering: '-aggregations.activity.budget_value',
@@ -17,7 +16,8 @@ HomeActivities.defaultProps = {
   initial: actions.homeActivitiesInitial,
   nameField: 'title.narratives[0].text',
   valueField: 'aggregations.activity.budget_value',
-  localeButtonText: {id: 'home.funding.goes.button', defaultMessage: 'See All Publisher Donors'}
+  localeTitle: {id: 'home.activities.title', defaultMessage: 'Where the Funding Goes'},
+  localeButtonText: {id: 'home.activities.button', defaultMessage: 'See All Published Projects'}
 };
 
 const mapStateToProps = (state, ) => {

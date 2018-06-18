@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class HomeDonors extends HomeChart {}
 
 HomeDonors.defaultProps = {
-  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
   params: {
     aggregations: 'value',
     group_by: 'participating_organisation',
@@ -18,7 +17,8 @@ HomeDonors.defaultProps = {
   initial: actions.homeDonorsInitial,
   nameField: 'participating_organisation',
   valueField: 'value',
-  localeButtonText: {id: 'home.funding.come.button', defaultMessage: 'See All Publisher Donors'}
+  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
+  localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'}
 };
 
 const mapStateToProps = (state, ) => {

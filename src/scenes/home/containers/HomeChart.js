@@ -48,9 +48,9 @@ class HomeChart extends Component {
     const Title = (props) => {
       const { classes } = props;
       return (
-        <Row middle="xs" start="xs" center="xs" className={classes.title}>
-          <Col xs={12}>
-            {title} {title}
+        <Row start="xs" center="xs">
+          <Col xs={12} className={classes.title}>
+            {title}
           </Col>
         </Row>
       )
@@ -127,6 +127,9 @@ const styles = {
   title: {
     padding: '30px 20px 0 20px',
     fontSize: 18,
+    '@media only screen and (min-width: 992px) and (max-width: 1033px)': {
+      minHeight: 84,
+    }
   },
   listItems: {
     height: 350,
