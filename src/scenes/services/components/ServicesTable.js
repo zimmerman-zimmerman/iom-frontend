@@ -21,6 +21,7 @@ class ServicesTable extends Component {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'}),
       dataIndex: 'sector.name',
@@ -34,7 +35,7 @@ class ServicesTable extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'Money',
-      render: value => <span>{format(',')(value)}</span>,
+      render: value => <span>{usd}{format(',')(value)}</span>,
     }, {
       title: intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'}),
       dataIndex: 'activity_count',

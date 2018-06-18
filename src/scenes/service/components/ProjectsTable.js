@@ -22,6 +22,7 @@ class ProjectsTable extends BaseFilter {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
       dataIndex: 'title.narratives[0].text',
@@ -33,7 +34,7 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
       className: 'columnMoney',
-      render: value => <span>{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.2f')(value)}</span>
     }, {
       title: intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'}),
       dataIndex: 'humanitarian',
