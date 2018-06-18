@@ -71,6 +71,8 @@
   "country.table.projects.header.start": "Start date",
   "country.table.projects.header.end": "End date",
 
+  "donors.title": "Donors",
+  "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",
   "donors.breadcrumb.home": "Home",
   "donors.breadcrumb.donors": "Donors",
   "donors.filters.donor": "Donor",
