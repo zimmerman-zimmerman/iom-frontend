@@ -22,7 +22,8 @@
   }
   tr > th {
     background: white;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: large;
     color: $blue;
   }
   h2 {
@@ -81,4 +82,15 @@ th.columnMoney, td.columnMoney {
 }
 .recharts-tooltip-wrapper {
   opacity: 0.85;
+}
+.ant-pagination {
+  float: left !important;
+}
+.ant-pagination-item-active {
+  color: white !important;
+  background-color: $blue;
+  border-color: white;
+}
+.ant-pagination-item-active a {
+  color: white;
 }
