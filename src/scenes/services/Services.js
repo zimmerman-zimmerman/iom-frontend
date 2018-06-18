@@ -59,9 +59,11 @@ class Services extends BaseFilter {
                 </Row>
                 <Row>
                   <Col span={24} className="Border Bottom">
-                    <FormattedMessage id="services.descriptions"
-                                      defaultMessage="Descriptions"
-                    />
+                    <h3>
+                      <FormattedMessage id="services.descriptions"
+                                        defaultMessage="Descriptions"
+                      />
+                    </h3>
                   </Col>
                 </Row>
                 <Row>
