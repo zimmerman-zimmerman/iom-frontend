@@ -27,7 +27,7 @@ class ServicesTable extends Component {
       dataIndex: 'sector.name',
       key: 'sector',
       className: 'Title',
-      width: '50%',
+      width: '55%',
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     }, {
@@ -40,6 +40,7 @@ class ServicesTable extends Component {
       title: intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'}),
       dataIndex: 'activity_count',
       key: 'activity_count',
+      className: 'Money',
     }];
     return (
       <Content className="ServiceTable">

@@ -33,6 +33,7 @@ class CountriesTable extends Component {
     }, {
       title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',
+      className: 'Money',
       key: 'count',
     },{
       title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),

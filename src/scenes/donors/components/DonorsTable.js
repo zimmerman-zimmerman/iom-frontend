@@ -22,7 +22,7 @@ class DonorsTable extends Component {
       title: intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
-      width: '50%',
+      width: '55%',
       render: (participating_organisation, row, index) => {
         return (
           <Link to={`/donors/${row.participating_organisation_ref.toLowerCase()}`}>
@@ -43,6 +43,7 @@ class DonorsTable extends Component {
       }),
       dataIndex: 'activity_count',
       key: 'activity_count',
+      className: 'Money',
     }];
     return (
       <Table className="DonorsTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"/>
