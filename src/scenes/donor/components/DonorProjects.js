@@ -81,7 +81,7 @@ class DonorProjects extends Component {
       dataIndex: 'aggregations.activity.budget_value',
       className: 'Money',
       key: 'budget',
-      render: (value) => <span>{usd} {format(",.2f")(value)}</span>
+      render: (value) => <span>{usd}{format(",.2f")(value)}</span>
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'}),
       dataIndex: 'activity_status.name',

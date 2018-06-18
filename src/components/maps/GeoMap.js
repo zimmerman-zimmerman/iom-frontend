@@ -165,12 +165,7 @@ class GeoMap extends Component {
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              <b>Total budget:</b> USD {format(".2s")(feature.properties.budgetValue).replace(/G/, "B")}
-            </label>
-          </div>
-          <div>
-            <label>
-              <b>Activities:</b> {feature.properties.activitiesValue}
+              <b>Total budget:</b> USD {format(",.2f")(feature.properties.budgetValue)}
             </label>
           </div>
         </div>

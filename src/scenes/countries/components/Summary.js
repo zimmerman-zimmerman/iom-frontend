@@ -24,7 +24,7 @@ class Summary extends Component {
         <Divider className="Divider"/>
         <Row>
           <Col span={24}>
-            {usd} {format(".2s")(totalBudget).replace(/G/, "B")}
+            {usd}{format(".2s")(totalBudget).replace(/G/, "B")}
           </Col>
         </Row>
         <Row>

@@ -29,7 +29,7 @@ class CountriesTable extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'Money',
-      render: value => <span>{usd} {format(",.2f")(value)}</span>
+      render: value => <span>{usd}{format(",.2f")(value)}</span>
     }, {
       title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',
