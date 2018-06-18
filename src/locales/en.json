@@ -71,6 +71,7 @@
   "country.table.projects.header.type": "Sector by IOM project type",
   "country.table.projects.header.start": "Start date",
   "country.table.projects.header.end": "End date",
+  "country.link.text": "Visit country page",
 
   "donors.title": "Donors",
   "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",

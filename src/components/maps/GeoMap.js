@@ -133,7 +133,7 @@ class GeoMap extends Component {
   }
 
   goToCountryPortal(code) {
-    this.props.history.push(`/explorer/country/${code}/${this.props.perspectiveId}`);
+    this.props.history.push(`/countries/${code}`);
   }
 
   onEachFeature(feature, layer) {
@@ -167,6 +167,9 @@ class GeoMap extends Component {
             <label>
               <b>Total budget:</b> USD {format(",.2f")(feature.properties.budgetValue)}
             </label>
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <a href={`/countries/${feature.properties.code}`}>Visit country page</a>
           </div>
         </div>
       );
