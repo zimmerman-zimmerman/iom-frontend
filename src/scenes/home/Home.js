@@ -44,13 +44,13 @@ class Home extends Component {
         </MediaQuery>
         <Grid fluid>
           <Row middle="xs">
-            <Col xs={12} md={4} lg={4}>
+            <Col xs={12} md={12} lg={4}>
               <HomeDonors />
             </Col>
-            <Col xs={12} md={4} lg={4}>
+            <Col xs={12} md={12} lg={4}>
               <HomeActivities />
             </Col>
-            <Col xs={12} md={4} lg={4}>
+            <Col xs={12} md={12} lg={4}>
               <HomeSectors />
             </Col>
           </Row>
