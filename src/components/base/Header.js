@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'antd/es/button';
