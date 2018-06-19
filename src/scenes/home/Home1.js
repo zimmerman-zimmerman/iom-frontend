@@ -10,9 +10,9 @@ import BannerText from '../../components/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
-import HomeDonors from './components/HomeDonors';
-import HomeActivities from './components/HomeActivities';
-import HomeSectors from './components/HomeSectors';
+import HomeDonors from './containers/HomeDonors';
+import HomeActivities from './containers/HomeActivities';
+import HomeSectors from './containers/HomeSectors';
 import injectSheet from "react-jss";
 
 class Home extends Component {
