@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'antd/es/button';
@@ -9,15 +9,16 @@ import injectSheet from 'react-jss';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-import { size as screenSize } from '../helpers/screen';
-import { variables as styleVariables } from '../helpers/style';
+import { size as screenSize } from '../../helpers/screen';
+import { variables as styleVariables } from '../../helpers/style';
 
-import Trans from '../locales/Trans';
-import MainMenu from './MainMenu';
-import logo from '../assets/iom-logo.svg';
-import logoOnly from '../assets/iom-logo-only.svg';
+import Menus from './Menus';
+import Trans from '../../locales/Trans';
+import logo from '../../assets/iom-logo.svg';
+import logoOnly from '../../assets/iom-logo-only.svg';
 
-class MainHeader extends Component {
+
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
@@ -73,7 +74,7 @@ class MainHeader extends Component {
       return (
         <Row end={props.size}>
           <Col xs={3} md={2}>
-            <MdMenu className={classes.triggerMenu} onClick={this.onOpenChange}/>
+            <MdMenu className={classes.triggerMenu} />
           </Col>
         </Row>
       )
@@ -101,7 +102,7 @@ class MainHeader extends Component {
             <Logo size={size}/>
           </Col>
           <Col xs={6} md={6} lg={9}>
-            {size === 'lg' ? <MainMenu items={menuItems} urlPath={urlPath} /> : null}
+            {size === 'lg' ? <Menus items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
           </Col>
           {size === 'lg'? <Col lg={2}><Share size={size} /></Col> : null}
@@ -160,4 +161,4 @@ const mapStateToProps = (state, ) => {
   return {};
 };
 
-export default injectSheet(styles)(withRouter(connect(mapStateToProps)(MainHeader)));
+export default injectSheet(styles)(withRouter(connect(mapStateToProps)(Header)));

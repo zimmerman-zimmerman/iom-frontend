@@ -17,6 +17,7 @@ const AsyncProjects = AsyncComponent(() => import('./scenes/projects/Projects'))
 const AsyncProject = AsyncComponent(() => import('./scenes/project/Project'));
 const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
 
+
 class App extends Component {
   render() {
     return (

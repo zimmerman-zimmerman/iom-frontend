@@ -26,3 +26,22 @@
 .transparent-white {
   background: rgba(255, 255, 255, 0.7);
 }
+.am-drawer-content {
+  padding-top: 0 !important;
+}
+.my-drawer {
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border: none !important;
+}
+.my-drawer .am-drawer-sidebar {
+  background-color: #0033a1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.my-drawer .am-drawer-sidebar .am-list {
+  width: 300px;
+  padding: 0;
+  background-color: #0033a1;
+}

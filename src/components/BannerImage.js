@@ -29,6 +29,8 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    '-webkit-backface-visibility': 'hidden',
+    '-webkit-transform': 'translate3d(0,0,0)'
   },
   card: {
     background: 'rgba(0, 51, 161, .7)',
