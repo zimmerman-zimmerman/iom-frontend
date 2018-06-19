@@ -35,7 +35,7 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, nameField, valueField, localeButtonText } = this.props;
+    const { reducer, localeTitle, intl, nameField, valueField, localeButtonText, linkPage } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
@@ -93,7 +93,7 @@ class HomeChart extends Component {
       return (
         <Row middle="xs" start="xs" className={classes.linkButton}>
           <Col xs={12}>
-            <Link to={`/donors`}>
+            <Link to={linkPage}>
               <Button>
                 {buttonText}
               </Button>

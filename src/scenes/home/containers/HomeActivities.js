@@ -17,7 +17,8 @@ HomeActivities.defaultProps = {
   nameField: 'title.narratives[0].text',
   valueField: 'aggregations.activity.budget_value',
   localeTitle: {id: 'home.activities.title', defaultMessage: 'Where the Funding Goes'},
-  localeButtonText: {id: 'home.activities.button', defaultMessage: 'See All Published Projects'}
+  localeButtonText: {id: 'home.activities.button', defaultMessage: 'See All Published Projects'},
+  linkPage: '/projects',
 };
 
 const mapStateToProps = (state, ) => {

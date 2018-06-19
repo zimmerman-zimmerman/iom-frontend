@@ -18,7 +18,8 @@ HomeDonors.defaultProps = {
   nameField: 'participating_organisation',
   valueField: 'value',
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
-  localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'}
+  localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'},
+  linkPage: '/donors',
 };
 
 const mapStateToProps = (state, ) => {
