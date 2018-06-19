@@ -19,26 +19,12 @@ import logoOnly from '../../assets/iom-logo-only.svg';
 
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
-
-    // This binding is necessary to make `this` work in the callback
-    this.onOpenChange = this.onOpenChange.bind(this);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     return this.props !== nextProps || this.state !== nextState;
   }
 
-  onOpenChange() {
-    const { onOpenChange } = this.props;
-    console.log(onOpenChange);
-    onOpenChange()
-  }
-
   render() {
-    const { classes, match } = this.props;
+    const { classes, match, onOpenSlider } = this.props;
     let urlPath = match.path;
     switch (urlPath) {
       case '/donors/:code':
@@ -74,7 +60,7 @@ class Header extends Component {
       return (
         <Row end={props.size}>
           <Col xs={3} md={2}>
-            <MdMenu className={classes.triggerMenu} />
+            <MdMenu className={classes.triggerMenu} onClick={onOpenSlider} />
           </Col>
         </Row>
       )

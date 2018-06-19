@@ -4,7 +4,7 @@ export const variables = {
   borderLight: '1px solid #ededed',
 };
 
-export const breadcrumb = {
+export const breadcrumbs = {
   border: 'solid 1px #d0d0d0',
   color: '#262626',
   colorActive: '#418fde',
@@ -15,4 +15,8 @@ export const breadcrumb = {
 export const pieRadialChart = {
   colors: ['#0033a1', '#f29d70', '#fac878', '#f27f6d', '#54c8c3'],
   fillColor: '#8884d8'
-}
+};
+
+export const slider = {
+  width: 300
+};
