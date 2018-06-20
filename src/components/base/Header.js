@@ -14,7 +14,6 @@ import { size as screenSize } from '../../helpers/screen';
 import { variables as styleVariables } from '../../helpers/style';
 
 import Menus from './Menus';
-import Trans from '../../locales/Trans';
 import logo from '../../assets/iom-logo.svg';
 import logoOnly from '../../assets/iom-logo-only.svg';
 
@@ -25,7 +24,7 @@ class Header extends Component {
   }
 
   render() {
-    const { classes, match, onOpenSlider, openSlider } = this.props;
+    const { classes, match, onOpenSlider, openSlider, menuItems } = this.props;
     let urlPath = match.path;
     switch (urlPath) {
       case '/donors/:code':
@@ -39,15 +38,6 @@ class Header extends Component {
         break;
       default:
     }
-
-    const menuItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
-      {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
-      {url: '/services', text: <Trans id='main.menu.services' text='Our Services' />},
-      {url: '/projects', text: <Trans id='main.menu.projects' text='Projects' />},
-      {url: '/about', text: <Trans id='main.menu.about' text='About' />},
-    ];
 
     const Logo = (props) => {
       if (props.size === 'xs') {
