@@ -21,7 +21,6 @@ class ServiceProjects extends BaseFilter {
         ordering: '-aggregations.activity.budget_value',
         convert_to: 'usd',
         hierarchy: 1,
-        activity_status: '2,3,4',
         sector: get(props, 'sectorId'),
         page_size: 5,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
