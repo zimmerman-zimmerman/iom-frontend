@@ -55,12 +55,13 @@ class ProjectsTable extends BaseFilter {
       title: intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'}),
       dataIndex: 'sectors',
       key: 'sectors',
+      width: '25%',
       render: sectors => <span>{get(sectors, '[0].sector.name')}</span>,
     }, {
       title: intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'}),
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
-      width: '15%',
+      width: '20%',
       render: recipient_countries => <span>{get(recipient_countries, '[0].country.name')}</span>,
     }];
     return (

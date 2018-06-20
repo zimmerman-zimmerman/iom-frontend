@@ -34,7 +34,7 @@ class Donors extends BaseFilter {
     const { donors } = this.props;
     const data = get(donors, 'data');
     return (
-      <Layout>
+      <Layout className="Donors">
         <Header className="Header">
           <MainHeader/>
         </Header>
