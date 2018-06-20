@@ -7,6 +7,7 @@ import Trans from '../../locales/Trans';
 import Header from './Header';
 import Footer from './Footer';
 import Slider from './Slider';
+import Breadcrumbs from './Breadcrumbs';
 
 class Page extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Page extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, breadcrumbItems } = this.props;
+    const { openSlider } = this.state;
     const menuItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
@@ -33,14 +35,16 @@ class Page extends Component {
     ];
     return (
       <Fragment>
-        <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider}/>
+        <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
         <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-          <Slider menuItems={menuItems} open={this.state.openSlider} onOpenChange={this.onOpenSlider}>
+          <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
+            {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
             {children}
             <Footer/>
           </Slider>
         </MediaQuery>
         <MediaQuery minWidth={screenSize.desktop.minWidth}>
+          {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
           {children}
           <Footer/>
         </MediaQuery>

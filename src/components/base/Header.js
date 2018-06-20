@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'antd/es/button';
 import MdMenu from 'react-icons/lib/md/menu';
+import MdClose from 'react-icons/lib/md/close';
 import FaFacebook from 'react-icons/lib/fa/facebook';
 import FaFeed from 'react-icons/lib/fa/feed';
 import injectSheet from 'react-jss';
@@ -24,7 +25,7 @@ class Header extends Component {
   }
 
   render() {
-    const { classes, match, onOpenSlider } = this.props;
+    const { classes, match, onOpenSlider, openSlider } = this.props;
     let urlPath = match.path;
     switch (urlPath) {
       case '/donors/:code':
@@ -60,7 +61,10 @@ class Header extends Component {
       return (
         <Row end={props.size}>
           <Col xs={3} md={2}>
-            <MdMenu className={classes.triggerMenu} onClick={onOpenSlider} />
+            {!openSlider ?
+              <MdMenu className={classes.triggerMenu} onClick={onOpenSlider} /> :
+              <MdClose className={classes.triggerMenu} onClick={onOpenSlider} />
+            }
           </Col>
         </Row>
       )
@@ -115,7 +119,7 @@ class Header extends Component {
 const styles = {
   header: {
     backgroundColor: styleVariables.blue,
-    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.59)',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.30)',
   },
   logo: {
     padding: '5px 0',

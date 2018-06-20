@@ -8,8 +8,10 @@ export const breadcrumbs = {
   border: 'solid 1px #d0d0d0',
   color: '#262626',
   colorActive: '#418fde',
-  sizeFont: 12,
-  height: 30
+  sizeFont: 16,
+  height: 30,
+  marginTop: 5,
+  separator: '>',
 };
 
 export const pieRadialChart = {

@@ -7,17 +7,17 @@ import { Link } from 'react-router-dom';
 import { breadcrumbs as styleBreadcrumbs } from '../../helpers/style';
 
 const Breadcrumbs = (props) => {
-  const { classes, items, separator, size } = props;
+  const { classes, items, size } = props;
   const breadcrumbs = items.map((item) =>
-    <Breadcrumb.Item key={item.url} className={item.active ? classes.active : classes.noActive}>
-      {item.active ? item.text : <Link to={item.url}>{item.text}</Link>}
+    <Breadcrumb.Item key={item.url} className={!item.url ? classes.active : classes.noActive}>
+      {item.url ? <Link to={item.url}>{item.text}</Link> : item.text}
     </Breadcrumb.Item>
   );
   return (
     <Grid fluid className={classes.border}>
       <Row middle={size} className={classes.row}>
         <Col md={12} lg={12}>
-          <Breadcrumb separator={separator}>
+          <Breadcrumb separator={styleBreadcrumbs.separator}>
             {breadcrumbs}
           </Breadcrumb>
         </Col>
@@ -28,6 +28,7 @@ const Breadcrumbs = (props) => {
 
 const styles = {
   border: {
+    marginTop: styleBreadcrumbs.marginTop,
     borderBottom: styleBreadcrumbs.border,
   },
   row: {
