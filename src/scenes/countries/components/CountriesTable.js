@@ -17,6 +17,7 @@ class CountriesTable extends Component {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'}),
       dataIndex: 'recipient_country',
@@ -27,10 +28,12 @@ class CountriesTable extends Component {
       title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      render: value => <span>{format(".2s")(value).replace(/G/, "B")}</span>
+      className: 'Money',
+      render: value => <span>{usd}{format(",.2f")(value)}</span>
     }, {
       title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',
+      className: 'Money',
       key: 'count',
     },{
       title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),

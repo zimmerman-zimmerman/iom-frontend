@@ -4,6 +4,7 @@ import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import {connect} from 'react-redux';
 import get from 'lodash/get';
+import { FormattedMessage } from "react-intl";
 
 import MainHeader from '../../components/main/MainHeader';
 import DonorsBreadcrumb from './components/DonorsBreadcrumb';
@@ -44,6 +45,21 @@ class Donors extends BaseFilter {
               <Filters data={data} rootComponent={this}/>
             </Col>
             <Col span={19}>
+              <Row>
+                <Col span={24}>
+                  <h1><FormattedMessage id="donors.title" defaultMessage="Donors"/></h1>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <h2>
+                    <FormattedMessage id="donors.description"
+                                      defaultMessage="Introduction text about this page and
+                                      what the treemap is showing, text provided by IOM"
+                    />
+                  </h2>
+                </Col>
+              </Row>
               <Row>
                 <Col span={24}>
                   <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>

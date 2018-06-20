@@ -34,7 +34,7 @@ class Country extends BaseFilter {
           actions.countryRequest
         );
         this.actionRequest(
-          extend({}, params, {recipient_country: code.toUpperCase()}),
+          extend({}, params, {recipient_country: code.toUpperCase()}, {page_size: 30}),
           'participating_organisation',
           actions.countryDonorsRequest
         );
@@ -48,7 +48,6 @@ class Country extends BaseFilter {
   render() {
     const pathname = get(this.props, 'location.pathname');
     const country = get(this.props, 'country.data.results[0]');
-    console.log(country);
     const donors = get(this.props, 'countryDonors.data.results');
     return (
       <Spin spinning={false}>

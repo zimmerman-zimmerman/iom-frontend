@@ -6,7 +6,6 @@
     padding: 7px 0;
     border-bottom: $border;
     color: $breadcrumbColor;
-    font-size: 12px;
     .Active {
       color: $breadcrumbColorActive;
     }
@@ -23,7 +22,8 @@
   }
   tr > th {
     background: white;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 15px;
     color: $blue;
   }
   h2 {
@@ -73,4 +73,31 @@ th.columnMoney, td.columnMoney {
 }
 .About .ant-table-thead th {
   background-color: #fafafa !important;
+}
+.SearchFilter {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+.ant-table-thead th {
+  font-weight: bold;
+}
+.recharts-tooltip-wrapper {
+  opacity: 0.85;
+}
+.ant-pagination {
+  float: left !important;
+}
+.ant-pagination-item-active {
+  color: white !important;
+  background-color: $blue;
+  border-color: white;
+}
+.ant-pagination-item-active a {
+  color: white;
+}
+.Filters h3 {
+  font-size: larger;
+  font-weight: bolder;
+}
+.ant-collapse-header {
+  font-weight: bolder;
 }

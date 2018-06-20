@@ -17,6 +17,7 @@ class TableProjects extends Component {
         'participating_organisations,aggregations',
         convert_to: 'usd',
         recipient_country: props.countryCode.toUpperCase(),
+        page_size: 50,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       }
     };
@@ -46,6 +47,8 @@ class TableProjects extends Component {
   render() {
     const { intl, countryActivities } = this.props;
     const data = _.get(countryActivities, 'data.results');
+    console.log(data);
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'}),
       dataIndex: 'participating_organisations[0].narratives[0].text',
@@ -61,7 +64,7 @@ class TableProjects extends Component {
       dataIndex: 'aggregations.activity.budget_value',
       className: 'Budget',
       key: 'budget',
-      render: value => <span>{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.2f')(value)}</span>
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'}),
       dataIndex: 'activity_status.name',
@@ -82,7 +85,7 @@ class TableProjects extends Component {
       title: intl.formatMessage({
         id: 'country.table.projects.header.end', defaultMessage: 'End date'
       }),
-      dataIndex: 'activity_dates[3].iso_date',
+      dataIndex: 'activity_dates[0].iso_date',
       key: 'end'
     }];
     return(

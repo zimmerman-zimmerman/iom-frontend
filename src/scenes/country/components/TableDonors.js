@@ -19,6 +19,7 @@ class TableDonors extends Component {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
@@ -30,7 +31,7 @@ class TableDonors extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'columnMoney',
-      render: value => <span>{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.2f')(value)}</span>
     }];
     return (
       <Content className="TablesDonors">

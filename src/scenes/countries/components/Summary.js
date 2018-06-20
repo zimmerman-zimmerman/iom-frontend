@@ -17,13 +17,14 @@ class Summary extends Component {
         totalActivity += item.activity_count;
       });
     }
+    const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     return (
       <Card className="ShadowBox" style={{height: 450}}>
         <h4><FormattedMessage id="countries.summary" defaultMessage="Summary"/></h4>
         <Divider className="Divider"/>
         <Row>
           <Col span={24}>
-            {format(".2s")(totalBudget).replace(/G/, "B")}
+            {usd}{format(".2s")(totalBudget).replace(/G/, "B")}
           </Col>
         </Row>
         <Row>

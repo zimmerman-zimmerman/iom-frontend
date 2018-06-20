@@ -36,6 +36,7 @@ class ServiceDonors extends BaseFilter {
   render() {
     const { intl, serviceDonors } = this.props;
     const data = get(serviceDonors, 'data.results');
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
@@ -47,7 +48,7 @@ class ServiceDonors extends BaseFilter {
       dataIndex: 'value',
       key: 'value',
       className: 'columnMoney',
-      render: value => <span>{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.2f')(value)}</span>
     }];
     return(
       <Content className="Content">
@@ -56,6 +57,7 @@ class ServiceDonors extends BaseFilter {
         </h3>
         <Table dataSource={data ? this.addKey(data) : null}
                columns={columns}
+               size="middle"
                loading={serviceDonors.request}
                pagination={{hideOnSinglePage: true}}
         />

@@ -120,6 +120,18 @@ class BannerCountry extends Component {
                     </Row>
                     <Row style={{marginTop: 20}}>
                       <Col span={24}>
+                        <FormattedMessage id="country.banner.right.total.expenditure"
+                                          defaultMessage="Total expenditure"
+                        />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={24}>
+                        {format(',')(data.expenditure)}
+                      </Col>
+                    </Row>
+                    <Row style={{marginTop: 20}}>
+                      <Col span={24}>
                         <FormattedMessage id="country.banner.right.data.source"
                                           defaultMessage="Data source"
                         />

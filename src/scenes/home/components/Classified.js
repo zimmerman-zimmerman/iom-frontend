@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import forEach from "lodash/forEach";
 import get from 'lodash/get';
 import slice from 'lodash/slice';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../../../services/actions/index';
 import PieReCharts from './PieReCharts';
@@ -66,11 +67,13 @@ class Classified extends Component {
             </Row>
             <Row>
               <Col span={24} className="Pad">
-                <Button className="Button">
-                  <FormattedMessage id="home.classified.button"
-                                    defaultMessage="See All Published Projects"
-                  />
-                </Button>
+                <Link to={`/projects`}>
+                  <Button className="Button">
+                    <FormattedMessage id="home.classified.button"
+                                      defaultMessage="See All Published Projects"
+                    />
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </Content>

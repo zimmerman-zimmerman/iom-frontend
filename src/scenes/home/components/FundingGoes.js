@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import get from "lodash/get";
 import forEach from 'lodash/forEach';
 import slice from 'lodash/slice';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../../../services/actions/index';
 import PieReCharts from './PieReCharts';
@@ -67,11 +68,13 @@ class FundingGoes extends Component {
             </Row>
             <Row>
               <Col span={24} className="Pad">
-                <Button className="Button">
-                  <FormattedMessage id="home.funding.goes.button"
-                                    defaultMessage="See All Publisher Services"
-                  />
-                </Button>
+                <Link to={`/services`}>
+                  <Button className="Button">
+                    <FormattedMessage id="home.funding.goes.button"
+                                      defaultMessage="See All Publisher Services"
+                    />
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </Content>

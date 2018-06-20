@@ -26,12 +26,13 @@ class ProjectsTable extends BaseFilter {
   render() {
     const { intl, data } = this.props;
     const count = get(data, 'count', 0);
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'}),
       dataIndex: 'title',
       key: 'title',
       className: 'Title',
-      width: '35%',
+      width: '25%',
       render: (title, record) =>
         <Link to={`/projects/${record.id}`}>{title.narratives[0].text}</Link>,
     }, {
@@ -48,7 +49,8 @@ class ProjectsTable extends BaseFilter {
       title: intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'budgets',
       key: 'budgets',
-      render: budgets => <span>{format(".2s")(budgets[0].value.value).replace(/G/, "B")}</span>,
+      className: 'Money',
+      render: budgets => <span>{usd}{format(',')(get(budgets, '[0].value.value'))}</span>,
     }, {
       title: intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'}),
       dataIndex: 'sectors',

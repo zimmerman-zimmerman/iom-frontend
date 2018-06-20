@@ -21,12 +21,13 @@ class ServicesTable extends Component {
 
   render() {
     const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'}),
       dataIndex: 'sector.name',
       key: 'sector',
       className: 'Title',
-      width: '50%',
+      width: '55%',
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     }, {
@@ -34,11 +35,12 @@ class ServicesTable extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'Money',
-      render: value => <span>{format(',')(value)}</span>,
+      render: value => <span>{usd}{format(',')(value)}</span>,
     }, {
       title: intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'}),
       dataIndex: 'activity_count',
       key: 'activity_count',
+      className: 'Money',
     }];
     return (
       <Content className="ServiceTable">
