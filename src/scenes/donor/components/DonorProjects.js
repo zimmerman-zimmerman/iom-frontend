@@ -63,7 +63,7 @@ class DonorProjects extends Component {
     const columns = [{
       title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
       dataIndex: 'title.narratives[0].text',
-      className: 'Donors',
+      className: 'donors',
       width: '30%',
       key: 'donors'
     },{

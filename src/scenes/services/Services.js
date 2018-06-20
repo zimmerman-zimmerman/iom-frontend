@@ -37,7 +37,7 @@ class Services extends BaseFilter {
     const data = get(services, 'data.results', null);
     return (
       <Spin spinning={services.request}>
-        <Layout>
+        <Layout className="Services">
           <Header className="Header">
             <MainHeader/>
           </Header>
