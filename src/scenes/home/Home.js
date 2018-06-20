@@ -3,14 +3,14 @@ import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import Page from '../../components/base/Page';
-import BannerImage from '../../components/BannerImage';
-import BannerText from '../../components/BannerText';
+import BannerImage from '../../components/base/BannerImage';
+import BannerText from '../../components/base/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import image from '../../assets/images/IOM_picture.jpg';
-import HomeDonors from './containers/HomeDonors';
-import HomeActivities from './containers/HomeActivities';
-import HomeSectors from './containers/HomeSectors';
+import HomeDonors from './components/HomeDonors';
+import HomeActivities from './components/HomeActivities';
+import HomeSectors from './components/HomeSectors';
 
 class Home extends Component {
   render() {

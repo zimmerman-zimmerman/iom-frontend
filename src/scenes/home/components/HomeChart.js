@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 import { pieRadialChart as pieRadialChartStyle, variables as variablesStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
-import ResponsivePieRadialChart from '../../../containers/ResponsivePieRadialChart';
+import ResponsivePieRadialChart from '../../../components/base/ResponsivePieRadialChart';
 
 class HomeChart extends Component {
   resize = () => this.forceUpdate();
@@ -132,7 +132,9 @@ const styles = {
     }
   },
   listItems: {
-    height: 350,
+    '@media only screen and (min-width: 992px)': {
+      height: 350,
+    },
     padding: '0 40px 30px 40px',
     '& .ant-badge-dot': {
       height: 8,

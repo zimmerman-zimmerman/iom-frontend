@@ -1,5 +1,6 @@
 {
   "currency.usd": "USD",
+  "currency.usd.symbol": "$",
 
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",
