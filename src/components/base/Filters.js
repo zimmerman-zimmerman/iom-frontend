@@ -4,7 +4,7 @@ import {injectIntl, intlShape} from 'react-intl';
 import injectSheet from 'react-jss';
 import Accordion from 'antd-mobile/es/accordion';
 
-import SearchFilter from '../../components/filters/SearchFilter';
+import SearchFilter from './SearchFilter';
 
 class Filters extends Component {
   render() {

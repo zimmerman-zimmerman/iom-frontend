@@ -9,7 +9,7 @@ import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import get from "lodash/get";
 import size from "lodash/size";
 
-import SearchFilter from '../../../components/filters/SearchFilter';
+import SearchFilter from '../../../components/base/SearchFilter';
 import StartEndDateFilter from '../../../components/filters/StartEndDateFilter';
 import Filter from '../../../components/filters/Filter';
 import * as actions from "../../../services/actions/index";

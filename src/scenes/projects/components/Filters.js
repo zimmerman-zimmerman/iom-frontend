@@ -8,7 +8,7 @@ import { FormattedMessage, injectIntl, intlShape } from "react-intl";
 import size from 'lodash/size';
 import get from 'lodash/get';
 
-import SearchFilter from '../../../components/filters/SearchFilter';
+import SearchFilter from '../../../components/base/SearchFilter';
 import StartEndDateFilter from '../../../components/filters/StartEndDateFilter';
 import Filter from '../../../components/filters/Filter';
 import * as actions from "../../../services/actions/index";

@@ -3,7 +3,7 @@ import Input from 'antd/es/input';
 import { connect } from 'react-redux';
 import injectSheet from "react-jss";
 
-import BaseFilter from "./BaseFilter";
+import BaseFilter from "../filters/BaseFilter";
 
 const Search = Input.Search;
 
@@ -28,6 +28,9 @@ const styles = {
       height: 44,
       width: 50,
       backgroundColor: '#418fde',
+    },
+    '& .ant-input-suffix': {
+      boxShadow: '0 1px 6px 0 rgba(0, 0, 0, 0.20)',
     }
   },
 };
