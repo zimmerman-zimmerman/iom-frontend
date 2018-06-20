@@ -10,7 +10,7 @@ const Slider = (props) => {
   const { classes, open, menuItems, onOpenChange } = props;
   const sidebar = (
     <List>{menuItems.map((item, index) => {
-      return (<List.Item key={index}><Link to={item.url}><h2>{item.text}</h2></Link></List.Item>)})}
+      return (<List.Item key={index}><Link to={item.url}><h3>{item.text}</h3></Link></List.Item>)})}
     </List>
   );
   return (
