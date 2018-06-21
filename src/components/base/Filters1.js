@@ -5,7 +5,7 @@ import injectSheet from 'react-jss';
 import Accordion from 'antd-mobile/es/accordion';
 import PropsType from 'prop-types';
 
-import Filter from './Filter';
+import Filter from './filters/Filter';
 import SearchFilter from './SearchFilter';
 import * as actions from '../../services/actions';
 

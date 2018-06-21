@@ -3,6 +3,12 @@
   "currency.usd.symbol": "$",
 
   "filters.search.placeholder": "Search",
+  "filters.panel.country": "Geo-location",
+  "filters.select.country.placeholder": "Select country",
+  "filters.panel.project.type": "Project type",
+  "filters.select.project.type.placeholder": "Select project type",
+  "filters.panel.project.status": "Project status",
+  "filters.select.project.status.placeholder": "Select project status",
 
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",

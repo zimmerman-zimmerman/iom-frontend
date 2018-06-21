@@ -5,26 +5,15 @@ import {injectIntl} from "react-intl";
 import Accordion from 'antd-mobile/es/accordion';
 import { Row, Col } from 'react-flexbox-grid';
 
-import Filter from './Filter';
-
 const AccordionFilter = (props) => {
-  const { classes, rootComponent, panelItems } = props;
+  const { classes, panels } = props;
   return (
     <Row className={classes.accordionFilter}>
       <Col xs={12}>
         <Accordion className={classes.accordionFilter}>
-          {panelItems.map((item, index) =>
+          {panels.map((item, index) =>
             <Accordion.Panel header={item.headerString} key={index}>
-              <Filter
-                rootComponent={rootComponent}
-                placeholder={item.placeholder}
-                reducerName={item.reducerName}
-                optionKeyName={item.optionKeyName}
-                optionValueName={item.optionValueName}
-                groupBy={item.groupBy}
-                fieldName={item.fieldName}
-                actionRequest={item.actionRequest}
-              />
+              {item.component}
             </Accordion.Panel>
           )}
         </Accordion>
@@ -35,7 +24,7 @@ const AccordionFilter = (props) => {
 
 AccordionFilter.propTypes = {
   rootComponent: PropsType.object,
-  panelItems: PropsType.array,
+  panels: PropsType.array,
 };
 
 const styles = {
