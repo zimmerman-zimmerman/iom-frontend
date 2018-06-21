@@ -2,6 +2,8 @@
   "currency.usd": "USD",
   "currency.usd.symbol": "$",
 
+  "filters.search.placeholder": "Search",
+
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",
   "main.menu.countries": "Countries",

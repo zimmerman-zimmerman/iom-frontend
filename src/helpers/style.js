@@ -1,5 +1,6 @@
 export const variables = {
   blue: '#0033a1',
+  green: '#35b6b4',
   border: 'solid 1px #d0d0d0',
   borderLight: '1px solid #ededed',
 };

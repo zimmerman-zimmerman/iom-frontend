@@ -4,6 +4,8 @@ import injectSheet from "react-jss";
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { variables as styleVariables } from '../../helpers/style';
+
 class Menus extends Component {
   handleClick = (e) => {
     this.props.history.push(e.key);
@@ -28,6 +30,14 @@ const styles = {
   menu: {
     float: 'right',
     borderBottom: 'none',
+    background: 'transparent',
+    color: 'white',
+    '& .ant-menu-item-selected': {
+      color: styleVariables.green,
+    },
+    '& .ant-menu-item:hover': {
+      color: styleVariables.green,
+    }
   },
 };
 
