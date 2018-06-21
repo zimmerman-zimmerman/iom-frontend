@@ -1,4 +1,7 @@
 {
+  "currency.usd": "USD",
+  "currency.usd.symbol": "$",
+
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",
   "main.menu.countries": "Countries",
@@ -6,20 +9,18 @@
   "main.menu.projects": "Projects",
   "main.menu.about": "About",
   "breadcrumb.home": "Home",
-  "currency.usd": "USD",
-  "currency.usd.symbol": "$",
 
   "banner.title": "IOM Transparency Portal",
   "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",
   "banner.detail": "Track money flow from donation to employment. Understanding our mission is the first step to give value to our projects and keep them alive.",
   "banner.text.text": "In 2016 IOM spent US$ 1,602,307,417 in over 100 countries around the world in seven different service areas.",
 
-  "home.funding.come.title": "Where the Funding Come From",
-  "home.funding.come.button": "See All Publisher Donors",
-  "home.funding.goes.title": "Where the Funding Goes",
-  "home.funding.goes.button": "See All Publisher Services",
-  "home.classified.title": "How the expenditures are classified",
-  "home.classified.button": "See All Published Projects",
+  "home.donors.title": "Where the Funding Come From",
+  "home.donors.button": "See All Publisher Donors",
+  "home.activities.title": "Where the Funding Goes",
+  "home.activities.button": "See All Published Projects",
+  "home.sectors.title": "How the expenditures are classified",
+  "home.sectors.button": "See All Publisher Services",
 
   "countries.title": "Countries",
   "countries.description": "Introduction to what is IOM recipients. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.",
@@ -71,10 +72,7 @@
   "country.table.projects.header.type": "Sector by IOM project type",
   "country.table.projects.header.start": "Start date",
   "country.table.projects.header.end": "End date",
-  "country.link.text": "Visit country page",
 
-  "donors.title": "Donors",
-  "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",
   "donors.breadcrumb.home": "Home",
   "donors.breadcrumb.donors": "Donors",
   "donors.filters.donor": "Donor",
@@ -84,6 +82,8 @@
   "donors.table.donors.header.budget": "Budget",
   "donors.table.donors.header.projects.count": "Implementation projects",
 
+  "donors.title": "Donors",
+  "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",
   "donor.breadcrumb.home": "Home",
   "donor.breadcrumb.donors": "Donors",
   "donor.breadcrumb.donors.detail": "Donor detail page",
@@ -173,6 +173,7 @@
   "project.location.contact.address": "Address:",
   "project.location.contact.website": "Website:",
 
+  "about.breadcrumb.home": "Home",
   "about.breadcrumb.about": "About",
 
   "footer.contact": "Contact us",

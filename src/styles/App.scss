@@ -104,3 +104,28 @@ th.columnMoney, td.columnMoney {
 .Home, .Services, .Service, .Projects, .Project, .Donors, .Donor, .Countries, .Country, .About  {
   min-width: 1400px;
 }
+
+/* Responsive */
+@media only screen and (min-width: 1100px) {
+  .container-fluid {
+    padding: 0 50px !important;
+  }
+}
+/* Override Ant Menu Style */
+.ant-menu {
+  * {
+    border-bottom: none !important;
+  }
+  li {
+    text-transform: uppercase;
+    &.ant-menu-item-selected {
+      border-bottom: 4px solid #35b6b4 !important;
+    }
+  }
+}
+.transparent-white {
+  background: rgba(255, 255, 255, 0.7);
+}
+.am-drawer-draghandle {
+  background-color: transparent;
+}
