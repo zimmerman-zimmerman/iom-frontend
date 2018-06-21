@@ -11,8 +11,7 @@ import StartEndDateFilter from './StartEndDateFilter';
 import * as actions from '../../../services/actions';
 
 class Filters extends Component {
-  defaultPanels() {
-    const { intl, rootComponent } = this.props;
+  defaultPanels(intl, rootComponent) {
     return [{
       headerString: intl.formatMessage({id: 'filters.panel.country', defaultMessage: 'Geo-location'}),
       component:
@@ -103,7 +102,9 @@ class Filters extends Component {
             />
           </Col>
         </Row>
-        <AccordionFilter rootComponent={rootComponent} panels={panels ? panels : this.defaultPanels()} />
+        <AccordionFilter rootComponent={rootComponent}
+                         panels={panels ? panels : this.defaultPanels(intl, rootComponent)}
+        />
       </Fragment>
     )
   }
