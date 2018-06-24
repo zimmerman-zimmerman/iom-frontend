@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-flexbox-grid';
-import {injectIntl, intlShape} from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import injectSheet from 'react-jss';
 import PropsType from 'prop-types';
+import get from "lodash/get";
+import size from "lodash/size";
+import Badge from 'antd/es/badge';
 
 import SearchFilter from '../SearchFilter';
 import AccordionFilter from './AccordionFilter';
@@ -87,11 +90,18 @@ class Filters extends Component {
     }];
   }
 
+  countResults() {
+    const { countResults, pluralMessage, singularMessage} = this.props;
+    const text = countResults > 1 ? pluralMessage : singularMessage;
+    return (<h2>{countResults} {text}</h2>)
+  }
+
   render() {
-    const { intl, rootComponent, classes, panels } = this.props;
+    const { intl, rootComponent, classes, panels, countResults } = this.props;
+    const filterCount = size(get(rootComponent, 'state.filters.values'));
     return (
       <Fragment>
-        <Row className={classes.filters}>
+        <Row className={classes.gap}>
           <Col xs={12}>
             <SearchFilter
               rootComponent={rootComponent}
@@ -100,6 +110,19 @@ class Filters extends Component {
               }
               fieldName="q"
             />
+          </Col>
+        </Row>
+        <Row className={classes.gap}>
+          <Col xs={12}>
+            {this.countResults()}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Badge className={classes.badge} count={filterCount} showZero={true}  />
+            <span style={{marginLeft: 5}}>
+              <FormattedMessage id="donors.filters.count" defaultMessage="Filter(s)"/>
+            </span>
           </Col>
         </Row>
         <AccordionFilter rootComponent={rootComponent}
@@ -114,12 +137,20 @@ Filters.propTypes = {
   intl: intlShape.isRequired,
   rootComponent: PropsType.object,
   panels: PropsType.array,
+  pluralMessage: PropsType.object,
+  singularMessage: PropsType.object,
+  countResults: PropsType.number,
 };
 
 const styles = {
-  filters: {
+  gap: {
     marginTop: 20
   },
+  badge: {
+    '& .ant-badge-count': {
+      background: '#f7c989',
+    }
+  }
 };
 
 export default injectSheet(styles)(injectIntl(Filters));

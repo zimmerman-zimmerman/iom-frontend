@@ -1,16 +1,19 @@
+@import "../styles/variables";
+
 @media only screen and (min-width: 1100px) {
   .container-fluid {
     padding: 0 50px !important;
   }
+  .tree-map {
+    font-size: 30px;
+  }
 }
 @media only screen and (max-width: 767px) {
-  h1 {
-    font-size: 130%;
-  }
-  h2 {
-    font-size: 100%;
+  .tree-map {
+    font-size: 20px;
   }
 }
+
 /* Override Ant Menu Style */
 .ant-menu {
   * {
@@ -29,22 +32,30 @@
 .am-drawer-content {
   padding-top: 0 !important;
 }
-.my-drawer {
-  position: relative;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border: none !important;
-}
-.my-drawer .am-drawer-sidebar {
-  background-color: #0033a1;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.my-drawer .am-drawer-sidebar .am-list {
-  width: 300px;
-  padding: 0;
-  background-color: #0033a1;
-}
 .am-drawer-draghandle {
   background-color: transparent;
+}
+.recharts-tooltip-wrapper {
+  opacity: 0.85;
+}
+
+/* Table */
+.ant-table-thead > tr > th {
+  background-color: transparent;
+  font-size: large;
+  color: $blue;
+}
+th.number, td.number {
+  text-align: right !important;
+}
+.ant-pagination {
+  float: left !important;
+}
+.ant-pagination-item-active {
+  color: white !important;
+  background-color: $blue;
+  border-color: white;
+}
+.ant-pagination-item-active a, .ant-pagination-item-active a:hover, .ant-pagination-item-active:hover {
+  color: white !important;
 }
