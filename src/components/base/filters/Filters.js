@@ -93,11 +93,11 @@ class Filters extends Component {
   countResults() {
     const { countResults, pluralMessage, singularMessage} = this.props;
     const text = countResults > 1 ? pluralMessage : singularMessage;
-    return (<h2>{countResults} {text}</h2>)
+    return <h2>{countResults} {text}</h2>;
   }
 
   render() {
-    const { intl, rootComponent, classes, panels, countResults } = this.props;
+    const { intl, rootComponent, classes, panels } = this.props;
     const filterCount = size(get(rootComponent, 'state.filters.values'));
     return (
       <Fragment>
