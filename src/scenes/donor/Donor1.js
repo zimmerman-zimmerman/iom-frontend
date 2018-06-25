@@ -1,14 +1,20 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import injectSheet from 'react-jss';
+import Layout from 'antd/es/layout';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
 
-import Page from '../../components/base/Page';
+import MainHeader from '../../components/MainHeader';
+import MainFooter from '../../components/main/MainFooter';
+import DonorBreadcrumbs from "./components/DonorBreadcrumb";
 import BaseFilter from '../../components/filters/BaseFilter';
 import _ from "lodash";
 import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";
 import DonorProjects from "./components/DonorProjects";
-import Trans from '../../locales/Trans';
+import './styles/Donor.scss';
+
+
+const { Header, Content, Footer } = Layout;
 
 class Donor extends BaseFilter {
   componentDidMount() {
@@ -27,29 +33,32 @@ class Donor extends BaseFilter {
   }
 
   render() {
-    const { classes } = this.props;
     const code = _.get(this.props, 'match.params.code');
     const data = _.get(this.props, 'donor.data.results[0]');
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
-    ];
     return (
-      <Page breadcrumbItems={breadcrumbItems}>
-        <Grid fluid>
+      <Layout className="Donor">
+        <Header className="Header">
+          <MainHeader/>
+        </Header>
+        <Content className="Content">
+          <DonorBreadcrumbs donor={data}/>
+        </Content>
+        <Content className="Content">
           <Row>
-            <Col xs={12}>
-              <h2 className={classes.title}>{data ? data.participating_organisation : null}</h2>
+            <Col span={24} className="Title">
+              <h2 style={{marginTop: 5, marginBottom: 5}}>{data ? data.participating_organisation : null}</h2>
             </Col>
           </Row>
-          <Row className={classes.table}>
-            <Col xs={12}>
+          <Row>
+            <Col span={24}>
               <DonorProjects code={code}/>
             </Col>
           </Row>
-        </Grid>
-      </Page>
+        </Content>
+        <Footer className="Footer">
+          <MainFooter/>
+        </Footer>
+      </Layout>
     )
   }
 }
@@ -60,14 +69,4 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-const styles = {
-  title: {
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  table: {
-    marginBottom: 15,
-  }
-};
-
-export default injectSheet(styles)(connect(mapStateToProps)(Donor));
+export default connect(mapStateToProps)(Donor);
