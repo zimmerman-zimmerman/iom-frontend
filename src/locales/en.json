@@ -12,6 +12,8 @@
   "filters.panel.period": "Start - end data",
   "filters.panel.donors": "Donors",
   "filters.select.donors.placeholder": "Select donor",
+  "filters.count": "Filter(s)",
+  "filters.show": "Show filters",
 
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",

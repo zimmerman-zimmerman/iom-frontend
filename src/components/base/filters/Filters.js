@@ -6,12 +6,16 @@ import PropsType from 'prop-types';
 import get from "lodash/get";
 import size from "lodash/size";
 import Badge from 'antd/es/badge';
+import MediaQuery from 'react-responsive';
+import Collapse from 'antd/es/collapse';
+import MdFilterList from 'react-icons/lib/md/filter-list';
 
 import SearchFilter from '../SearchFilter';
 import AccordionFilter from './AccordionFilter';
 import Filter from './Filter';
 import StartEndDateFilter from './StartEndDateFilter';
 import * as actions from '../../../services/actions';
+import {size as screenSize} from "../../../helpers/screen";
 
 class Filters extends Component {
   defaultPanels(intl, rootComponent) {
@@ -96,9 +100,33 @@ class Filters extends Component {
     return <h2>{countResults} {text}</h2>;
   }
 
-  render() {
+  content() {
     const { intl, rootComponent, classes, panels } = this.props;
     const filterCount = size(get(rootComponent, 'state.filters.values'));
+    return (
+      <Fragment>
+        <Row>
+          <Col xs={12}>
+            {this.countResults()}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Badge className={classes.badge} count={filterCount} showZero={true}  />
+            <span style={{marginLeft: 5}}>
+              <FormattedMessage id="filters.count" defaultMessage="Filter(s)"/>
+            </span>
+          </Col>
+        </Row>
+        <AccordionFilter rootComponent={rootComponent}
+                         panels={panels ? panels : this.defaultPanels(intl, rootComponent)}
+        />
+      </Fragment>
+    )
+  }
+
+  render() {
+    const { intl, rootComponent, classes } = this.props;
     return (
       <Fragment>
         <Row className={classes.gap}>
@@ -112,24 +140,30 @@ class Filters extends Component {
             />
           </Col>
         </Row>
-        <Row className={classes.gap}>
-          <Col xs={12}>
-            {this.countResults()}
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Badge className={classes.badge} count={filterCount} showZero={true}  />
-            <span style={{marginLeft: 5}}>
-              <FormattedMessage id="donors.filters.count" defaultMessage="Filter(s)"/>
-            </span>
-          </Col>
-        </Row>
-        <AccordionFilter rootComponent={rootComponent}
-                         panels={panels ? panels : this.defaultPanels(intl, rootComponent)}
-        />
+        <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
+          <Collapse bordered={false}>
+            <Collapse.Panel
+              className={classes.collapse}
+              showArrow={false}
+              header={
+                <span>
+                  <MdFilterList className={classes.icon} />
+                  {intl.formatMessage({id: 'filters.show', defaultMessage: 'Show filters'})}
+                </span>
+              }
+              key="1"
+            >
+              {this.content()}
+            </Collapse.Panel>
+          </Collapse>
+        </MediaQuery>
+        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+          <div className={classes.gap}>
+            {this.content()}
+          </div>
+        </MediaQuery>
       </Fragment>
-    )
+    );
   }
 }
 
@@ -150,6 +184,18 @@ const styles = {
     '& .ant-badge-count': {
       background: '#f7c989',
     }
+  },
+  icon: {
+    fontSize: 20,
+    marginTop: -5,
+    marginRight: 5,
+  },
+  collapse: {
+    background: '#f5f5f9',
+    '& .ant-collapse-borderless > .ant-collapse-item': {
+      borderBottom: '0 !important',
+    }
+
   }
 };
 
