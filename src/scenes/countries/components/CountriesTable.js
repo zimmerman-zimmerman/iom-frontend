@@ -28,12 +28,12 @@ class CountriesTable extends Component {
       title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      className: 'Money',
+      className: 'number',
       render: value => <span>{usd}{format(",.2f")(value)}</span>
     }, {
       title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
       dataIndex: 'activity_count',
-      className: 'Money',
+      className: 'number',
       key: 'count',
     },{
       title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
@@ -42,7 +42,10 @@ class CountriesTable extends Component {
       render: recipient_country => <span>{recipient_country.region.name}</span>,
     }];
     return (
-      <Table className="CountriesTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"/>
+      <Table className="CountriesTable" dataSource={data ? this.addKey(data) : null} columns={columns}
+             scroll={{ x: 900 }}
+             size="middle"
+      />
     )
   }
 }

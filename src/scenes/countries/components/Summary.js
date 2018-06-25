@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Card from 'antd/es/card';
 import Divider from 'antd/es/divider';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
+import { Row, Col } from 'react-flexbox-grid';
 import { format } from "d3-format";
 import { FormattedMessage } from "react-intl";
+import injectSheet from 'react-jss';
+import Button from 'antd/es/button';
 
 class Summary extends Component {
   render() {
-    const { data } = this.props;
+    const { data, classes } = this.props;
     let totalBudget = 0;
     let totalActivity = 0;
     if (data) {
@@ -20,25 +21,28 @@ class Summary extends Component {
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     return (
       <Card className="ShadowBox" style={{height: 450}}>
-        <h4><FormattedMessage id="countries.summary" defaultMessage="Summary"/></h4>
+        <h3><strong><FormattedMessage id="countries.summary" defaultMessage="Summary"/></strong></h3>
         <Divider className="Divider"/>
+        <Button size="small" type="primary" ghost className={classes.buttonHide} onClick={this.props.onHideSummary}>
+          Hide
+        </Button>
         <Row>
-          <Col span={24}>
-            {usd}{format(".2s")(totalBudget).replace(/G/, "B")}
+          <Col xs={12}>
+            <strong>{usd}{format(".2s")(totalBudget).replace(/G/, "B")}</strong>
           </Col>
         </Row>
         <Row>
-          <Col span={24} style={{color: '#959595', fontSize: 11}}>
+          <Col xs={12} style={{color: '#959595', fontSize: 11}}>
             <FormattedMessage id="countries.summary.total" defaultMessage="Total budget"/>
           </Col>
         </Row>
         <Row style={{marginTop: 15}}>
-          <Col span={24}>
-            {totalActivity}
+          <Col xs={12}>
+            <strong>{totalActivity}</strong>
           </Col>
         </Row>
         <Row>
-          <Col span={24} style={{color: '#959595', fontSize: 11}}>
+          <Col xs={12} style={{color: '#959595', fontSize: 11}}>
             <FormattedMessage id="countries.summary.projects" defaultMessage="Projects"/>
           </Col>
         </Row>
@@ -47,5 +51,19 @@ class Summary extends Component {
   }
 }
 
-export default Summary;
+const styles = {
+  summary: {
+    marginTop: 15,
+    '& .leaflet-control-attribution.leaflet-control': {
+      display: 'none',
+    },
+  },
+  buttonHide: {
+    position: 'absolute',
+    right: 20,
+    top: 25,
+  }
+};
+
+export default injectSheet(styles)(Summary);
 

@@ -1,29 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import Spin from 'antd/es/spin';
 import get from 'lodash/get';
-import { FormattedMessage } from "react-intl";
+import injectSheet from 'react-jss';
+import MediaQuery from 'react-responsive';
+import Button from 'antd/es/button';
 
-import MainHeader from '../../components/main/MainHeader';
 import GeoMap from '../../components/maps/GeoMap';
 import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';
-import MainFooter from '../../components/main/MainFooter';
 import Summary from './components/Summary';
-import Filters from "./components/Filters";
+import Filters from "../../components/base/filters/Filters";
 import BaseFilter from '../../components/filters/BaseFilter';
-import CountriesBreadcrumb from "./components/CountriesBreadcrumb";
-import './styles/Countries.scss';
-
-const { Header, Content, Footer } = Layout;
+import Trans from '../../locales/Trans';
+import Page from '../../components/base/Page';
+import {size as screenSize} from "../../helpers/screen";
 
 class Countries extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
+    this.setState({showSummary: true});
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'recipient_country', actions.countriesRequest);
@@ -33,65 +31,91 @@ class Countries extends BaseFilter {
     }
   }
 
+  onHideSummary() {
+    this.setState({showSummary: !this.state.showSummary});
+  }
+
   render() {
-    const { countries } = this.props;
+    const { countries, classes } = this.props;
+    const { showSummary } = this.state;
     const data = get(countries, 'data');
     const showMap = get(data, 'results[0].recipient_country.code');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: null, text: <Trans id='countries.breadcrumb.countries' text='Countries' />},
+      {url: null, text: <Trans id='countries.breadcrumb.funding' text='Funding by countries' />},
+    ];
+    const ShowSummary = () => {
+      return (
+        <div className={classes.boxShadow}>
+          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                  tabName="activities"
+          />
+          {!showSummary ?
+            <Button size="small" type="primary" ghost className={classes.buttonShowSummary}
+                    onClick={this.onHideSummary.bind(this)}
+            >
+              Show Summary
+            </Button> : null
+          }
+        </div>
+      )
+    };
     return (
       <Spin spinning={countries.request}>
-        <Layout className='Countries'>
-          <Header className="Header">
-            <MainHeader/>
-          </Header>
-          <Content className="Content">
-            <CountriesBreadcrumb/>
-            <Row style={{marginTop: 15}} className="Search">
-              <Col span={5}>
-                <Filters data={data} rootComponent={this}/>
+        <Page breadcrumbItems={breadcrumbItems}>
+          <Grid fluid>
+            <Row>
+              <Col xs={12} md={4} lg={3}>
+                <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
+                         pluralMessage={<Trans id="countries.filters.countries" defaultMessage="Countries"/>}
+                         singularMessage={ <Trans id="countries.filters.country" defaultMessage="Country"/>}
+
+                />
               </Col>
-              <Col span={19}>
+              <Col xs={12} md={8} lg={9} className={classes.map}>
                 <Row>
-                  <Col span={24}>
+                  <Col xs={12} className={classes.gapBottom}>
                     <h2 className="Title">
-                      <FormattedMessage id="countries.title"
-                                        defaultMessage="Countries"
-                      />
+                      <Trans id="countries.title" defaultMessage="Countries"/>
                     </h2>
+                    <Trans id="countries.description" defaultMessage="Description"/>
                   </Col>
                 </Row>
                 <Row>
-                  <Col span={17} className="Description">
-                    <FormattedMessage id="countries.description"
-                                      defaultMessage="Description"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={19}>
-                    <div className="ShadowBox" style={{height: 450}}>
+                  <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
+                    <Col xs={12}>
                       { showMap ?
-                        <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
-                                tabName="activities"
-                        /> : null
+                        <div className={classes.boxShadow}>
+                          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                                  tabName="activities"
+                          />
+                        </div> : null
                       }
-                    </div>
-                  </Col>
-                  <Col span={5}>
-                    <Summary data={showMap ? get(data, 'results') : null}/>
-                  </Col>
+                    </Col>
+                  </MediaQuery>
+                  <MediaQuery minWidth={screenSize.tablet.minWidth}>
+                    <Col xs={12} md={12} lg={showSummary ? 9 : 12} className={classes.noPaddingRight}>
+                      {showMap ? showSummary ? <ShowSummary/> : <ShowSummary/> : null}
+                    </Col>
+                    {showSummary ?
+                      <Col lg={3} className={classes.noPaddingLeft}>
+                        <Summary data={showMap ? get(data, 'results') : null}
+                                 onHideSummary={this.onHideSummary.bind(this)}
+                        />
+                      </Col> : null
+                    }
+                  </MediaQuery>
                 </Row>
                 <Row>
-                  <Col span={24} style={{marginTop: 20}}>
+                  <Col xs={12}>
                     <CountriesTable data={showMap ? get(data, 'results') : null}/>
                   </Col>
                 </Row>
               </Col>
             </Row>
-          </Content>
-          <Footer className="MainFooter">
-            <MainFooter/>
-          </Footer>
-        </Layout>
+          </Grid>
+        </Page>
       </Spin>
     );
   }
@@ -108,4 +132,33 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-export default connect(mapStateToProps)(Countries);
+const styles = {
+  map: {
+    marginTop: 15,
+    '& .leaflet-control-attribution.leaflet-control': {
+      display: 'none',
+    },
+  },
+  gapBottom: {
+    marginBottom: 20,
+  },
+  noPaddingLeft: {
+    paddingLeft: 0,
+  },
+  noPaddingRight: {
+    paddingRight: 0,
+  },
+  boxShadow: {
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+  },
+  buttonShowSummary: {
+    position: 'absolute',
+    right: 50,
+    top: 215,
+    zIndex: 100,
+    background: 'white !important',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(Countries));
