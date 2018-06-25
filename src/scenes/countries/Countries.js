@@ -83,7 +83,7 @@ class Countries extends BaseFilter {
                   </Col>
                 </Row>
                 <Row>
-                  <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
+                  <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                     <Col xs={12}>
                       { showMap ?
                         <div className={classes.boxShadow}>
@@ -94,8 +94,10 @@ class Countries extends BaseFilter {
                       }
                     </Col>
                   </MediaQuery>
-                  <MediaQuery minWidth={screenSize.tablet.minWidth}>
-                    <Col xs={12} md={12} lg={showSummary ? 9 : 12} className={classes.noPaddingRight}>
+                  <MediaQuery minWidth={screenSize.desktop.minWidth}>
+                    <Col lg={showSummary ? 9 : 12}
+                         className={classes.noPaddingRight}
+                    >
                       {showMap ? showSummary ? <ShowSummary/> : <ShowSummary/> : null}
                     </Col>
                     {showSummary ?
@@ -156,8 +158,7 @@ const styles = {
     right: 50,
     top: 215,
     zIndex: 100,
-    background: 'white !important',
-    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+    background: 'white !important'
   }
 };
 
