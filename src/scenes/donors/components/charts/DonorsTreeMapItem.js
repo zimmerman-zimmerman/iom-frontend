@@ -40,13 +40,12 @@ export default class DonorsTreeMapItem extends Component {
         {
           depth === 1 ? (
           <Text
-            x={x + width / 2}
-            y={y + height / 2 + 9}
+            x={x + (width / 2)}
+            y={y + (height / 2) + 9}
             textAnchor="middle"
             fill="#fff"
             stroke="none"
             fontSize={fontSize}
-            width={width}
             fillOpacity={0.5}
           >
             {participating_organisation}
@@ -55,7 +54,7 @@ export default class DonorsTreeMapItem extends Component {
         }
         {
           depth === 1 ?
-            <text
+            <Text
               x={x + 4}
               y={y + 18}
               fill="#fff"
@@ -63,7 +62,7 @@ export default class DonorsTreeMapItem extends Component {
               fontSize={fontSize}
             >
               {percent}%
-            </text>
+            </Text>
             : null
         }
       </g>
