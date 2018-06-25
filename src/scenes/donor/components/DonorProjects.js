@@ -7,9 +7,10 @@ import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
+import { format } from "d3-format";
+import injectSheet from 'react-jss';
 
 import * as actions from '../../../services/actions/index';
-import {format} from "d3-format";
 
 const { Content } = Layout;
 
@@ -56,15 +57,15 @@ class DonorProjects extends Component {
   };
 
   render() {
-    const { intl, donorProjects } = this.props;
+    const { intl, donorProjects, classes } = this.props;
     const data = get(donorProjects, 'data.results');
+    console.log(data);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{
       title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
       dataIndex: 'title.narratives[0].text',
-      className: 'donors',
-      width: '30%',
+      width: '40%',
       key: 'donors'
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.start', defaultMessage: 'Start date'}),
@@ -79,7 +80,7 @@ class DonorProjects extends Component {
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'aggregations.activity.budget_value',
-      className: 'Money',
+      className: 'number',
       key: 'budget',
       render: (value) => <span>{usd}{format(",.2f")(value)}</span>
     },{
@@ -91,19 +92,17 @@ class DonorProjects extends Component {
       title: intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'}),
       dataIndex: 'sectors[0].sector.name',
       className: 'Sector',
-      key: 'sector',
-      render: (name, record) => <span>{get(record, 'sectors[0].sector.code')} {name}</span>
+      key: 'sector'
     }];
     return (
       <Spin spinning={donorProjects.request}>
-        <Content className="Projects">
-          <Table className="Table"
+          <Table className="DonorsTable"
                  dataSource={data ? this.addKey(data) : null}
                  columns={columns} size="middle"
                  pagination={false}
+                 scroll={{ x: 1200 }}
           />
-          <Pagination size="small" total={total} className="Pagination" onChange={this.onPageChange}/>
-        </Content>
+          <Pagination size="small" total={total} className={classes.pagination} onChange={this.onPageChange}/>
       </Spin>
     )
   }
@@ -119,4 +118,10 @@ DonorProjects.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default connect(mapStateToProps)(injectIntl(DonorProjects));
+const styles = {
+  pagination: {
+    marginTop: 10
+  },
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(DonorProjects)));
