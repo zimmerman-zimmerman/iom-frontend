@@ -96,12 +96,12 @@ class Countries extends BaseFilter {
                   </MediaQuery>
                   <MediaQuery minWidth={screenSize.desktop.minWidth}>
                     <Col lg={showSummary ? 9 : 12}
-                         className={classes.noPaddingRight}
+                         className={showSummary ? classes.noPaddingRight : null}
                     >
                       {showMap ? showSummary ? <ShowSummary/> : <ShowSummary/> : null}
                     </Col>
                     {showSummary ?
-                      <Col lg={3} className={classes.noPaddingLeft}>
+                      <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <Summary data={showMap ? get(data, 'results') : null}
                                  onHideSummary={this.onHideSummary.bind(this)}
                         />
@@ -155,8 +155,8 @@ const styles = {
   },
   buttonShowSummary: {
     position: 'absolute',
-    right: 50,
-    top: 215,
+    right: 60,
+    top: 250,
     zIndex: 100,
     background: 'white !important'
   }
