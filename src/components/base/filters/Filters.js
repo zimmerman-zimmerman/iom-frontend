@@ -140,7 +140,7 @@ class Filters extends Component {
             />
           </Col>
         </Row>
-        <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
+        <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
           <Collapse bordered={false}>
             <Collapse.Panel
               className={classes.collapse}
@@ -157,7 +157,7 @@ class Filters extends Component {
             </Collapse.Panel>
           </Collapse>
         </MediaQuery>
-        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+        <MediaQuery minWidth={screenSize.tablet.minWidth}>
           <div className={classes.gap}>
             {this.content()}
           </div>
