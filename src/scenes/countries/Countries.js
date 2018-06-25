@@ -5,7 +5,6 @@ import Spin from 'antd/es/spin';
 import get from 'lodash/get';
 import injectSheet from 'react-jss';
 import MediaQuery from 'react-responsive';
-import Button from 'antd/es/button';
 
 import GeoMap from '../../components/maps/GeoMap';
 import CountriesTable from './components/CountriesTable';
@@ -51,13 +50,6 @@ class Countries extends BaseFilter {
           <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
                   tabName="activities"
           />
-          {!showSummary ?
-            <Button size="small" type="primary" ghost className={classes.buttonShowSummary}
-                    onClick={this.onHideSummary.bind(this)}
-            >
-              Show Summary
-            </Button> : null
-          }
         </div>
       )
     };
@@ -111,7 +103,7 @@ class Countries extends BaseFilter {
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <CountriesTable data={showMap ? get(data, 'results') : null}/>
+                    <CountriesTable data={showMap ? get(data, 'results') : null} />
                   </Col>
                 </Row>
               </Col>
@@ -152,13 +144,6 @@ const styles = {
   },
   boxShadow: {
     boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
-  },
-  buttonShowSummary: {
-    position: 'absolute',
-    right: 60,
-    top: 250,
-    zIndex: 100,
-    background: 'white !important'
   }
 };
 
