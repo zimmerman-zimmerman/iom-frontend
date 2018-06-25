@@ -110,7 +110,16 @@ th.columnMoney, td.columnMoney {
   .container-fluid {
     padding: 0 50px !important;
   }
+  .tree-map {
+    font-size: 30px;
+  }
 }
+@media only screen and (max-width: 767px) {
+  .tree-map {
+    font-size: 20px;
+  }
+}
+
 /* Override Ant Menu Style */
 .ant-menu {
   * {
@@ -126,6 +135,36 @@ th.columnMoney, td.columnMoney {
 .transparent-white {
   background: rgba(255, 255, 255, 0.7);
 }
+.am-drawer-content {
+  padding-top: 0 !important;
+}
 .am-drawer-draghandle {
   background-color: transparent;
+}
+.recharts-tooltip-wrapper {
+  opacity: 0.85;
+}
+
+/* Table */
+.ant-table-thead > tr > th {
+  background-color: transparent;
+  font-size: large;
+  color: $blue;
+}
+th.number, td.number {
+  text-align: right !important;
+}
+.ant-pagination {
+  float: left !important;
+}
+.ant-pagination-item-active {
+  color: white !important;
+  background-color: $blue;
+  border-color: white;
+}
+.ant-pagination-item-active a, .ant-pagination-item-active a:hover, .ant-pagination-item-active:hover {
+  color: white !important;
+}
+tbody > tr > td {
+  word-break: normal !important;
 }

@@ -34,7 +34,7 @@ class DonorsTable extends Component {
       title: intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      className: 'Money',
+      className: 'number',
       render: value => <span>{usd}{format(",.2f")(value)}</span>
     }, {
       title: intl.formatMessage({
@@ -43,10 +43,12 @@ class DonorsTable extends Component {
       }),
       dataIndex: 'activity_count',
       key: 'activity_count',
-      className: 'Money',
+      className: 'number',
     }];
     return (
-      <Table className="DonorsTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"/>
+      <Table className="DonorsTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+             scroll={{ x: 900 }}
+      />
     )
   }
 }

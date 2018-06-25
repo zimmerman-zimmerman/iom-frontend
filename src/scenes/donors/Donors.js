@@ -1,21 +1,17 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
-import {connect} from 'react-redux';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { connect } from "react-redux";
 import get from 'lodash/get';
+import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
 
-import MainHeader from '../../components/main/MainHeader';
-import DonorsBreadcrumb from './components/DonorsBreadcrumb';
-import Filters from './components/Filters';
+import Page from '../../components/base/Page';
+import Filters from '../../components/base/filters/Filters';
+import Trans from '../../locales/Trans';
 import BaseFilter from '../../components/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
-import MainFooter from '../../components/main/MainFooter';
-
-const { Header, Content, Footer } = Layout;
 
 class Donors extends BaseFilter {
   componentDidMount() {
@@ -31,53 +27,49 @@ class Donors extends BaseFilter {
   }
 
   render() {
-    const { donors } = this.props;
+    const { donors, classes } = this.props;
     const data = get(donors, 'data');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
+    ];
     return (
-      <Layout className="Donors">
-        <Header className="Header">
-          <MainHeader/>
-        </Header>
-        <Content className="Content">
-          <DonorsBreadcrumb/>
-          <Row style={{marginTop: 15}} className="Search">
-            <Col span={5}>
-              <Filters data={data} rootComponent={this}/>
+      <Page breadcrumbItems={breadcrumbItems}>
+        <Grid fluid>
+          <Row>
+            <Col xs={12} md={4} lg={3} >
+              <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
+                       pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
+                       singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
+
+              />
             </Col>
-            <Col span={19}>
-              <Row>
-                <Col span={24}>
-                  <h1><FormattedMessage id="donors.title" defaultMessage="Donors"/></h1>
+            <Col xs={12} md={8} lg={9}>
+              <Row className={classes.rowGap}>
+                <Col xs={12}>
+                  <h1><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
                 </Col>
               </Row>
               <Row>
-                <Col span={24}>
-                  <h2>
-                    <FormattedMessage id="donors.description"
-                                      defaultMessage="Introduction text about this page and
-                                      what the treemap is showing, text provided by IOM"
-                    />
-                  </h2>
+                <Col xs={12}>
+                  <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
                 </Col>
               </Row>
               <Row>
-                <Col span={24}>
+                <Col xs={12}>
                   <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>
                 </Col>
               </Row>
               <Row>
-                <Col span={24} style={{marginTop: 20}}>
-                  <DonorsTable data={data}/>
+                <Col xs={12}>
+                  <DonorsTable data={data} />
                 </Col>
               </Row>
             </Col>
           </Row>
-        </Content>
-        <Footer className="MainFooter">
-          <MainFooter/>
-        </Footer>
-      </Layout>
-    );
+        </Grid>
+      </Page>
+    )
   }
 }
 
@@ -92,4 +84,10 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-export default connect(mapStateToProps)(Donors);
+const styles = {
+  rowGap: {
+    marginTop: 10
+  },
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(Donors));
