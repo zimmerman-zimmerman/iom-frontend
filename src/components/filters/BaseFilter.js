@@ -36,7 +36,7 @@ class BaseFilter extends Component {
     if (get(filters.values, fieldName)) {
       delete filters.values[fieldName];
     }
-    if (!isEmpty(values) || values) {
+    if (!isEmpty(values)) {
       filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
     filters.changed = true

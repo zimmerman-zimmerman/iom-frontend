@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
+
 import Card from 'antd/es/card';
 import Layout from 'antd/es/layout';
+import {  Row, Col } from 'react-flexbox-grid';
 
 import { Treemap, ResponsiveContainer, Tooltip } from 'recharts';
 import get from 'lodash/get';
@@ -19,7 +19,7 @@ const CustomToolTip = props => {
       <Content>
         <h3>{data.participating_organisation}</h3>
         <h4>{format(".2s")(data.value)}</h4>
-       </Content>
+      </Content>
     </Card> : null;
 };
 
@@ -29,9 +29,9 @@ class DonorsTreeMap extends Component {
     const ColorPlatte = ['#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6', '#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6'];
     return (
       <Row>
-        <Col span={24}>
+        <Col xs={12}>
           <ResponsiveContainer height={360} >
-            <Treemap style={{fontSize: 35}}
+            <Treemap className="tree-map"
                      data={data}
                      dataKey="value"
                      ratio={4/3}
