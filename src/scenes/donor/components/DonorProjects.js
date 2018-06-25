@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Layout from 'antd/es/layout';
+
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
 import Spin from 'antd/es/spin';
@@ -11,8 +11,6 @@ import { format } from "d3-format";
 import injectSheet from 'react-jss';
 
 import * as actions from '../../../services/actions/index';
-
-const { Content } = Layout;
 
 class DonorProjects extends Component {
   constructor(props) {
