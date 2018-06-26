@@ -168,3 +168,9 @@ th.number, td.number {
 tbody > tr > td {
   word-break: normal !important;
 }
+
+/* Prevent to auto zoom on mobile */
+input,
+textarea {
+  font-size: 16px !important;
+}

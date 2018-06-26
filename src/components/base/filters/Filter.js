@@ -29,6 +29,16 @@ class Filter extends BaseFilter {
 
   select(options) {
     const { placeholder, classes } = this.props;
+    if (/Android/i.test(navigator.userAgent)) {
+      return (
+        <Select placeholder={placeholder}
+                className={classes.filter}
+                onChange={(values) => this.handleChange(values)}
+        >
+          {options}
+        </Select>
+      )
+    }
     return (
       <Select showSearch
               placeholder={placeholder}
