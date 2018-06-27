@@ -47,7 +47,6 @@ class TableProjects extends Component {
   render() {
     const { intl, countryActivities } = this.props;
     const data = _.get(countryActivities, 'data.results');
-    console.log(data);
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'}),

@@ -53,7 +53,12 @@ class Country extends BaseFilter {
     return (
       <Spin spinning={country.request || countryDonors.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <BannerCountry data={countryResult} />
+          <Grid fluid>
+            <Row>
+              <Col>
+              </Col>
+            </Row>
+          </Grid>
         </Page>
       </Spin>
     )
