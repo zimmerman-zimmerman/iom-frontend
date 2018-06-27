@@ -24,7 +24,7 @@ class Summary extends Component {
         <h3><strong><FormattedMessage id="countries.summary" defaultMessage="Summary"/></strong></h3>
         <Divider className="Divider"/>
         <Button size="small" type="primary" ghost className={classes.buttonHide} onClick={this.props.onHideSummary}>
-          Hide
+          <FormattedMessage id="countries.summary.hide" defaultMessage="Hide"/>
         </Button>
         <Row>
           <Col xs={12}>

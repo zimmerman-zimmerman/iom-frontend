@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Layout, Table } from 'antd';
-import * as actions from "../../../services/actions/index";
-import { FormattedMessage, injectIntl, intlShape } from "react-intl";
+import Table from 'antd/es/table';
+import { injectIntl, intlShape } from "react-intl";
 import {connect} from "react-redux";
-import _ from "lodash";
-import { format } from "d3-format";
+import get from 'lodash/get';
+import { format } from 'd3-format';
+import { Link } from 'react-router-dom';
 
-const { Content } = Layout;
+import * as actions from "../../../services/actions/index";
 
 class TableProjects extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class TableProjects extends Component {
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
-      item.key = _.get(item, 'id');
+      item.key = get(item, 'id');
       data.push(item);
     });
     return data;
@@ -46,22 +46,23 @@ class TableProjects extends Component {
 
   render() {
     const { intl, countryActivities } = this.props;
-    const data = _.get(countryActivities, 'data.results');
+    const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'}),
       dataIndex: 'participating_organisations[0].narratives[0].text',
-      className: 'Donors',
-      key: 'donors'
+      key: 'donors',
+      width: '20%',
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'}),
       dataIndex: 'title.narratives[0].text',
-      className: 'Title',
-      key: 'title'
+      key: 'title',
+      width: '30%',
+      render: value => <Link to="/">{value}</Link>
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'aggregations.activity.budget_value',
-      className: 'Budget',
+      className: 'number',
       key: 'budget',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     },{
@@ -88,16 +89,10 @@ class TableProjects extends Component {
       key: 'end'
     }];
     return(
-      <Content className="TableProjects">
-        <h3 className="Title">
-          <FormattedMessage id="country.table.projects.title" defaultMessage="Related projects"/>
-        </h3>
-        <Table className="Table"
-               dataSource={data ? this.addKey(data) : null}
-               columns={columns} size="middle"
-               pagination={{hideOnSinglePage: true}}
-        />
-      </Content>
+      <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+             scroll={{ x: 1800 }}
+             loading={countryActivities.request}
+      />
     )
   }
 }

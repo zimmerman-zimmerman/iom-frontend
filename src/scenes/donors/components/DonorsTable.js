@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'antd/es/table';
 import { format } from "d3-format";
-import _ from "lodash";
+import get from 'lodash/get';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ class DonorsTable extends Component {
   addKey(dataSource) {
     let data = [];
     dataSource.results.forEach(function(item) {
-      item.key = _.get(item, 'participating_organisation_ref');
+      item.key = get(item, 'participating_organisation_ref');
       data.push(item);
     });
     return data;

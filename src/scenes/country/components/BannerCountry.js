@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import Layout from 'antd/es/layout';
 import Menu from 'antd/es/menu';
 import Icon from 'antd/es/icon';
 import ReactCountryFlag from "react-country-flag";
@@ -8,15 +7,68 @@ import { format } from "d3-format";
 import { Row, Col } from 'react-flexbox-grid';
 import Trans from '../../../locales/Trans';
 import injectSheet from 'react-jss';
+import get from 'lodash/get';
+import {injectIntl, intlShape} from "react-intl";
 
 const BannerCountry = (props) => {
-  const { data, classes } = props;
+  const { data, classes, key, intl } = props;
+  const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
   const Line = (props) => {
     return (
-      <Row className={props.className}>
+      <Row className={props.className} key={key}>
         <Col xs={12}>
           {props.children}
         </Col>
+      </Row>
+    )
+  };
+  const RightColumn = () => {
+    const lines = [
+      [
+        {line: <Trans id="country.banner.right.total.budget" defaultMessage="Total project budget"/>, className: 'gap'},
+        {line: <span>{usd}{format(',')(data.value)}</span>},
+        {
+          line: <Trans id="country.banner.right.total.incoming" defaultMessage="Total incoming funds"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.incoming_fund)}</span>},
+        {line: <Trans id="country.banner.right.activity.count" defaultMessage="Activity count"/>, className: 'gap'},
+        {line: <span>{format(',')(data.activity_count)}</span>}
+      ],
+      [
+        {
+          line: <Trans id="country.banner.right.total.disbursements" defaultMessage="Total disbursements"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.disbursement)}</span>},
+        {
+          line: <Trans id="country.banner.right.total.expenditure" defaultMessage="Total expenditure"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.expenditure)}</span>},
+        {line: <Trans id="country.banner.right.data.source" defaultMessage="Data source" />, className: 'gap'},
+        {line: <Trans id="country.banner.right.data.source.iati.registry" defaultMessage="IATI Registry" />}
+      ]
+    ];
+    return (
+      <Row>
+        {
+          lines.map((items, index) => {
+            return (
+              <Col xs={12} md={6} lg={6} key={index}>
+                {
+                  items.map((item, key) => {
+                    return (
+                      <Line className={get(item, 'className')} key={key}>
+                        {item.line}
+                      </Line>
+                    )
+                  })
+                }
+            </Col>
+            )
+          })
+        }
       </Row>
     )
   };
@@ -60,51 +112,10 @@ const BannerCountry = (props) => {
         <Col xs={12} md={6} lg={6}  className="right">
           {data ?
             <Fragment>
-              <h2 className="title">
+              <span className="title">
                 <Trans id="country.banner.right.overview" defaultMessage="Financial Overview" />
-              </h2>
-              <Row>
-                <Col xs={12} md={6} lg={6}>
-                  <Line>
-                    <Trans id="country.banner.right.total.budget" defaultMessage="Total project budget" />
-                  </Line>
-                  <Line>
-                      {format(',')(data.value)}
-                  </Line>
-                  <Line className="gap">
-                    <Trans id="country.banner.right.total.incoming" defaultMessage="Total incoming funds" />
-                  </Line>
-                  <Line>
-                      {format(',')(data.incoming_fund)}
-                  </Line>
-                  <Line className="gap">
-                    <Trans id="country.banner.right.activity.count" defaultMessage="Activity count" />
-                  </Line>
-                  <Line>
-                    {format(',')(data.activity_count)}
-                  </Line>
-                </Col>
-                <Col xs={12} md={6} lg={6}>
-                  <Line>
-                    <Trans id="country.banner.right.total.disbursements" defaultMessage="Total disbursements" />
-                  </Line>
-                  <Line>
-                    {format(',')(data.disbursement)}
-                  </Line>
-                  <Line className="gap">
-                    <Trans id="country.banner.right.total.expenditure" defaultMessage="Total expenditure" />
-                  </Line>
-                  <Line>
-                    {format(',')(data.expenditure)}
-                  </Line>
-                  <Line className="gap">
-                    <Trans id="country.banner.right.data.source" defaultMessage="Data source" />
-                  </Line>
-                  <Line>
-                    <Trans id="country.banner.right.data.source.iati.registry" defaultMessage="IATI Registry" />
-                  </Line>
-                </Col>
-              </Row>
+              </span>
+              <RightColumn data={data} />
             </Fragment> : null
           }
         </Col>
@@ -117,6 +128,9 @@ const styles = {
   bannerCountry: {
     '& .left': {
       padding: '20px 65px',
+      '@media (max-width: 767px)': {
+        padding: '20px 35px'
+      },
       backgroundColor: '#efefef',
       '& .country': {
         fontSize: 30,
@@ -139,11 +153,15 @@ const styles = {
     },
     '& .right': {
       padding: '20px 65px',
+      '@media (max-width: 767px)': {
+        padding: '20px 25px'
+      },
       backgroundColor: '#54c8c3',
       color: 'white',
       fontWeight: 600,
       '& .title': {
-        color: 'white'
+        color: 'white',
+        fontSize: 25,
       },
       '& .gap': {
         marginTop: 20,
@@ -152,4 +170,8 @@ const styles = {
   }
 };
 
-export default injectSheet(styles)(BannerCountry);
+BannerCountry.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectSheet(styles)(injectIntl(BannerCountry));

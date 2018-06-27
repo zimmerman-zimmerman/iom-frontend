@@ -30,6 +30,9 @@ class Header extends Component {
       case '/donors/:code':
         urlPath = '/donors';
         break;
+      case '/countries/:code':
+        urlPath = '/countries';
+        break;
       case '/projects/:id':
         urlPath = '/projects';
         break;
