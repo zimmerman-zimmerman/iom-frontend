@@ -36,10 +36,12 @@ class BaseFilter extends Component {
     if (get(filters.values, fieldName)) {
       delete filters.values[fieldName];
     }
+    delete filters.values['page'];
+    filters.values['page'] = 1;
     if (!isEmpty(values)) {
       filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
-    filters.changed = true
+    filters.changed = true;
     this.setState({filters: filters});
   }
 

@@ -11,6 +11,17 @@ import injectSheet from 'react-jss';
 import BaseFilter from "../../../components/filters/BaseFilter";
 
 class ProjectsTable extends BaseFilter {
+  handleChange(value) {
+    const { fieldName, rootComponent } = this.props;
+    const { filters } = rootComponent.state;
+    if (get(filters.values, fieldName)) {
+      delete filters.values[fieldName];
+    }
+    filters.values[fieldName] = value;
+    filters.changed = true;
+    this.setState({filters: filters});
+  }
+
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function (item) {
@@ -18,6 +29,14 @@ class ProjectsTable extends BaseFilter {
       data.push(item);
     });
     return data;
+  }
+
+  getCurrentPage() {
+    const { filters } = this.props.rootComponent.state;
+    if (get(filters.values, 'page')) {
+       return filters.values['page'];
+    }
+    return 1
   }
 
   render() {
@@ -72,7 +91,9 @@ class ProjectsTable extends BaseFilter {
         />
         <Pagination size="small"
                     className={classes.rowGap}
-                    total={count} onChange={(page) => this.handleChange(page)}/>
+                    total={count} onChange={(page) => this.handleChange(page)}
+                    current={this.getCurrentPage()}
+        />
       </Fragment>
     )
   }
