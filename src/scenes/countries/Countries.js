@@ -94,9 +94,11 @@ class Countries extends BaseFilter {
                     </Col>
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
-                        <Summary data={showMap ? get(data, 'results') : null}
-                                 onHideSummary={this.onHideSummary.bind(this)}
-                        />
+                        <div className={classes.boxShadow}>
+                          <Summary data={showMap ? get(data, 'results') : null}
+                                   onHideSummary={this.onHideSummary.bind(this)}
+                          />
+                        </div>
                       </Col> : null
                     }
                   </MediaQuery>
