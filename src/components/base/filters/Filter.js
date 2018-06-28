@@ -78,7 +78,7 @@ const styles = {
   filter: {
     width: '100%',
     '& .ant-select-selection': {
-      height: 44,
+      minHeight: 44,
     },
     '& .ant-select-selection__rendered': {
       marginTop: 6,

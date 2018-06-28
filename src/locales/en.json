@@ -15,6 +15,11 @@
   "filters.count": "Filter(s)",
   "filters.show": "Show filters",
 
+  "summary.title": "Summary",
+  "summary.hide": "Hide",
+  "summary.budget": "Total budget",
+  "summary.projects": "Projects",
+
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",
   "main.menu.detail": "Detail",

@@ -9,7 +9,7 @@ import MediaQuery from 'react-responsive';
 import GeoMap from '../../components/maps/GeoMap';
 import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';
-import Summary from './components/Summary';
+import Summary from '../../components/base/filters/Summary';
 import Filters from "../../components/base/filters/Filters";
 import BaseFilter from '../../components/filters/BaseFilter';
 import Trans from '../../locales/Trans';
@@ -94,9 +94,13 @@ class Countries extends BaseFilter {
                     </Col>
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
-                        <Summary data={showMap ? get(data, 'results') : null}
-                                 onHideSummary={this.onHideSummary.bind(this)}
-                        />
+                        <div className={classes.boxShadow}>
+                          <Summary data={showMap ? get(data, 'results') : null}
+                                   onHideSummary={this.onHideSummary.bind(this)}
+                                   fieldValue="value"
+                                   fieldCount="activity_count"
+                          />
+                        </div>
                       </Col> : null
                     }
                   </MediaQuery>
