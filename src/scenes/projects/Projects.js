@@ -54,6 +54,7 @@ class Projects extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
+    this.setState({showSummary: true});
     if (dispatch) {
       if (params) {
         this.actionRequest(params, null, actions.projectsRequest);
@@ -65,17 +66,30 @@ class Projects extends BaseFilter {
     }
   }
 
+  onHideSummary() {
+    this.setState({showSummary: !this.state.showSummary});
+  }
+
   render() {
     const { projects, countries, classes } = this.props;
+    const { showSummary } = this.state;
     const dataProjects = get(projects, 'data');
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data');
     const showMap = get(dataCountries, 'results[0].recipient_country.code');
-    const showSummary = true;
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='projects.breadcrumb.projects' text='Projects' />},
     ];
+    const ShowSummary = () => {
+      return (
+        <div className={classes.boxShadow}>
+          <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                  tabName="activities"
+          />
+        </div>
+      )
+    };
     return (
       <Spin spinning={projects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
@@ -101,19 +115,16 @@ class Projects extends BaseFilter {
                 </MediaQuery>
                 <MediaQuery minWidth={screenSize.desktop.minWidth}>
                   <Row>
-                    <Col lg={9} className={showSummary ? classes.noPaddingRight : null}>
-                      { showMap ?
-                        <div className={classes.boxShadow}>
-                          <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
-                                  tabName="activities"
-                          />
-                        </div>: null
-                      }
+                    <Col lg={showSummary ? 9 : 12}
+                         className={showSummary ? classes.noPaddingRight : null}
+                    >
+                      {showMap ? showSummary ? <ShowSummary/> : <ShowSummary/> : null}
                     </Col>
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div className={classes.boxShadow}>
                           <Summary data={showMap ? get(dataProjects, 'results') : null}
+                                   onHideSummary={this.onHideSummary.bind(this)}
                                    fieldValue="budgets[0].value.value"
                           />
                         </div>
