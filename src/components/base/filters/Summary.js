@@ -12,13 +12,13 @@ import Trans from '../../../locales/Trans';
 
 class Summary extends Component {
   render() {
-    const { data, fieldValue, onHideSummary, classes } = this.props;
+    const { data, fieldValue, fieldCount, onHideSummary, classes } = this.props;
     let totalBudget = 0;
     let totalActivity = 0;
     if (data) {
       data.forEach(function (item) {
         totalBudget += get(item, fieldValue, 0);
-        totalActivity += 1;
+        totalActivity += get(item, fieldCount, 1);
       });
     }
     const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
@@ -57,6 +57,7 @@ class Summary extends Component {
 Summary.propTypes = {
   data: PropsType.array,
   fieldValue: PropsType.string,
+  fieldCount: PropsType.string,
   onHideSummary: PropsType.func
 };
 
