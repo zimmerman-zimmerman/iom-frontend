@@ -54,6 +54,7 @@
   "countries.summary": "Summary",
   "countries.summary.total": "Total budget",
   "countries.summary.projects": "Projects",
+  "countries.summary.hide": "Hide",
   "countries.table.country": "Country name",
   "countries.table.budget": "Budget",
   "countries.table.count": "Project count",

@@ -1,25 +1,20 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
 import Spin from 'antd/es/spin';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
 import get from 'lodash/get';
 import extend from 'lodash/extend';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import injectSheet from 'react-jss';
+import { connect } from "react-redux";
 
-import MainHeader from '../../components/main/MainHeader';
-import MainFooter from '../../components/main/MainFooter';
-import CountryBreadcrumb from './components/CountryBreadcrumb';
+import Page from '../../components/base/Page';
 import BannerCountry from './components/BannerCountry';
-import './styles/Country.scss';
-import {connect} from "react-redux";
 import BaseFilter from "../../components/filters/BaseFilter";
 import * as actions from "../../services/actions";
 import TableDonors from "./components/TableDonors";
 import CountryMap from "../../components/maps/CountryMap";
 import TableProjects from "./components/TableProjects";
-import ContactInfo from './components/ContactInfo';
-
-const { Header, Content, Footer } = Layout;
+import Trans from '../../locales/Trans';
+import ContactProject from './components/ContactProject';
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -46,41 +41,42 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const pathname = get(this.props, 'location.pathname');
-    const country = get(this.props, 'country.data.results[0]');
+    const { country, countryDonors, countryActivities, classes, project } = this.props;
+    const countryResult = get(this.props, 'country.data.results[0]');
     const donors = get(this.props, 'countryDonors.data.results');
+    const firstProject = get(countryActivities, 'data.results[0]');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
+      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
+    ];
     return (
-      <Spin spinning={false}>
-        <Layout className='Country'>
-          <Header className='Header'>
-            <MainHeader/>
-          </Header>
-          <Content className="Content">
-            <CountryBreadcrumb/>
-          </Content>
-          <Content>
-            <BannerCountry data={country}/>
-          </Content>
-          <Content className="Content" style={{marginBottom: 30}}>
-            <Row>
-              <Col span={12}>
+      <Spin spinning={country.request || countryDonors.request || countryActivities.request || project.request}>
+        <Page breadcrumbItems={breadcrumbItems}>
+          <BannerCountry data={countryResult} />
+          <Grid fluid className={classes.country}>
+            <Row middle="xs" className="gap">
+              <Col xs={12} md={6} lg={6}>
+                <h2 className="title">
+                  <Trans id="country.table.donors.title" defaultMessage="Where the funds come from"/>
+                </h2>
                 <TableDonors data={donors}/>
               </Col>
-              <Col span={12}>
-                <CountryMap data={get(country, 'recipient_country')}/>
+              <Col xs={12} md={6} lg={6}>
+                <CountryMap data={get(countryResult, 'recipient_country')}/>
               </Col>
             </Row>
-          </Content>
-          <Content className="Content">
-            <TableProjects countryCode={ get(this.props, 'match.params.code')}/>
-          </Content>
-          <Content className="Content">
-            <ContactInfo pathname={pathname}/>
-          </Content>
-          <Footer className="MainFooter">
-            <MainFooter/>
-          </Footer>
-        </Layout>
+            <Row>
+              <Col xs={12}>
+                <h2 className="title">
+                  <Trans id="country.table.projects.title" defaultMessage="Related projects"/>
+                </h2>
+                <TableProjects countryCode={ get(this.props, 'match.params.code')}  />
+              </Col>
+            </Row>
+            {firstProject ? <ContactProject id={firstProject.id} /> : null}
+          </Grid>
+        </Page>
       </Spin>
     )
   }
@@ -89,8 +85,24 @@ class Country extends BaseFilter {
 const mapStateToProps = (state, ) => {
   return {
     country: state.country,
-    countryDonors: state.countryDonors
+    countryDonors: state.countryDonors,
+    countryActivities: state.countryActivities,
+    project: state.project
   }
 };
 
-export default connect(mapStateToProps)(Country);
+const styles = {
+  country: {
+    '& .gap': {
+      padding: '20px 0'
+    },
+    '& .no-padding': {
+      padding: 0,
+    },
+    '& .title': {
+      color: '#1f4283'
+    }
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(Country));

@@ -1,158 +1,177 @@
-import React, { Component } from 'react';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
+import React, { Fragment } from 'react';
 import Menu from 'antd/es/menu';
 import Icon from 'antd/es/icon';
 import ReactCountryFlag from "react-country-flag";
-import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom';
 import { format } from "d3-format";
+import { Row, Col } from 'react-flexbox-grid';
+import Trans from '../../../locales/Trans';
+import injectSheet from 'react-jss';
+import get from 'lodash/get';
+import {injectIntl, intlShape} from "react-intl";
 
-const { Content } = Layout;
-
-class BannerCountry extends Component {
-  render() {
-    const { data } = this.props;
+const BannerCountry = (props) => {
+  const { data, classes, key, intl } = props;
+  const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+  const Line = (props) => {
     return (
-      <Layout className="BannerCountry">
-        <Row>
-          <Col span={12} className="Left">
-              { data ?
-                <Content>
-                  <Content className="Name">
-                    <span className="inline-block" style={{fontSize: "30px"}}>
-                    <ReactCountryFlag code={data.recipient_country.code} svg/>
-                    <span style={{margin: '3px 10px', position: 'absolute'}}>{data.recipient_country.name}</span>
-                    </span>
-                  </Content>
-                  <Content>
-                    <Menu className="Menu" selectedKeys={['overview']} mode="horizontal">
-                      <Menu.Item key="overview">
-                        <Icon type="appstore"/>
-                        <FormattedMessage id="country.banner.overview" defaultMessage="Overview"/>
-                      </Menu.Item>
-                      <Menu.Item key="related">
-                        <Icon type="book"/>
-                        <FormattedMessage id="country.banner.related" defaultMessage="Related projects"/>
-                      </Menu.Item>
-                    </Menu>
-                    <Row className="Description">
-                      <Col span={24}>
-                        <FormattedMessage id="country.banner.overview.description" defaultMessage="Description"/>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24} style={{marginTop: 30}}>
-                        <Link to={`/countries/${data.recipient_country.code.toLowerCase()}`}>
-                          https://www.iom.int/countries/{data.recipient_country.code.toLowerCase()}
-                        </Link>
-                      </Col>
-                    </Row>
-                  </Content>
-                </Content> : null
-              }
-          </Col>
-          <Col span={12} className="Right">
-            {data ?
-              <Content>
-                <Row>
-                  <Col span={24}>
-                    <h2>
-                      <FormattedMessage id="country.banner.right.overview" defaultMessage="Financial Overview"/>
-                    </h2>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={12}>
-                    <Row>
-                      <Col span={24}>
-                        <Row>
-                          <Col span={24}>
-                            <FormattedMessage id="country.banner.right.total.budget"
-                                              defaultMessage="Total project budget"/>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col span={24}>
-                            {format(',')(data.value)}
-                          </Col>
-                        </Row>
-                        <Row style={{marginTop: 20}}>
-                          <Col span={24}>
-                            <FormattedMessage id="country.banner.right.total.incoming"
-                                              defaultMessage="Total incoming funds"
-                            />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col span={24}>
-                            {format(',')(data.incoming_fund)}
-                          </Col>
-                        </Row>
-                        <Row style={{marginTop: 20}}>
-                          <Col span={24}>
-                            <FormattedMessage id="country.banner.right.activity.count"
-                                              defaultMessage="Activity count"
-                            />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col span={24}>
-                            {format(',')(data.activity_count)}
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={12}>
-                    <Row>
-                      <Col span={24}>
-                        <FormattedMessage id="country.banner.right.total.disbursements"
-                                          defaultMessage="Total disbursements"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(data.disbursement)}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="country.banner.right.total.expenditure"
-                                          defaultMessage="Total expenditure"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(data.expenditure)}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="country.banner.right.data.source"
-                                          defaultMessage="Data source"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        <FormattedMessage id="country.banner.right.data.source.iati.registry"
-                                          defaultMessage="IATI Registry"
-                        />
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Content> : null
-            }
-          </Col>
-        </Row>
-      </Layout>
+      <Row className={props.className} key={key}>
+        <Col xs={12}>
+          {props.children}
+        </Col>
+      </Row>
     )
-  }
-}
+  };
+  const RightColumn = () => {
+    const lines = [
+      [
+        {line: <Trans id="country.banner.right.total.budget" defaultMessage="Total project budget"/>, className: 'gap'},
+        {line: <span>{usd}{format(',')(data.value)}</span>},
+        {
+          line: <Trans id="country.banner.right.total.incoming" defaultMessage="Total incoming funds"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.incoming_fund)}</span>},
+        {line: <Trans id="country.banner.right.activity.count" defaultMessage="Activity count"/>, className: 'gap'},
+        {line: <span>{format(',')(data.activity_count)}</span>}
+      ],
+      [
+        {
+          line: <Trans id="country.banner.right.total.disbursements" defaultMessage="Total disbursements"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.disbursement)}</span>},
+        {
+          line: <Trans id="country.banner.right.total.expenditure" defaultMessage="Total expenditure"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(data.expenditure)}</span>},
+        {line: <Trans id="country.banner.right.data.source" defaultMessage="Data source" />, className: 'gap'},
+        {line: <Trans id="country.banner.right.data.source.iati.registry" defaultMessage="IATI Registry" />}
+      ]
+    ];
+    return (
+      <Row>
+        {
+          lines.map((items, index) => {
+            return (
+              <Col xs={12} md={6} lg={6} key={index}>
+                {
+                  items.map((item, key) => {
+                    return (
+                      <Line className={get(item, 'className')} key={key}>
+                        {item.line}
+                      </Line>
+                    )
+                  })
+                }
+            </Col>
+            )
+          })
+        }
+      </Row>
+    )
+  };
+  return (
+    <Fragment>
+      <Row className={classes.bannerCountry}>
+        <Col xs={12} md={6} lg={6} className="left">
+          { data ?
+            <Fragment>
+              <span className="country">
+                <ReactCountryFlag code={data.recipient_country.code} svg/>
+                <span className="name">
+                  {data.recipient_country.name}
+                </span>
+              </span>
+              <Menu className="menu" selectedKeys={['overview']} mode="horizontal">
+                <Menu.Item key="overview">
+                  <Icon type="appstore"/>
+                  <Trans id="country.banner.overview" defaultMessage="Overview"/>
+                </Menu.Item>
+                <Menu.Item key="related">
+                  <Icon type="book"/>
+                  <Trans id="country.banner.related" defaultMessage="Related projects"/>
+                </Menu.Item>
+              </Menu>
+              <Row className="description">
+                <Col span={24}>
+                  <Trans id="country.banner.overview.description" defaultMessage="Description"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24} style={{marginTop: 30}}>
+                  <Link to={`/countries/${data.recipient_country.code.toLowerCase()}`}>
+                    https://www.iom.int/countries/{data.recipient_country.code.toLowerCase()}
+                  </Link>
+                </Col>
+              </Row>
+            </Fragment> : null
+          }
+        </Col>
+        <Col xs={12} md={6} lg={6}  className="right">
+          {data ?
+            <Fragment>
+              <span className="title">
+                <Trans id="country.banner.right.overview" defaultMessage="Financial Overview" />
+              </span>
+              <RightColumn data={data} />
+            </Fragment> : null
+          }
+        </Col>
+      </Row>
+    </Fragment>
+  )
+};
 
-export default BannerCountry;
+const styles = {
+  bannerCountry: {
+    '& .left': {
+      padding: '20px 65px',
+      '@media (max-width: 767px)': {
+        padding: '20px 35px'
+      },
+      backgroundColor: '#efefef',
+      '& .country': {
+        fontSize: 30,
+        '& .name': {
+          margin: '3px 10px',
+          position: 'absolute',
+        }
+      },
+      '& .description': {
+        marginTop: 20,
+        color: '#1471ce',
+        fontWeight: 600,
+      },
+      '& .menu li': {
+        color: '#5d5d5d',
+      },
+      '& .menu .ant-menu-item-selected': {
+        color: '#35b6b4'
+      }
+    },
+    '& .right': {
+      padding: '20px 65px',
+      '@media (max-width: 767px)': {
+        padding: '20px 25px'
+      },
+      backgroundColor: '#54c8c3',
+      color: 'white',
+      fontWeight: 600,
+      '& .title': {
+        color: 'white',
+        fontSize: 25,
+      },
+      '& .gap': {
+        marginTop: 20,
+      }
+    }
+  }
+};
+
+BannerCountry.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectSheet(styles)(injectIntl(BannerCountry));

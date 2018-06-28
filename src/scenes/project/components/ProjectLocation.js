@@ -26,7 +26,6 @@ class ProjectLocation extends Component {
   render() {
     const { data, projectLocation } = this.props;
     const country = get(projectLocation, 'data', null);
-    console.log(country);
     return (
       <Layout className="ProjectLocation">
         <Content className="Content">
