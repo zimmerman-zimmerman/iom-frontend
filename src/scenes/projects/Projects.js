@@ -1,28 +1,22 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import extend from 'lodash/extend';
-import { FormattedMessage } from "react-intl";
 import Spin from 'antd/es/spin';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
 import MediaQuery from 'react-responsive';
 
-import MainHeader from '../../components/main/MainHeader';
 import BaseFilter from '../../components/filters/BaseFilter';
 import Filters from '../../components/base/filters/Filters';
 import * as actions from '../../services/actions';
-import ProjectsBreadcrumb from './components/ProjectsBreadcrumb';
 import ProjectsTable from './components/ProjectsTable';
 import GeoMap from '../../components/maps/GeoMap';
-import MainFooter from '../../components/main/MainFooter';
 import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from '../../helpers/screen';
 import Summary from './components/Summary';
 
-const { Header, Content, Footer } = Layout;
 
 class Projects extends BaseFilter {
   constructor(props) {
@@ -125,6 +119,14 @@ class Projects extends BaseFilter {
                     }
                   </Row>
                 </MediaQuery>
+                <Row>
+                  <Col xs={12}>
+                    <ProjectsTable data={existProjects ? dataProjects : null}
+                                   fieldName="page"
+                                   rootComponent={this}
+                    />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Grid>

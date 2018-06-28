@@ -1,17 +1,15 @@
-import React from 'react';
-import get from "lodash/get";
+import React, { Fragment } from 'react';
+import get from 'lodash/get';
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
-import {format} from "d3-format";
-import Layout from 'antd/es/layout';
-import {connect} from "react-redux";
+import { format } from "d3-format";
+import { connect } from "react-redux";
+import injectSheet from 'react-jss';
 
 import '../styles/ProjectsTable.scss';
 import BaseFilter from "../../../components/filters/BaseFilter";
-
-const { Content } = Layout;
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -24,7 +22,7 @@ class ProjectsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data } = this.props;
+    const { intl, data, classes } = this.props;
     const count = get(data, 'count', 0);
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
@@ -65,14 +63,18 @@ class ProjectsTable extends BaseFilter {
       render: recipient_countries => <span>{get(recipient_countries, '[0].country.name')}</span>,
     }];
     return (
-      <Content className="ProjectsTable">
+      <Fragment>
         <Table dataSource={data ? this.addKey(data.results) : null}
                columns={columns}
                size="middle"
                pagination={false}
+               scroll={{ x: 1200 }}
+               className={classes.rowGap}
         />
-        <Pagination className="Pagination" size="small" total={count} onChange={(page) => this.handleChange(page)}/>
-      </Content>
+        <Pagination size="small"
+                    className={classes.rowGap}
+                    total={count} onChange={(page) => this.handleChange(page)}/>
+      </Fragment>
     )
   }
 }
@@ -85,4 +87,10 @@ const mapStateToProps = (state, ) => {
   return {}
 };
 
-export default connect(mapStateToProps)(injectIntl(ProjectsTable));
+const styles = {
+  rowGap: {
+    marginTop: 20
+  },
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ProjectsTable)));
