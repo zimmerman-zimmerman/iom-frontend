@@ -34,9 +34,7 @@ class Project extends Component {
       <Spin spinning={project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <ProjectBanner data={data} />
-          <Grid fluid>
-            <ProjectLocation data={data} />
-          </Grid>
+          <ProjectLocation data={data} />
         </Page>
       </Spin>
     )

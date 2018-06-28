@@ -74,7 +74,7 @@ const ProjectBanner= (props) => {
   return (
     <Row className={classes.projectBanner}>
       <Col xs={12} md={6} lg={6} className="left">
-        <h2 className='Title'>{get(data, 'title.narratives[0].text', 'Title')}</h2>
+        <span className="title">{get(data, 'title.narratives[0].text', 'Title')}</span>
         <Menu className="menu" selectedKeys={['overview']} mode="horizontal">
           <Menu.Item key="overview">
             <Icon type="appstore"/>
@@ -105,12 +105,8 @@ const styles = {
         padding: '20px 35px'
       },
       backgroundColor: '#efefef',
-      '& .country': {
-        fontSize: 30,
-        '& .name': {
-          margin: '3px 10px',
-          position: 'absolute',
-        }
+      '& .title': {
+        fontSize: 25,
       },
       '& .description': {
         marginTop: 20,
