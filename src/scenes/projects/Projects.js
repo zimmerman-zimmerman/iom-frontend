@@ -15,7 +15,7 @@ import GeoMap from '../../components/maps/GeoMap';
 import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from '../../helpers/screen';
-import Summary from './components/Summary';
+import Summary from '../../components/base/filters/Summary';
 
 
 class Projects extends BaseFilter {
@@ -89,7 +89,7 @@ class Projects extends BaseFilter {
                 />
               </Col>
               <Col xs={12} md={8} lg={9} className={classes.map}>
-                <h2 className={classes.rowGap}><Trans id="projects.title" defaultMessage="IOM Projects overview" /></h2>
+                <h2 className={classes.title}><Trans id="projects.title" defaultMessage="IOM Projects overview" /></h2>
                 <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                   <div className={classes.boxShadow}>
                     { showMap ?
@@ -113,7 +113,9 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div className={classes.boxShadow}>
-                          <Summary data={showMap ? get(dataProjects, 'results') : null} />
+                          <Summary data={showMap ? get(dataProjects, 'results') : null}
+                                   fieldValue="budgets[0].value.value"
+                          />
                         </div>
                       </Col> : null
                     }
@@ -150,8 +152,8 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
-  rowGap: {
-    marginTop: 10
+  title: {
+    marginTop: 12
   },
   map: {
     '& .leaflet-control-attribution.leaflet-control': {

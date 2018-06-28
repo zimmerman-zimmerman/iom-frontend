@@ -8,7 +8,6 @@ import { format } from "d3-format";
 import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 
-import '../styles/ProjectsTable.scss';
 import BaseFilter from "../../../components/filters/BaseFilter";
 
 class ProjectsTable extends BaseFilter {
