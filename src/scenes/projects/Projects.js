@@ -25,7 +25,7 @@ class Projects extends BaseFilter {
       params: {
         fields: 'id,iati_identifier,title,activity_dates,budgets,recipient_countries,sectors',
         order_by: '-id',
-        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
+        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
       },
       update: false,
       filters: {values: {}, changed: false},
@@ -39,7 +39,6 @@ class Projects extends BaseFilter {
       group_by: '',
       order_by: '-value',
       convert_to: 'usd',
-      hierarchy: 1,
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
     this.actionRequest(extend({}, params, filters.values), 'recipient_country', actions.countriesRequest);
@@ -96,7 +95,7 @@ class Projects extends BaseFilter {
           <Grid fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
-                <Filters rootComponent={this} countResults={get(dataProjects, 'results.length', 0)}
+                <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}
                          pluralMessage={<Trans id="projects.filters.projects" defaultMessage="Projects" />}
                          singularMessage={<Trans id="projects.filters.project" defaultMessage="Project" />}
 
@@ -123,9 +122,10 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div className={classes.boxShadow}>
-                          <Summary data={showMap ? get(dataProjects, 'results') : null}
+                          <Summary data={showMap ? get(dataCountries, 'results') : null}
                                    onHideSummary={this.onHideSummary.bind(this)}
-                                   fieldValue="budgets[0].value.value"
+                                   fieldValue="value"
+                                   fieldCount="activity_count"
                           />
                         </div>
                       </Col> : null
