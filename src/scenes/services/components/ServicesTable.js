@@ -34,13 +34,13 @@ class ServicesTable extends Component {
       title: intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
-      className: 'Money',
+      className: 'number',
       render: value => <span>{usd}{format(',')(value)}</span>,
     }, {
       title: intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'}),
       dataIndex: 'activity_count',
       key: 'activity_count',
-      className: 'Money',
+      className: 'number',
     }];
     return (
       <Content className="ServiceTable">
