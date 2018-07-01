@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 import get from 'lodash/get';
 import Menu from 'antd/es/menu';

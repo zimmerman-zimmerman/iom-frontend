@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import Spin from 'antd/es/spin';
 import get from 'lodash/get';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import * as actions from "../../services/actions/index";
 import './styles/Project.scss';
@@ -23,7 +22,7 @@ class Project extends Component {
   }
 
   render() {
-    const { project } = this.props;
+    const { project, projectLocation } = this.props;
     const data = get(this.props.project, 'data', null);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -31,7 +30,7 @@ class Project extends Component {
       {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
     ];
     return(
-      <Spin spinning={project.request}>
+      <Spin spinning={project.request || projectLocation.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <ProjectBanner data={data} />
           <ProjectLocation data={data} />
@@ -44,6 +43,7 @@ class Project extends Component {
 const mapStateToProps = (state, ) => {
   return {
     project: state.project,
+    projectLocation: state.projectLocation
   }
 };
 
