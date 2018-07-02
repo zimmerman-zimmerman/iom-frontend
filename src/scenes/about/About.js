@@ -1,27 +1,20 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
 
-import MainHeader from '../../components/main/MainHeader';
-import MainFooter from '../../components/main/MainFooter';
-import AboutBreadcrumb from './components/AboutBreadcrumb';
+import Page from '../../components/base/Page';
+import Trans from '../../locales/Trans';
+
 import AboutContent from './components/AboutContent';
 
-const { Header, Content, Footer } = Layout;
-
 const About = () => {
+
+  const breadcrumbItems = [
+    {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+    {url: null, text: <Trans id='main.menu.about' text='About' />},
+  ];
   return (
-    <Layout className='About'>
-      <Header className="Header">
-        <MainHeader/>
-      </Header>
-      <Content className="Content">
-        <AboutBreadcrumb/>
-      </Content>
+    <Page breadcrumbItems={breadcrumbItems}>
       <AboutContent/>
-      <Footer className="MainFooter">
-        <MainFooter/>
-      </Footer>
-    </Layout>
+    </Page>
   );
 };
 
