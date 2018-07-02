@@ -4,7 +4,6 @@ import Spin from 'antd/es/spin';
 import get from 'lodash/get';
 
 import * as actions from "../../services/actions/index";
-import './styles/Project.scss';
 import ProjectBanner from "./components/ProjectBanner";
 import ProjectLocation from "./components/ProjectLocation";
 import Page from '../../components/base/Page';

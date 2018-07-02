@@ -8,7 +8,6 @@ import injectSheet from 'react-jss';
 
 import Trans from '../../../locales/Trans';
 
-
 const ProjectBanner= (props) => {
   const { data, classes, key } = props;
   const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
