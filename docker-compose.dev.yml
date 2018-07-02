@@ -1,0 +1,24 @@
+version: "3"
+services:
+    # See: http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
+    iom-client:
+      image: iomfrontend_app
+      #extends:
+      #  file: docker-compose.yml
+      #  service: client
+      command: ["npm", "run", "start"]
+      volumes:
+        - .:/app/src
+        # hack for node_modules to exist inside src dir
+        - /app/src/node_modules
+      ports:
+      #  - "2000:2000"  # Server port
+        - "3000:3000"  # Webpack dev server
+    #define as service OIPA
+
+    #redis:
+    #  image: redis:3.2.11
+    #  ports:
+    #    - "6379:6379"
+    #  volumes:
+    #    - ./.data/redis:/data
