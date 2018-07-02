@@ -3,6 +3,7 @@ import ReactCountryFlag from "react-country-flag";
 import get from 'lodash/get';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
 
 import * as actions from '../../../services/actions';
 import Trans from '../../../locales/Trans';
@@ -31,7 +32,7 @@ class ProjectLocation extends Component {
   }
 
   render() {
-    const { data, projectLocation } = this.props;
+    const { data, projectLocation, classes } = this.props;
     const country = get(projectLocation, 'data', null);
     const GroupFields = (props) => {
       const { fields } = props;
@@ -72,9 +73,9 @@ class ProjectLocation extends Component {
         title: {id: "project.location.title", defaultMessage: "Project Location"},
         rows: [
           {
-            value: <Col xs={12}>
+            value: <Col xs={12} className="flag-country">
               <ReactCountryFlag code={get(data, 'recipient_countries[0].country.code','')} svg />
-              <span className="title">{get(data, 'recipient_countries[0].country.name','')}</span>
+              <span className="country-name">{get(data, 'recipient_countries[0].country.name','')}</span>
             </Col>
           },
           {
@@ -122,8 +123,8 @@ class ProjectLocation extends Component {
       }
     ];
     return (
-      <Grid fluid>
-        <Row>
+      <Grid fluid className={classes.projectLocation}>
+        <Row middle="xs">
           <Col xs={12} md={6}>
             <GroupFields fields={fields} />
           </Col>
@@ -142,4 +143,30 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-export default connect(mapStateToProps)(ProjectLocation);
+const styles = {
+  projectLocation: {
+    margin: '25px 0',
+    '& .title': {
+      marginTop: 10,
+      paddingBottom: 10,
+      fontSize: 25,
+    },
+    '& .flag-country': {
+      fontSize: 25,
+      marginBottom: 10,
+    },
+    '& .country-name': {
+      marginLeft: 10,
+      marginTop: 2,
+      position: 'absolute',
+    },
+    '& .name': {
+      fontWeight: 'bolder',
+    },
+    '& .value': {
+      marginLeft: 5,
+    }
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(ProjectLocation));
