@@ -8,7 +8,6 @@ import Icon from 'antd/es/icon';
 
 import Trans from '../../../locales/Trans';
 
-
 class ServiceBanner extends Component {
   render() {
     const { data, classes } = this.props;

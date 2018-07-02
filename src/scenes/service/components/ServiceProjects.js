@@ -1,16 +1,11 @@
 import React  from 'react';
-import Layout from 'antd/es/layout';
-import Spin from 'antd/es/spin';
-
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import * as actions from '../../../services/actions';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 
 import BaseFilter from '../../../components/filters/BaseFilter';
 import ProjectsTable from '../components/ProjectsTable';
-
-const { Content } = Layout;
 
 class ServiceProjects extends BaseFilter {
   constructor(props) {
@@ -43,16 +38,8 @@ class ServiceProjects extends BaseFilter {
   }
 
   render() {
-    const { serviceProjects } = this.props;
-    return(
-      <Spin spinning={serviceProjects.request}>
-        <Content className="Content">
-          <h3 className="Title">
-            <FormattedMessage id="service.projects.title" defaultMessage="Where the funds go"/>
-          </h3>
-          <ProjectsTable data={get(this.props.serviceProjects, 'data')} fieldName="page" rootComponent={this}/>
-        </Content>
-      </Spin>
+    return (
+      <ProjectsTable data={get(this.props.serviceProjects, 'data')} fieldName="page" rootComponent={this}/>
     )
   }
 }
