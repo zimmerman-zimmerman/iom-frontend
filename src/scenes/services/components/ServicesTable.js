@@ -4,10 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Table from 'antd/es/table';
-import Layout from 'antd/es/layout';
 import { format } from "d3-format";
-
-const { Content } = Layout;
 
 class ServicesTable extends Component {
   addKey(dataSource) {
@@ -31,6 +28,10 @@ class ServicesTable extends Component {
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     }, {
+      title: intl.formatMessage({id: 'services.table.header.code', defaultMessage: 'Code'}),
+      dataIndex: 'sector.code',
+      key: 'code',
+    }, {
       title: intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'value',
       key: 'value',
@@ -43,13 +44,9 @@ class ServicesTable extends Component {
       className: 'number',
     }];
     return (
-      <Content className="ServiceTable">
-        <Table dataSource={this.addKey(data)}
-               columns={columns}
-               size="middle"
-               pagination={false}
-        />
-      </Content>
+      <Table dataSource={this.addKey(data)} columns={columns} size="middle"
+                   pagination={false} scroll={{ x: 900 }}
+      />
     )
   }
 }
