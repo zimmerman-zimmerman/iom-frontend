@@ -8,7 +8,7 @@ import { format } from "d3-format";
 import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 
-import BaseFilter from "../../../components/filters/BaseFilter";
+import BaseFilter from "../../../components/base/filters/BaseFilter";
 
 class ProjectsTable extends BaseFilter {
   handleChange(value) {

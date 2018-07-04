@@ -3,7 +3,7 @@ import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
 import { format } from "d3-format";
 import get from "lodash/get";
-import BaseFilter from "../../../components/filters/BaseFilter";
+import BaseFilter from "../../../components/base/filters/BaseFilter";
 import {connect} from "react-redux";
 import {injectIntl, intlShape} from "react-intl";
 import injectSheet from 'react-jss';
@@ -52,12 +52,12 @@ class ProjectsTable extends BaseFilter {
         <Table dataSource={data ? this.addKey(data.results) : null}
                columns={columns}
                pagination={false}
+               scroll={{ x: 650 }}
         />
         <Pagination className="pagination"
                     size="small"
                     total={get(data, 'count', 0)}
                     onChange={(page) => this.handleChange(page)}
-                    scroll={{ x: 900 }}
         />
       </div>
     )

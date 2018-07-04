@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import PropsType from 'prop-types';
 
-import BaseFilter from "../../filters/BaseFilter";
+import BaseFilter from "./BaseFilter";
 
 const Option = Select.Option;
 const { Content } = Layout;

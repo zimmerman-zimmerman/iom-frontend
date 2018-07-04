@@ -8,7 +8,7 @@ import { FormattedMessage } from "react-intl";
 import Page from '../../components/base/Page';
 import Filters from '../../components/base/filters/Filters';
 import Trans from '../../locales/Trans';
-import BaseFilter from '../../components/filters/BaseFilter';
+import BaseFilter from '../../components/base/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';

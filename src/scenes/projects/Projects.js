@@ -7,7 +7,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
 import MediaQuery from 'react-responsive';
 
-import BaseFilter from '../../components/filters/BaseFilter';
+import BaseFilter from '../../components/base/filters/BaseFilter';
 import Filters from '../../components/base/filters/Filters';
 import * as actions from '../../services/actions';
 import ProjectsTable from './components/ProjectsTable';

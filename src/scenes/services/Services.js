@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import BaseFilter from '../../components/filters/BaseFilter';
+import BaseFilter from '../../components/base/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';

@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
 
 import Page from '../../components/base/Page';
-import BaseFilter from '../../components/filters/BaseFilter';
+import BaseFilter from '../../components/base/filters/BaseFilter';
 import _ from "lodash";
 import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";

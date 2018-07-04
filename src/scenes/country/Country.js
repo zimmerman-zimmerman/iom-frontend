@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 import Page from '../../components/base/Page';
 import BannerCountry from './components/BannerCountry';
-import BaseFilter from "../../components/filters/BaseFilter";
+import BaseFilter from "../../components/base/filters/BaseFilter";
 import * as actions from "../../services/actions";
 import TableDonors from "./components/TableDonors";
 import CountryMap from "../../components/maps/CountryMap";

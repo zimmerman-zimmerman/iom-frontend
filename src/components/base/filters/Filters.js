@@ -10,7 +10,7 @@ import MediaQuery from 'react-responsive';
 import Collapse from 'antd/es/collapse';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 
-import SearchFilter from '../SearchFilter';
+import SearchFilter from './SearchFilter';
 import AccordionFilter from './AccordionFilter';
 import Filter from './Filter';
 import StartEndDateFilter from './StartEndDateFilter';
