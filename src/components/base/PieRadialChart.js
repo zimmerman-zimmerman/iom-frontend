@@ -20,7 +20,7 @@ const PieRadialChart = (props) => {
       <PieChart>
         <Pie
           data={data}
-          outerRadius={innerRadius + 45}
+          outerRadius={innerRadius + 35}
           innerRadius={innerRadius}
           fill={style.fillColor}
           dataKey="value"

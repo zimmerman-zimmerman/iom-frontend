@@ -116,7 +116,13 @@ const styles = {
   },
   logo: {
     padding: '5px 0',
-    height: 48,
+    height: 70,
+    '@media (max-width: 1277px)': {
+      height: 55,
+    },
+    '@media (max-width: 991px)': {
+      height: 50
+    },
   },
   triggerMenu: {
     color: 'white',

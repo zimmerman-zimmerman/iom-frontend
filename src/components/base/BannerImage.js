@@ -12,9 +12,9 @@ const BannerImage = (props) => {
           <Row>
             <Col xs={9} md={6} lg={6}>
               <Card className={classes.card}>
-                <h1 className={classes.title}>{title}</h1>
-                <h2 className={classes.description}>{description}</h2>
-                {size === 'lg' ? <h3>{detail}</h3> : null}
+                <span className={classes.title}>{title}</span><br />
+                <span className={classes.description}>{description}</span><br /><br />
+                <span className={classes.detail}>{detail}</span>
               </Card>
             </Col>
           </Row>
@@ -36,19 +36,16 @@ const styles = {
     background: 'rgba(0, 51, 161, .7)',
     border: 'none',
     color: 'white',
-    '& h1, h2, h3, h4': {
-      color: 'white',
-    }
   },
-  '@media only screen and (max-width: 767px)': {
-    title: {
-      fontSize: 18,
-    },
-    description: {
-      fontSize: 15,
-    }
+  title: {
+    fontSize: 'calc(1em + 1vw)',
+  },
+  description: {
+    fontSize: 'calc(0.5em + 1vw)',
+  },
+  detail: {
+    fontSize: 'calc(0.25em + 1vw)',
   }
-
 };
 
 export default injectSheet(styles)(BannerImage);

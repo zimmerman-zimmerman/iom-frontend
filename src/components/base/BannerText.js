@@ -6,9 +6,9 @@ const BannerText = (props) => {
   const {classes, text} = props;
   return (
     <Grid fluid className={classes.bannerText}>
-      <Row center="xs" className={classes.content}>
-        <Col xs={10} md={8} lg={8}>
-          <h2>{text}</h2>
+      <Row center="xs"  middle="xs">
+        <Col xs={12} md={10} lg={10} className="content">
+          <span className="title">{text}</span>
         </Col>
       </Row>
     </Grid>
@@ -18,9 +18,13 @@ const BannerText = (props) => {
 const styles = {
   bannerText: {
     backgroundColor: '#ececec',
-    '& h2': {
-      paddingTop: 15,
+    '& .content': {
+      fontSize: 'calc(1em + 1vw)',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      letterSpacing: 'normal',
       color: '#0033a1',
+      padding: 'calc(1em + 1vw) 0',
     }
   }
 };
