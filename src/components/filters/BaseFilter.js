@@ -39,7 +39,8 @@ class BaseFilter extends Component {
     if (!isEmpty(values)) {
       filters.values[fieldName] = Array.isArray(values) ? values.join() : values;
     }
-    filters.changed = true
+    filters.values['page'] = 1;
+    filters.changed = true;
     this.setState({filters: filters});
   }
 

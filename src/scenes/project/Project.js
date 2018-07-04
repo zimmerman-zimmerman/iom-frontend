@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import Layout from 'antd/es/layout';
 import Spin from 'antd/es/spin';
 import get from 'lodash/get';
 
-import MainHeader from '../../components/main/MainHeader';
-import MainFooter from '../../components/main/MainFooter';
 import * as actions from "../../services/actions/index";
-import ProjectBreadcrumb from "./components/ProjectBreadcrumb";
-import './styles/Project.scss';
 import ProjectBanner from "./components/ProjectBanner";
 import ProjectLocation from "./components/ProjectLocation";
-
-const { Header, Content, Footer } = Layout;
+import Page from '../../components/base/Page';
+import Trans from '../../locales/Trans';
 
 class Project extends Component {
   componentDidMount() {
@@ -26,26 +21,19 @@ class Project extends Component {
   }
 
   render() {
-    const { project } = this.props;
+    const { project, projectLocation } = this.props;
     const data = get(this.props.project, 'data', null);
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: '/countries', text: <Trans id='main.menu.projects' text='Projects' />},
+      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
+    ];
     return(
-      <Spin spinning={project.request}>
-        <Layout className='Project'>
-          <Header className='Header'>
-            <MainHeader/>
-          </Header>
-          <Content className="Content">
-            <ProjectBreadcrumb/>
-          </Content>
-          {project.success ?
-            <Layout>
-              <ProjectBanner data={data}/>
-              <ProjectLocation data={data}/>
-              <Footer className="MainFooter">
-                <MainFooter/>
-              </Footer>
-            </Layout> : null}
-        </Layout>
+      <Spin spinning={project.request || projectLocation.request}>
+        <Page breadcrumbItems={breadcrumbItems}>
+          <ProjectBanner data={data} />
+          <ProjectLocation data={data} />
+        </Page>
       </Spin>
     )
   }
@@ -54,6 +42,7 @@ class Project extends Component {
 const mapStateToProps = (state, ) => {
   return {
     project: state.project,
+    projectLocation: state.projectLocation
   }
 };
 

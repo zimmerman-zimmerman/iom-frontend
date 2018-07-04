@@ -1,5 +1,4 @@
-import React  from 'react';
-import Layout from 'antd/es/layout';
+import React from 'react';
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
 import { format } from "d3-format";
@@ -7,8 +6,9 @@ import get from "lodash/get";
 import BaseFilter from "../../../components/filters/BaseFilter";
 import {connect} from "react-redux";
 import {injectIntl, intlShape} from "react-intl";
+import injectSheet from 'react-jss';
 
-const { Content } = Layout;
+import Trans from '../../../locales/Trans';
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -21,7 +21,7 @@ class ProjectsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data } = this.props;
+    const { intl, data, classes } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
@@ -33,7 +33,7 @@ class ProjectsTable extends BaseFilter {
       title: intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'}),
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
-      className: 'columnMoney',
+      className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     }, {
       title: intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'}),
@@ -45,17 +45,21 @@ class ProjectsTable extends BaseFilter {
         </span>
     }];
     return(
-      <Content>
+      <div className={classes.projectsTable}>
+        <h2 className="title">
+          <Trans id="service.projects.title" defaultMessage="Where the funds go"/>
+        </h2>
         <Table dataSource={data ? this.addKey(data.results) : null}
                columns={columns}
                pagination={false}
         />
-        <Pagination className="Pagination"
+        <Pagination className="pagination"
                     size="small"
                     total={get(data, 'count', 0)}
                     onChange={(page) => this.handleChange(page)}
+                    scroll={{ x: 900 }}
         />
-      </Content>
+      </div>
     )
   }
 }
@@ -68,4 +72,16 @@ const mapStateToProps = (state, ) => {
   return {}
 };
 
-export default connect(mapStateToProps)(injectIntl(ProjectsTable));
+const styles = {
+  projectsTable: {
+    paddingTop: 20,
+    '& .title': {
+      color: '#0033a1',
+    },
+    '& .pagination': {
+      padding: '20px 0',
+    }
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ProjectsTable)));

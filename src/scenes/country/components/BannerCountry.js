@@ -5,10 +5,11 @@ import ReactCountryFlag from "react-country-flag";
 import { Link } from 'react-router-dom';
 import { format } from "d3-format";
 import { Row, Col } from 'react-flexbox-grid';
-import Trans from '../../../locales/Trans';
 import injectSheet from 'react-jss';
 import get from 'lodash/get';
 import {injectIntl, intlShape} from "react-intl";
+
+import Trans from '../../../locales/Trans';
 
 const BannerCountry = (props) => {
   const { data, classes, key, intl } = props;
@@ -113,7 +114,7 @@ const BannerCountry = (props) => {
           {data ?
             <Fragment>
               <span className="title">
-                <Trans id="country.banner.right.overview" defaultMessage="Financial Overview" />
+                <Trans id="project.banner.right.title" defaultMessage="Financial overview"/>
               </span>
               <RightColumn data={data} />
             </Fragment> : null

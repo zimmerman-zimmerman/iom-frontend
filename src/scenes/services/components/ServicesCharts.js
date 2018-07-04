@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { FormattedMessage } from "react-intl";
-
 import { format } from "d3-format";
 import get from "lodash/get";
 import Layout from 'antd/es/layout';
 import Card from 'antd/es/card';
+
+import Trans from '../../../locales/Trans';
 
 const CustomToolTip = props => {
   const { Content } = Layout;
@@ -14,7 +14,7 @@ const CustomToolTip = props => {
     <Card>
       <Content>
         <h5>
-          <FormattedMessage id="currency.usd" defaultMessage="USD"/> {format(",.2f")(data.value)}
+          <Trans id="currency.usd" defaultMessage="USD"/> {format(",.2f")(data.value)}
         </h5>
       </Content>
     </Card> : null;
@@ -29,7 +29,7 @@ class ServicesCharts extends Component {
           <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="sector.name"/>
+            <XAxis dataKey="sector.code" />
             <YAxis/>
             <Tooltip content={<CustomToolTip/>}/>
             <Legend />

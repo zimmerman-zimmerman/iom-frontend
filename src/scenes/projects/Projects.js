@@ -78,7 +78,7 @@ class Projects extends BaseFilter {
     const showMap = get(dataCountries, 'results[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: null, text: <Trans id='projects.breadcrumb.projects' text='Projects' />},
+      {url: null, text: <Trans id='main.menu.projects' text='Projects' />},
     ];
     const ShowSummary = () => {
       return (

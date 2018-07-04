@@ -1,15 +1,13 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
 import Table from 'antd/es/table';
 import Icon from 'antd/es/icon';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import aboutOMG from '../../../assets/images/AboutIOM.jpg';
+import injectSheet from "react-jss";
 
-const { Content } = Layout;
-
-const AboutContent = () => {
+const AboutContent = (props) => {
+  const { classes } = props;
   const columns = [{
     title: 'Document',
     dataIndex: 'document',
@@ -41,11 +39,10 @@ const AboutContent = () => {
     link: 'link',
   }];
   return (
-    <Layout>
-      <Content className="Content Top">
-        <Row>
-          <Col span={12} offset={6}>
-            <h2 className="Title">About IOM Transparency portal</h2>
+    <Grid fluid className={classes.aboutContent}>
+        <Row center="xs">
+          <Col xs={12} md={8} lg={8}>
+            <h2 className="title">About IOM Transparency portal</h2>
             <p>
               <strong>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -78,17 +75,13 @@ const AboutContent = () => {
             </p>
           </Col>
         </Row>
-      </Content>
-      <Content className="Content">
-        <Row>
-          <Col span={12} offset={6}>
+        <Row center="xs">
+          <Col xs={12} md={8} lg={8}>
             <img src={aboutOMG} width="100%" alt="IOM"/>
           </Col>
         </Row>
-      </Content>
-      <Content className="Content Top">
-        <Row>
-          <Col span={12} offset={6}>
+        <Row center="xs">
+          <Col xs={12} md={8} lg={8}>
             <p>
               Ut placerat magna id diam hendrerit, a scelerisque massa rutrum.
               Pellentesque aliquet erat ut placerat tempor. Nulla quis leo consectetur, venenatis neque et,
@@ -110,16 +103,30 @@ const AboutContent = () => {
             </p>
           </Col>
         </Row>
-      </Content>
-      <Content className="Content Top">
-        <Row>
-          <Col span={12} offset={6}>
+        <Row center="xs" className="document-table">
+          <Col xs={12} md={8} lg={8}>
             <Table columns={columns} dataSource={data} pagination={false}/>
           </Col>
         </Row>
-      </Content>
-    </Layout>
+    </Grid>
   )
 };
 
-export default AboutContent;
+const styles = {
+  aboutContent: {
+    '& .title': {
+      marginTop: 20,
+    },
+    '& p, & h2': {
+      textAlign: 'left',
+    },
+    '& p': {
+      padding: '8px 0',
+    },
+    '& .document-table': {
+      marginBottom: 30,
+    }
+  }
+};
+
+export default injectSheet(styles)(AboutContent);

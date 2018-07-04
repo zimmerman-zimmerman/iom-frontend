@@ -133,6 +133,7 @@
   "services.title": "Our services",
   "services.descriptions": "Introduction to what is IOM services.",
   "services.table.header.service": "Service Area",
+  "services.table.header.code": "Code",
   "services.table.header.budget": "Budget",
   "services.table.header.projects": "Implementation projects",
 

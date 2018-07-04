@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from 'antd/es/layout';
 import Table from 'antd/es/table';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import BaseFilter from '../../../components/filters/BaseFilter';
@@ -8,8 +7,7 @@ import extend from 'lodash/extend';
 import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
-
-const { Content } = Layout;
+import injectSheet from "react-jss";
 
 class ServiceDonors extends BaseFilter {
   addKey(dataSource) {
@@ -34,14 +32,14 @@ class ServiceDonors extends BaseFilter {
   }
 
   render() {
-    const { intl, serviceDonors } = this.props;
+    const { intl, serviceDonors, classes } = this.props;
     const data = get(serviceDonors, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
-      width: '60%',
+      width: '50%',
       render: name => <span>{name}</span>
     }, {
       title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
@@ -51,17 +49,16 @@ class ServiceDonors extends BaseFilter {
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     }];
     return(
-      <Content className="Content">
-        <h3 className="Title">
+      <div className={classes.serviceDonors}>
+        <h2 className="title">
           <FormattedMessage id="service.donors.title" defaultMessage="Where the funds come from"/>
-        </h3>
+        </h2>
         <Table dataSource={data ? this.addKey(data) : null}
                columns={columns}
                size="middle"
                loading={serviceDonors.request}
-               pagination={{hideOnSinglePage: true}}
         />
-      </Content>
+      </div>
     )
   }
 }
@@ -76,4 +73,13 @@ const mapStateToProps = (state, ) => {
   }
 };
 
-export default connect(mapStateToProps)(injectIntl(ServiceDonors));
+const styles = {
+  serviceDonors: {
+    paddingTop: 20,
+    '& .title': {
+      color: '#0033a1',
+    }
+  }
+};
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ServiceDonors)));

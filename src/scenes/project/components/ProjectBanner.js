@@ -1,144 +1,142 @@
-import React, { Component } from 'react';
-import Layout from 'antd/es/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
+import React from 'react';
+import { Row, Col } from 'react-flexbox-grid';
 import get from 'lodash/get';
 import Menu from 'antd/es/menu';
 import Icon from 'antd/es/icon';
-import { FormattedMessage } from "react-intl";
-import {format} from "d3-format";
+import { format } from "d3-format";
+import injectSheet from 'react-jss';
 
-const { Content } = Layout;
+import Trans from '../../../locales/Trans';
 
-class ProjectBanner extends Component {
-  render() {
-    const { data } = this.props;
+const ProjectBanner= (props) => {
+  const { data, classes, key } = props;
+  const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
+  const Line = (props) => {
     return (
-      <Layout className="Banner">
-        <Row>
-          <Col span={12} className="Left">
-            { data ?
-              <Content>
-                <Content>
-                  <h2 className='Title'>{get(data, 'title.narratives[0].text', 'Title')}</h2>
-                </Content>
-                <Content>
-                  <Menu className="Menu" selectedKeys={['overview']} mode="horizontal">
-                    <Menu.Item key="overview">
-                      <Icon type="appstore"/>
-                      <FormattedMessage id="project.banner.left.menu.overview" defaultMessage="Overview"/>
-                    </Menu.Item>
-                    <Menu.Item key="related">
-                      <Icon type="book"/>
-                      <FormattedMessage id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
-                    </Menu.Item>
-                  </Menu>
-                  <Row className="Description">
-                    <Col span={24}>
-                      {get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}
-                    </Col>
-                  </Row>
-                </Content>
-              </Content> : null
-            }
-          </Col>
-          <Col span={12} className="Right">
-            <Row>
-              <Col span={24}>
-                <h2 className='Title'>
-                  <FormattedMessage id="project.banner.right.title" defaultMessage="Financial overview"/>
-                </h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <Row>
-                  <Col span={24}>
-                    <Row>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.budget"
-                                          defaultMessage="Total activity budget"/>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(get(data, 'aggregations.activity.budget_value', 0))}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.incoming"
-                                          defaultMessage="Total incoming funds"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.start"
-                                          defaultMessage="Start date"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {get(data, 'activity_dates[1].iso_date', '-')}
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={12}>
-                <Row>
-                  <Col span={24}>
-                    <Row>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.disbursement"
-                                          defaultMessage="Total Disbursements to Implementing"/>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.expenditures"
-                                          defaultMessage="Total Expenditures by IOM"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}
-                      </Col>
-                    </Row>
-                    <Row style={{marginTop: 20}}>
-                      <Col span={24}>
-                        <FormattedMessage id="project.banner.right.end"
-                                          defaultMessage="End date"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={24}>
-                        {get(data, 'activity_dates[2].iso_date', '-')}
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Layout>
+      <Row className={props.className} key={key}>
+        <Col xs={12}>
+          {props.children}
+        </Col>
+      </Row>
     )
-  }
-}
+  };
+  const RightColumn = () => {
+    const lines = [
+      [
+        {line: <Trans id="project.banner.right.budget" defaultMessage="Total activity budget"/>, className: 'gap'},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>},
+        {
+          line: <Trans id="project.banner.right.incoming" defaultMessage="Total incoming funds"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>},
+        {line: <Trans id="project.banner.right.start" defaultMessage="Start date"/>, className: 'gap'},
+        {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>}
+      ],
+      [
+        {
+          line: <Trans id="project.banner.right.disbursement" defaultMessage="Total disbursements"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>},
+        {
+          line: <Trans id="project.banner.right.expenditures" defaultMessage="Total expenditure"/>,
+          className: 'gap'
+        },
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>},
+        {line: <Trans id="project.banner.right.end" defaultMessage="End date" />, className: 'gap'},
+        {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>}
+      ]
+    ];
+    return (
+      <Row>
+        {
+          lines.map((items, index) => {
+            return (
+              <Col xs={12} md={6} lg={6} key={index}>
+                {
+                  items.map((item, key) => {
+                    return (
+                      <Line className={get(item, 'className')} key={key}>
+                        {item.line}
+                      </Line>
+                    )
+                  })
+                }
+              </Col>
+            )
+          })
+        }
+      </Row>
+    )
+  };
+  return (
+    <Row className={classes.projectBanner}>
+      <Col xs={12} md={6} lg={6} className="left">
+        <span className="title">{get(data, 'title.narratives[0].text', 'Title')}</span>
+        <Menu className="menu" selectedKeys={['overview']} mode="horizontal">
+          <Menu.Item key="overview">
+            <Icon type="appstore"/>
+            <Trans id="project.banner.left.menu.overview" defaultMessage="Overview"/>
+          </Menu.Item>
+          <Menu.Item key="related">
+            <Icon type="book"/>
+            <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
+          </Menu.Item>
+        </Menu>
+        <div className="description">{get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}</div>
+      </Col>
+      <Col xs={12} md={6} lg={6}  className="right">
+        <span className="title">
+          <Trans id="project.banner.right.title" defaultMessage="Financial overview"/>
+        </span>
+        <RightColumn data={data} />
+      </Col>
+    </Row>
+  )
+};
 
-export default ProjectBanner;
+const styles = {
+  projectBanner: {
+    '& .left': {
+      padding: '20px 60px',
+      '@media (max-width: 767px)': {
+        padding: '20px 35px'
+      },
+      backgroundColor: '#efefef',
+      '& .title': {
+        fontSize: 25,
+      },
+      '& .description': {
+        marginTop: 20,
+        color: '#1471ce',
+        fontWeight: 600,
+      },
+      '& .menu li': {
+        color: '#5d5d5d',
+      },
+      '& .menu .ant-menu-item-selected': {
+        color: '#35b6b4'
+      }
+    },
+    '& .right': {
+      padding: '20px 65px',
+      '@media (max-width: 767px)': {
+        padding: '20px 25px'
+      },
+      backgroundColor: '#f27f6d',
+      color: 'white',
+      fontWeight: 600,
+      '& .title': {
+        color: 'white',
+        fontSize: 25,
+      },
+      '& .gap': {
+        marginTop: 20,
+      }
+    }
+  }
+};
+
+
+export default injectSheet(styles)(ProjectBanner);
