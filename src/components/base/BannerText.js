@@ -19,7 +19,7 @@ const styles = {
   bannerText: {
     backgroundColor: '#ececec',
     '& .content': {
-      fontSize: 'calc(1em + 1vw)',
+      fontSize: 'calc(1.8em + 1vw)',
       fontStyle: 'normal',
       fontStretch: 'normal',
       letterSpacing: 'normal',

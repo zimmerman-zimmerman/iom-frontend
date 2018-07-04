@@ -146,24 +146,28 @@ const styles = {
       marginLeft: 5,
     },
     '& .ant-list-item-meta': {
-      minHeight: 50,
-      maxHeight: 50,
+      minHeight: 56,
+      maxHeight: 56,
     },
     '& .ant-list-item-meta-title': {
       textOverflow: 'ellipsis',
       '-webkit-line-clamp': 2,
       '-webkit-box-orient': 'vertical',
       overflow: 'hidden',
-      maxHeight: 48,
+      maxHeight: 54,
       maxWidth: '100%',
-      fontSize: 18,
+      fontSize: 21,
+      lineHeight: 1.33,
       '@media only screen and (max-width: 767px)': {
         fontSize: 15,
       }
     }
   },
   linkButton: {
-    marginTop: 25,
+    marginTop: 80,
+    '@media only screen and (max-width: 767px)': {
+      marginTop: 0,
+    },
     padding: '0 40px 30px 40px',
     '& .ant-btn': {
       width: '100%',
@@ -171,6 +175,8 @@ const styles = {
       textTransform: 'uppercase',
       backgroundColor: variablesStyle.blue,
       border: 'none',
+      height: 51,
+      fontSize: 18,
     }
   }
 };

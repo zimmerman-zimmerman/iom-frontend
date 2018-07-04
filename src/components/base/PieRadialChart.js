@@ -12,7 +12,7 @@ const PieRadialChart = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
       <Card className="transparent-white">
-        {prefixLegend} {format(",.2f")(data.value)}
+        <span className="value">{prefixLegend} {format(",.2f")(data.value)}</span>
       </Card> : null;
   };
   return (

@@ -14,7 +14,7 @@ const BannerImage = (props) => {
               <Card className={classes.card}>
                 <span className={classes.title}>{title}</span><br />
                 <span className={classes.description}>{description}</span><br /><br />
-                <span className={classes.detail}>{detail}</span>
+                {size === 'lg' ? <span className={classes.detail}>{detail}</span> : null}
               </Card>
             </Col>
           </Row>
