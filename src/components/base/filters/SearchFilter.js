@@ -3,7 +3,7 @@ import Input from 'antd/es/input';
 import { connect } from 'react-redux';
 import injectSheet from "react-jss";
 
-import BaseFilter from "../filters/BaseFilter";
+import BaseFilter from "./BaseFilter";
 
 const Search = Input.Search;
 

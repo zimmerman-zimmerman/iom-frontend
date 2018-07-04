@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 import injectSheet from 'react-jss';
 
-import BaseFilter from '../../../components/filters/BaseFilter';
+import BaseFilter from '../../../components/base/filters/BaseFilter';
 import * as actions from '../../../services/actions';
 import GeoMap from '../../../components/maps/GeoMap';
 import Trans from '../../../locales/Trans';

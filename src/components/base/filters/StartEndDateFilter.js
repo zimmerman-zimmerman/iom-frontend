@@ -5,7 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 
-import BaseFilter from "../../filters/BaseFilter";
+import BaseFilter from "./BaseFilter";
 import PropsType from "prop-types";
 
 const { RangePicker } = DatePicker;

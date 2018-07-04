@@ -11,7 +11,7 @@ import CountriesTable from './components/CountriesTable';
 import * as actions from '../../services/actions/index';
 import Summary from '../../components/base/filters/Summary';
 import Filters from "../../components/base/filters/Filters";
-import BaseFilter from '../../components/filters/BaseFilter';
+import BaseFilter from '../../components/base/filters/BaseFilter';
 import Trans from '../../locales/Trans';
 import Page from '../../components/base/Page';
 import {size as screenSize} from "../../helpers/screen";

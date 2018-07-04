@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'antd/es/table';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import BaseFilter from '../../../components/filters/BaseFilter';
+import BaseFilter from '../../../components/base/filters/BaseFilter';
 import * as actions from '../../../services/actions';
 import extend from 'lodash/extend';
 import { connect } from 'react-redux';
@@ -45,7 +45,7 @@ class ServiceDonors extends BaseFilter {
       title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
       dataIndex: 'value',
       key: 'value',
-      className: 'columnMoney',
+      className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     }];
     return(

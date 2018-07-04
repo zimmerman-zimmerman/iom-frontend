@@ -4,7 +4,7 @@ import * as actions from '../../../services/actions';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 
-import BaseFilter from '../../../components/filters/BaseFilter';
+import BaseFilter from '../../../components/base/filters/BaseFilter';
 import ProjectsTable from '../components/ProjectsTable';
 
 class ServiceProjects extends BaseFilter {
