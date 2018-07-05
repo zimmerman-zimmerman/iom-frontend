@@ -30,10 +30,10 @@ const styles = {
     borderBottom: 'none',
     fontSize: 21,
     marginTop: 28,
-    lineHeight: '34px',
+    lineHeight: '38px',
     '@media (max-width: 1277px)': {
       fontSize: 15,
-      lineHeight: 3.3,
+      lineHeight: '38px',
     }
   },
 };
