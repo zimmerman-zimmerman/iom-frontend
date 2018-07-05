@@ -116,7 +116,7 @@ const styles = {
   },
   logo: {
     padding: '5px 0',
-    height: 70,
+    height: 60,
     '@media (max-width: 1277px)': {
       height: 55,
     },
@@ -129,10 +129,12 @@ const styles = {
     fontSize: 40,
   },
   share: {
+    marginTop: 26,
     float: 'right',
     '& $button': {
       marginLeft: 5,
       color: '#0033a1',
+      size: 32,
       '&:hover': {
         color: '#35b6b4',
       }

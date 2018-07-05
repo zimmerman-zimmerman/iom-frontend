@@ -29,7 +29,8 @@ const styles = {
     float: 'right',
     borderBottom: 'none',
     fontSize: 21,
-    lineHeight: 3.1,
+    marginTop: 28,
+    lineHeight: '34px',
     '@media (max-width: 1277px)': {
       fontSize: 15,
       lineHeight: 3.3,
