@@ -95,9 +95,9 @@ class Filters extends Component {
   }
 
   countResults() {
-    const { countResults, pluralMessage, singularMessage} = this.props;
+    const { countResults, pluralMessage, singularMessage, classes } = this.props;
     const text = countResults > 1 ? pluralMessage : singularMessage;
-    return <h2>{countResults} {text}</h2>;
+    return <h2><span className={classes.countNumber}>{countResults}</span> <span className={classes.countLabel}>{text}</span></h2>;
   }
 
   content() {
@@ -128,7 +128,7 @@ class Filters extends Component {
   render() {
     const { intl, rootComponent, classes } = this.props;
     return (
-      <Fragment>
+      <div className={classes.container}>
         <Row className={classes.gap}>
           <Col xs={12}>
             <SearchFilter
@@ -162,7 +162,7 @@ class Filters extends Component {
             {this.content()}
           </div>
         </MediaQuery>
-      </Fragment>
+      </div>
     );
   }
 }
@@ -180,6 +180,15 @@ const styles = {
   gap: {
     marginTop: 20
   },
+  countNumber: {
+    fontSize: 32,
+    fontWeight: 300,
+  },
+  countLabel: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'lowercase',
+  },
   badge: {
     '& .ant-badge-count': {
       background: '#f7c989',
@@ -191,11 +200,12 @@ const styles = {
     marginRight: 5,
   },
   collapse: {
-    background: '#f5f5f9',
     '& .ant-collapse-borderless > .ant-collapse-item': {
       borderBottom: '0 !important',
     }
-
+  },
+  container: {
+    paddingRight: 20,
   }
 };
 

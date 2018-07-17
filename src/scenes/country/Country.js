@@ -100,7 +100,8 @@ const styles = {
       padding: 0,
     },
     '& .title': {
-      color: '#1f4283'
+      color: '#1f4283',
+      fontSize: 26,
     }
   }
 };

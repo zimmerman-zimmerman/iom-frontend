@@ -8,7 +8,7 @@ export const breadcrumbs = {
   border: 'solid 1px #d0d0d0',
   color: '#262626',
   colorActive: '#418fde',
-  sizeFont: 16,
+  sizeFont: 18,
   height: 30,
   marginTop: 5,
   separator: '>',
@@ -22,3 +22,7 @@ export const pieRadialChart = {
 export const slider = {
   width: 300
 };
+
+export const tableHeader = {
+  fontWeight: 'bold',
+}

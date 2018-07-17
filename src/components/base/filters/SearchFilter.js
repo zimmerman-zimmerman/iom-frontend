@@ -23,14 +23,14 @@ class SearchFilter extends BaseFilter {
 const styles = {
   search: {
     height: 44,
-    boxShadow: '0 1px 6px 0 rgba(0, 0, 0, 0.16)',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
     '& button': {
       height: 44,
       width: 50,
       backgroundColor: '#418fde',
     },
     '& .ant-input-suffix': {
-      boxShadow: '0 1px 6px 0 rgba(0, 0, 0, 0.20)',
+      boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
     }
   },
 };

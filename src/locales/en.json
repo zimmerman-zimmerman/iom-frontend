@@ -34,7 +34,7 @@
   "banner.detail": "Track money flow from donation to employment. Understanding our mission is the first step to give value to our projects and keep them alive.",
   "banner.text.text": "In 2016 IOM spent US$ 1,602,307,417 in over 100 countries around the world in seven different service areas.",
 
-  "home.donors.title": "Where the Funding Come From",
+  "home.donors.title": "Where the Funding Comes From",
   "home.donors.button": "See All Publisher Donors",
   "home.activities.title": "Where the Funding Goes",
   "home.activities.button": "See All Published Projects",
@@ -113,6 +113,7 @@
   "donor.table.projects.header.budget": "Budget",
   "donor.table.projects.header.status": "Project status",
   "donor.table.projects.header.sector": "DAC sector",
+  "donor.description": "Below is a list of all related governmental agencies providing funding to IOM.",
 
   "projects.title": "IOM Projects overview",
   "projects.breadcrumb.home": "Home",
@@ -202,8 +203,8 @@
   "footer.copyright": "© 2018 Migration data portal",
   "footer.term": "Term of use",
   "footer.disclaimer": "Disclaimer",
-  "footer.address": "17 Route des Morillos",
-  "footer.city": "1218 Grand-Saconnex",
+  "footer.address": "17, Route des Morillons, C.P.17",
+  "footer.city": "CH 1211 Geneva",
   "footer.country": "Switzerland",
   "footer.phone": "Tel. +41.22.717.9111",
   "footer.website": "IOM website",

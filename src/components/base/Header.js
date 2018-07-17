@@ -88,7 +88,7 @@ class Header extends Component {
             {size === 'lg' ? <Menus items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
           </Col>
-          {size === 'lg'? <Col lg={2}><Share size={size} /></Col> : null}
+          {size === 'lg'? <Col lg={2} className={classes.shareCol}><Share size={size} /></Col> : null}
         </Row>
       )
     };
@@ -128,11 +128,14 @@ const styles = {
     color: 'white',
     fontSize: 40,
   },
+  shareCol: {
+    height: 70,
+  },
   share: {
     marginTop: 26,
     float: 'right',
     '& $button': {
-      marginLeft: 5,
+      marginLeft: 16,
       color: '#0033a1',
       size: 32,
       '&:hover': {

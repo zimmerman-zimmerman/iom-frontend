@@ -32,14 +32,19 @@ const styles = {
     marginTop: 5,
     '& .am-accordion': {
       borderTop: 'none',
-      backgroundColor: '#f5f5f9',
     },
     '& .am-accordion .am-accordion-item .am-accordion-header': {
-      backgroundColor: '#f5f5f9',
+      paddingLeft: 0,
+      fontWeight: 'bold',
+    },
+    '& .am-accordion-header': {
+      padding: '5px 0',
+      '& i': {
+        marginTop: 5,
+      }
     },
     '& .am-accordion-content-box': {
       padding: '10px 0',
-      backgroundColor: '#f5f5f9',
       borderBottom: '0 !important',
 
     }

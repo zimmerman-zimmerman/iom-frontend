@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import get from 'lodash/get';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
+import MediaQuery from 'react-responsive';
 
 import Page from '../../components/base/Page';
 import Filters from '../../components/base/filters/Filters';
@@ -12,6 +13,7 @@ import BaseFilter from '../../components/base/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
+import {size as screenSize} from "../../helpers/screen";
 
 class Donors extends BaseFilter {
   componentDidMount() {
@@ -47,14 +49,16 @@ class Donors extends BaseFilter {
             <Col xs={12} md={8} lg={9}>
               <Row className={classes.rowGap}>
                 <Col xs={12}>
-                  <h1><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
+                  <h1 className={classes.title}><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={12}>
-                  <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
-                </Col>
-              </Row>
+              <MediaQuery minWidth={screenSize.mobile.maxWidth}>
+                <Row>
+                  <Col xs={12}>
+                    <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
+                  </Col>
+                </Row>
+              </MediaQuery>
               <Row>
                 <Col xs={12}>
                   <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>
@@ -88,6 +92,9 @@ const styles = {
   rowGap: {
     marginTop: 10
   },
+  title: {
+    fontWeight: 300,
+  }
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Donors));

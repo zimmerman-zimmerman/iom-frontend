@@ -29,7 +29,6 @@ class Services extends BaseFilter {
   render() {
     const { services, classes } = this.props;
     const data = get(services, 'data.results', null);
-    console.log(data);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
@@ -48,8 +47,9 @@ class Services extends BaseFilter {
               <Col xs={12} md={8} lg={9}>
                 <Row>
                   <Col xs={12}>
-                    <h2 className="Title"><Trans id="services.title" defaultMessage="Our services" /></h2>
-                    <h3><Trans id="services.descriptions" defaultMessage="Descriptions" /></h3>
+                    <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
+                    <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
+                    <hr className="divider" />
                     {data ? <ServicesCharts data={data}/> : null}
                   </Col>
                   <Col xs={12} className="service-table">
@@ -78,9 +78,16 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   services: {
+    '& .title': {
+      marginTop: 10,
+    },
     '& .service-table': {
       paddingBottom: 30,
-    }
+    },
+    '& .divider': {
+      border: 'solid 3px #173d8e',
+      opacity: 0.3,
+    },
   }
 };
 

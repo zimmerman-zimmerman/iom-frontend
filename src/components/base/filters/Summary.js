@@ -64,18 +64,28 @@ Summary.propTypes = {
 
 const styles = {
   summary: {
+    '& .ant-card-body': {
+      padding: 12,
+    },
+    borderLeftStyle: 'none',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },
     height: 450,
+    '& h3': {
+      marginBottom: 0,
+      fontWeight: 'bold',
+    },
     '& .field': {
       color: '#959595',
       fontSize: 11
     },
     '& .button-hide': {
       position: 'absolute',
-      right: 20,
-      top: 25,
+      borderRadius: 2,
+      right: 12,
+      top: 12,
     },
     '& .gap-row': {
       marginTop: 15

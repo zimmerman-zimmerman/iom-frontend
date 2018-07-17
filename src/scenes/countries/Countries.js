@@ -68,10 +68,12 @@ class Countries extends BaseFilter {
               <Col xs={12} md={8} lg={9} className={classes.map}>
                 <Row>
                   <Col xs={12} className={classes.gapBottom}>
-                    <h2 className="Title">
+                    <h1 className={classes.title}>
                       <Trans id="countries.title" defaultMessage="Countries"/>
+                    </h1>
+                    <h2>
+                      <Trans id="countries.description" defaultMessage="Description"/>
                     </h2>
-                    <Trans id="countries.description" defaultMessage="Description"/>
                   </Col>
                 </Row>
                 <Row>
@@ -131,6 +133,9 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  title: {
+    fontWeight: 300,
+  },
   map: {
     marginTop: 15,
     '& .leaflet-control-attribution.leaflet-control': {

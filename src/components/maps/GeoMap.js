@@ -158,10 +158,6 @@ class GeoMap extends Component {
             <span className="inline-block">
               <h5>{feature.properties.name}</h5>
             </span>
-            {false && <span className="inline-block action-icons">
-              <i className="material-icons">favorite_border</i>
-              <i className="material-icons">more_vert</i>
-            </span>}
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>

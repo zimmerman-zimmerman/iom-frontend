@@ -22,17 +22,17 @@ const CustomToolTip = props => {
 
 class ServicesCharts extends Component {
   render() {
-    const { data }  =  this.props;
+    const { data } = this.props;
     return (
       <ResponsiveContainer width='100%' aspect={16.0/9.0}>
         { data !== null ?
           <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
-            <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="sector.code" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+            <XAxis dataKey="sector.name" />
             <YAxis/>
             <Tooltip content={<CustomToolTip/>}/>
-            <Legend />
+            <Legend verticalAlign="top" align="right" />
             <Bar dataKey="value" stackId="a" fill="#1f4283" />
           </BarChart>
           : <div></div>

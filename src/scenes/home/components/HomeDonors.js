@@ -17,7 +17,7 @@ HomeDonors.defaultProps = {
   initial: actions.homeDonorsInitial,
   nameField: 'participating_organisation',
   valueField: 'value',
-  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
+  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Comes From'},
   localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'},
   linkPage: '/donors',
 };

@@ -7,7 +7,7 @@ import Card from 'antd/es/card';
 import { pieRadialChart as style } from "../../helpers/style";
 
 const PieRadialChart = (props) => {
-  const {data, prefixLegend, innerRadius} = props;
+  const {data, prefixLegend, innerRadius, outerRadius} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
@@ -20,7 +20,7 @@ const PieRadialChart = (props) => {
       <PieChart>
         <Pie
           data={data}
-          outerRadius={innerRadius + 35}
+          outerRadius={outerRadius}
           innerRadius={innerRadius}
           fill={style.fillColor}
           dataKey="value"

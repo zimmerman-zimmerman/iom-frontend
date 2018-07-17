@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import get from 'lodash/get';
 import { format } from 'd3-format';
 import { Link } from 'react-router-dom';
+import { tableHeader } from '../../../helpers/style';
 
 import * as actions from "../../../services/actions/index";
 
@@ -49,42 +50,42 @@ class TableProjects extends Component {
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
       dataIndex: 'participating_organisations[0].narratives[0].text',
       key: 'donors',
       width: '20%',
     },{
-      title: intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}</span>,
       dataIndex: 'title.narratives[0].text',
       key: 'title',
       width: '30%',
-      render: value => <Link to="/">{value}</Link>
+      render: (title, record) => <Link to={`/projects/${record.id}`}>{title}</Link>
     },{
-      title: intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     },{
-      title: intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
       dataIndex: 'activity_status.name',
       key: 'status'
     },{
-      title: intl.formatMessage({
+      title: <span style={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
-      }),
+      })}</span>,
       dataIndex: 'sectors[0].sector.name',
       key: 'type'
     },{
-      title: intl.formatMessage({
+      title: <span style={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.start', defaultMessage: 'Start date'
-      }),
+      })}</span>,
       dataIndex: 'activity_dates[1].iso_date',
       key: 'start'
     },{
-      title: intl.formatMessage({
+      title: <span style={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.end', defaultMessage: 'End date'
-      }),
+      })}</span>,
       dataIndex: 'activity_dates[0].iso_date',
       key: 'end'
     }];

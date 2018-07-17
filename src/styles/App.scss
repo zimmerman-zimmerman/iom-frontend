@@ -23,8 +23,13 @@
   li {
     text-transform: uppercase;
     &.ant-menu-item-selected {
-      border-bottom: 4px solid #35b6b4 !important;
+      border-bottom: 7px solid #35b6b4 !important;
     }
+  }
+}
+.ant-menu-horizontal {
+  .ant-menu-item {
+    top: -2px;
   }
 }
 .transparent-white {
@@ -53,7 +58,10 @@ th.number, td.number {
   text-align: right !important;
 }
 .ant-pagination {
-  float: left !important;
+  // float: left !important;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0 !important;
 }
 .ant-pagination-item-active {
   color: white !important;
