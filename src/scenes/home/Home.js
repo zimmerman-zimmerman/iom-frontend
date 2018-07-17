@@ -38,7 +38,7 @@ class Home extends Component {
           <Banner height={400} size="md" />
         </MediaQuery>
         <MediaQuery minWidth={screenSize.desktop.minWidth}>
-          <Banner height={500} size="lg" />
+          <Banner height={600} size="lg" />
         </MediaQuery>
         <Grid fluid>
           <Row middle="xs">

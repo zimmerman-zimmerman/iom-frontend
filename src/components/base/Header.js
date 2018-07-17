@@ -111,22 +111,30 @@ class Header extends Component {
 
 const styles = {
   header: {
+    '@media (min-width: 992px)': {
+      height: 70,
+    },
     backgroundColor: styleVariables.blue,
     boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.30)',
   },
   logo: {
-    padding: '5px 0',
-    height: 48,
+    padding: '10px 0',
+    height: 60,
+    '@media (max-width: 991px)': {
+      height: 50
+    },
   },
   triggerMenu: {
     color: 'white',
     fontSize: 40,
   },
   share: {
+    marginTop: 26,
     float: 'right',
     '& $button': {
       marginLeft: 5,
       color: '#0033a1',
+      size: 32,
       '&:hover': {
         color: '#35b6b4',
       }

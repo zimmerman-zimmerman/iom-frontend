@@ -28,7 +28,10 @@
   }
 }
 .transparent-white {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
+}
+.transparent-white .ant-card-body {
+  padding: 12px;
 }
 .am-drawer-content {
   padding-top: 0 !important;

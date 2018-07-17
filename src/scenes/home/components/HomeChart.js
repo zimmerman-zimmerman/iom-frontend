@@ -48,7 +48,7 @@ class HomeChart extends Component {
     const Title = (props) => {
       const { classes } = props;
       return (
-        <Row start="xs" center="xs">
+        <Row top="xs" center="xs">
           <Col xs={12} className={classes.title}>
             {title}
           </Col>
@@ -61,7 +61,7 @@ class HomeChart extends Component {
       const height = window.innerWidth / widthDivider;
       return (
         <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={height / 3.7}
+                                  innerRadius={height / 4}
         />
       )
     };
@@ -126,9 +126,10 @@ class HomeChart extends Component {
 const styles = {
   title: {
     padding: '30px 20px 0 20px',
-    fontSize: 18,
-    '@media only screen and (min-width: 992px) and (max-width: 1033px)': {
-      minHeight: 84,
+    fontSize: 'calc(1em + 1vw)',
+    height: 90,
+    '@media only screen (max-width: 1033px)': {
+      height: 80,
     }
   },
   listItems: {
@@ -145,19 +146,28 @@ const styles = {
       marginLeft: 5,
     },
     '& .ant-list-item-meta': {
-      minHeight: 40,
-      maxHeight: 40,
+      minHeight: 56,
+      maxHeight: 56,
     },
     '& .ant-list-item-meta-title': {
       textOverflow: 'ellipsis',
       '-webkit-line-clamp': 2,
       '-webkit-box-orient': 'vertical',
       overflow: 'hidden',
-      maxHeight: 45,
+      maxHeight: 54,
       maxWidth: '100%',
+      fontSize: 21,
+      lineHeight: 1.33,
+      '@media only screen and (max-width: 767px)': {
+        fontSize: 15,
+      }
     }
   },
   linkButton: {
+    marginTop: 80,
+    '@media only screen and (max-width: 767px)': {
+      marginTop: 0,
+    },
     padding: '0 40px 30px 40px',
     '& .ant-btn': {
       width: '100%',
@@ -165,6 +175,8 @@ const styles = {
       textTransform: 'uppercase',
       backgroundColor: variablesStyle.blue,
       border: 'none',
+      height: 51,
+      fontSize: 18,
     }
   }
 };
