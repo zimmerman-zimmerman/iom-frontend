@@ -131,7 +131,7 @@ const styles = {
     '& .left': {
       padding: '40px 35px 100px 137px',
       '@media (max-width: 767px)': {
-        padding: '20px 35px'
+        padding: '20px 25px'
       },
       backgroundColor: '#efefef',
       '& .country': {

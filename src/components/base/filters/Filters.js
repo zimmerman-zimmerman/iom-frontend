@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import PropsType from 'prop-types';
 import get from "lodash/get";
 import size from "lodash/size";
+import has from "lodash/has";
 import Badge from 'antd/es/badge';
 import MediaQuery from 'react-responsive';
 import Collapse from 'antd/es/collapse';
@@ -102,7 +103,8 @@ class Filters extends Component {
 
   content() {
     const { intl, rootComponent, classes, panels } = this.props;
-    const filterCount = size(get(rootComponent, 'state.filters.values'));
+    const filters = get(rootComponent, 'state.filters.values');
+    const filterCount = has(filters, 'page') ? size(filters) - 1 : size(filters);
     return (
       <Fragment>
         <Row>
@@ -200,6 +202,8 @@ const styles = {
     marginRight: 5,
   },
   collapse: {
+    marginTop: 15,
+    borderTop: '1px solid #d9d9d9',
     '& .ant-collapse-borderless > .ant-collapse-item': {
       borderBottom: '0 !important',
     }

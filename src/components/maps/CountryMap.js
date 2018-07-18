@@ -12,7 +12,7 @@ class CountryMap extends Component {
   render() {
     const { data } = this.props;
     return (
-      <Content style={{ height: '350px', width: '99%' }}>
+      <Content style={{ height: '450px', width: '100%' }}>
         {data ?
           <GoogleMapReact
             bootstrapURLKeys={{key: process.env.REACT_APP_GOOGLE_MAP_KEY, language: 'en', region: 'af'}}

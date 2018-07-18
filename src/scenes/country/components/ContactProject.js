@@ -19,10 +19,10 @@ class ContactProject extends Component {
 
   render() {
     const data = get(this.props.project, 'data', null);
-
+    
     const Line = (props) => {
       return (
-        <Row className={props.className} key={props.key}>
+        <Row className="line" key={props.key}>
           <Col xs={12}>
             {props.children}
           </Col>
@@ -32,20 +32,29 @@ class ContactProject extends Component {
 
     const Field = (props) => {
       return (
-        <Fragment>
-          <strong><Trans id={props.name[0]} defaultMessage={props.name[1]} /></strong>
+        <div className="field">
+          <strong className="label"><Trans id={props.name[0]} defaultMessage={props.name[1]} /></strong>
           <span className="value">{get(data, props.value, '-')}</span>
-        </Fragment>
+        </div>
       )
     };
 
     const items = [
       <h2 className="Title"><Trans id="project.location.contact.title" defaultMessage="Contact info" /></h2>,
-      <Field name={['project.location.contact.organisation', 'Organisation:']}
-             value="contact_info[0].organisation.narratives[0].text"
-      />,
-      <Field name={['project.location.contact.phone', 'Phone number:']} value="contact_info[0].telephone" />,
-      <Field name={['project.location.contact.email', 'Email:']} value="contact_info[0].email" />
+      <Field name={['project.location.contact.email', 'Email:']} value="contact_info[0].email" />,
+      // <Field name={['project.location.contact.organisation', 'Organisation:']}
+      //        value="contact_info[0].organisation.narratives[0].text"
+      // />,
+      // <Field name={['project.location.contact.phone', 'Phone number:']} value="contact_info[0].telephone" />,
+      <Field name={['project.location.contact.address', 'Address:']} value="contact_info[0].mailing_address.narratives[0].text" />,
+      <div className="field">
+        <strong className="label"><Trans id='project.location.contact.website' defaultMessage='Website:' /></strong>
+        <span className="value">
+          <a href={`https://www.iom.int/countries/${this.props.code}`} target="_blank">
+            https://www.iom.int/countries/{this.props.code}
+          </a>
+        </span>
+      </div>
     ];
 
     return (
@@ -70,8 +79,32 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   contactProject: {
+    '& .line': {
+      marginBottom: 10,
+    },
+    '& .Title': {
+      color: '#1f4283',
+      fontSize: 26,
+      fontWeight: 600,
+    },
+    '& .field': {
+      width: '100%',
+      overflow: 'hidden',
+      wordWrap: 'break-word',
+    },
+    '& .label': {
+      fontSize: 22,
+      fontWeight: 600,
+      '@media (max-width: 776px)': {
+        fontSize: 18,
+      },
+    },
     '& .value': {
-      marginLeft: 10
+      marginLeft: 10,
+      fontSize: 22,
+      '@media (max-width: 776px)': {
+        fontSize: 18,
+      },
     },
     marginBottom: 20
   }

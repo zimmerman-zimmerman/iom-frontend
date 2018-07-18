@@ -25,14 +25,14 @@ class ServicesCharts extends Component {
     const { data } = this.props;
     return (
       <ResponsiveContainer width='100%' aspect={16.0/9.0}>
-        { data !== null ?
+        {data !== null ?
           <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+            <CartesianGrid vertical={false}/>
             <XAxis dataKey="sector.name" />
-            <YAxis/>
+            <YAxis axisLine={false} />
             <Tooltip content={<CustomToolTip/>}/>
-            <Legend verticalAlign="top" align="right" />
+            <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}/>
             <Bar dataKey="value" stackId="a" fill="#1f4283" />
           </BarChart>
           : <div></div>

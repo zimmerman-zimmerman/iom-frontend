@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
+import { tableHeader } from '../../../helpers/style';
 
 class ServiceDonors extends BaseFilter {
   addKey(dataSource) {
@@ -36,13 +37,13 @@ class ServiceDonors extends BaseFilter {
     const data = get(serviceDonors, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       width: '50%',
       render: name => <span>{name}</span>
     }, {
-      title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
@@ -57,6 +58,7 @@ class ServiceDonors extends BaseFilter {
                columns={columns}
                size="middle"
                loading={serviceDonors.request}
+               className={classes.table}
         />
       </div>
     )
@@ -76,8 +78,17 @@ const mapStateToProps = (state, ) => {
 const styles = {
   serviceDonors: {
     paddingTop: 20,
+    marginRight: 10,
     '& .title': {
       color: '#0033a1',
+      fontWeight: 600,
+    }
+  },
+  table: {
+    '& tr': {
+      '& td, th': {
+        paddingLeft: '0px !important',
+      }
     }
   }
 };

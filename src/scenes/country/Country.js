@@ -74,7 +74,7 @@ class Country extends BaseFilter {
                 <TableProjects countryCode={ get(this.props, 'match.params.code')}  />
               </Col>
             </Row>
-            {firstProject ? <ContactProject id={firstProject.id} /> : null}
+            {firstProject ? <ContactProject id={firstProject.id} code={get(this.props, 'match.params.code')} /> : null}
           </Grid>
         </Page>
       </Spin>
@@ -93,6 +93,10 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   country: {
+    paddingLeft: '137px !important',
+    '@media (max-width: 767px)': {
+      padding: '0px 25px !important',
+    },
     '& .gap': {
       padding: '20px 0'
     },

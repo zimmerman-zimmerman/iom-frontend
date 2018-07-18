@@ -58,7 +58,6 @@ class DonorProjects extends Component {
   render() {
     const { intl, donorProjects, classes } = this.props;
     const data = get(donorProjects, 'data.results');
-    console.log(data);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Spin from 'antd/es/spin';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -50,8 +50,15 @@ class Services extends BaseFilter {
                     <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
                     <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
                     <hr className="divider" />
-                    {data ? <ServicesCharts data={data}/> : null}
+                    {data ? 
+                      <Fragment>
+                        <h2 className="chart-header"><Trans id="services.chart.header" defaultMessage="Budget per service area" /></h2>
+                        <ServicesCharts data={data} />
+                      </Fragment>
+                        : null
+                    }
                   </Col>
+                  <hr className="divider" />
                   <Col xs={12} className="service-table">
                     {data ? <ServicesTable data={data}/> : null}
                   </Col>
@@ -79,14 +86,22 @@ const mapStateToProps = (state, ) => {
 const styles = {
   services: {
     '& .title': {
+      marginTop: 15,
+      fontWeight: 300,
+    },
+    '& .chart-header': {
+      color: '#1f4283',
       marginTop: 10,
     },
     '& .service-table': {
-      paddingBottom: 30,
+      paddingBottom: 80,
+      paddingLeft: 0,
     },
     '& .divider': {
       border: 'solid 3px #173d8e',
       opacity: 0.3,
+      margin: '30px 0',
+      width: '100%',
     },
   }
 };

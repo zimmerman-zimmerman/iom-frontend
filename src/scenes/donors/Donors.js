@@ -37,7 +37,7 @@ class Donors extends BaseFilter {
     ];
     return (
       <Page breadcrumbItems={breadcrumbItems}>
-        <Grid fluid>
+        <Grid className={classes.container} fluid>
           <Row>
             <Col xs={12} md={4} lg={3} >
               <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
@@ -89,6 +89,11 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  container: {
+    '& th, td': {
+      paddingLeft: '0 !important',
+    }
+  },
   rowGap: {
     marginTop: 10
   },

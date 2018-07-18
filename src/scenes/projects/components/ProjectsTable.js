@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 
 import BaseFilter from "../../../components/base/filters/BaseFilter";
+import { tableHeader } from '../../../helpers/style';
 
 class ProjectsTable extends BaseFilter {
   handleChange(value) {
@@ -44,7 +45,7 @@ class ProjectsTable extends BaseFilter {
     const count = get(data, 'count', 0);
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}</span>,
       dataIndex: 'title',
       key: 'title',
       className: 'Title',
@@ -52,29 +53,29 @@ class ProjectsTable extends BaseFilter {
       render: (title, record) =>
         <Link to={`/projects/${record.id}`}>{title.narratives[0].text}</Link>,
     }, {
-      title: intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
       dataIndex: 'activity_dates',
       key: 'start_date',
       render: activity_dates => <span>{activity_dates[1].iso_date}</span>
     }, {
-      title: intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
       dataIndex: 'activity_dates',
       key: 'end_date',
       render: activity_dates => <span>{activity_dates[2].iso_date}</span>
     },{
-      title: intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'budgets',
       key: 'budgets',
       className: 'Money',
       render: budgets => <span>{usd}{format(',')(get(budgets, '[0].value.value'))}</span>,
     }, {
-      title: intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
       dataIndex: 'sectors',
       key: 'sectors',
       width: '25%',
       render: sectors => <span>{get(sectors, '[0].sector.name')}</span>,
     }, {
-      title: intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}</span>,
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
       width: '20%',

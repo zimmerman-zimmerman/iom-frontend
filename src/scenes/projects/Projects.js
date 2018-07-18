@@ -164,7 +164,9 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   title: {
-    marginTop: 12
+    marginTop: 12,
+    fontSize: 36,
+    fontWeight: 300,
   },
   map: {
     '& .leaflet-control-attribution.leaflet-control': {

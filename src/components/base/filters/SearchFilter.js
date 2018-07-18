@@ -30,6 +30,7 @@ const styles = {
       backgroundColor: '#418fde',
     },
     '& .ant-input-suffix': {
+      zIndex: 1,
       boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
     }
   },
