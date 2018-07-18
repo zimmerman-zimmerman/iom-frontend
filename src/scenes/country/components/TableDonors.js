@@ -28,7 +28,7 @@ const TableDonors = (props) => {
     dataIndex: 'value',
     key: 'value',
     className: 'columnMoney',
-    render: value => <span>{usd}{format(',.2f')(value)}</span>
+    render: value => <span>{usd}{format(',.0f')(value)}</span>
   }];
   return (
     <Table dataSource={data ? addKey(data) : null} columns={columns} size="middle" pagination={{pageSize: 5}} />

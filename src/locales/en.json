@@ -17,8 +17,9 @@
 
   "summary.title": "Summary",
   "summary.hide": "Hide",
-  "summary.budget": "Total budget",
-  "summary.projects": "Projects",
+  "summary.budget": "total budget",
+  "summary.projects": "projects",
+  "summary.donors": "donors",
 
   "main.menu.home": "Home",
   "main.menu.donors": "Donors",

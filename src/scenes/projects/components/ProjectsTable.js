@@ -67,7 +67,7 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'budgets',
       key: 'budgets',
       className: 'Money',
-      render: budgets => <span>{usd}{format(',')(get(budgets, '[0].value.value'))}</span>,
+      render: budgets => <span>{usd}{format(',.0f')(get(budgets, '[0].value.value'))}</span>,
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
       dataIndex: 'sectors',

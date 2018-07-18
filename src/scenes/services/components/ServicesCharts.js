@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { injectIntl, intlShape } from "react-intl";
 import { format } from "d3-format";
 import get from "lodash/get";
 import Layout from 'antd/es/layout';
@@ -14,7 +15,7 @@ const CustomToolTip = props => {
     <Card>
       <Content>
         <h5>
-          <Trans id="currency.usd" defaultMessage="USD"/> {format(",.2f")(data.value)}
+          <Trans id="currency.usd" defaultMessage="USD"/> {format(",.0f")(data.value)}
         </h5>
       </Content>
     </Card> : null;
@@ -22,15 +23,23 @@ const CustomToolTip = props => {
 
 class ServicesCharts extends Component {
   render() {
-    const { data } = this.props;
+    const { intl, data } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     return (
       <ResponsiveContainer width='100%' aspect={16.0/9.0}>
         {data !== null ?
           <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid vertical={false}/>
-            <XAxis dataKey="sector.name" />
-            <YAxis axisLine={false} />
+            <XAxis dataKey="sector.name" tick={{ fontSize: 16 }} />
+            <YAxis
+              axisLine={false}
+              tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}
+              tickSize={0}
+              tick={{
+                fontSize: 10, marginRight: 10, color: '#262626'
+              }}
+            />
             <Tooltip content={<CustomToolTip/>}/>
             <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}/>
             <Bar dataKey="value" stackId="a" fill="#1f4283" />
@@ -42,4 +51,8 @@ class ServicesCharts extends Component {
   }
 }
 
-export default ServicesCharts;
+ServicesCharts.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(ServicesCharts);

@@ -36,7 +36,7 @@ class DonorsTable extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(",.2f")(value)}</span>
+      render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',

@@ -12,7 +12,7 @@ import Trans from '../../../locales/Trans';
 
 class Summary extends Component {
   render() {
-    const { data, fieldValue, fieldCount, onHideSummary, classes } = this.props;
+    const { data, fieldValue, fieldCount, onHideSummary, donorsCount, classes } = this.props;
     let totalBudget = 0;
     let totalActivity = 0;
     if (data) {
@@ -36,7 +36,7 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col xs={12} className="field">
-            <Trans id="summary.budget" defaultMessage="Total budget"/>
+            <Trans id="summary.budget" defaultMessage="total budget"/>
           </Col>
         </Row>
         <Row className="gap-row">
@@ -46,7 +46,17 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col xs={12} className="field">
-            <Trans id="summary.projects" defaultMessage="Projects"/>
+            <Trans id="summary.projects" defaultMessage="projects"/>
+          </Col>
+        </Row>
+        <Row className="gap-row">
+          <Col xs={12}>
+            <strong>{donorsCount}</strong>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} className="field">
+            <Trans id="summary.donors" defaultMessage="donors"/>
           </Col>
         </Row>
       </Card>
@@ -58,7 +68,8 @@ Summary.propTypes = {
   data: PropsType.array,
   fieldValue: PropsType.string,
   fieldCount: PropsType.string,
-  onHideSummary: PropsType.func
+  onHideSummary: PropsType.func,
+  donorsCount: PropsType.number,
 };
 
 

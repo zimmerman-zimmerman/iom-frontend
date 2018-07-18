@@ -24,8 +24,10 @@ class Countries extends BaseFilter {
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'recipient_country', actions.countriesRequest);
+        this.actionRequest(params, 'participating_organisation', actions.countryDonorsRequest);
       } else {
         dispatch(actions.countriesInitial());
+        dispatch(actions.countryDonorsInitial());
       }
     }
   }
@@ -35,9 +37,10 @@ class Countries extends BaseFilter {
   }
 
   render() {
-    const { countries, classes } = this.props;
+    const { countries, donors, classes } = this.props;
     const { showSummary } = this.state;
     const data = get(countries, 'data');
+    const donorsCount = get(donors, 'data.count');
     const showMap = get(data, 'results[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -101,6 +104,7 @@ class Countries extends BaseFilter {
                                    onHideSummary={this.onHideSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
+                                   donorsCount={donorsCount}
                           />
                         </div>
                       </Col> : null
@@ -124,11 +128,13 @@ class Countries extends BaseFilter {
 Countries.defaultProps = {
   groupBy: 'recipient_country',
   filterRequest: actions.countriesRequest,
+  secondFilterRequest: actions.countryDonorsRequest,
 };
 
 const mapStateToProps = (state, ) => {
   return {
-    countries: state.countries
+    countries: state.countries,
+    donors: state.countryDonors,
   }
 };
 

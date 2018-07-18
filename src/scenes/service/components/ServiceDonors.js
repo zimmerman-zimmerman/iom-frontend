@@ -47,7 +47,7 @@ class ServiceDonors extends BaseFilter {
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.0f')(value)}</span>
     }];
     return(
       <div className={classes.serviceDonors}>

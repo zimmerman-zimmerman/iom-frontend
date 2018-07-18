@@ -65,7 +65,7 @@ class TableProjects extends Component {
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
-      render: value => <span>{usd}{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.0f')(value)}</span>
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
       dataIndex: 'activity_status.name',

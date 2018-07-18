@@ -38,7 +38,7 @@ class ServicesTable extends Component {
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(',')(value)}</span>,
+      render: value => <span>{usd}{format(',.0f')(value)}</span>,
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
       dataIndex: 'activity_count',
