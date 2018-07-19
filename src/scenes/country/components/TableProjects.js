@@ -51,15 +51,16 @@ class TableProjects extends Component {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
-      dataIndex: 'participating_organisations[0].narratives[0].text',
       key: 'donors',
       width: '20%',
+      render: obj => 
+        <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}</span>,
-      dataIndex: 'title.narratives[0].text',
       key: 'title',
       width: '30%',
-      render: (title, record) => <Link to={`/projects/${record.id}`}>{title}</Link>
+      render: obj => 
+        <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
@@ -74,8 +75,9 @@ class TableProjects extends Component {
       title: <span style={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
       })}</span>,
-      dataIndex: 'sectors[0].sector.name',
-      key: 'type'
+      key: 'type',
+      render: obj => 
+        <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
     },{
       title: <span style={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.start', defaultMessage: 'Start date'

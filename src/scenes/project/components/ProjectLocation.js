@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ReactCountryFlag from "react-country-flag";
 import get from 'lodash/get';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 
@@ -33,6 +34,7 @@ class ProjectLocation extends Component {
 
   render() {
     const { data, projectLocation, classes } = this.props;
+    console.log(data, );
     const country = get(projectLocation, 'data', null);
     const GroupFields = (props) => {
       const { fields } = props;
@@ -85,7 +87,7 @@ class ProjectLocation extends Component {
           },
           {
             name: {id: "project.location.fields.funding", defaultMessage: "Funding donor:"},
-            value: <span>{get(data, 'participating_organisations[0].narratives[0].text','-')}</span>
+            value: <Link to={`/donors/${get(data, 'participating_organisations[0].ref','')}`}>{get(data, 'participating_organisations[0].narratives[0].text','-')}</Link>
           },
           {
             name: {id: "project.location.fields.donor.type", defaultMessage: "Donor type:"},
@@ -101,7 +103,7 @@ class ProjectLocation extends Component {
           },
           {
             name: {id: "project.location.fields.dac", defaultMessage: "DAC 5 sector:"},
-            value: <span>{get(data, 'sectors[0].sector.code','')} {get(data, 'sectors[0].sector.name','')}</span>
+            value: <Link to={`/services/${get(data, 'sectors[0].sector.code', '')}`}>{get(data, 'sectors[0].sector.code','')} {get(data, 'sectors[0].sector.name','')}</Link>
           }
         ]
       },

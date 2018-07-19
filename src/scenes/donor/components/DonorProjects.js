@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
@@ -62,9 +63,10 @@ class DonorProjects extends Component {
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
-      dataIndex: 'title.narratives[0].text',
       width: '40%',
-      key: 'donors'
+      key: 'donors',
+      render: project => 
+        <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
@@ -78,9 +80,10 @@ class DonorProjects extends Component {
       key: 'status'
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'})}</span>,
-      dataIndex: 'sectors[0].sector.name',
       className: 'Sector',
-      key: 'sector'
+      key: 'sector',
+      render: project => 
+        <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
     }];
     return (
       <Spin spinning={donorProjects.request}>

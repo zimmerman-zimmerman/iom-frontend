@@ -9,6 +9,7 @@ import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
 import { tableHeader } from '../../../helpers/style';
+import { Link } from 'react-router-dom';
 
 class ServiceDonors extends BaseFilter {
   addKey(dataSource) {
@@ -38,10 +39,10 @@ class ServiceDonors extends BaseFilter {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
-      dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       width: '50%',
-      render: name => <span>{name}</span>
+      render: obj => 
+        <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'value',

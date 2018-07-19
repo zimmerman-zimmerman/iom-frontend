@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from "react-intl";
 import get from "lodash/get";
 import { format } from "d3-format";
 import { tableHeader } from '../../../helpers/style';
+import { Link } from 'react-router-dom';
 
 const TableDonors = (props) => {
   function addKey(dataSource) {
@@ -19,10 +20,10 @@ const TableDonors = (props) => {
   const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
   const columns = [{
     title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}</span>,
-    dataIndex: 'participating_organisation',
     key: 'participating_organisation',
     width: '60%',
-    render: name => <span>{name}</span>
+    render: obj => 
+      <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
   }, {
     title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
     dataIndex: 'value',

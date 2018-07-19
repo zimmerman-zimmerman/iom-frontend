@@ -35,10 +35,11 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, nameField, valueField, localeButtonText, linkPage } = this.props;
+    const { reducer, localeTitle, intl, idField, nameField, valueField, localeButtonText, linkPage } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
+        id: get(item, idField),
         name: get(item, nameField),
         value: get(item, valueField),
       });
@@ -77,7 +78,7 @@ class HomeChart extends Component {
                 <List.Item>
                   <List.Item.Meta
                     avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
-                    title={item.name}
+                    title={<Link to={`${linkPage}/${item.id}`}>{item.name}</Link>}
                   />
                 </List.Item>
               )}
