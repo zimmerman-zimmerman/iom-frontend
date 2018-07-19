@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import DonorProjects from "./components/DonorProjects";
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
+import { pageContainer } from '../../helpers/style';
 
 class Donor extends BaseFilter {
   componentDidMount() {
@@ -40,7 +41,7 @@ class Donor extends BaseFilter {
     ];
     return (
       <Page breadcrumbItems={breadcrumbItems}>
-        <Grid className={classes.grid} fluid>
+        <Grid className={classes.grid} style={pageContainer} fluid>
           <Row>
             <Col xs={12}>
               <h1 className={classes.title}>{data ? data.participating_organisation : null}</h1>

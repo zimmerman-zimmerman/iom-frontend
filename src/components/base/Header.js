@@ -115,7 +115,6 @@ const styles = {
       height: 70,
     },
     backgroundColor: styleVariables.blue,
-    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.30)',
   },
   logo: {
     padding: '10px 0',

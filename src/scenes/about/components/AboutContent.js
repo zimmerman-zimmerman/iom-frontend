@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import aboutOMG from '../../../assets/images/AboutIOM.jpg';
 import injectSheet from "react-jss";
+import { pageContainer } from '../../../helpers/style';
 
 const AboutContent = (props) => {
   const { classes } = props;
@@ -39,7 +40,7 @@ const AboutContent = (props) => {
     link: 'link',
   }];
   return (
-    <Grid className={classes.aboutContent}>
+    <Grid className={classes.aboutContent} style={pageContainer}>
         <Row center="xs">
           <Col xs={12} md={8} lg={8}>
             <h2 className="title">About IOM Transparency portal</h2>

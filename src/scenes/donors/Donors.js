@@ -14,6 +14,7 @@ import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
 import {size as screenSize} from "../../helpers/screen";
+import { pageContainer } from '../../helpers/style';
 
 class Donors extends BaseFilter {
   componentDidMount() {
@@ -37,7 +38,7 @@ class Donors extends BaseFilter {
     ];
     return (
       <Page breadcrumbItems={breadcrumbItems}>
-        <Grid className={classes.container} fluid>
+        <Grid className={classes.container} style={pageContainer} fluid>
           <Row>
             <Col xs={12} md={4} lg={3} >
               <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}

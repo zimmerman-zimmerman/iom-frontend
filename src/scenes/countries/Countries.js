@@ -15,6 +15,7 @@ import BaseFilter from '../../components/base/filters/BaseFilter';
 import Trans from '../../locales/Trans';
 import Page from '../../components/base/Page';
 import {size as screenSize} from "../../helpers/screen";
+import { pageContainer } from '../../helpers/style';
 
 class Countries extends BaseFilter {
   componentDidMount() {
@@ -59,7 +60,7 @@ class Countries extends BaseFilter {
     return (
       <Spin spinning={countries.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <Grid fluid>
+          <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
                 <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}

@@ -26,3 +26,7 @@ export const slider = {
 export const tableHeader = {
   fontWeight: 'bold',
 }
+
+export const pageContainer = {
+  minHeight: 'calc(100vh - 262px)',
+}

@@ -16,6 +16,7 @@ import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from '../../helpers/screen';
 import Summary from '../../components/base/filters/Summary';
+import { pageContainer } from '../../helpers/style';
 
 
 class Projects extends BaseFilter {
@@ -95,7 +96,7 @@ class Projects extends BaseFilter {
     return (
       <Spin spinning={projects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <Grid fluid>
+          <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
                 <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}

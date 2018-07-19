@@ -15,6 +15,7 @@ import CountryMap from "../../components/maps/CountryMap";
 import TableProjects from "./components/TableProjects";
 import Trans from '../../locales/Trans';
 import ContactProject from './components/ContactProject';
+import { pageContainer } from '../../helpers/style';
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -54,7 +55,7 @@ class Country extends BaseFilter {
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <BannerCountry data={countryResult} />
-          <Grid fluid className={classes.country}>
+          <Grid className={classes.country} style={pageContainer} fluid>
             <Row middle="xs" className="gap">
               <Col xs={12} md={6} lg={6}>
                 <h2 className="title">
