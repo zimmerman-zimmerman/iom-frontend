@@ -1,74 +1,46 @@
 import React, { Component } from 'react';
-import { Chart, Geom, Tooltip, Label }  from 'bizcharts';
-import DataSet from '@antv/data-set';
-import { Layout, Row, Col } from 'antd';
-import { FormattedMessage } from "react-intl";
+
+import Card from 'antd/es/card';
+import Layout from 'antd/es/layout';
+import {  Row, Col } from 'react-flexbox-grid';
+
+import { Treemap, ResponsiveContainer, Tooltip } from 'recharts';
+import get from 'lodash/get';
+
+import { format } from "d3-format";
+
+import SectorsTreeMapItem from './SectorsTreeMapItem';
+
+const CustomToolTip = props => {
+  const { Content } = Layout;
+  const data = get(props, 'payload[0].payload');
+  return data ?
+    <Card style={{width: 270}}>
+      <Content>
+        <h3>{data.sector.name}</h3>
+        <h4>{format(".2s")(data.value)}</h4>
+      </Content>
+    </Card> : null;
+};
 
 class SectorsMap extends Component {
   render() {
-    const { sectors } = this.props;
-    const items = [];
-    let total = 0;
-    sectors.forEach((item) => {
-      items.push({name: item.sector.name, value: item.value});
-      total += item.value;
-    });
-    const { DataView } = DataSet;
-    const data = {
-      name: 'root',
-      children: items
-    };
-    const dv = new DataView();
-    dv.source(data, {
-      type: 'hierarchy',
-    }).transform({
-      field: 'value',
-      type: 'hierarchy.treemap',
-      tile: 'treemapResquarify',
-      as: ['x', 'y'],
-    });
-    const nodes = dv.getAllNodes();
-    nodes.map(node => {
-      node.name = node.data.name;
-      node.value = node.data.value;
-      return node;
-    });
-    const scale = {
-      value:{nice:false}
-    };
-    const htmlStr = '<li data-index={index}>'
-      + '<span style="background-color:{color};" class="g2-tooltip-marker"></span>'
-      + '{name}<br/>'
-      + '<span style="padding-left: 16px">{count}</span><br/>'
-      + '</li>';
-
-    return(
-      <Row className="SectorsMap">
-        <Col span={24}>
-          <h3 className="Title">
-            <FormattedMessage id="country.sectors.map.title" defaultMessage="Explore what sectors the funds go to"/>
-          </h3>
-          <Layout style={{marginLeft: -80}}>
-            <Chart data={nodes} forceFit={true} height={400} scale={scale}>
-              <Tooltip showTitle={false} itemTpl={htmlStr}/>
-              <Geom type='polygon' position='x*y' color='name' tooltip={['name*value', (name, count)=>{
-                return {
-                  name,
-                  count,
-                }
-              }]} style={{lineWidth:1, stroke:"#fff"}}>
-                <Label content="name" offset={0}
-                       textStyle={{textBaseline:'middle', fontSize: 15}}
-                       formatter={(val, obj)=>{
-                         if(val !== 'root') {
-                           const percent = (obj.point.data.value/total * 100/100) * 100;
-                           return val.toString().concat(' ', percent, '%');
-                         }
-                       }}
-                />
-              </Geom>
-            </Chart>
-          </Layout>
+    const { data } = this.props;
+    const ColorPlatte = ['#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6', '#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6'];
+    return (
+      <Row>
+        <Col xs={12}>
+          <ResponsiveContainer height={360} >
+            <Treemap className="tree-map"
+                     data={data}
+                     dataKey="value"
+                     ratio={4/3}
+                     stroke="#fff"
+                     content={<SectorsTreeMapItem bgColors={ColorPlatte}/>}
+            >
+              <Tooltip content={<CustomToolTip/>}/>
+            </Treemap>
+          </ResponsiveContainer>
         </Col>
       </Row>
     )
