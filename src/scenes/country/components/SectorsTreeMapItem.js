@@ -45,7 +45,7 @@ export default class SectorsTreeMapItem extends Component {
             textAnchor="middle"
             fill="#fff"
             stroke="none"
-            fontSize={'50%'}
+            fontSize={fontSize}
             fillOpacity={0.5}
           >
             {sector.name}
@@ -59,7 +59,7 @@ export default class SectorsTreeMapItem extends Component {
               y={y + 21}
               fill="#fff"
               fillOpacity={0.9}
-              fontSize={'50%'}
+              fontSize={fontSize}
             >
               {percent}%
             </Text>
