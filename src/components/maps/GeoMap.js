@@ -236,7 +236,7 @@ class GeoMap extends Component {
               worldCopyJump={true}
               scrollWheelZoom={false}
               style={{ height: this.props.height, zIndex: 0 }}>
-              <ZoomControl position="topright" />
+              <ZoomControl position="bottomright" />
 
               <TileLayer
                 url="https://api.mapbox.com/styles/v1/zimmerman2014/cjg5196po1i442sp5gd40vspl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemltbWVybWFuMjAxNCIsImEiOiJhNUhFM2YwIn0.sedQBdUN7PJ1AjknVVyqZw"
@@ -255,6 +255,10 @@ class GeoMap extends Component {
                 }}
                 onEachFeature={this.onEachFeature}
               />
+
+              <Control position="topleft" className="disclaimer-box">
+                <div>Disclaimer</div>
+              </Control>
 
               <Control position="bottomleft" className="supportLegend">
                 <div>
