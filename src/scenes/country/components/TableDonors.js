@@ -3,6 +3,7 @@ import Table from 'antd/es/table';
 import { injectIntl, intlShape } from "react-intl";
 import get from "lodash/get";
 import { format } from "d3-format";
+import { Link } from 'react-router-dom';
 
 const TableDonors = (props) => {
   function addKey(dataSource) {
@@ -18,10 +19,9 @@ const TableDonors = (props) => {
   const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
   const columns = [{
     title: intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'}),
-    dataIndex: 'participating_organisation',
-    key: 'participating_organisation',
     width: '60%',
-    render: name => <span>{name}</span>
+    render: obj => 
+      <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
   }, {
     title: intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'}),
     dataIndex: 'value',

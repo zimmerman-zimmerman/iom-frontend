@@ -14,6 +14,7 @@ HomeActivities.defaultProps = {
   },
   request: actions.homeActivitiesRequest,
   initial: actions.homeActivitiesInitial,
+  idField: 'id',
   nameField: 'title.narratives[0].text',
   valueField: 'aggregations.activity.budget_value',
   localeTitle: {id: 'home.activities.title', defaultMessage: 'Where the Funding Goes'},

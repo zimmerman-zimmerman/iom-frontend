@@ -40,7 +40,7 @@ const Footer = (props) => {
             </Col>
             <Col md={6} lg={6} className={classes.gap}>
               <h3 className={classes.text}><Trans id="footer.website" text="IOM website" /></h3>
-              <Trans id="footer.website.url" text="www.iom.int"/>
+              <a href="https://www.iom.int" target="_blank" rel="noopener noreferrer"><Trans id="footer.website.url" text="www.iom.int"/></a>
             </Col>
           </Row>
         </Col>
@@ -73,6 +73,12 @@ const styles = {
   gap: {
     paddingTop: '10px',
     paddingBottom: '10px',
+    '& a': {
+      color: 'white',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
   },
   text: {
     color: 'white',

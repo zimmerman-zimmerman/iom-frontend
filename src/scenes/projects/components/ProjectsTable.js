@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { format } from "d3-format";
 import { connect } from "react-redux";
 import injectSheet from 'react-jss';
+import size from 'lodash/size';
 
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 
@@ -72,13 +73,20 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'sectors',
       key: 'sectors',
       width: '25%',
-      render: sectors => <span>{get(sectors, '[0].sector.name')}</span>,
+      render: sectors => 
+        <Link to={`/services/${sectors[0].sector.code}`}>{get(sectors, '[0].sector.name')}</Link>,
     }, {
       title: intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'}),
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
       width: '20%',
-      render: recipient_countries => <span>{get(recipient_countries, '[0].country.name')}</span>,
+      render: recipient_countries => {
+        if (size(recipient_countries) > 0) {
+          return <Link to={`/country/${recipient_countries[0].country.code}`}>{get(recipient_countries, '[0].country.name')}</Link>
+        } else {
+          return <span></span>
+        }
+      }
     }];
     return (
       <Fragment>

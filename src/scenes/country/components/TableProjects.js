@@ -50,15 +50,16 @@ class TableProjects extends Component {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'}),
-      dataIndex: 'participating_organisations[0].narratives[0].text',
       key: 'donors',
       width: '20%',
+      render: obj => 
+        <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'}),
-      dataIndex: 'title.narratives[0].text',
       key: 'title',
       width: '30%',
-      render: value => <Link to="/">{value}</Link>
+      render: obj => 
+        <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
       title: intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'}),
       dataIndex: 'aggregations.activity.budget_value',

@@ -7,6 +7,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 import {connect} from "react-redux";
 import {injectIntl, intlShape} from "react-intl";
 import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 
 import Trans from '../../../locales/Trans';
 
@@ -25,10 +26,10 @@ class ProjectsTable extends BaseFilter {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
-      dataIndex: 'title.narratives[0].text',
       key: 'title.narratives[0].text',
       width: '45%',
-      render: name => <span>{name}</span>
+      render: obj => 
+        <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     }, {
       title: intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'}),
       dataIndex: 'aggregations.activity.budget_value',
