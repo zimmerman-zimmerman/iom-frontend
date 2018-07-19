@@ -16,6 +16,7 @@ HomeSectors.defaultProps = {
   },
   request: actions.homeSectorsRequest,
   initial: actions.homeSectorsInitial,
+  idField: 'sector.code',
   nameField: 'sector.name',
   valueField: 'value',
   localeTitle: {id: 'home.sectors.title', defaultMessage: 'How the expenditures are classified'},

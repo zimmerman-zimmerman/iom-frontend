@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
@@ -62,9 +63,10 @@ class DonorProjects extends Component {
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{
       title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
-      dataIndex: 'title.narratives[0].text',
       width: '40%',
-      key: 'donors'
+      key: 'donors',
+      render: project => 
+        <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.start', defaultMessage: 'Start date'}),
       dataIndex: 'activity_dates[1].iso_date',
@@ -88,9 +90,10 @@ class DonorProjects extends Component {
       key: 'status'
     },{
       title: intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'}),
-      dataIndex: 'sectors[0].sector.name',
       className: 'Sector',
-      key: 'sector'
+      key: 'sector',
+      render: project => 
+        <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
     }];
     return (
       <Spin spinning={donorProjects.request}>

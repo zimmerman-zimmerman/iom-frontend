@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
+import { Link } from 'react-router-dom';
 
 class ServiceDonors extends BaseFilter {
   addKey(dataSource) {
@@ -37,10 +38,10 @@ class ServiceDonors extends BaseFilter {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
-      dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       width: '50%',
-      render: name => <span>{name}</span>
+      render: obj => 
+        <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
       title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
       dataIndex: 'value',

@@ -15,6 +15,7 @@ HomeDonors.defaultProps = {
   },
   request: actions.homeDonorsRequest,
   initial: actions.homeDonorsInitial,
+  idField: 'participating_organisation_ref',
   nameField: 'participating_organisation',
   valueField: 'value',
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Come From'},
