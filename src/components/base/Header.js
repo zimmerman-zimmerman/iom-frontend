@@ -9,6 +9,7 @@ import FaFeed from 'react-icons/lib/fa/feed';
 import injectSheet from 'react-jss';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import { injectIntl, intlShape } from "react-intl";
 
 import { size as screenSize } from '../../helpers/screen';
 import { variables as styleVariables } from '../../helpers/style';
@@ -24,7 +25,7 @@ class Header extends Component {
   }
 
   render() {
-    const { classes, match, onOpenSlider, openSlider, menuItems } = this.props;
+    const { intl, classes, match, onOpenSlider, openSlider, menuItems } = this.props;
     let urlPath = match.path;
     switch (urlPath) {
       case '/donors/:code':
@@ -65,12 +66,15 @@ class Header extends Component {
 
     const Share = (props) => {
       const { size } = props;
+      const twitterLink = intl.formatMessage({id: 'social.link.twitter'});
+      const facebookLink = intl.formatMessage({id: 'social.link.facebook'});
+      const rssLink = intl.formatMessage({id: 'social.link.rss'});
       return (
         <Row middle={size} className={classes.share}>
           <Col lg={12}>
-            <Button shape="circle" icon="twitter" />
-            <Button shape="circle"><FaFacebook className={classes.faIcon} /></Button>
-            <Button shape="circle"><FaFeed className={classes.faIcon} /></Button>
+            <Button href={twitterLink} target="_blank" shape="circle" icon="twitter" />
+            <Button href={facebookLink} target="_blank" shape="circle"><FaFacebook className={classes.faIcon} /></Button>
+            <Button href={rssLink} target="_blank" shape="circle"><FaFeed className={classes.faIcon} /></Button>
             <Button shape="circle" icon="share-alt" />
           </Col>
         </Row>
@@ -131,8 +135,8 @@ const styles = {
   share: {
     marginTop: 26,
     float: 'right',
-    '& $button': {
-      marginLeft: 5,
+    '& $button, a': {
+      marginLeft: 16,
       color: '#0033a1',
       size: 32,
       '&:hover': {
@@ -148,8 +152,12 @@ const styles = {
   }
 };
 
+Header.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const mapStateToProps = (state, ) => {
   return {};
 };
 
-export default injectSheet(styles)(withRouter(connect(mapStateToProps)(Header)));
+export default injectSheet(styles)(withRouter(connect(mapStateToProps)(injectIntl(Header))));

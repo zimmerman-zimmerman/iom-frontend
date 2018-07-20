@@ -4,12 +4,15 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'antd/es/button';
 import Divider from 'antd/es/divider';
 import FaFacebook from 'react-icons/lib/fa/facebook';
+import { injectIntl, intlShape } from "react-intl";
 
 import { variables as styleVariables } from '../../helpers/style';
 import Trans from '../../locales/Trans';
 
 const Footer = (props) => {
-  const { classes } = props;
+  const { intl, classes } = props;
+  const twitterLink = intl.formatMessage({id: 'social.link.twitter'});
+  const facebookLink = intl.formatMessage({id: 'social.link.facebook'});
   return (
     <Grid fluid className={classes.footer}>
       <Row>
@@ -35,8 +38,8 @@ const Footer = (props) => {
           <Row>
             <Col md={6} lg={6} className={classes.share}>
               <h3 className={classes.text}><Trans id="footer.follow" text="Follow us" /></h3>
-              <Button shape="circle" icon="twitter" />
-              <Button shape="circle" className={classes.faButton}><FaFacebook className={classes.faIcon} /></Button>
+              <Button href={twitterLink} target="_blank" shape="circle" icon="twitter" />
+              <Button href={facebookLink} target="_blank" shape="circle"><FaFacebook className={classes.faIcon} /></Button>
             </Col>
             <Col md={6} lg={6} className={classes.gap}>
               <h3 className={classes.text}><Trans id="footer.website" text="IOM website" /></h3>
@@ -87,7 +90,10 @@ const styles = {
     paddingTop: '10px',
     paddingBottom: '10px',
     float: 'right',
-    '& $button': {
+    '& $button, a': {
+      '&:last-of-type': {
+        marginLeft: 5,
+      },
       color: '#0033a1',
       '&:hover': {
         color: '#35b6b4',
@@ -102,4 +108,8 @@ const styles = {
   }
 };
 
-export default injectSheet(styles)(Footer);
+Footer.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectSheet(styles)(injectIntl(Footer));

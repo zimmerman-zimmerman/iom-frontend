@@ -213,5 +213,8 @@
   "contact.info.email": "info@iom.int",
   "contact.info.email.label": "Email",
   "contact.info.website": "https://www.iom.int",
-  "contact.info.website.label": "Website"
+  "contact.info.website.label": "Website",
+  "social.link.twitter": "https://twitter.com/UNmigration",
+  "social.link.facebook": "https://www.facebook.com/IOM",
+  "social.link.rss": "http://www.iom.int/rss-feeds"
 }
