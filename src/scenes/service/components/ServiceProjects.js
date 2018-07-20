@@ -13,7 +13,7 @@ class ServiceProjects extends BaseFilter {
     this.state = {
       params: {
         fields: 'id,iati_identifier,reporting_organisation,activity_dates,aggregations,sectors,title,humanitarian',
-        ordering: '-aggregations.activity.budget_value',
+        ordering: '-activity_budget_value',
         convert_to: 'usd',
         hierarchy: 1,
         sector: get(props, 'sectorId'),
@@ -25,7 +25,15 @@ class ServiceProjects extends BaseFilter {
     };
   }
 
-  componentDidMount() {
+  handleSortBy(value) {
+    const newParams = this.state.params;
+    newParams.ordering = value;
+    this.setState({params: newParams}, () => {
+      this.getProjects();
+    });
+  }
+
+  getProjects() {
     const { dispatch } = this.props;
     const { params } = this.state;
     if (dispatch) {
@@ -37,9 +45,19 @@ class ServiceProjects extends BaseFilter {
     }
   }
 
+  componentDidMount() {
+    this.getProjects();
+  }
+
   render() {
     return (
-      <ProjectsTable data={get(this.props.serviceProjects, 'data')} fieldName="page" rootComponent={this}/>
+      <ProjectsTable
+        data={get(this.props.serviceProjects, 'data')}
+        fieldName="page"
+        rootComponent={this}
+        selectedSortBy={this.state.params.ordering}
+        handleSortBy={e => this.handleSortBy(e)}
+      />
     )
   }
 }

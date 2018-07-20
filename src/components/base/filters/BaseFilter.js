@@ -18,6 +18,7 @@ class BaseFilter extends Component {
       },
       update: false,
       filters: {values: {}, changed: false},
+      donorTableSortBy: 'participating_organisation',
     };
   }
 

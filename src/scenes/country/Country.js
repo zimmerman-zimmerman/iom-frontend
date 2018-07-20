@@ -40,6 +40,24 @@ class Country extends BaseFilter {
     }
   }
 
+  handleDonorSortBy(value) {
+    const { dispatch } = this.props;
+    const { params } = this.state;
+    const code = get(this.props, 'match.params.code');
+    this.setState({ donorTableSortBy: value });
+    if (dispatch && code) {
+      if (params) {
+        this.actionRequest(
+          extend({}, { ...params, order_by: value }, {recipient_country: code.toUpperCase()}, {page_size: 30}),
+          'participating_organisation',
+          actions.countryDonorsRequest
+        );
+      } else {
+        dispatch(actions.countryDonorsInitial());
+      }
+    }
+  }
+
   render() {
     const { country, countryDonors, countryActivities, classes, project } = this.props;
     const countryResult = get(this.props, 'country.data.results[0]');
@@ -60,7 +78,11 @@ class Country extends BaseFilter {
                 <h2 className="title">
                   <Trans id="country.table.donors.title" defaultMessage="Where the funds come from"/>
                 </h2>
-                <TableDonors data={donors}/>
+                <TableDonors
+                  data={donors}
+                  sortBy={this.state.donorTableSortBy}
+                  handleDonorSortBy={e => this.handleDonorSortBy(e)}
+                />
               </Col>
               <Col xs={12} md={6} lg={6}>
                 <CountryMap data={get(countryResult, 'recipient_country')}/>

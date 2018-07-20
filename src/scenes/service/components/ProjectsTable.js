@@ -8,8 +8,16 @@ import {connect} from "react-redux";
 import {injectIntl, intlShape} from "react-intl";
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
+import SortBy from '../../../components/base/SortBy';
 
 import Trans from '../../../locales/Trans';
+
+const sortByOptions = [
+  { value: 'title', label: 'Name (a - z)' },
+  { value: '-title', label: 'Name (z - a)' },
+  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
+  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
+];
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -22,7 +30,7 @@ class ProjectsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, classes } = this.props;
+    const { intl, data, classes, selectedSortBy, handleSortBy } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
@@ -44,6 +52,14 @@ class ProjectsTable extends BaseFilter {
         <span>{value ? intl.formatMessage({id: 'service.projects.yes', defaultMessage: 'Yes'}) :
           intl.formatMessage({id: 'service.projects.no', defaultMessage: 'No'})}
         </span>
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={selectedSortBy}
+          handleChange={e => handleSortBy(e)}
+        />,
+      key: 'sort_by',
     }];
     return(
       <div className={classes.projectsTable}>

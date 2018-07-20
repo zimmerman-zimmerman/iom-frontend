@@ -53,7 +53,7 @@ class Services extends BaseFilter {
                     {data ? <ServicesCharts data={data}/> : null}
                   </Col>
                   <Col xs={12} className="service-table">
-                    {data ? <ServicesTable data={data}/> : null}
+                    {data ? <ServicesTable rootComponent={this} data={data}/> : null}
                   </Col>
                 </Row>
               </Col>

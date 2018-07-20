@@ -1,16 +1,36 @@
 import React from 'react';
 import Table from 'antd/es/table';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import BaseFilter from '../../../components/base/filters/BaseFilter';
 import * as actions from '../../../services/actions';
-import extend from 'lodash/extend';
 import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
 import { Link } from 'react-router-dom';
+import SortBy from '../../../components/base/SortBy';
 
-class ServiceDonors extends BaseFilter {
+const sortByOptions = [
+  { value: 'participating_organisation', label: 'Name (a - z)' },
+  { value: '-participating_organisation', label: 'Name (z - a)' },
+  { value: 'value', label: 'Total Budget (asc)' },
+  { value: '-value', label: 'Total Budget (desc)' },
+];
+
+class ServiceDonors extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      params: {
+        aggregations: 'activity_count,incoming_fund,disbursement,expenditure,value',
+        convert_to: 'usd',
+        page_size: 10,
+        group_by: 'participating_organisation',
+        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
+        order_by: 'participating_organisation',
+      }
+    };
+  }
+  
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
@@ -19,17 +39,27 @@ class ServiceDonors extends BaseFilter {
     });
     return data;
   }
+  
+  handleSortBy(value) {
+    const newParams = this.state.params;
+    newParams.order_by = value;
+    this.setState({params: newParams}, () => {
+      this.getDonors();
+    });
+  }
 
-  componentDidMount() {
+  getDonors() {
     const { dispatch, sectorId } = this.props;
     const { params } = this.state;
     if (dispatch && sectorId) {
-      this.actionRequest(
-        extend({}, params, {sector: sectorId}), 'participating_organisation', actions.serviceDonorsRequest
-      );
+      dispatch(actions.serviceDonorsRequest({ ...params, sector: sectorId }));
     } else {
-      actions.serviceDonorsInitial();
+      dispatch(actions.serviceDonorsInitial());
     }
+  }
+
+  componentDidMount() {
+    this.getDonors()
   }
 
   render() {
@@ -48,6 +78,14 @@ class ServiceDonors extends BaseFilter {
       key: 'value',
       className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={this.state.params.order_by}
+          handleChange={e => this.handleSortBy(e)}
+        />,
+      key: 'sort_by',
     }];
     return(
       <div className={classes.serviceDonors}>

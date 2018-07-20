@@ -66,6 +66,9 @@ th.number, td.number {
 tbody > tr > td {
   word-break: normal !important;
 }
+.ant-dropdown-menu-item {
+  padding: 10px 20px;
+}
 
 /* Prevent to auto zoom on mobile */
 input,

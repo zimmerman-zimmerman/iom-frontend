@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from "react-redux";
 import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
 
@@ -41,7 +42,6 @@ class Donors extends BaseFilter {
               <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
                        pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
                        singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
-
               />
             </Col>
             <Col xs={12} md={8} lg={9}>
@@ -57,12 +57,17 @@ class Donors extends BaseFilter {
               </Row>
               <Row>
                 <Col xs={12}>
-                  <DonorsTreeMap data={get(data, 'results') ? data.results : []}/>
+                  <DonorsTreeMap
+                    data={sortBy(get(data, 'results', []), function(e) {
+                        return e.value;
+                      }).reverse()
+                    }
+                    />
                 </Col>
               </Row>
               <Row>
                 <Col xs={12}>
-                  <DonorsTable data={data} />
+                  <DonorsTable rootComponent={this} data={data} />
                 </Col>
               </Row>
             </Col>

@@ -134,10 +134,7 @@ class Projects extends BaseFilter {
                 </MediaQuery>
                 <Row>
                   <Col xs={12}>
-                    <ProjectsTable data={existProjects ? dataProjects : null}
-                                   fieldName="page"
-                                   rootComponent={this}
-                    />
+                    <ProjectsTable data={existProjects ? dataProjects : null} rootComponent={this}/>
                   </Col>
                 </Row>
               </Col>
