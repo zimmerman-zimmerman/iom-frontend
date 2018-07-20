@@ -14,6 +14,7 @@ import SearchFilter from './SearchFilter';
 import AccordionFilter from './AccordionFilter';
 import Filter from './Filter';
 import StartEndDateFilter from './StartEndDateFilter';
+import SliderFilter from './SliderFilter';
 import * as actions from '../../../services/actions';
 import {size as screenSize} from "../../../helpers/screen";
 
@@ -90,6 +91,15 @@ class Filters extends Component {
                 groupBy="participating_organisation"
                 fieldName="participating_organisation_ref"
                 actionRequest={actions.transactionsAggregationsParticipatingOrganisationRequest}
+        />
+    },
+    {
+      headerString: intl.formatMessage({id: 'filters.slider.funding', defaultMessage: 'Funding amount'}),
+      component:
+        <SliderFilter
+          minValue={0}
+          maxValue={1000000}
+          rootComponent={rootComponent}
         />
     }];
   }
