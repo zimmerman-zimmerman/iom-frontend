@@ -5,6 +5,7 @@ import Menu from 'antd/es/menu';
 import Icon from 'antd/es/icon';
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
+import ReactTooltip from 'react-tooltip';
 
 import Trans from '../../../locales/Trans';
 
@@ -80,8 +81,10 @@ const ProjectBanner= (props) => {
             <Trans id="project.banner.left.menu.overview" defaultMessage="Overview"/>
           </Menu.Item>
           <Menu.Item key="related">
-            <Icon type="book"/>
-            <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
+            <span data-tip="Under construction" data-effect="solid" data-place="top" data-type="light">
+              <Icon type="book"/>
+              <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
+            </span>
           </Menu.Item>
         </Menu>
         <div className="description">{get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}</div>
@@ -92,6 +95,7 @@ const ProjectBanner= (props) => {
         </span>
         <RightColumn data={data} />
       </Col>
+      <ReactTooltip />
     </Row>
   )
 };

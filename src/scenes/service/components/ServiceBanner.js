@@ -5,6 +5,7 @@ import { format } from 'd3-format';
 import injectSheet from 'react-jss';
 import Menu from 'antd/es/menu';
 import Icon from 'antd/es/icon';
+import ReactTooltip from 'react-tooltip';
 
 import Trans from '../../../locales/Trans';
 
@@ -81,8 +82,10 @@ class ServiceBanner extends Component {
               <Trans id="service.banner.left.menu.overview" defaultMessage="Overview"/>
             </Menu.Item>
             <Menu.Item key="related">
-              <Icon type="book"/>
-              <Trans id="service.banner.left.menu.detail" defaultMessage="detail report"/>
+              <span data-tip="Under construction" data-effect="solid" data-place="top" data-type="light">
+                <Icon type="book"/>
+                <Trans id="service.banner.left.menu.detail" defaultMessage="detail report"/>
+              </span>
             </Menu.Item>
           </Menu>
           <div className="description">
@@ -95,6 +98,7 @@ class ServiceBanner extends Component {
           </span>
           <RightColumn data={data} />
         </Col>
+        <ReactTooltip/>
       </Row>
     )
   }
