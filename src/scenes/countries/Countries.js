@@ -15,6 +15,7 @@ import BaseFilter from '../../components/base/filters/BaseFilter';
 import Trans from '../../locales/Trans';
 import Page from '../../components/base/Page';
 import {size as screenSize} from "../../helpers/screen";
+import { pageContainer } from '../../helpers/style';
 
 class Countries extends BaseFilter {
   componentDidMount() {
@@ -24,8 +25,10 @@ class Countries extends BaseFilter {
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'recipient_country', actions.countriesRequest);
+        this.actionRequest(params, 'participating_organisation', actions.countryDonorsRequest);
       } else {
         dispatch(actions.countriesInitial());
+        dispatch(actions.countryDonorsInitial());
       }
     }
   }
@@ -35,9 +38,10 @@ class Countries extends BaseFilter {
   }
 
   render() {
-    const { countries, classes } = this.props;
+    const { countries, donors, classes } = this.props;
     const { showSummary } = this.state;
     const data = get(countries, 'data');
+    const donorsCount = get(donors, 'data.count');
     const showMap = get(data, 'results[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -56,7 +60,7 @@ class Countries extends BaseFilter {
     return (
       <Spin spinning={countries.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <Grid fluid>
+          <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
                 <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
@@ -68,10 +72,12 @@ class Countries extends BaseFilter {
               <Col xs={12} md={8} lg={9} className={classes.map}>
                 <Row>
                   <Col xs={12} className={classes.gapBottom}>
-                    <h2 className="Title">
+                    <h1 className={classes.title}>
                       <Trans id="countries.title" defaultMessage="Countries"/>
+                    </h1>
+                    <h2>
+                      <Trans id="countries.description" defaultMessage="Description"/>
                     </h2>
-                    <Trans id="countries.description" defaultMessage="Description"/>
                   </Col>
                 </Row>
                 <Row>
@@ -99,6 +105,7 @@ class Countries extends BaseFilter {
                                    onHideSummary={this.onHideSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
+                                   donorsCount={donorsCount}
                           />
                         </div>
                       </Col> : null
@@ -124,15 +131,20 @@ class Countries extends BaseFilter {
 Countries.defaultProps = {
   groupBy: 'recipient_country',
   filterRequest: actions.countriesRequest,
+  secondFilterRequest: actions.countryDonorsRequest,
 };
 
 const mapStateToProps = (state, ) => {
   return {
-    countries: state.countries
+    countries: state.countries,
+    donors: state.countryDonors,
   }
 };
 
 const styles = {
+  title: {
+    fontWeight: 300,
+  },
   map: {
     marginTop: 15,
     '& .leaflet-control-attribution.leaflet-control': {

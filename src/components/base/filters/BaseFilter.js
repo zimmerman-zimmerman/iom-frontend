@@ -49,10 +49,13 @@ class BaseFilter extends Component {
     const rootComponent = get(this.props, 'rootComponent');
     if (rootComponent) {
       const { filters } = rootComponent.state;
-      const { groupBy, filterRequest } = rootComponent.props;
+      const { groupBy, filterRequest, secondFilterRequest } = rootComponent.props;
       if (filters.changed) {
         const { params } = rootComponent.state;
         this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+        if (secondFilterRequest) {
+          this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);          
+        }
         filters.changed = false;
         rootComponent.setState({filters: filters})
       }
@@ -62,7 +65,8 @@ class BaseFilter extends Component {
 
 BaseFilter.defaultProps = {
   groupBy: '',
-  filterRequest: null
+  filterRequest: null,
+  secondFilterRequest: null,
 };
 
 export default BaseFilter;

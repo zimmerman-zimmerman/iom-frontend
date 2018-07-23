@@ -7,12 +7,12 @@ import Card from 'antd/es/card';
 import { pieRadialChart as style } from "../../helpers/style";
 
 const PieRadialChart = (props) => {
-  const {data, prefixLegend, innerRadius} = props;
+  const {data, prefixLegend, innerRadius, outerRadius} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
       <Card className="transparent-white">
-        <span className="value">{prefixLegend} {format(",.2f")(data.value)}</span>
+        <span className="value">{prefixLegend} {format(",.0f")(data.value)}</span>
       </Card> : null;
   };
   return (
@@ -20,7 +20,7 @@ const PieRadialChart = (props) => {
       <PieChart>
         <Pie
           data={data}
-          outerRadius={innerRadius + 35}
+          outerRadius={outerRadius}
           innerRadius={innerRadius}
           fill={style.fillColor}
           dataKey="value"

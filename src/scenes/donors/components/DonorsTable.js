@@ -7,6 +7,7 @@ import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
+import { tableHeader } from '../../../helpers/style';
 
 const sortByOptions = [
   { value: 'participating_organisation', label: 'Name (a - z)' },
@@ -43,7 +44,7 @@ class DonorsTable extends BaseFilter {
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       dataIndex: 'participating_organisation',
       key: 'participating_organisation',
       width: '55%',
@@ -55,16 +56,16 @@ class DonorsTable extends BaseFilter {
         );
       },
     }, {
-      title: intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(",.2f")(value)}</span>
+      render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
-      title: intl.formatMessage({
+      title: <span style={tableHeader}>{intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',
         defaultMessage: 'Implementation projects'
-      }),
+      })}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
       className: 'number',

@@ -10,9 +10,9 @@ const BannerImage = (props) => {
       <Row middle="xs" style={{height: height}}>
         <Col xs={12} md={12} lg={12}>
           <Row>
-            <Col xs={9} md={6} lg={6}>
+            <Col xs={12} md={6} lg={5}>
               <Card className={classes.card}>
-                <span className={classes.title}>{title}</span><br />
+                <span className={classes.title}>{title}</span>
                 <span className={classes.description}>{description}</span><br /><br />
                 {size === 'lg' ? <span className={classes.detail}>{detail}</span> : null}
               </Card>
@@ -38,13 +38,27 @@ const styles = {
     color: 'white',
   },
   title: {
-    fontSize: 'calc(1em + 1vw)',
+    fontSize: 44,
+    fontWeight: 300,
+    display: 'block',
+    height: 73,
+    '@media (max-width: 768px)': {
+      fontSize: 26,
+    }
   },
   description: {
-    fontSize: 'calc(0.5em + 1vw)',
+    fontSize: 21,
+    fontWeight: 300,
+    '@media (max-width: 768px)': {
+      fontSize: 16,
+    }
   },
   detail: {
-    fontSize: 'calc(0.25em + 1vw)',
+    fontSize: 21,
+    fontWeight: 300,
+    '@media (max-width: 768px)': {
+      fontSize: 16,
+    }
   }
 };
 

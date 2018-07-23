@@ -158,14 +158,10 @@ class GeoMap extends Component {
             <span className="inline-block">
               <h5>{feature.properties.name}</h5>
             </span>
-            {false && <span className="inline-block action-icons">
-              <i className="material-icons">favorite_border</i>
-              <i className="material-icons">more_vert</i>
-            </span>}
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              <b>Total budget:</b> USD {format(",.2f")(feature.properties.budgetValue)}
+              <b>Total budget:</b> USD {format(",.0f")(feature.properties.budgetValue)}
             </label>
           </div>
           <div style={{ marginTop: "10px" }}>
@@ -236,7 +232,7 @@ class GeoMap extends Component {
               worldCopyJump={true}
               scrollWheelZoom={false}
               style={{ height: this.props.height, zIndex: 0 }}>
-              <ZoomControl position="topright" />
+              <ZoomControl position="bottomright" />
 
               <TileLayer
                 url="https://api.mapbox.com/styles/v1/zimmerman2014/cjg5196po1i442sp5gd40vspl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemltbWVybWFuMjAxNCIsImEiOiJhNUhFM2YwIn0.sedQBdUN7PJ1AjknVVyqZw"
@@ -255,6 +251,10 @@ class GeoMap extends Component {
                 }}
                 onEachFeature={this.onEachFeature}
               />
+
+              <Control position="topleft" className="disclaimer-box">
+                <div>Disclaimer</div>
+              </Control>
 
               <Control position="bottomleft" className="supportLegend">
                 <div>

@@ -7,6 +7,8 @@ import Table from 'antd/es/table';
 import { format } from "d3-format";
 import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
+import { tableHeader } from '../../../helpers/style';
+import injectSheet from "react-jss";
 
 const sortByOptions = [
   { value: 'sector', label: 'Name (a - z)' },
@@ -38,11 +40,11 @@ class ServicesTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, rootComponent } = this.props;
+    const { intl, data, classes, rootComponent } = this.props;
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}</span>,
       dataIndex: 'sector.name',
       key: 'sector',
       className: 'Title',
@@ -50,17 +52,17 @@ class ServicesTable extends BaseFilter {
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     }, {
-      title: intl.formatMessage({id: 'services.table.header.code', defaultMessage: 'Code'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.code', defaultMessage: 'Code'})}</span>,
       dataIndex: 'sector.code',
       key: 'code',
     }, {
-      title: intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(',')(value)}</span>,
+      render: value => <span>{usd}{format(',.0f')(value)}</span>,
     }, {
-      title: intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
       className: 'number',
@@ -75,7 +77,7 @@ class ServicesTable extends BaseFilter {
     }];
     return (
       <Table dataSource={this.addKey(data)} columns={columns} size="middle"
-                   pagination={false} scroll={{ x: 900 }}
+                   pagination={false} scroll={{ x: 900 }} className={classes.table}
       />
     )
   }
@@ -89,4 +91,14 @@ const mapStateToProps = (state, ) => {
   return {}
 };
 
-export default connect(mapStateToProps)(injectIntl(ServicesTable));
+const styles = {
+  table: {
+    '& tr': {
+      '& td, th': {
+        paddingLeft: '0px !important',
+      }
+    }
+  }
+}
+
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ServicesTable)));

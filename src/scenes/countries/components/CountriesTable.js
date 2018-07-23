@@ -7,6 +7,7 @@ import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
+import { tableHeader } from '../../../helpers/style';
 
 const sortByOptions = [
   { value: 'recipient_country', label: 'Name (a - z)' },
@@ -43,24 +44,24 @@ class CountriesTable extends BaseFilter {
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}</span>,
       dataIndex: 'recipient_country',
       key: 'recipient_country',
       render: recipient_country =>
         <Link to={`/countries/${recipient_country.code.toLowerCase()}`}>{recipient_country.name}</Link>,
     }, {
-      title: intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(",.2f")(value)}</span>
+      render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
-      title: intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}</span>,
       dataIndex: 'activity_count',
       className: 'number',
       key: 'count',
     },{
-      title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}</span>,
       dataIndex: 'recipient_country',
       key: 'region',
       render: recipient_country => <span>{recipient_country.region.name}</span>,

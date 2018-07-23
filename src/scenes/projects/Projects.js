@@ -16,6 +16,7 @@ import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from '../../helpers/screen';
 import Summary from '../../components/base/filters/Summary';
+import { pageContainer } from '../../helpers/style';
 
 
 class Projects extends BaseFilter {
@@ -42,6 +43,7 @@ class Projects extends BaseFilter {
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
     this.actionRequest(extend({}, params, filters.values), 'recipient_country', actions.countriesRequest);
+    this.actionRequest(extend({}, params, filters.values), 'participating_organisation', actions.countryDonorsRequest);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -61,6 +63,7 @@ class Projects extends BaseFilter {
       } else {
         dispatch(actions.projectsInitial());
         dispatch(actions.countriesInitial());
+        dispatch(actions.countryDonorsInitial());
       }
     }
   }
@@ -70,9 +73,10 @@ class Projects extends BaseFilter {
   }
 
   render() {
-    const { projects, countries, classes } = this.props;
+    const { projects, countries, donors, classes } = this.props;
     const { showSummary } = this.state;
     const dataProjects = get(projects, 'data');
+    const donorsCount = get(donors, 'data.count');
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data');
     const showMap = get(dataCountries, 'results[0].recipient_country.code');
@@ -92,7 +96,7 @@ class Projects extends BaseFilter {
     return (
       <Spin spinning={projects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <Grid fluid>
+          <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
                 <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}
@@ -126,6 +130,7 @@ class Projects extends BaseFilter {
                                    onHideSummary={this.onHideSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
+                                   donorsCount={donorsCount}
                           />
                         </div>
                       </Col> : null
@@ -149,19 +154,23 @@ class Projects extends BaseFilter {
 Projects.defaultProps = {
   groupBy: null,
   filterRequest: actions.projectsRequest,
+  secondFilterRequest: actions.countryDonorsRequest,
 };
 
 
 const mapStateToProps = (state, ) => {
   return {
     projects: state.projects,
-    countries: state.countries
+    countries: state.countries,
+    donors: state.countryDonors,
   }
 };
 
 const styles = {
   title: {
-    marginTop: 12
+    marginTop: 12,
+    fontSize: 36,
+    fontWeight: 300,
   },
   map: {
     '& .leaflet-control-attribution.leaflet-control': {

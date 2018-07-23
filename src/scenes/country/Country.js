@@ -15,6 +15,8 @@ import CountryMap from "../../components/maps/CountryMap";
 import TableProjects from "./components/TableProjects";
 import Trans from '../../locales/Trans';
 import ContactProject from './components/ContactProject';
+import SectorsMap from './components/SectorsMap';
+import { pageContainer } from '../../helpers/style';
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -27,6 +29,11 @@ class Country extends BaseFilter {
           extend({}, params, {recipient_country: code.toUpperCase()}),
           'recipient_country',
           actions.countryRequest
+        );
+        this.actionRequest(
+          extend({}, params, {recipient_country: code.toUpperCase()}, {page_size: 30}),
+          'sector',
+          actions.countrySectorsRequest
         );
         this.actionRequest(
           extend({}, params, {recipient_country: code.toUpperCase()}, {page_size: 30}),
@@ -59,9 +66,10 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const { country, countryDonors, countryActivities, classes, project } = this.props;
+    const { country, countryDonors, countryActivities, countrySectors, classes, project } = this.props;
     const countryResult = get(this.props, 'country.data.results[0]');
     const donors = get(this.props, 'countryDonors.data.results');
+    const sectors = get(this.props, 'countrySectors.data.results', []);
     const firstProject = get(countryActivities, 'data.results[0]');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -69,10 +77,10 @@ class Country extends BaseFilter {
       {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
     ];
     return (
-      <Spin spinning={country.request || countryDonors.request || countryActivities.request || project.request}>
+      <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <BannerCountry data={countryResult} />
-          <Grid fluid className={classes.country}>
+          <Grid className={classes.country} style={pageContainer} fluid>
             <Row middle="xs" className="gap">
               <Col xs={12} md={6} lg={6}>
                 <h2 className="title">
@@ -88,6 +96,14 @@ class Country extends BaseFilter {
                 <CountryMap data={get(countryResult, 'recipient_country')}/>
               </Col>
             </Row>
+            <Row className="gap">
+              <Col xs={12}>
+                <h2 className="title">
+                  <Trans id="country.sectors.map.title" defaultMessage="Explore what sectors the funds go to"/>
+                </h2>
+                <SectorsMap data={sectors} />
+              </Col>
+            </Row>
             <Row>
               <Col xs={12}>
                 <h2 className="title">
@@ -96,7 +112,7 @@ class Country extends BaseFilter {
                 <TableProjects countryCode={ get(this.props, 'match.params.code')}  />
               </Col>
             </Row>
-            {firstProject ? <ContactProject id={firstProject.id} /> : null}
+            {firstProject ? <ContactProject id={firstProject.id} code={get(this.props, 'match.params.code')} /> : null}
           </Grid>
         </Page>
       </Spin>
@@ -109,20 +125,26 @@ const mapStateToProps = (state, ) => {
     country: state.country,
     countryDonors: state.countryDonors,
     countryActivities: state.countryActivities,
+    countrySectors: state.countrySectors,
     project: state.project
   }
 };
 
 const styles = {
   country: {
+    paddingLeft: '137px !important',
+    '@media (max-width: 767px)': {
+      padding: '0px 25px !important',
+    },
     '& .gap': {
-      padding: '20px 0'
+      padding: '30px 0'
     },
     '& .no-padding': {
       padding: 0,
     },
     '& .title': {
-      color: '#1f4283'
+      color: '#1f4283',
+      fontSize: 26,
     }
   }
 };
