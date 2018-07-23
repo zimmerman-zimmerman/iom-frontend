@@ -83,6 +83,15 @@ export function* countryDonorsRequest(action) {
   }
 }
 
+export function* countrySectorsRequest(action) {
+  try {
+    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    yield put(actions.countrySectorsSuccess(response));
+  } catch (error) {
+    yield put(actions.countrySectorsFailed(error));
+  }
+}
+
 export function* countryActivitiesRequest(action) {
   try {
     const response = yield call(api.activitiesRequest, action.values);
@@ -229,6 +238,7 @@ function* sagas() {
     takeLatest('COUNTRIES_REQUEST', countriesRequest),
     takeLatest('COUNTRY_REQUEST', countryRequest),
     takeLatest('COUNTRY_DONORS_REQUEST', countryDonorsRequest),
+    takeLatest('COUNTRY_SECTORS_REQUEST', countrySectorsRequest),
     takeLatest('COUNTRY_ACTIVITIES_REQUEST', countryActivitiesRequest),
     takeLatest('SERVICES_REQUEST', servicesRequest),
     takeLatest('SERVICE_REQUEST', serviceRequest),
