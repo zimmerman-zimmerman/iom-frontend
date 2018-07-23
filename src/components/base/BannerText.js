@@ -22,6 +22,7 @@ const styles = {
       fontSize: 'calc(1.8em + 1vw)',
       fontStyle: 'normal',
       fontStretch: 'normal',
+      fontWeight: 300,
       letterSpacing: 'normal',
       color: '#0033a1',
       padding: 'calc(1em + 1vw) 0',

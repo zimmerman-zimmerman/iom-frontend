@@ -53,6 +53,8 @@ const styles = {
     paddingBottom: 30,
     '& .title': {
       color: '#0033a1',
+      fontWeight: 600,
+      marginBottom: 20,
     },
     '& .leaflet-bottom': {
       display: 'none'

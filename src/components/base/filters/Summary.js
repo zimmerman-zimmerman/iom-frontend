@@ -12,7 +12,7 @@ import Trans from '../../../locales/Trans';
 
 class Summary extends Component {
   render() {
-    const { data, fieldValue, fieldCount, onHideSummary, classes } = this.props;
+    const { data, fieldValue, fieldCount, onHideSummary, donorsCount, classes } = this.props;
     let totalBudget = 0;
     let totalActivity = 0;
     if (data) {
@@ -36,7 +36,7 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col xs={12} className="field">
-            <Trans id="summary.budget" defaultMessage="Total budget"/>
+            <Trans id="summary.budget" defaultMessage="total budget"/>
           </Col>
         </Row>
         <Row className="gap-row">
@@ -46,7 +46,17 @@ class Summary extends Component {
         </Row>
         <Row>
           <Col xs={12} className="field">
-            <Trans id="summary.projects" defaultMessage="Projects"/>
+            <Trans id="summary.projects" defaultMessage="projects"/>
+          </Col>
+        </Row>
+        <Row className="gap-row">
+          <Col xs={12}>
+            <strong>{donorsCount}</strong>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} className="field">
+            <Trans id="summary.donors" defaultMessage="donors"/>
           </Col>
         </Row>
       </Card>
@@ -58,24 +68,35 @@ Summary.propTypes = {
   data: PropsType.array,
   fieldValue: PropsType.string,
   fieldCount: PropsType.string,
-  onHideSummary: PropsType.func
+  onHideSummary: PropsType.func,
+  donorsCount: PropsType.number,
 };
 
 
 const styles = {
   summary: {
+    '& .ant-card-body': {
+      padding: 12,
+    },
+    borderLeftStyle: 'none',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },
     height: 450,
+    '& h3': {
+      marginBottom: 0,
+      fontWeight: 'bold',
+    },
     '& .field': {
       color: '#959595',
       fontSize: 11
     },
     '& .button-hide': {
       position: 'absolute',
-      right: 20,
-      top: 25,
+      borderRadius: 2,
+      right: 12,
+      top: 12,
     },
     '& .gap-row': {
       marginTop: 15

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
+import { tableHeader } from '../../../helpers/style';
 import { Link } from 'react-router-dom';
 
 class ServiceDonors extends BaseFilter {
@@ -37,17 +38,17 @@ class ServiceDonors extends BaseFilter {
     const data = get(serviceDonors, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       key: 'participating_organisation',
       width: '50%',
       render: obj => 
         <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
-      title: intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
-      render: value => <span>{usd}{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.0f')(value)}</span>
     }];
     return(
       <div className={classes.serviceDonors}>
@@ -58,6 +59,7 @@ class ServiceDonors extends BaseFilter {
                columns={columns}
                size="middle"
                loading={serviceDonors.request}
+               className={classes.table}
         />
       </div>
     )
@@ -77,8 +79,17 @@ const mapStateToProps = (state, ) => {
 const styles = {
   serviceDonors: {
     paddingTop: 20,
+    marginRight: 10,
     '& .title': {
       color: '#0033a1',
+      fontWeight: 600,
+    }
+  },
+  table: {
+    '& tr': {
+      '& td, th': {
+        paddingLeft: '0px !important',
+      }
     }
   }
 };

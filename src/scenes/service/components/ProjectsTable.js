@@ -10,6 +10,7 @@ import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 
 import Trans from '../../../locales/Trans';
+import { tableHeader } from '../../../helpers/style';
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -25,19 +26,19 @@ class ProjectsTable extends BaseFilter {
     const { intl, data, classes } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
-      title: intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
       key: 'title.narratives[0].text',
       width: '45%',
       render: obj => 
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     }, {
-      title: intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
       className: 'number',
-      render: value => <span>{usd}{format(',.2f')(value)}</span>
+      render: value => <span>{usd}{format(',.0f')(value)}</span>
     }, {
-      title: intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}</span>,
       dataIndex: 'humanitarian',
       key: 'humanitarian',
       render: value =>
@@ -54,6 +55,7 @@ class ProjectsTable extends BaseFilter {
                columns={columns}
                pagination={false}
                scroll={{ x: 650 }}
+               className={classes.table}
         />
         <Pagination className="pagination"
                     size="small"
@@ -78,9 +80,19 @@ const styles = {
     paddingTop: 20,
     '& .title': {
       color: '#0033a1',
+      fontWeight: 600,
     },
     '& .pagination': {
       padding: '20px 0',
+    }
+  },
+  table: {
+    '& tr': {
+      '& td, th': {
+        paddingLeft: '0px !important',
+        paddingTop: 12,
+        paddingBottom: 12,
+      }
     }
   }
 };

@@ -31,7 +31,11 @@ import {
   TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_INITIAL,
   TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_REQUEST,
   TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_SUCCESS,
-  TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_FAILED
+  TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_FAILED,
+  COUNTRY_SECTORS_INITIAL,
+  COUNTRY_SECTORS_REQUEST,
+  COUNTRY_SECTORS_SUCCESS,
+  COUNTRY_SECTORS_FAILED
 } from '../actions/index';
 
 const initial = {
@@ -231,6 +235,21 @@ function countryDonors(state=initial, action) {
     case COUNTRY_DONORS_SUCCESS:
       return updateSuccess(state, action);
     case COUNTRY_DONORS_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
+function countrySectors(state=initial, action) {
+  switch (action.type) {
+    case COUNTRY_SECTORS_INITIAL:
+      return updateInitial(state, action);
+    case COUNTRY_SECTORS_REQUEST:
+      return updateRequest(state, action);
+    case COUNTRY_SECTORS_SUCCESS:
+      return updateSuccess(state, action);
+    case COUNTRY_SECTORS_FAILED:
       return updateFailed(state, action);
     default:
       return state;
@@ -472,6 +491,7 @@ const reducers = {
   countries,
   country,
   countryDonors,
+  countrySectors,
   countryActivities,
   services,
   service,

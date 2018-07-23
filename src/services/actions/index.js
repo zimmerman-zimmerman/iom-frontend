@@ -250,6 +250,34 @@ export function countryDonorsFailed(error) {
   }
 }
 
+export const COUNTRY_SECTORS_INITIAL = 'COUNTRY_SECTORS_INITIAL';
+export const COUNTRY_SECTORS_REQUEST = 'COUNTRY_SECTORS_REQUEST';
+export const COUNTRY_SECTORS_SUCCESS = 'COUNTRY_SECTORS_SUCCESS';
+export const COUNTRY_SECTORS_FAILED = 'COUNTRY_SECTORS_FAILED';
+export function countrySectorsInitial() {
+  return {
+    type: COUNTRY_SECTORS_INITIAL
+  }
+}
+export function countrySectorsRequest(values) {
+  return {
+    type: COUNTRY_SECTORS_REQUEST,
+    values: values
+  }
+}
+export function countrySectorsSuccess(data) {
+  return {
+    type: COUNTRY_SECTORS_SUCCESS,
+    data: data
+  }
+}
+export function countrySectorsFailed(error) {
+  return {
+    type: COUNTRY_SECTORS_FAILED,
+    error: error
+  }
+}
+
 export const COUNTRY_ACTIVITIES_INITIAL = 'COUNTRY_ACTIVITIES_INITIAL';
 export const COUNTRY_ACTIVITIES_REQUEST = 'COUNTRY_ACTIVITIES_REQUEST';
 export const COUNTRY_ACTIVITIES_SUCCESS = 'COUNTRY_ACTIVITIES_SUCCESS';
