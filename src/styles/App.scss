@@ -23,9 +23,24 @@
   li {
     text-transform: uppercase;
     &.ant-menu-item-selected {
-      border-bottom: 4px solid #35b6b4 !important;
+      border-bottom: 7px solid #35b6b4 !important;
     }
   }
+}
+.ant-menu-horizontal {
+  .ant-menu-item {
+    top: -2px;
+    font-weight: 300;
+  }
+}
+.ant-collapse-header {
+  padding-left: 0 !important;
+}
+.am-drawer-sidebar {
+  z-index: 3;
+}
+.am-drawer-overlay {
+  z-index: 2;
 }
 .transparent-white {
   background: rgba(255, 255, 255, 0.9);
@@ -42,6 +57,11 @@
 .recharts-tooltip-wrapper {
   opacity: 0.85;
 }
+.ant-breadcrumb {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* Table */
 .ant-table-thead > tr > th {
@@ -53,7 +73,10 @@ th.number, td.number {
   text-align: right !important;
 }
 .ant-pagination {
-  float: left !important;
+  // float: left !important;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0 !important;
 }
 .ant-pagination-item-active {
   color: white !important;

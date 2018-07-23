@@ -83,7 +83,7 @@
   }
   .leaflet-popup-content {
     margin: 0 !important;
-    width: 300px !important;
+    width: 220px !important;
   }
   .leaflet-container a {
     font-size: 18px;
@@ -113,11 +113,16 @@
   padding: 10px 0 10px 10px;
 
   a {
-    font-size: 16px !important;
+    font-weight: normal !important;
+    font-size: 12px !important;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   h5 {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 0 0 10px;
     color: #3398db;
     cursor: default;
@@ -127,11 +132,11 @@
   }
 
   label {
-    font-size: 14px;
+    font-size: 12px;
     margin: 0 0 5px 0;
     color: #454e53;
     font-family: $fontFamily;
-    font-weight: normal;
+    font-weight: 300;
   }
 
   .inline-block {
@@ -154,5 +159,5 @@
   }
 }
 .leaflet-top {
-  top: 84%;
+  top: 82%;
 }

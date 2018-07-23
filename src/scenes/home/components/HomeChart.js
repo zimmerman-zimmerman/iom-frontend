@@ -35,10 +35,11 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, nameField, valueField, localeButtonText, linkPage } = this.props;
+    const { reducer, localeTitle, intl, idField, nameField, valueField, localeButtonText, linkPage } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
+        id: get(item, idField),
         name: get(item, nameField),
         value: get(item, valueField),
       });
@@ -57,11 +58,11 @@ class HomeChart extends Component {
     };
     const StyledTitle = injectSheet(styles)(Title);
     const PieRadialChart = (props) => {
-      const {widthDivider } = props;
+      const { widthDivider } = props;
       const height = window.innerWidth / widthDivider;
       return (
         <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={height / 4}
+                                  innerRadius={height / 5} outerRadius={height / 4 + 35}
         />
       )
     };
@@ -77,7 +78,7 @@ class HomeChart extends Component {
                 <List.Item>
                   <List.Item.Meta
                     avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
-                    title={item.name}
+                    title={<Link to={`${linkPage}/${item.id}`}>{item.name}</Link>}
                   />
                 </List.Item>
               )}
@@ -127,6 +128,7 @@ const styles = {
   title: {
     padding: '30px 20px 0 20px',
     fontSize: 'calc(1em + 1vw)',
+    fontWeight: 300,
     height: 90,
     '@media only screen (max-width: 1033px)': {
       height: 80,
@@ -136,10 +138,14 @@ const styles = {
     '@media only screen and (min-width: 992px)': {
       height: 350,
     },
+    '@media only screen and (max-width: 767px)': {
+      padding: '0 0 30px 0',
+    },
     padding: '0 40px 30px 40px',
     '& .ant-badge-dot': {
-      height: 8,
-      width: 8,
+      height: 14,
+      width: 14,
+      boxShadow: '3px 3px 6px 0 rgba(0, 0, 0, 0.16)',
     },
     '& .ant-list-item-meta-avatar': {
       marginTop: 7,
@@ -167,8 +173,9 @@ const styles = {
     marginTop: 80,
     '@media only screen and (max-width: 767px)': {
       marginTop: 0,
+      padding: '0 0 30px 0',
     },
-    padding: '0 40px 30px 40px',
+    padding: '0 40px 95px 40px',
     '& .ant-btn': {
       width: '100%',
       color: 'white',

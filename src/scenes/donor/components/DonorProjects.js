@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Table from 'antd/es/table';
 import Pagination from 'antd/es/pagination';
@@ -9,6 +10,7 @@ import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
+import { tableHeader } from '../../../helpers/style';
 
 import * as actions from '../../../services/actions/index';
 
@@ -57,40 +59,31 @@ class DonorProjects extends Component {
   render() {
     const { intl, donorProjects, classes } = this.props;
     const data = get(donorProjects, 'data.results');
-    console.log(data);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
     const columns = [{
-      title: intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'}),
-      dataIndex: 'title.narratives[0].text',
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
       width: '40%',
-      key: 'donors'
+      key: 'donors',
+      render: project => 
+        <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
     },{
-      title: intl.formatMessage({id: 'donor.table.projects.header.start', defaultMessage: 'Start date'}),
-      dataIndex: 'activity_dates[1].iso_date',
-      className: 'StartDate',
-      key: 'start'
-    },{
-      title: intl.formatMessage({id: 'donor.table.projects.header.end', defaultMessage: 'End date'}),
-      dataIndex: 'activity_dates[2].iso_date',
-      className: 'EndDate',
-      key: 'end'
-    },{
-      title: intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
-      render: (value) => <span>{usd}{format(",.2f")(value)}</span>
+      render: (value) => <span>{usd}{format(",.0f")(value)}</span>
     },{
-      title: intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'}),
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
       dataIndex: 'activity_status.name',
       className: 'Status',
       key: 'status'
     },{
-      title: intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'}),
-      dataIndex: 'sectors[0].sector.name',
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'})}</span>,
       className: 'Sector',
-      key: 'sector'
+      key: 'sector',
+      render: project => 
+        <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
     }];
     return (
       <Spin spinning={donorProjects.request}>

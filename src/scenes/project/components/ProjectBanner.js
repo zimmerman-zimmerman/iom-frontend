@@ -24,28 +24,28 @@ const ProjectBanner= (props) => {
     const lines = [
       [
         {line: <Trans id="project.banner.right.budget" defaultMessage="Total activity budget"/>, className: 'gap'},
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>, className: 'value'},
         {
           line: <Trans id="project.banner.right.incoming" defaultMessage="Total incoming funds"/>,
           className: 'gap'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>, className: 'value'},
         {line: <Trans id="project.banner.right.start" defaultMessage="Start date"/>, className: 'gap'},
-        {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>}
+        {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>, className: 'value'}
       ],
       [
         {
           line: <Trans id="project.banner.right.disbursement" defaultMessage="Total disbursements"/>,
           className: 'gap'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>, className: 'value'},
         {
           line: <Trans id="project.banner.right.expenditures" defaultMessage="Total expenditure"/>,
           className: 'gap'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>, className: 'value'},
         {line: <Trans id="project.banner.right.end" defaultMessage="End date" />, className: 'gap'},
-        {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>}
+        {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>, className: 'value'}
       ]
     ];
     return (
@@ -98,29 +98,50 @@ const ProjectBanner= (props) => {
 
 const styles = {
   projectBanner: {
+    width: '100%',
+    marginLeft: 0,
     '& .left': {
-      padding: '20px 60px',
+      padding: '40px 35px 100px 135px',
       '@media (max-width: 767px)': {
-        padding: '20px 35px'
+        padding: '20px 25px'
       },
       backgroundColor: '#efefef',
       '& .title': {
-        fontSize: 25,
+        fontWeight: 600,
+        fontSize: 32,
+        color: '#1471ce',
       },
       '& .description': {
-        marginTop: 20,
+        marginTop: 40,
         color: '#1471ce',
         fontWeight: 600,
+        fontSize: 21,
+      },
+      '& .countryLink': {
+        fontSize: 21,
+        marginTop: 30,
+        paddingLeft: 9,
+      },
+      '& .menu': {
+        marginTop: 20,
+        lineHeight: '30px',
+        borderBottomStyle: 'none',
       },
       '& .menu li': {
         color: '#5d5d5d',
+        padding: '0',
+        marginRight: 20,
+        fontSize: 22,
+        textTransform: 'none',
       },
       '& .menu .ant-menu-item-selected': {
-        color: '#35b6b4'
+        color: '#1471ce',
+        fontWeight: 'bold',
+        borderBottom: '2px solid #1471ce !important',
       }
     },
     '& .right': {
-      padding: '20px 65px',
+      padding: '40px 65px 100px 65px',
       '@media (max-width: 767px)': {
         padding: '20px 25px'
       },
@@ -129,11 +150,16 @@ const styles = {
       fontWeight: 600,
       '& .title': {
         color: 'white',
-        fontSize: 25,
+        fontSize: 32,
       },
       '& .gap': {
         marginTop: 20,
-      }
+        fontSize: 21,
+      },
+      '& .value': {
+        fontSize: 26,
+        fontWeight: 300,
+      },
     }
   }
 };
