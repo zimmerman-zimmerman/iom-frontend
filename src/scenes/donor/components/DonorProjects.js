@@ -12,7 +12,18 @@ import { format } from "d3-format";
 import injectSheet from 'react-jss';
 import { tableHeader } from '../../../helpers/style';
 
+import SortBy from '../../../components/base/SortBy';
+
 import * as actions from '../../../services/actions/index';
+
+const sortByOptions = [
+  { value: 'title', label: 'Name (a - z)' },
+  { value: '-title', label: 'Name (z - a)' },
+  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
+  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
+  { value: 'start_date', label: 'Start date (asc)' },
+  { value: '-start_date', label: 'Start date (desc)' },
+];
 
 class DonorProjects extends Component {
   constructor(props) {
@@ -23,12 +34,17 @@ class DonorProjects extends Component {
         'participating_organisations,aggregations',
         convert_to: 'usd',
         participating_organisation: props.code.toUpperCase(),
-        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
+        reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
+        ordering: 'title',
       }
     };
   }
 
   componentDidMount() {
+    this.getProjects();
+  }
+
+  getProjects() {
     const { dispatch } = this.props;
     const { params } = this.state;
     if (dispatch) {
@@ -38,6 +54,14 @@ class DonorProjects extends Component {
         dispatch(actions.donorProjectsInitial());
       }
     }
+  }
+
+  handleChange(value) {
+    const newParams = this.state.params;
+    newParams.ordering = value;
+    this.setState({params: newParams}, () => {
+      this.getProjects();
+    });
   }
 
   addKey(dataSource) {
@@ -84,6 +108,14 @@ class DonorProjects extends Component {
       key: 'sector',
       render: project => 
         <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={this.state.params.ordering}
+          handleChange={e => this.handleChange(e)}
+        />,
+      key: 'sort_by',
     }];
     return (
       <Spin spinning={donorProjects.request}>

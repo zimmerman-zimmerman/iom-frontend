@@ -60,7 +60,7 @@ class Services extends BaseFilter {
                   </Col>
                   <hr className="divider" />
                   <Col xs={12} className="service-table">
-                    {data ? <ServicesTable data={data}/> : null}
+                    {data ? <ServicesTable rootComponent={this} data={data}/> : null}
                   </Col>
                 </Row>
               </Col>

@@ -114,7 +114,9 @@ class Countries extends BaseFilter {
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <CountriesTable data={showMap ? get(data, 'results') : null} />
+                    <CountriesTable
+                      rootComponent={this}
+                      data={showMap ? get(data, 'results') : null} />
                   </Col>
                 </Row>
               </Col>

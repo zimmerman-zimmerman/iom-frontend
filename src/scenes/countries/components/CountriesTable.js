@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import get from 'lodash/get';
 import { format } from "d3-format";
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
+import SortBy from '../../../components/base/SortBy';
+import BaseFilter from "../../../components/base/filters/BaseFilter";
 import { tableHeader } from '../../../helpers/style';
 
-class CountriesTable extends Component {
+const sortByOptions = [
+  { value: 'recipient_country', label: 'Name (a - z)' },
+  { value: '-recipient_country', label: 'Name (z - a)' },
+  { value: 'value', label: 'Total Budget (asc)' },
+  { value: '-value', label: 'Total Budget (desc)' },
+  { value: 'activity_count', label: 'Projects count (asc)' },
+  { value: '-activity_count', label: 'Projects count (desc)' },
+];
+
+class CountriesTable extends BaseFilter {
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
@@ -16,8 +28,20 @@ class CountriesTable extends Component {
     return data;
   }
 
+  handleChange(value) {
+    const { rootComponent } = this.props;
+    const { filters } = rootComponent.state;
+    if (get(filters.values, 'order_by')) {
+      delete filters.values['order_by'];
+    }
+    filters.values['order_by'] = value;
+    filters.changed = true;
+    this.setState({filters: filters});
+  }
+
   render() {
-    const { intl, data } = this.props;
+    const { intl, data, rootComponent } = this.props;
+    const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}</span>,
@@ -41,6 +65,14 @@ class CountriesTable extends Component {
       dataIndex: 'recipient_country',
       key: 'region',
       render: recipient_country => <span>{recipient_country.region.name}</span>,
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={filters.values['order_by']}
+          handleChange={e => this.handleChange(e)}
+        />,
+      key: 'sort_by',
     }];
     return (
       <Table className="CountriesTable" dataSource={data ? this.addKey(data) : null} columns={columns}
@@ -55,4 +87,8 @@ CountriesTable.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default injectIntl(CountriesTable);
+const mapStateToProps = (state, ) => {
+  return {}
+};
+
+export default injectIntl(connect(mapStateToProps)(CountriesTable));

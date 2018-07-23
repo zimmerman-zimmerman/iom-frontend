@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import { format } from "d3-format";
 import get from 'lodash/get';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
+import SortBy from '../../../components/base/SortBy';
+import BaseFilter from "../../../components/base/filters/BaseFilter";
 import { tableHeader } from '../../../helpers/style';
 
-class DonorsTable extends Component {
+const sortByOptions = [
+  { value: 'participating_organisation', label: 'Name (a - z)' },
+  { value: '-participating_organisation', label: 'Name (z - a)' },
+  { value: 'value', label: 'Total Budget (asc)' },
+  { value: '-value', label: 'Total Budget (desc)' },
+  { value: 'activity_count', label: 'Projects count (asc)' },
+  { value: '-activity_count', label: 'Projects count (desc)' },
+];
+
+class DonorsTable extends BaseFilter {
   addKey(dataSource) {
     let data = [];
     dataSource.results.forEach(function(item) {
@@ -15,9 +27,21 @@ class DonorsTable extends Component {
     });
     return data;
   }
+  
+  handleChange(value) {
+    const { rootComponent } = this.props;
+    const { filters } = rootComponent.state;
+    if (get(filters.values, 'order_by')) {
+      delete filters.values['order_by'];
+    }
+    filters.values['order_by'] = value;
+    filters.changed = true;
+    this.setState({filters: filters});
+  }
 
   render() {
-    const { intl, data } = this.props;
+    const { intl, data, rootComponent } = this.props;
+    const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}</span>,
@@ -45,6 +69,14 @@ class DonorsTable extends Component {
       dataIndex: 'activity_count',
       key: 'activity_count',
       className: 'number',
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={filters.values['order_by']}
+          handleChange={e => this.handleChange(e)}
+        />,
+      key: 'sort_by',
     }];
     return (
       <Table className="DonorsTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
@@ -58,4 +90,8 @@ DonorsTable.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default injectIntl(DonorsTable);
+const mapStateToProps = (state, ) => {
+  return {}
+};
+
+export default injectIntl(connect(mapStateToProps)(DonorsTable));

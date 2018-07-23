@@ -9,12 +9,22 @@ import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 import size from 'lodash/size';
 
+import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import { tableHeader } from '../../../helpers/style';
 
+const sortByOptions = [
+  { value: 'title', label: 'Name (a - z)' },
+  { value: '-title', label: 'Name (z - a)' },
+  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
+  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
+  { value: 'start_date', label: 'Start date (asc)' },
+  { value: '-start_date', label: 'Start date (desc)' },
+];
+
 class ProjectsTable extends BaseFilter {
-  handleChange(value) {
-    const { fieldName, rootComponent } = this.props;
+  handleChange(value, fieldName) {
+    const { rootComponent } = this.props;
     const { filters } = rootComponent.state;
     if (get(filters.values, fieldName)) {
       delete filters.values[fieldName];
@@ -42,7 +52,8 @@ class ProjectsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, classes } = this.props;
+    const { intl, data, classes, rootComponent } = this.props;
+    const { filters } = rootComponent.state;
     const count = get(data, 'count', 0);
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
@@ -88,6 +99,14 @@ class ProjectsTable extends BaseFilter {
           return <span></span>
         }
       }
+    },{
+      title: 
+        <SortBy
+          options={sortByOptions}
+          selectedKey={filters.values['ordering']}
+          handleChange={e => this.handleChange(e, "ordering")}
+        />,
+      key: 'sort_by',
     }];
     return (
       <Fragment>
@@ -100,7 +119,7 @@ class ProjectsTable extends BaseFilter {
         />
         <Pagination size="small"
                     className={classes.rowGap}
-                    total={count} onChange={(page) => this.handleChange(page)}
+                    total={count} onChange={(page) => this.handleChange(page, "page")}
                     current={this.getCurrentPage()}
         />
       </Fragment>
