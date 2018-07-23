@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import PropsType from 'prop-types';
 import get from "lodash/get";
 import size from "lodash/size";
+import has from "lodash/has";
 import Badge from 'antd/es/badge';
 import MediaQuery from 'react-responsive';
 import Collapse from 'antd/es/collapse';
@@ -95,14 +96,15 @@ class Filters extends Component {
   }
 
   countResults() {
-    const { countResults, pluralMessage, singularMessage} = this.props;
+    const { countResults, pluralMessage, singularMessage, classes } = this.props;
     const text = countResults > 1 ? pluralMessage : singularMessage;
-    return <h2>{countResults} {text}</h2>;
+    return <h2><span className={classes.countNumber}>{countResults}</span> <span className={classes.countLabel}>{text}</span></h2>;
   }
 
   content() {
     const { intl, rootComponent, classes, panels } = this.props;
-    const filterCount = size(get(rootComponent, 'state.filters.values'));
+    const filters = get(rootComponent, 'state.filters.values');
+    const filterCount = has(filters, 'page') ? size(filters) - 1 : size(filters);
     return (
       <Fragment>
         <Row>
@@ -128,7 +130,7 @@ class Filters extends Component {
   render() {
     const { intl, rootComponent, classes } = this.props;
     return (
-      <Fragment>
+      <div className={classes.container}>
         <Row className={classes.gap}>
           <Col xs={12}>
             <SearchFilter
@@ -162,7 +164,7 @@ class Filters extends Component {
             {this.content()}
           </div>
         </MediaQuery>
-      </Fragment>
+      </div>
     );
   }
 }
@@ -180,6 +182,15 @@ const styles = {
   gap: {
     marginTop: 20
   },
+  countNumber: {
+    fontSize: 32,
+    fontWeight: 300,
+  },
+  countLabel: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'lowercase',
+  },
   badge: {
     '& .ant-badge-count': {
       background: '#f7c989',
@@ -191,11 +202,14 @@ const styles = {
     marginRight: 5,
   },
   collapse: {
-    background: '#f5f5f9',
+    marginTop: 15,
+    borderTop: '1px solid #d9d9d9',
     '& .ant-collapse-borderless > .ant-collapse-item': {
       borderBottom: '0 !important',
     }
-
+  },
+  container: {
+    paddingRight: 20,
   }
 };
 

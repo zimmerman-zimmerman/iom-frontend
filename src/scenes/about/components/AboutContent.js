@@ -5,11 +5,12 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import aboutOMG from '../../../assets/images/AboutIOM.jpg';
 import injectSheet from "react-jss";
+import { pageContainer } from '../../../helpers/style';
 
 const AboutContent = (props) => {
   const { classes } = props;
   const columns = [{
-    title: 'Document',
+    title: 'Title',
     dataIndex: 'document',
     key: 'document',
     width: '95%',
@@ -39,20 +40,18 @@ const AboutContent = (props) => {
     link: 'link',
   }];
   return (
-    <Grid fluid className={classes.aboutContent}>
+    <Grid className={classes.aboutContent} style={pageContainer}>
         <Row center="xs">
           <Col xs={12} md={8} lg={8}>
             <h2 className="title">About IOM Transparency portal</h2>
-            <p>
-              <strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Integer ut mi neque. Nulla consectetur laoreet orci.
-                Etiam consequat quam et magna consectetur pulvinar.
-                Suspendisse bibendum nisi ex, nec finibus tortor ultricies quis.
-                Curabitur lobortis augue velit, vel faucibus odio elementum et.
-                Cras placerat consectetur libero, eu vestibulum magna posuere sed.
-                Integer enim turpis, efficitur eget dignissim vel, lacinia eu magna.
-              </strong>
+            <p style={{ fontWeight: 600 }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Integer ut mi neque. Nulla consectetur laoreet orci.
+              Etiam consequat quam et magna consectetur pulvinar.
+              Suspendisse bibendum nisi ex, nec finibus tortor ultricies quis.
+              Curabitur lobortis augue velit, vel faucibus odio elementum et.
+              Cras placerat consectetur libero, eu vestibulum magna posuere sed.
+              Integer enim turpis, efficitur eget dignissim vel, lacinia eu magna.
             </p>
             <p>
               Ut placerat magna id diam hendrerit, a scelerisque massa rutrum.
@@ -105,6 +104,7 @@ const AboutContent = (props) => {
         </Row>
         <Row center="xs" className="document-table">
           <Col xs={12} md={8} lg={8}>
+            <h3 className={classes.tableHeading}>DOCUMENTS</h3>
             <Table columns={columns} dataSource={data} pagination={false}/>
           </Col>
         </Row>
@@ -114,18 +114,50 @@ const AboutContent = (props) => {
 
 const styles = {
   aboutContent: {
+    '@media (max-width: 776px)': {
+      padding: '0 20px',
+    },
+    color: '#262626',
     '& .title': {
+      fontSize: 42,
+      fontWeight: 300,
       marginTop: 20,
+      '@media (max-width: 776px)': {
+        fontSize: 36,
+      },
     },
     '& p, & h2': {
       textAlign: 'left',
     },
     '& p': {
+      fontSize: 22,
+      fontWeight: 300,
       padding: '8px 0',
+      '@media (max-width: 776px)': {
+        fontSize: 18,
+      },
+    },
+    '& img': {
+      margin: '30px 0 40px 0',
     },
     '& .document-table': {
-      marginBottom: 30,
-    }
+      marginBottom: 80,
+    },
+    '& thead': {
+      background: '#efefef',
+      fontWeight: '600 !important',
+    },
+    '& th, td': {
+      color: '#262626 !important',
+      fontSize: '20px !important',
+    },
+  },
+  tableHeading: {
+    color: '#0033a1',
+    fontSize: 26,
+    fontWeight: 600,
+    textAlign: 'start',
+    margin: '50px 0 20px 0',
   }
 };
 

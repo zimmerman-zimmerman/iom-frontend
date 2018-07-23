@@ -63,6 +63,7 @@ class ProjectLocation extends Component {
                       )
                     })
                   }
+                  <br/>
                 </Fragment>
               )
             })
@@ -110,27 +111,31 @@ class ProjectLocation extends Component {
         title: {id: "project.location.contact.title", defaultMessage: "Contact info"},
         rows: [
           {
-            name:  {id:"project.location.contact.organisation",  defaultMessage: "Organisation:"},
-            value: <span>{get(data, 'contact_info[0].organisation.narratives[0].text','-')}</span>
-          },
-          {
             name:  {id:"project.location.contact.phone",  defaultMessage: "Phone number:"},
             value: <span>{get(data, 'contact_info[0].telephone','-')}</span>
           },
           {
             name:  {id:"project.location.contact.email",  defaultMessage: "Email:"},
             value: <span>{get(data, 'contact_info[0].email','-')}</span>
-          }
+          },
+          {
+            name:  {id:"project.location.contact.address",  defaultMessage: "Address:"},
+            value: <span>{get(data, 'contact_info[0].mailing_address.narratives[0].text','-')}</span>
+          },
+          {
+            name:  {id:"project.location.contact.website",  defaultMessage: "Website:"},
+            value: <span>{get(data, 'contact_info[0].website','-')}</span>
+          },
         ]
       }
     ];
     return (
       <Grid fluid className={classes.projectLocation}>
         <Row middle="xs">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="left">
             <GroupFields fields={fields} />
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="right">
             <CountryMap data={country}/>
           </Col>
         </Row>
@@ -147,23 +152,52 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   projectLocation: {
-    margin: '25px 0',
+    '& .left': {
+      paddingLeft: '85px !important',
+      '@media (max-width: 767px)': {
+        padding: '0px 25px !important',
+      },
+    },
+    '& .right': {
+      marginTop: -200,
+      paddingRight: '8px !important',
+      paddingLeft: '0px !important',
+      '@media (max-width: 767px)': {
+        marginTop: 40,
+        padding: '0px 25px !important',
+      },
+    },
+    margin: '60px 0',
     '& .title': {
+      color: '#1f4283',
       marginTop: 10,
       paddingBottom: 10,
-      fontSize: 25,
+      fontSize: 26,
     },
     '& .flag-country': {
-      fontSize: 25,
+      fontSize: 32,
       marginBottom: 10,
     },
     '& .country-name': {
+      color: '#1f4283',
+      fontSize: 22,
       marginLeft: 10,
-      marginTop: 2,
+      marginTop: 16,
       position: 'absolute',
     },
+    '& .field': {
+      color: '#262626',
+      fontSize: 20,
+      margin: '20px 0',
+      width: '100%',
+      overflow: 'hidden',
+      wordWrap: 'break-word',
+      '& > div': {
+        paddingLeft: '0px !important'
+      }
+    },
     '& .name': {
-      fontWeight: 'bolder',
+      fontWeight: 'bold',
     },
     '& .value': {
       marginLeft: 5,

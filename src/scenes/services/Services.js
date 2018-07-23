@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Spin from 'antd/es/spin';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -29,7 +29,6 @@ class Services extends BaseFilter {
   render() {
     const { services, classes } = this.props;
     const data = get(services, 'data.results', null);
-    console.log(data);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
@@ -48,10 +47,18 @@ class Services extends BaseFilter {
               <Col xs={12} md={8} lg={9}>
                 <Row>
                   <Col xs={12}>
-                    <h2 className="Title"><Trans id="services.title" defaultMessage="Our services" /></h2>
-                    <h3><Trans id="services.descriptions" defaultMessage="Descriptions" /></h3>
-                    {data ? <ServicesCharts data={data}/> : null}
+                    <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
+                    <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
+                    <hr className="divider" />
+                    {data ? 
+                      <Fragment>
+                        <h2 className="chart-header"><Trans id="services.chart.header" defaultMessage="Budget per service area" /></h2>
+                        <ServicesCharts data={data} />
+                      </Fragment>
+                        : null
+                    }
                   </Col>
+                  <hr className="divider" />
                   <Col xs={12} className="service-table">
                     {data ? <ServicesTable data={data}/> : null}
                   </Col>
@@ -78,9 +85,24 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   services: {
+    '& .title': {
+      marginTop: 15,
+      fontWeight: 300,
+    },
+    '& .chart-header': {
+      color: '#1f4283',
+      marginTop: 10,
+    },
     '& .service-table': {
-      paddingBottom: 30,
-    }
+      paddingBottom: 80,
+      paddingLeft: 0,
+    },
+    '& .divider': {
+      border: 'solid 3px #173d8e',
+      opacity: 0.3,
+      margin: '30px 0',
+      width: '100%',
+    },
   }
 };
 
