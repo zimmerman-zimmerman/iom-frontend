@@ -21,13 +21,13 @@ const sortByOptions = [
 class DonorsTable extends BaseFilter {
   addKey(dataSource) {
     let data = [];
-    dataSource.results.forEach(function(item) {
+    dataSource.forEach(function(item) {
       item.key = get(item, 'participating_organisation_ref');
       data.push(item);
     });
     return data;
   }
-  
+
   handleChange(value) {
     const { rootComponent } = this.props;
     const { filters } = rootComponent.state;
@@ -70,7 +70,7 @@ class DonorsTable extends BaseFilter {
       key: 'activity_count',
       className: 'number',
     },{
-      title: 
+      title:
         <SortBy
           options={sortByOptions}
           selectedKey={filters.values['order_by']}
@@ -79,7 +79,7 @@ class DonorsTable extends BaseFilter {
       key: 'sort_by',
     }];
     return (
-      <Table className="DonorsTable" dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+      <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
              scroll={{ x: 900 }}
       />
     )

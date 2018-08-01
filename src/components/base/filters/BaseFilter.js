@@ -18,8 +18,19 @@ class BaseFilter extends Component {
       },
       update: false,
       filters: {values: {}, changed: false},
+      dataRange: [],
       donorTableSortBy: 'participating_organisation',
     };
+  }
+
+  filter(data) {
+    let dataSource = get(data, 'results');
+    if (this.state.dataRange.length > 0 && dataSource) {
+      return dataSource.filter(
+        d => (d.value >= this.state.dataRange[0] &&  d.value <= this.state.dataRange[1])
+      );
+    }
+    return dataSource;
   }
 
   actionRequest(params, groupBy, request) {
@@ -54,7 +65,7 @@ class BaseFilter extends Component {
         const { params } = rootComponent.state;
         this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
         if (secondFilterRequest) {
-          this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);          
+          this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
         }
         filters.changed = false;
         rootComponent.setState({filters: filters})

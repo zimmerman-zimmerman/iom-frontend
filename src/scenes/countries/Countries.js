@@ -40,9 +40,9 @@ class Countries extends BaseFilter {
   render() {
     const { countries, donors, classes } = this.props;
     const { showSummary } = this.state;
-    const data = get(countries, 'data');
+    const data = this.filter(get(countries, 'data'));
     const donorsCount = get(donors, 'data.count');
-    const showMap = get(data, 'results[0].recipient_country.code');
+    const showMap = get(data, '[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='countries.breadcrumb.countries' text='Countries' />},
@@ -63,7 +63,7 @@ class Countries extends BaseFilter {
           <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>
-                <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
+                <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="countries.filters.countries" defaultMessage="Countries"/>}
                          singularMessage={ <Trans id="countries.filters.country" defaultMessage="Country"/>}
 
@@ -101,7 +101,7 @@ class Countries extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div className={classes.boxShadow}>
-                          <Summary data={showMap ? get(data, 'results') : null}
+                          <Summary data={showMap ? data : null}
                                    onHideSummary={this.onHideSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
@@ -116,7 +116,7 @@ class Countries extends BaseFilter {
                   <Col xs={12}>
                     <CountriesTable
                       rootComponent={this}
-                      data={showMap ? get(data, 'results') : null} />
+                      data={showMap ? data : null} />
                   </Col>
                 </Row>
               </Col>

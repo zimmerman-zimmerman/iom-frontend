@@ -15,11 +15,12 @@ import SearchFilter from './SearchFilter';
 import AccordionFilter from './AccordionFilter';
 import Filter from './Filter';
 import StartEndDateFilter from './StartEndDateFilter';
+import SliderFilter from './SliderFilter';
 import * as actions from '../../../services/actions';
 import {size as screenSize} from "../../../helpers/screen";
 
 class Filters extends Component {
-  defaultPanels(intl, rootComponent) {
+  defaultPanels(intl, rootComponent, rootData) {
     return [{
       headerString: intl.formatMessage({id: 'filters.panel.country', defaultMessage: 'Geo-location'}),
       component:
@@ -92,17 +93,31 @@ class Filters extends Component {
                 fieldName="participating_organisation_ref"
                 actionRequest={actions.transactionsAggregationsParticipatingOrganisationRequest}
         />
-    }];
+    },
+      {
+        headerString: intl.formatMessage({id: 'filters.slider.funding', defaultMessage: 'Funding amount'}),
+        component:
+          <SliderFilter
+            minValue={0}
+            maxValue={900000000}
+            rootComponent={rootComponent}
+            rootData={rootData}
+          />
+      }];
   }
 
   countResults() {
     const { countResults, pluralMessage, singularMessage, classes } = this.props;
     const text = countResults > 1 ? pluralMessage : singularMessage;
-    return <h2><span className={classes.countNumber}>{countResults}</span> <span className={classes.countLabel}>{text}</span></h2>;
+    return (
+      <h2>
+        <span className={classes.countNumber}>{countResults}</span> <span className={classes.countLabel}>{text}</span>
+      </h2>
+    );
   }
 
   content() {
-    const { intl, rootComponent, classes, panels } = this.props;
+    const { intl, rootComponent, classes, panels, rootData } = this.props;
     const filters = get(rootComponent, 'state.filters.values');
     const filterCount = has(filters, 'page') ? size(filters) - 1 : size(filters);
     return (
@@ -121,7 +136,7 @@ class Filters extends Component {
           </Col>
         </Row>
         <AccordionFilter rootComponent={rootComponent}
-                         panels={panels ? panels : this.defaultPanels(intl, rootComponent)}
+                         panels={panels ? panels : this.defaultPanels(intl, rootComponent, rootData)}
         />
       </Fragment>
     )
