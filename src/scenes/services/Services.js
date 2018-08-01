@@ -28,7 +28,7 @@ class Services extends BaseFilter {
 
   render() {
     const { services, classes } = this.props;
-    const data = get(services, 'data.results', null);
+    const data = this.filter(get(services, 'data'));
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
@@ -39,7 +39,7 @@ class Services extends BaseFilter {
           <Grid fluid className={classes.services}>
             <Row>
               <Col xs={12} md={4} lg={3}>
-                <Filters rootComponent={this} countResults={get(services, 'data.count', 0)}
+                <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="services.filters.services" defaultMessage="Services" />}
                          singularMessage={<Trans id="services.filters.service" defaultMessage="Service" />}
                 />
@@ -50,9 +50,11 @@ class Services extends BaseFilter {
                     <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
                     <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
                     <hr className="divider" />
-                    {data ? 
+                    {data ?
                       <Fragment>
-                        <h2 className="chart-header"><Trans id="services.chart.header" defaultMessage="Budget per service area" /></h2>
+                        <h2 className="chart-header">
+                          <Trans id="services.chart.header" defaultMessage="Budget per service area" />
+                        </h2>
                         <ServicesCharts data={data} />
                       </Fragment>
                         : null

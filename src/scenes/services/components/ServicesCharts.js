@@ -26,7 +26,7 @@ class ServicesCharts extends Component {
   render() {
     const { intl, data } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
-    const XKey = window.innerWidth > screenSize.tablet.minWidth ? "sector.name" : "sector.code";
+    const XKey = "sector.code";
     return (
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
         {data !== null ?
