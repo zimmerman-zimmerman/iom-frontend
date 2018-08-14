@@ -34,7 +34,7 @@ class Projects extends BaseFilter {
   }
 
   countriesRequest() {
-    const { filters } = this.state;
+    const { filters, dataRange } = this.state;
     const params = {
       aggregations: 'activity_count,incoming_fund,disbursement,value',
       group_by: '',
@@ -42,13 +42,27 @@ class Projects extends BaseFilter {
       convert_to: 'usd',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
-    this.actionRequest(extend({}, params, filters.values), 'recipient_country', actions.countriesRequest);
-    this.actionRequest(extend({}, params, filters.values), 'participating_organisation', actions.countryDonorsRequest);
+    const filterDataRange = dataRange ? {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]} : {};
+    this.actionRequest(
+      extend({}, params, filters.values, filterDataRange), 'recipient_country', actions.countriesRequest
+    );
+    this.actionRequest(
+      extend({}, params, filters.values, filterDataRange), 'participating_organisation', actions.countryDonorsRequest
+    );
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState !== this.state) {
       this.countriesRequest();
+      if (prevState.dataRange !== this.state.dataRange) {
+        const { params, filters, dataRange } = this.state;
+        delete filters.values['page'];
+        this.actionRequest(
+          extend({}, params, filters.values, {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]}),
+          null,
+          actions.projectsRequest
+        );
+      }
     }
   }
 

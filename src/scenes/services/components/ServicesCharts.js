@@ -7,7 +7,6 @@ import Layout from 'antd/es/layout';
 import Card from 'antd/es/card';
 
 import Trans from '../../../locales/Trans';
-import {size as screenSize} from "../../../helpers/screen";
 
 const CustomToolTip = props => {
   const { Content } = Layout;
@@ -26,14 +25,13 @@ class ServicesCharts extends Component {
   render() {
     const { intl, data } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
-    const XKey = window.innerWidth > screenSize.tablet.minWidth ? "sector.name" : "sector.code";
     return (
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
         {data !== null ?
           <BarChart width={600} height={300} data={data} maxBarSize={50}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid vertical={false}/>
-            <XAxis dataKey={XKey} tick={{ fontSize: 16, color: '#262626' }} />
+            <XAxis dataKey="sector.code" tick={{ fontSize: 16, color: '#262626' }} />
             <YAxis
               axisLine={false}
               tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}

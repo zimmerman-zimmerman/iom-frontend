@@ -32,7 +32,7 @@ class Donors extends BaseFilter {
 
   render() {
     const { donors, classes } = this.props;
-    const data = get(donors, 'data');
+    const data = this.filter(get(donors, 'data'));
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
@@ -42,7 +42,7 @@ class Donors extends BaseFilter {
         <Grid className={classes.container} style={pageContainer} fluid>
           <Row>
             <Col xs={12} md={4} lg={3} >
-              <Filters rootComponent={this} countResults={get(data, 'results.length', 0)}
+              <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                        pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
                        singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
               />
@@ -63,7 +63,7 @@ class Donors extends BaseFilter {
               <Row>
                 <Col xs={12}>
                   <DonorsTreeMap
-                    data={sortBy(get(data, 'results', []), function(e) {
+                    data={sortBy(data, function(e) {
                         return e.value;
                       }).reverse()
                     }
@@ -72,7 +72,7 @@ class Donors extends BaseFilter {
               </Row>
               <Row>
                 <Col xs={12}>
-                  <DonorsTable rootComponent={this} data={data} />
+                  <DonorsTable rootComponent={this} data={data ? data : null} />
                 </Col>
               </Row>
             </Col>

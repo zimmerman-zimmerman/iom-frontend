@@ -56,16 +56,16 @@ class GeoMap extends Component {
 
     this.getCenter();
 
-    if (data.results.length) {
-      const maxValue = _.maxBy(data.results, o => o.activity_count).activity_count;
-      let minValue = _.minBy(data.results, o => o.activity_count).activity_count;
+    if (data.length) {
+      const maxValue = _.maxBy(data, o => o.activity_count).activity_count;
+      let minValue = _.minBy(data, o => o.activity_count).activity_count;
       let midValue = (maxValue + minValue) / 2;
       if (minValue === maxValue) {
         minValue = 0;
       }
       const legendValues = this.getLegendValues(maxValue, minValue);
 
-      const features = _.chain(data.results)
+      const features = _.chain(data)
         .map(o => {
           let country = namedGeoJson[o.recipient_country.code];
           if (!country) {
@@ -108,7 +108,7 @@ class GeoMap extends Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.data.results.length !== this.props.data.results.length) {
+    if (prevProps.data.length !== this.props.data.length) {
       this.initializeLayers();
       //this.getCenter()
     }

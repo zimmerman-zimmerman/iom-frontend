@@ -12,6 +12,7 @@
   "filters.panel.period": "Start - end data",
   "filters.panel.donors": "Donors",
   "filters.select.donors.placeholder": "Select donor",
+  "filters.slider.funding": "Funding amount",
   "filters.count": "Filter(s)",
   "filters.show": "Show filters",
 

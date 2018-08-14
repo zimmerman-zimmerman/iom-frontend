@@ -6,7 +6,8 @@ import { FormattedMessage } from "react-intl";
 
 import Page from '../../components/base/Page';
 import BaseFilter from '../../components/base/filters/BaseFilter';
-import _ from "lodash";
+import get from 'lodash/get';
+import extend from 'lodash/extend';
 import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";
 import DonorProjects from "./components/DonorProjects";
@@ -18,10 +19,10 @@ class Donor extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
-    const code = _.get(this.props, 'match.params.code');
+    const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
       this.actionRequest(
-        _.extend({}, params, {participating_organisation_ref: code.toUpperCase()}),
+        extend({}, params, {participating_organisation_ref: code.toUpperCase()}),
         'participating_organisation',
         actions.donorRequest
       );
@@ -32,8 +33,8 @@ class Donor extends BaseFilter {
 
   render() {
     const { classes } = this.props;
-    const code = _.get(this.props, 'match.params.code');
-    const data = _.get(this.props, 'donor.data.results[0]');
+    const code = get(this.props, 'match.params.code');
+    const data = get(this.props, 'donor.data.results[0]');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
