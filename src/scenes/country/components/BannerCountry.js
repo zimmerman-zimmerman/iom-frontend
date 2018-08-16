@@ -96,7 +96,7 @@ const BannerCountry = (props) => {
               </Menu>
               <Row className="description">
                 <Col span={24}>
-                  <Trans id="country.banner.overview.description" defaultMessage="Description"/>
+                  <div dangerouslySetInnerHTML={{__html: data.recipient_country.description}} />
                 </Col>
               </Row>
               <Row>
@@ -129,7 +129,7 @@ const styles = {
     width: '100%',
     marginLeft: 0,
     '& .left': {
-      padding: '40px 35px 100px 137px',
+      padding: '40px 137px 100px 137px',
       '@media (max-width: 767px)': {
         padding: '20px 25px'
       },
@@ -138,7 +138,6 @@ const styles = {
         fontSize: 48,
         '& .name': {
           margin: '3px 10px',
-          position: 'absolute',
           color: '#1471ce',
         }
       },
