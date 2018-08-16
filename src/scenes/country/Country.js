@@ -1,6 +1,7 @@
 import React from 'react';
 import Spin from 'antd/es/spin';
 import get from 'lodash/get';
+import find from 'lodash/find';
 import extend from 'lodash/extend';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
@@ -17,6 +18,7 @@ import Trans from '../../locales/Trans';
 import ContactProject from './components/ContactProject';
 import SectorsMap from './components/SectorsMap';
 import { pageContainer } from '../../helpers/style';
+import CountriesJSON from '../../services/data/countries.json';
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -71,10 +73,15 @@ class Country extends BaseFilter {
     const donors = get(this.props, 'countryDonors.data.results');
     const sectors = get(this.props, 'countrySectors.data.results', []);
     const firstProject = get(countryActivities, 'data.results[0]');
+    const code = get(this.props, 'match.params.code');
+    const countryJSON = find(CountriesJSON, {'code': code.toUpperCase()});
+    if (countryResult) {
+      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] : 'No fount on site';
+    }
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
+      {url: null, text: countryJSON ? countryJSON['name'] : <Trans id='main.menu.detail' text='Detail' />},
     ];
     return (
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
@@ -132,7 +139,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   country: {
-    paddingLeft: '137px !important',
+    padding: '0 137px !important',
     '@media (max-width: 767px)': {
       padding: '0px 25px !important',
     },
