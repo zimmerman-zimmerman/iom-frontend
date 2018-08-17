@@ -11,7 +11,7 @@ const PieRadialChart = (props) => {
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
-      <Card className="transparent-white">
+      <Card className="just-white">
         <span className="value">{prefixLegend} {format(",.0f")(data.value)}</span>
       </Card> : null;
   };
@@ -27,7 +27,7 @@ const PieRadialChart = (props) => {
         >
           {data.map((entry, index) => <Cell fill={style.colors[index % style.colors.length]} key={index}/>)}
         </Pie>
-        <Tooltip content={<CustomToolTip/>}/>
+        <Tooltip wrapperStyle={{opacity: "1"}} content={<CustomToolTip/>}/>
       </PieChart>
     </ResponsiveContainer>
   )
