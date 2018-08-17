@@ -82,7 +82,7 @@ class Projects extends BaseFilter {
     }
   }
 
-  onHideSummary() {
+  onToggleSummary() {
     this.setState({showSummary: !this.state.showSummary});
   }
 
@@ -103,6 +103,8 @@ class Projects extends BaseFilter {
         <div className={classes.boxShadow}>
           <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
                   tabName="activities"
+                  onShowSummary={this.onToggleSummary.bind(this)}
+                  showSummary={showSummary}
           />
         </div>
       )
@@ -141,10 +143,12 @@ class Projects extends BaseFilter {
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div className={classes.boxShadow}>
                           <Summary data={showMap ? get(dataCountries, 'results') : null}
-                                   onHideSummary={this.onHideSummary.bind(this)}
+                                   onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
                                    donorsCount={donorsCount}
+                                   onShowSummary={this.onToggleSummary.bind(this)}
+                                   showSummary={showSummary}
                           />
                         </div>
                       </Col> : null

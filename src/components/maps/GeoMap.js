@@ -7,11 +7,14 @@ import _ from "lodash";
 import { format } from "d3-format";
 import { scaleLinear } from 'd3-scale'
 import { withRouter } from "react-router";
+import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import ReactCountryFlag from "react-country-flag";
+import { injectIntl, intlShape } from "react-intl";
 
 import '../../styles/GeoMap.scss';
+
 
 const colors = ["#CDDC39", "#4CAF50", "#795548"];
 
@@ -50,6 +53,11 @@ class GeoMap extends Component {
     this.getCenter = this.getCenter.bind(this);
     this.goToCountryPortal = this.goToCountryPortal.bind(this);
   }
+
+    Trans = () => {
+        const { intl } = this.props;
+        return intl.formatMessage({id: 'summary.show', defaultMessage: 'Show Summary'});
+    };
 
   initializeLayers = () => {
     const { data, tooltipName } = this.props;
@@ -256,6 +264,16 @@ class GeoMap extends Component {
                 <div>Disclaimer</div>
               </Control>
 
+                {this.props.showSummary === false &&
+                    <Control position="topright" >
+                        <div>
+                            <Button size="small" type="primary" ghost className="button-show" onClick={() => this.props.onShowSummary()}>
+                                {this.Trans()}
+                            </Button>
+                        </div>
+                    </Control>
+                }
+
               <Control position="bottomleft" className="supportLegend">
                 <div>
                   <label>N of activities</label>
@@ -281,4 +299,8 @@ class GeoMap extends Component {
   }
 }
 
-export default withRouter(GeoMap);
+GeoMap.propTypes = {
+    intl: intlShape.isRequired
+};
+
+export default injectIntl(withRouter(GeoMap));
