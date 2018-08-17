@@ -104,3 +104,15 @@ input,
 textarea {
   font-size: 16px !important;
 }
+
+.flag-icon {
+  order: 1;
+  border: 1px solid rgba(220,220,220,0.7);
+  height: 44px;
+  width: 58px;
+  span {
+    vertical-align: top !important;
+    width: 56px !important;
+    height: 42px !important;
+  }
+}
