@@ -117,6 +117,7 @@ class DonorProjects extends Component {
         />,
       key: 'sort_by',
     }];
+    console.log(total);
     return (
       <Spin spinning={donorProjects.request}>
           <Table className="DonorsTable"
@@ -125,7 +126,9 @@ class DonorProjects extends Component {
                  pagination={false}
                  scroll={{ x: 1200 }}
           />
-          <Pagination size="small" total={total} className={classes.pagination} onChange={this.onPageChange}/>
+          {total > 10 &&
+            <Pagination size="small" total={total} className={classes.pagination} onChange={this.onPageChange}/>
+          }
       </Spin>
     )
   }

@@ -33,6 +33,7 @@ class ProjectsTable extends BaseFilter {
   render() {
     const { intl, data, classes, selectedSortBy, handleSortBy } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const total = get(data, 'count', 0);
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
       key: 'title.narratives[0].text',
@@ -73,11 +74,14 @@ class ProjectsTable extends BaseFilter {
                scroll={{ x: 650 }}
                className={classes.table}
         />
-        <Pagination className="pagination"
-                    size="small"
-                    total={get(data, 'count', 0)}
-                    onChange={(page) => this.handleChange(page)}
-        />
+          {total > 10 &&
+              <Pagination className="pagination"
+                          size="small"
+                          total={total}
+                          onChange={(page) => this.handleChange(page)}
+              />
+          }
+
       </div>
     )
   }

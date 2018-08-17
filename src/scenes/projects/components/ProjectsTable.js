@@ -117,11 +117,13 @@ class ProjectsTable extends BaseFilter {
                scroll={{ x: 1200 }}
                className={classes.rowGap}
         />
-        <Pagination size="small"
-                    className={classes.rowGap}
-                    total={count} onChange={(page) => this.handleChange(page, "page")}
-                    current={this.getCurrentPage()}
-        />
+          {count > 10 &&
+            <Pagination size="small"
+                        className={classes.rowGap}
+                        total={count} onChange={(page) => this.handleChange(page, "page")}
+                        current={this.getCurrentPage()}
+            />
+          }
       </Fragment>
     )
   }
