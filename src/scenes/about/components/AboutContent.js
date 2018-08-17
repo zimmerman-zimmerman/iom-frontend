@@ -7,6 +7,8 @@ import aboutOMG from '../../../assets/images/AboutIOM.jpg';
 import injectSheet from "react-jss";
 import { pageContainer } from '../../../helpers/style';
 
+import DonwloadIcon from '../../../icons/download';
+
 const AboutContent = (props) => {
   const { classes } = props;
   const columns = [{
@@ -21,7 +23,7 @@ const AboutContent = (props) => {
     render: (text, record) => (
       <span>
         <a href="/" className="ant-dropdown-link">
-          <Icon type="download" />
+          <DonwloadIcon className='download-icon' />
         </a>
       </span>
     ),
@@ -145,7 +147,13 @@ const styles = {
     },
     '& thead': {
       background: '#efefef',
-      fontWeight: '600 !important',
+        '& tr': {
+            '& th': {
+                '& span': {
+                    fontWeight: '600',
+                }
+            }
+        }
     },
     '& th, td': {
       color: '#262626 !important',

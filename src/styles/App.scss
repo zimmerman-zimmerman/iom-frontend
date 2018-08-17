@@ -93,6 +93,29 @@ tbody > tr > td {
   padding: 10px 20px;
 }
 
+.download-icon {
+  width: 20px;
+  height: 20px;
+  fill: #0035ad;
+  margin-bottom: -5px;
+}
+
+.share-icon {
+  width: 20px;
+  margin-bottom: -5px;
+  fill: #0033a1;
+  transition: fill 0.5s ease;
+}
+
+.ant-btn-circle{
+  &:hover{
+    .share-icon {
+      transition: fill 0.5s ease;
+      fill: #35b6b4;
+    }
+  }
+}
+
 /* Prevent to auto zoom on mobile */
 input,
 textarea {
