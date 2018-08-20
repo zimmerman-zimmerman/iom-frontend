@@ -59,7 +59,6 @@ class DonorsTable extends BaseFilter {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
-      className: 'number',
       render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({
@@ -68,7 +67,6 @@ class DonorsTable extends BaseFilter {
       })}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
-      className: 'number',
     },{
       title:
         <SortBy
