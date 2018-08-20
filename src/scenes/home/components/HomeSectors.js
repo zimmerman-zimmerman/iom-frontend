@@ -9,7 +9,7 @@ HomeSectors.defaultProps = {
     aggregations: 'activity_count,incoming_fund,disbursement,value',
     group_by: 'sector',
     order_by: '-value',
-    convert_to: 'usd',
+    sector_vocabulary: 99,
     hierarchy: 1,
     page_size: 5,
     reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
