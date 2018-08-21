@@ -236,6 +236,7 @@ class GeoMap extends Component {
               center={center}
               boundsOptions={bounds}
               zoom={this.getZoomValue()}
+              minZoom={2}
               zoomControl={false}
               worldCopyJump={true}
               scrollWheelZoom={false}
