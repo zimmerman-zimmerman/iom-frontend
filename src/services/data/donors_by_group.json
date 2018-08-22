@@ -6,7 +6,8 @@
   "XM-DAC-1-5": "AT",
   "XM-DAC-1-8": "AT",
   "BE-BCE_KBO-0264814354": "BE",
-  "XM-DAC-2-10,XM-DAC-2-20": "BE",
+  "XM-DAC-2-10": "BE",
+  "XM-DAC-2-20": "BE",
   "CA-3": "CA",
   "XM-DAC-301-1": "CA",
   "XM-DAC-301-2": "CA",
@@ -80,5 +81,14 @@
   "GB-GOV-3": "GB",
   "GB-GOV-8": "GB",
   "US-GOV-1": "US",
-  "US-USAGOV": "US"
+  "US-USAGOV": "US",
+  "XM-OCHA-CERF": "UN",
+  "46002": "UN",
+  "XM-OCHA-CBPF": "UN",
+  "41AAA": "UN",
+  "41122": "UN",
+  "XM-DAC-41127": "UN",
+  "XM-DAC-41114": "UN",
+  "XI-IATI-EC_DEVCO": "UN",
+  "GB-COH-01846493": "UN"
 }

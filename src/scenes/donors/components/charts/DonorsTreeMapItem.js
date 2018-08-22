@@ -21,7 +21,7 @@ export default class DonorsTreeMapItem extends Component {
   static defaultProps = {};
 
   render() {
-    const { root, depth, x, y, width, height, index, bgColors, participating_organisation, value } = this.props;
+    const { root, depth, x, y, width, height, index, bgColors, name, value } = this.props;
     const total = sumBy(root.children, 'value');
     const percent = parseFloat(value / total * 100).toFixed(2);
     const fontSize = percent.toString().concat('%')
@@ -48,7 +48,7 @@ export default class DonorsTreeMapItem extends Component {
             fontSize={fontSize}
             fillOpacity={0.5}
           >
-            {participating_organisation}
+            {name}
           </Text> )
           : null
         }

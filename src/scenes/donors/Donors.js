@@ -3,6 +3,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from "react-redux";
 import get from 'lodash/get';
 import sortBy from 'lodash/sortBy';
+import forEach from 'lodash/forEach';
+import find from 'lodash/find';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
 import MediaQuery from 'react-responsive';
@@ -17,6 +19,9 @@ import DonorsTable from './components/DonorsTable';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
 
+import DonorGroups from '../../services/data/donor_groups';
+import DonorsByGroup from '../../services/data/donors_by_group';
+
 class Donors extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -30,9 +35,32 @@ class Donors extends BaseFilter {
     }
   }
 
+  createDonorsByGroup(donors) {
+    let dataGroup = [];
+    forEach(donors, function(donor) {
+      const code = get(DonorsByGroup, donor.participating_organisation_ref);
+      const group = get(DonorGroups, code);
+      let donorGroup = find(dataGroup, {code: code});
+      if (!donorGroup) {
+        donorGroup = {
+          code: code,
+          name: group.name,
+          value:  donor.value,
+          project: donor.activity_count,
+        };
+        dataGroup.push(donorGroup);
+      } else {
+        donorGroup.value = donorGroup.value + donor.value;
+        donorGroup.project = donorGroup.project + donor.activity_count;
+      }
+    });
+    return dataGroup;
+  }
+
   render() {
     const { donors, classes } = this.props;
     const data = this.filter(get(donors, 'data'));
+    const dataDonors = this.createDonorsByGroup(data);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
@@ -42,7 +70,7 @@ class Donors extends BaseFilter {
         <Grid className={classes.container} style={pageContainer} fluid>
           <Row>
             <Col xs={12} md={4} lg={3} >
-              <Filters rootComponent={this} countResults={get(data, 'length', 0)}
+              <Filters rootComponent={this} countResults={get(dataDonors, 'length', 0)}
                        pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
                        singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
               />
@@ -63,7 +91,7 @@ class Donors extends BaseFilter {
               <Row>
                 <Col xs={12}>
                   <DonorsTreeMap
-                    data={sortBy(data, function(e) {
+                    data={sortBy(dataDonors, function(e) {
                         return e.value;
                       }).reverse()
                     }
@@ -72,7 +100,7 @@ class Donors extends BaseFilter {
               </Row>
               <Row>
                 <Col xs={12}>
-                  <DonorsTable rootComponent={this} data={data ? data : null} />
+                  <DonorsTable rootComponent={this} data={dataDonors ? dataDonors : null} />
                 </Col>
               </Row>
             </Col>
