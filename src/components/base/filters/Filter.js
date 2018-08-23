@@ -7,6 +7,7 @@ import Layout from 'antd/es/layout';
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import PropsType from 'prop-types';
+import find from 'lodash/find';
 
 import BaseFilter from "./BaseFilter";
 
@@ -36,8 +37,10 @@ class Filter extends BaseFilter {
             values = chips[this.props.fieldName].values;
             names = chips[this.props.fieldName].labels;
         }
-        values.push(value);
-        names.push(component.props.children);
+        if(values.indexOf(value) === -1){
+            values.push(value);
+            names.push(component.props.children);
+        }
         this.handleChange(values, names);
     }
 

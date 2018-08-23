@@ -29,7 +29,7 @@ class Projects extends BaseFilter {
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
       },
       update: false,
-      filters: {values: {}, changed: false},
+      filters: {values: {}, changed: false, chips: {}},
     };
   }
 

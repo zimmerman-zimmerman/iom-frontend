@@ -2,6 +2,7 @@ import { Component } from 'react';
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import extend from "lodash/extend";
+import find from 'lodash/find';
 
 
 class BaseFilter extends Component {
@@ -54,7 +55,10 @@ class BaseFilter extends Component {
     if(fieldName === 'q' && filters.chips['q'] && !remove)
     {
       value = filters.chips['q'].values;
-      value.push(values);
+      if(value.indexOf(values) === -1)
+      {
+          value.push(values);
+      }
     }
 
     if (get(filters.values, fieldName)) {

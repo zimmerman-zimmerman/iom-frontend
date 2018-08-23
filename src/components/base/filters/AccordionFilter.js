@@ -19,6 +19,7 @@ class AccordionFilter  extends BaseFilter{
     }
 
   componentDidUpdate(){
+        console.log(this.props.rootComponent);
     if(!isEqual(this.props.rootComponent.state.filters.chips, this.state.chips))
     {
       this.setState({
