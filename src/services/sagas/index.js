@@ -1,5 +1,6 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import * as actions from '../actions/index';
+import * as genericActions from '../actions/generic';
 import * as api from '../index';
 
 export function* homeDonorsRequest(action) {
@@ -227,8 +228,13 @@ export function* transactionsAggregationsParticipatingOrganisationRequest(action
   }
 }
 
+export function* toggleModalRequest(action) {
+    yield put(genericActions.toggleModalSuccess(action));
+}
+
 function* sagas() {
   yield [
+      takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
     takeLatest('HOME_DONORS_REQUEST', homeDonorsRequest),
     takeLatest('HOME_ACTIVITIES_REQUEST', homeActivitiesRequest),
     takeLatest('HOME_SECTORS_REQUEST', homeSectorsRequest),

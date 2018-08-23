@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DialogWindow from './dialogWindow/DialogWindow';
 
 export default function asyncComponent(importComponent) {
   class AsyncComponent extends Component {
@@ -18,7 +19,10 @@ export default function asyncComponent(importComponent) {
 
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : null;
+      return <div>
+        <DialogWindow/>
+          {C ? <C {...this.props} /> : null}
+      </div>
     }
   }
 

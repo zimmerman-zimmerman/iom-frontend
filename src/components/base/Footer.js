@@ -4,9 +4,15 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'antd/es/button';
 import Divider from 'antd/es/divider';
 import FaFacebook from 'react-icons/lib/fa/facebook';
+import * as genericActions from '../../services/actions/generic';
 
 import { variables as styleVariables } from '../../helpers/style';
 import Trans from '../../locales/Trans';
+import {connect} from "react-redux";
+
+import GenericDialog from '../dialogWindow/GenericDialog/GenericDialog';
+
+import './styles/Footer.scss';
 
 const Footer = (props) => {
   const { classes } = props;
@@ -52,11 +58,27 @@ const Footer = (props) => {
         <Col xs={12} md={9} lg={9} className={classes.gap}>
           <Row start="xs" end="md">
             <Col xs={12} md={9} lg={7}>
-              <Trans  id="footer.copyright" text="© 2018 Migration data portal"/>
-              <Divider type="vertical"/>
-              <Trans  id="footer.term" text="Term of use"/>
-              <Divider type="vertical"/>
-              <Trans  id="footer.disclaimer" text="Disclaimer"/>
+              <div className={'link-container'}>
+                  <div className={'link'}>
+                      <Trans  id="footer.copyright" text="© 2018 Migration data portal"/>
+                  </div>
+                <div>
+                    <Divider type="vertical"/>
+                </div>
+                  <div className={'link'}>
+                      <Trans  id="footer.term" text="Term of use"/>
+                  </div>
+                  <div>
+                      <Divider type="vertical"/>
+                  </div>
+                  <div className={'link'} onClick={() =>
+                           props.dispatch(genericActions.toggleModalRequest(
+                               <GenericDialog text={<Trans  id="disclaimer.text" text="Disclaimer text"/>}
+                                              buttonText={<Trans  id="disclaimer.button.text" text="CONTINUE"/>}
+                                              handleClick={() => props.dispatch(genericActions.toggleModalRequest())}/>))}>
+                      <Trans  id="footer.disclaimer" text="Disclaimer" />
+                  </div>
+              </div>
             </Col>
           </Row>
         </Col>
@@ -102,4 +124,4 @@ const styles = {
   }
 };
 
-export default injectSheet(styles)(Footer);
+export default injectSheet(styles)(connect(null)(Footer));

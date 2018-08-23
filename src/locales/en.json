@@ -214,6 +214,9 @@
   "footer.website": "IOM website",
   "footer.website.url": "www.iom.int",
 
+  "disclaimer.text": "Disclaimer: The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations or the International Organization for Migration.",
+  "disclaimer.button.text": "CONTINUE",
+
   "contact.info.title": "Contact info",
   "contact.info.email": "info@iom.int",
   "contact.info.email.label": "Email",
