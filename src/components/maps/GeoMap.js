@@ -14,9 +14,15 @@ import ReactCountryFlag from "react-country-flag";
 import { injectIntl, intlShape } from "react-intl";
 
 import '../../styles/GeoMap.scss';
+import * as genericActions from "../../services/actions/generic";
+import {connect} from "react-redux";
+import GenericDialog from "../dialogWindow/GenericDialog/GenericDialog";
 
 
 const colors = ["#CDDC39", "#4CAF50", "#795548"];
+
+const dialogText = 'Disclaimer: The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations or the International Organization for Migration.';
+const dialogButText = 'CONTINUE';
 
 class GeoMap extends Component {
   constructor(props) {
@@ -54,9 +60,9 @@ class GeoMap extends Component {
     this.goToCountryPortal = this.goToCountryPortal.bind(this);
   }
 
-    Trans = () => {
+    Trans = (id) => {
         const { intl } = this.props;
-        return intl.formatMessage({id: 'summary.show', defaultMessage: 'Show Summary'});
+        return intl.formatMessage({id, defaultMessage: 'Show Summary'});
     };
 
   initializeLayers = () => {
@@ -261,14 +267,18 @@ class GeoMap extends Component {
               />
 
               <Control position="topleft" className="disclaimer-box">
-                <div>Disclaimer</div>
+                <div onClick={() =>
+                    this.props.dispatch(genericActions.toggleModalRequest(
+                        <GenericDialog text={this.Trans('disclaimer.text')}
+                                       buttonText={this.Trans('disclaimer.button.text')}
+                                       handleClick={() => this.props.dispatch(genericActions.toggleModalRequest())}/>))}>Disclaimer</div>
               </Control>
 
                 {this.props.showSummary === false &&
                     <Control position="topright" >
                         <div>
                             <Button size="small" type="primary" ghost className="button-show" onClick={() => this.props.onShowSummary()}>
-                                {this.Trans()}
+                                {this.Trans('summary.show')}
                             </Button>
                         </div>
                     </Control>
@@ -303,4 +313,4 @@ GeoMap.propTypes = {
     intl: intlShape.isRequired
 };
 
-export default injectIntl(withRouter(GeoMap));
+export default (connect(null))(injectIntl(withRouter(GeoMap)));

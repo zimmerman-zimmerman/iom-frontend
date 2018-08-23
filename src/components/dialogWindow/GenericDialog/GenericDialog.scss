@@ -1,0 +1,28 @@
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  width: 310px;
+  height: 250px;
+}
+
+.button {
+  margin: auto auto 6px auto;
+  border-radius: 2px;
+  width: 134px;
+  height: 38px;
+  background-color: #418fde;
+  color: #ffffff;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.text {
+  text-align: center;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 260px;
+}
