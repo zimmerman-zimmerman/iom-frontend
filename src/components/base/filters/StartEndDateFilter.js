@@ -17,10 +17,17 @@ class StartEndDateFilter extends BaseFilter {
     if (get(filters.values, 'start_date_gte') || get(filters.values, 'end_date_lte') ) {
       delete filters.values['start_date_gte'];
       delete filters.values['end_date_lte'];
+      delete filters.chips['date'];
     }
     if (!isEmpty(values)) {
-      filters.values['start_date_gte'] = values[0].format('YYYY-MM-DD');
-      filters.values['end_date_lte'] = values[1].format('YYYY-MM-DD');
+      const start_date = values[0].format('YYYY-MM-DD');
+      const end_date = values[1].format('YYYY-MM-DD');
+        filters.chips['date'] = {
+            labels: [('From: ').concat(start_date).concat(' to: ').concat(end_date)],
+            type: 'Date',
+        };
+        filters.values['start_date_gte'] = start_date;
+      filters.values['end_date_lte'] = end_date;
     }
     filters.changed = true;
     this.setState({filters: filters});
