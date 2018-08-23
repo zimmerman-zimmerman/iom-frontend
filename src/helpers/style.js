@@ -24,7 +24,10 @@ export const slider = {
 };
 
 export const tableHeader = {
-  fontWeight: 'bold',
+    fontSize: '22px',
+  fontWeight: '600',
+    overflowWrap: 'normal',
+    wordBreak: 'keep-all',
 }
 
 export const pageContainer = {
