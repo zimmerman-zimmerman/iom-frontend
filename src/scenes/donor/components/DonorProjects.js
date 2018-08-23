@@ -117,7 +117,6 @@ class DonorProjects extends Component {
         />,
       key: 'sort_by',
     }];
-    console.log(total);
     return (
       <Spin spinning={donorProjects.request}>
           <Table className="DonorsTable"

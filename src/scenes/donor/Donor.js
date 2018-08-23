@@ -35,13 +35,8 @@ class Donor extends BaseFilter {
     const { classes } = this.props;
     const code = get(this.props, 'match.params.code');
     const data = get(this.props, 'donor.data.results[0]');
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
-    ];
     return (
-      <Page breadcrumbItems={breadcrumbItems}>
+      <Page pageName={<Trans id='main.menu.donor.detail' text='Donor Detail' />}>
         <Grid className={classes.grid} style={pageContainer} fluid>
           <Row>
             <Col xs={12}>

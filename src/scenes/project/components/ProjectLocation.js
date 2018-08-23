@@ -34,7 +34,6 @@ class ProjectLocation extends Component {
 
     render() {
         const { data, projectLocation, classes } = this.props;
-        console.log(data, );
         const country = get(projectLocation, 'data', null);
         const GroupFields = (props) => {
             const { fields } = props;
