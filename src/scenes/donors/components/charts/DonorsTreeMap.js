@@ -37,6 +37,7 @@ class DonorsTreeMap extends Component {
                      ratio={4/3}
                      stroke="#fff"
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
+                     animationDuration={800}
             >
               <Tooltip content={<CustomToolTip/>}/>
             </Treemap>
