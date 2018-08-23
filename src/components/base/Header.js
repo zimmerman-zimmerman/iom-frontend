@@ -16,6 +16,7 @@ import { variables as styleVariables } from '../../helpers/style';
 import Menus from './Menus';
 import logo from '../../assets/iom-logo.svg';
 import logoOnly from '../../assets/iom-logo-only.svg';
+import ShareIcon from '../../icons/share';
 
 
 class Header extends Component {
@@ -68,10 +69,14 @@ class Header extends Component {
       return (
         <Row middle={size} className={classes.share}>
           <Col lg={12}>
-            <Button shape="circle" icon="twitter" />
-            <Button shape="circle"><FaFacebook className={classes.faIcon} /></Button>
-            <Button shape="circle"><FaFeed className={classes.faIcon} /></Button>
-            <Button shape="circle" icon="share-alt" />
+            <Button shape="circle" onClick={()=> window.location = 'https://twitter.com/UNmigration'} icon="twitter" />
+            <Button shape="circle" onClick={()=> window.location = 'https://www.facebook.com/IOM'}>
+                <FaFacebook className={classes.faIcon} />
+            </Button>
+            <Button shape="circle" onClick={()=> window.location = 'https://www.iom.int/rss-feeds'}>
+                <FaFeed className={classes.faIcon} />
+            </Button>
+            <Button shape="circle"><ShareIcon className='share-icon'/></Button>
           </Col>
         </Row>
       )
