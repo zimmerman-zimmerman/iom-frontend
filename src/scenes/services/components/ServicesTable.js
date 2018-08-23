@@ -47,7 +47,6 @@ class ServicesTable extends BaseFilter {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}</span>,
       dataIndex: 'sector.name',
       key: 'sector',
-      className: 'Title',
       width: '55%',
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
@@ -59,13 +58,11 @@ class ServicesTable extends BaseFilter {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
-      className: 'number',
       render: value => <span>{usd}{format(',.0f')(value)}</span>,
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
-      className: 'number',
     },{
       title: 
         <SortBy

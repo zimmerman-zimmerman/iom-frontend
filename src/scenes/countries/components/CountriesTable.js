@@ -53,12 +53,10 @@ class CountriesTable extends BaseFilter {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
-      className: 'number',
       render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}</span>,
       dataIndex: 'activity_count',
-      className: 'number',
       key: 'count',
     },{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}</span>,
