@@ -94,7 +94,7 @@ class ProjectsTable extends BaseFilter {
       width: '20%',
       render: recipient_countries => {
         if (size(recipient_countries) > 0) {
-          return <Link to={`/country/${recipient_countries[0].country.code}`}>{get(recipient_countries, '[0].country.name')}</Link>
+          return <Link to={`/countries/${recipient_countries[0].country.code}`}>{get(recipient_countries, '[0].country.name')}</Link>
         } else {
           return <span></span>
         }
