@@ -63,7 +63,7 @@ class DonorsTable extends BaseFilter {
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',
-        defaultMessage: 'Implementation projects'
+        defaultMessage: 'Number of projects',
       })}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
