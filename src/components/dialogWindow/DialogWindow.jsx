@@ -39,7 +39,6 @@ class DialogWindow extends Component {
     }
 
     render() {
-        console.log('dialog window props', this.props);
         return (
             <Modal
                 isOpen={this.state.modalOpen}
