@@ -107,7 +107,7 @@
   "donors.filters.count": "Filter(s)",
   "donors.table.donors.header.donor": "Donor",
   "donors.table.donors.header.budget": "Budget",
-  "donors.table.donors.header.projects.count": "Implementation projects",
+  "donors.table.donors.header.projects.count": "Number of projects",
 
   "donors.title": "Donors",
   "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",
