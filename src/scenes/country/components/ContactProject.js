@@ -34,7 +34,14 @@ class ContactProject extends Component {
       return (
         <div className="field">
           <strong className="label"><Trans id={props.name[0]} defaultMessage={props.name[1]} /></strong>
-            {props.name[1] === 'Website' && <span className="value"><a>{get(data, props.value, '-')}</a></span>}
+            {props.name[1] === 'Website' &&
+            <span className="value">
+                <a href={get(data, 'contact_info[0].website','-').includes('http') ?
+                      get(data, 'contact_info[0].website','-') :
+                      'https://' + get(data, 'contact_info[0].website','-')}>
+                    {get(data, props.value, '-')}
+                </a>
+            </span>}
             {props.name[1] !== 'Website' && <span className="value">{get(data, props.value, '-')}</span>}
         </div>
       )

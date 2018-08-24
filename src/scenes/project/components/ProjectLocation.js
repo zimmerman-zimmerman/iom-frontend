@@ -71,6 +71,8 @@ class ProjectLocation extends Component {
                 </Fragment>
             )
         };
+
+        const websiteLink = get(data, 'contact_info[0].website','-').includes('http') ? get(data, 'contact_info[0].website','-') : 'https://' + get(data, 'contact_info[0].website','-');
         const fields = [
             {
                 title: {id: "project.location.title", defaultMessage: "Project Location"},
@@ -126,7 +128,7 @@ class ProjectLocation extends Component {
                     },
                     {
                         name:  {id:"project.location.contact.website",  defaultMessage: "Website:"},
-                        value: <span>{get(data, 'contact_info[0].website','-')}</span>
+                        value: <span><a href={websiteLink}>{get(data, 'contact_info[0].website','-')}</a></span>
                     },
                 ]
             }
