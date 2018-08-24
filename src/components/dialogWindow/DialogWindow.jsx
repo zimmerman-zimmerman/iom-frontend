@@ -35,7 +35,7 @@ class DialogWindow extends Component {
     }
 
     closeModal() {
-        this.props.dispatch(genericActions.toggleModalRequest(null))
+        this.props.dispatch(genericActions.toggleModalRequest(null, false))
     }
 
     render() {

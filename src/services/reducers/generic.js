@@ -22,7 +22,7 @@ function updateRequest(state) {
 function updateSuccess(state, action) {
     return update(state, {
         modalWindow: {$set: {
-                open: !state.modalWindow.open,
+                open: action.component.open,
                 component: action.component.component,
             }},
     });

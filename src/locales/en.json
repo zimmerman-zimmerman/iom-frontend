@@ -1,4 +1,13 @@
 {
+  "share.dialog.title": "Share current page",
+  "share.dialog.shareable.link": "Get shareable link",
+  "share.dialog.share.email": "Share via email ",
+  "share.dialog.enter.email": "Enter email adresses",
+  "share.dialog.share.social": "Share with your friends using these",
+  "button.send": "SEND",
+  "button.done": "DONE",
+  "button.cancel": "CANCEL",
+
   "currency.usd": "USD",
   "currency.usd.symbol": "$",
 
