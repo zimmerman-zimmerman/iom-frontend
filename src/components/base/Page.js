@@ -26,7 +26,6 @@ class Page extends Component {
 
   componentDidMount(){
     let breadcrumbItems = this.state.breadcrumbItems;
-    console.log(this.props.pageName);
     const existingBreadIndex = findIndex(breadcrumbItems, item => item.text.props.text === this.props.pageName.props.text);
     if(existingBreadIndex > -1)
     {
