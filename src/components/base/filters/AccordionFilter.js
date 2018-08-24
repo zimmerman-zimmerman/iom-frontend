@@ -4,13 +4,68 @@ import injectSheet from 'react-jss';
 import {injectIntl} from "react-intl";
 import { Collapse } from 'antd';
 import { Row, Col } from 'react-flexbox-grid';
+import isEqual from 'lodash/isEqual';
+import './styles/AccordionFilter.scss';
+import BaseFilter from './BaseFilter';
 
 const Panel = Collapse.Panel;
 
-const AccordionFilter = (props) => {
-    const { classes, panels } = props;
-    return (
+class AccordionFilter  extends BaseFilter{
+    constructor(props) {
+        super(props);
+        this.state = {
+            chips: {},
+        };
+    }
+
+  componentDidUpdate(){
+        console.log(this.props.rootComponent);
+    if(!isEqual(this.props.rootComponent.state.filters.chips, this.state.chips))
+    {
+      this.setState({
+          chips: this.props.rootComponent.state.filters.chips,
+      });
+    }
+  }
+
+  handleRemoveChip(chips, key, index){
+      let values = [];
+      let names = [];
+      if(key !== 'date' && key !== 'money')
+      {
+          values = chips[key].values;
+          names = chips[key].labels;
+          values.splice(index, 1);
+          names.splice(index, 1);
+      }
+      this.handleChange(values, names, true, key, chips[key].type);
+  }
+
+  render () {
+      const { classes, panels } = this.props;
+      const chips = this.state.chips;
+    return(
         <Row className={classes.accordionFilter}>
+            <div className='filters-container'>
+                {Object.keys(chips).map(key => {
+                    return (
+                        <div className='chip-container'>
+                          <div className='chip-type'>
+                              {chips[key].type}
+                          </div>
+                          <div className='chip-label-container'>
+                              {chips[key].labels.map((label, index) => {
+                                  return (
+                                      <div className='chip-box'>
+                                          <div className='chip-x' onClick={() => this.handleRemoveChip(chips, key, index)}> x </div>
+                                          <div className='chip-label'> {label} </div>
+                                      </div>
+                                  )})}
+                          </div>
+                      </div>
+                    )
+                })}
+            </div>
             <Col xs={12}>
                 <Collapse bordered={false} className={classes.accordionFilter}>
                     {panels.map((item, index) =>
@@ -22,7 +77,8 @@ const AccordionFilter = (props) => {
             </Col>
         </Row>
     )
-};
+  }
+}
 
 AccordionFilter.propTypes = {
     rootComponent: PropsType.object,
