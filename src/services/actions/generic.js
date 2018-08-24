@@ -14,3 +14,20 @@ export function toggleModalSuccess(component) {
         component,
     }
 }
+
+export const UPDATE_BREADCRUMBS_REQUEST = 'UPDATE_BREADCRUMBS_REQUEST';
+export const UPDATE_BREADCRUMBS_SUCCESS = 'UPDATE_BREADCRUMBS_SUCCESS';
+
+export function updateBreadcrumbsRequest(breadcrumbItems) {
+    return {
+        type: UPDATE_BREADCRUMBS_REQUEST,
+        breadcrumbItems,
+    }
+}
+
+export function updateBreadcrumbsSuccess(breadcrumbItems) {
+    return {
+        type: UPDATE_BREADCRUMBS_SUCCESS,
+        breadcrumbItems,
+    }
+}

@@ -232,9 +232,14 @@ export function* toggleModalRequest(action) {
     yield put(genericActions.toggleModalSuccess(action));
 }
 
+export function* updateBreadcrumbsRequest(action) {
+    yield put(genericActions.updateBreadcrumbsSuccess(action));
+}
+
 function* sagas() {
   yield [
       takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
+      takeLatest('UPDATE_BREADCRUMBS_REQUEST', updateBreadcrumbsRequest),
     takeLatest('HOME_DONORS_REQUEST', homeDonorsRequest),
     takeLatest('HOME_ACTIVITIES_REQUEST', homeActivitiesRequest),
     takeLatest('HOME_SECTORS_REQUEST', homeSectorsRequest),

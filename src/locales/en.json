@@ -31,6 +31,10 @@
   "main.menu.projects": "Projects",
   "main.menu.about": "About",
   "breadcrumb.home": "Home",
+  "main.menu.service.detail": "Service Detail",
+  "main.menu.project.detail": "Project Detail",
+  "main.menu.country.detail": "Country Detail",
+  "main.menu.donor.detail": "Donor Detail",
 
   "banner.title": "IOM Transparency Portal",
   "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",
