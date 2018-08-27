@@ -175,7 +175,7 @@ class GeoMap extends Component {
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              <b>Total budget:</b> USD {format(",.0f")(feature.properties.budgetValue)}
+              <b>Total budget:</b> US$ {format(",.0f")(feature.properties.budgetValue)}
             </label>
           </div>
           <div style={{ marginTop: "10px" }}>

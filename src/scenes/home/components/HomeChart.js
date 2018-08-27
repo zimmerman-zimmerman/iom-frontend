@@ -44,7 +44,7 @@ class HomeChart extends Component {
         value: get(item, valueField),
       });
     });
-    const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
+    const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const title = intl.formatMessage(localeTitle);
     const Title = (props) => {
       const { classes } = props;

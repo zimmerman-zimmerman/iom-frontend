@@ -15,7 +15,7 @@ const CustomToolTip = props => {
     <Card>
       <Content>
         <h5>
-          <Trans id="currency.usd" defaultMessage="USD"/> {format(",.0f")(data.value)}
+          <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.value)}
         </h5>
       </Content>
     </Card> : null;
@@ -24,7 +24,7 @@ const CustomToolTip = props => {
 class ServicesCharts extends Component {
   render() {
     const { intl, data } = this.props;
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     return (
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
         {data !== null ?
@@ -37,7 +37,7 @@ class ServicesCharts extends Component {
               tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}
               tickSize={0}
               tick={{
-                fontSize: 10, marginRight: 10, color: '#262626'
+                fontSize: 10, marginRight: 10, color: '#262626', whiteSpace: 'nowrap', width: '200',
               }}
             />
             <Tooltip content={<CustomToolTip/>}/>
