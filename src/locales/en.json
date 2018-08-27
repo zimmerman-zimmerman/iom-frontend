@@ -7,6 +7,12 @@
   "button.send": "SEND",
   "button.done": "DONE",
   "button.cancel": "CANCEL",
+  "shared.link.sent.title": "Shared link was sent",
+  "shared.link.sent.desc": "The link will be in the mail box",
+  "shared.link.copied.title": "Shared link was copied",
+  "shared.link.copied.desc": "The link will has been copied to your clipboard",
+  "shared.link.social.title": "Link shared!",
+  "shared.link.social.desc": "The link was shared via social media",
 
   "currency.usd": "USD",
   "currency.usd.symbol": "$",

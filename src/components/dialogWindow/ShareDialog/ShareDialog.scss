@@ -1,19 +1,61 @@
+$fontFamily: 'Open Sans';
+$buttonColor: #5287b7;
 
 .container {
-  min-width: 25%;
   width: fit-content;
+  padding: 20px 30px 20px 30px;
 }
 
 .share-link-icon {
+  order: 2;
   cursor: pointer;
+  pointer-events: all;
+  margin: auto 8px auto auto;
+  font-size: 20px;
+}
+
+.label {
+  margin-top: 18px;
+  font-family: $fontFamily;
+  font-size: 21px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #454e53;
+}
+
+.share-link-box {
+  margin-top: 12px;
+  width: 230px;
+  border-radius: 3px;
+  background-color: #fafafa;
+  border: solid 1px #ced9db;
+  display: flex;
 }
 
 .share-link-input {
+  order: 1;
+  border: none;
   pointer-events: none;
+  width: 70%;
+  font-family: $fontFamily;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-align: left;
+  color: #8d8d8d;
+  background-color: #fafafa;
+  padding: 5px;
 }
 
 .title {
-  font-family: 'Open Sans';
+  font-family: $fontFamily;
   font-size: 28px;
   font-weight: normal;
   font-style: normal;
@@ -24,11 +66,82 @@
   color: #1f4283;
 }
 
-.button {
-  border-radius: 2px;
-  background-color: #418fde;
+.share-email-box {
+  margin-top: 12px;
+  display: flex;
+  height: 39px;
+  width: 410px;
+  border-radius: 3px;
+  background-color: #fafafa;
+  border-left: solid 1px #ced9db;
+  border-top: solid 1px #ced9db;
+  border-bottom: solid 1px #ced9db;
+}
+
+.share-email-input {
+  order: 1;
+  border: none;
+  height: fit-content;
+  padding: 5px;
+}
+
+.send-button {
+  order: 2;
+  width: 88px !important;
+  margin: 0 0 0 auto !important;
+  height: 40px !important;
+  top: -1px;
+  border-radius: 0 5px 5px 0 !important;
+  background-color: $buttonColor;
   color: #ffffff;
   text-transform: capitalize;
   font-weight: bold;
   font-size: 14px;
+}
+
+.social-share-container{
+  margin-top: 12px;
+  display: flex;
+}
+
+.social-button-container {
+  margin-right: 40px;
+}
+
+.social-button {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.social-label {
+  font-family: $fontFamily;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: left;
+  color: #454e53;
+}
+
+.done-button {
+  width: 134px;
+  height: 42px;
+  border-radius: 3px;
+  background-color: $buttonColor;
+  color: #fff;
+  font-weight: bold;
+}
+
+.cancel-button {
+  width: 134px;
+  height: 42px;
+  border-radius: 3px;
+  background-color: #939495;
+  color: #fff;
+  font-weight: bold;
+  margin-right: 20px;
 }
