@@ -49,7 +49,12 @@ class ShareDialog extends Component {
     }
 
     sendEmail(){
-        window.location.href = (`mailto:${this.state.email}?subject=Share a Link&body=${window.location}`);
+        this.props.dispatch(genericActions.toggleModalRequest(<ConfirmationDialog
+            title={this.trans('shared.link.sent.title', 'Shared link was sent')}
+            descText={this.trans('shared.link.sent.desc', 'The link will be in the mail box(NOT IMPLEMENTED YET)')}
+            buttonText={this.trans('disclaimer.button.text', 'CONTINUE')}
+            handleClick={() => this.props.dispatch(genericActions.toggleModalRequest(null, false))}
+        />, true));
     }
 
     render(){
