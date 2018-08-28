@@ -13,7 +13,6 @@ class BaseFilter extends Component {
         aggregations: 'activity_count,incoming_fund,disbursement,expenditure,value',
         group_by: '',
         order_by: '-value',
-        convert_to: 'usd',
         hierarchy: 1,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       },

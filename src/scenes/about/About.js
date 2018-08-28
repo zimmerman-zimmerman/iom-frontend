@@ -7,8 +7,12 @@ import AboutContent from './components/AboutContent';
 
 const About = () => {
 
+  const breadcrumbItems = [
+    {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+    {url: null, text: <Trans id='main.menu.about' text='About' />},
+  ];
   return (
-    <Page pageName={<Trans id='main.menu.about' text='About' />}>
+    <Page breadcrumbItems={breadcrumbItems}>
       <AboutContent/>
     </Page>
   );
