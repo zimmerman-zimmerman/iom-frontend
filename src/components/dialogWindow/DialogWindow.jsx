@@ -7,6 +7,7 @@ import isEqual from 'lodash/isEqual';
 const customStyles = {
     overlay: {
         backgroundColor: 'rgba(44, 44, 44, 0.8)',
+        zIndex: '10',
     },
     content : {
         margin: 'auto',
