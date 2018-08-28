@@ -133,6 +133,7 @@ const styles = {
   },
   title: {
     fontWeight: 300,
+      marginTop: '8px',
   }
 };
 

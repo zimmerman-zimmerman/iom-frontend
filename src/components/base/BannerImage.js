@@ -41,7 +41,7 @@ const styles = {
     fontSize: 44,
     fontWeight: 300,
     display: 'block',
-    height: 73,
+    height: 'fit-content',
     '@media (max-width: 768px)': {
       fontSize: 26,
     }

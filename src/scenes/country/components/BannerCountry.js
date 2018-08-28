@@ -25,29 +25,29 @@ const BannerCountry = (props) => {
   const RightColumn = () => {
     const lines = [
       [
-        {line: <Trans id="country.banner.right.total.budget" defaultMessage="Total project budget"/>, className: 'gap'},
-        {line: <span>{usd}{format(',')(data.value)}</span>, className: 'value'},
+        {line: <Trans id="country.banner.right.total.budget" defaultMessage="Total project budget"/>, className: 'financialLabel'},
+        {line: <span>{usd}{format(',')(data.value)}</span>, className: 'financialText'},
         {
-          line: <Trans id="country.banner.right.total.incoming" defaultMessage="Total incoming funds"/>,
-          className: 'gap'
+          line: <Trans id="country.banner.right.total.incoming" defaultMessage="Total incoming funds" />,
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(data.incoming_fund)}</span>, className: 'value'},
-        {line: <Trans id="country.banner.right.activity.count" defaultMessage="Activity count"/>, className: 'gap'},
-        {line: <span>{format(',')(data.activity_count)}</span>, className: 'value'}
+        {line: <span>{usd}{format(',')(data.incoming_fund)}</span>, className: 'financialText'},
+        {line: <Trans id="country.banner.right.activity.count" defaultMessage="Activity count"/>, className: 'financialLabel'},
+        {line: <span>{format(',')(data.activity_count)}</span>, className: 'financialText'}
       ],
       [
         {
           line: <Trans id="country.banner.right.total.disbursements" defaultMessage="Total disbursements"/>,
-          className: 'gap'
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(data.disbursement)}</span>, className: 'value'},
+        {line: <span>{usd}{format(',')(data.disbursement)}</span>, className: 'financialText'},
         {
           line: <Trans id="country.banner.right.total.expenditure" defaultMessage="Total expenditure"/>,
-          className: 'gap'
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(data.expenditure)}</span>, className: 'value'},
-        {line: <Trans id="country.banner.right.data.source" defaultMessage="Data source" />, className: 'gap'},
-        {line: <Trans id="country.banner.right.data.source.iati.registry" defaultMessage="IATI Registry" />, className: 'value'}
+        {line: <span>{usd}{format(',')(data.expenditure)}</span>, className: 'financialText'},
+        {line: <Trans id="country.banner.right.data.source" defaultMessage="Data source" />, className: 'financialLabel'},
+        {line: <Trans id="country.banner.right.data.source.iati.registry" defaultMessage="IATI Registry" />, className: 'financialText'}
       ]
     ];
     return (
@@ -112,7 +112,7 @@ const BannerCountry = (props) => {
         <Col xs={12} md={6} lg={6}  className="right">
           {data ?
             <Fragment>
-              <span className="title">
+              <span className={classes.financialTitle}>
                 <Trans id="project.banner.right.title" defaultMessage="Financial overview"/>
               </span>
               <RightColumn data={data} />
@@ -125,6 +125,11 @@ const BannerCountry = (props) => {
 };
 
 const styles = {
+  financialTitle:{
+    fontSize: '32px',
+      fontWeight: 600,
+      color: '#fff',
+  },
   bannerCountry: {
     width: '100%',
     marginLeft: 0,
@@ -183,9 +188,15 @@ const styles = {
         color: 'white',
         fontSize: 32,
       },
-      '& .gap': {
-        marginTop: 20,
-        fontSize: 21,
+        '& .financialLabel': {
+        marginTop: '24px',
+            fontSize: '22px',
+            fontWeight: 'bold',
+            color: '#fff',
+        },
+      '& .financialText':{
+          fontSize: '28px',
+          fontWeight: 'normal',
       },
       '& .value': {
         fontSize: 26,

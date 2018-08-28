@@ -134,7 +134,7 @@ class Filters extends Component {
         <Row>
           <Col xs={12}>
             <Badge className={classes.badge} count={filterCount} showZero={true}  />
-            <span style={{marginLeft: 5}}>
+            <span className={classes.filtersLabel}>
               <FormattedMessage id="filters.count" defaultMessage="Filter(s)"/>
             </span>
           </Col>
@@ -199,6 +199,11 @@ Filters.propTypes = {
 };
 
 const styles = {
+    filtersLabel: {
+        marginLeft: 5,
+        fontSize: '21px',
+        color: '#262626',
+    },
   gap: {
     marginTop: 20
   },
@@ -212,9 +217,13 @@ const styles = {
     textTransform: 'lowercase',
   },
   badge: {
+      marginBottom: '8px',
     '& .ant-badge-count': {
       background: '#f7c989',
-    }
+        width: '21px',
+        height: '20px',
+        borderRadius: '8px',
+    },
   },
   icon: {
     fontSize: 20,
