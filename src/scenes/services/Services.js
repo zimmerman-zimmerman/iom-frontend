@@ -29,13 +29,9 @@ class Services extends BaseFilter {
   render() {
     const { services, classes } = this.props;
     const data = this.filter(get(services, 'data'));
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
-    ];
     return (
       <Spin spinning={services.request}>
-        <Page breadcrumbItems={breadcrumbItems}>
+        <Page pageName={<Trans id='main.menu.services' text='Our Service' />}>
           <Grid fluid className={classes.services}>
             <Row>
               <Col xs={12} md={4} lg={3}>

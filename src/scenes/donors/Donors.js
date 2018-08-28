@@ -61,12 +61,8 @@ class Donors extends BaseFilter {
     const { donors, classes } = this.props;
     const data = this.filter(get(donors, 'data'));
     const dataDonors = this.createDonorsByGroup(data);
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
-    ];
     return (
-      <Page breadcrumbItems={breadcrumbItems}>
+      <Page pageName={<Trans id='main.menu.donors' text='Donors' />}>
         <Grid className={classes.container} style={pageContainer} fluid>
           <Row>
             <Col xs={12} md={4} lg={3} >

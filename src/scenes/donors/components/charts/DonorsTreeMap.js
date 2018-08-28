@@ -33,11 +33,13 @@ class DonorsTreeMap extends Component {
         <Col xs={12}>
           <ResponsiveContainer height={360} >
             <Treemap className="tree-map"
+                     isAnimationActive={false}
                      data={data}
                      dataKey="value"
                      ratio={4/3}
                      stroke="#fff"
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
+                     animationDuration={800}
             >
               <Tooltip content={<CustomToolTip/>}/>
             </Treemap>

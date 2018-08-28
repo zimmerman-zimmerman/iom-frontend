@@ -23,14 +23,9 @@ class Project extends Component {
   render() {
     const { project, projectLocation } = this.props;
     const data = get(this.props.project, 'data', null);
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/countries', text: <Trans id='main.menu.projects' text='Projects' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
-    ];
     return(
       <Spin spinning={project.request || projectLocation.request}>
-        <Page breadcrumbItems={breadcrumbItems}>
+        <Page pageName={<Trans id='main.menu.project.detail' text='Project Detail' />}>
           <ProjectBanner data={data} />
           <ProjectLocation data={data} />
         </Page>

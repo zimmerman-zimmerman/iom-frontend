@@ -33,7 +33,7 @@ const TableDonors = (props) => {
     render: obj => 
       <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
   }, {
-    title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
+    title: <div style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</div>,
     dataIndex: 'value',
     key: 'value',
     className: 'columnMoney',

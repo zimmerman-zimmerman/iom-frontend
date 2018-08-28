@@ -30,7 +30,7 @@ class Home extends Component {
       )
     };
     return (
-      <Page>
+      <Page pageName={<Trans id='main.menu.home' text='Home' />}>
         <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
           <Banner height={250} size="xs" />
         </MediaQuery>

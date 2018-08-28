@@ -3,6 +3,8 @@ import injectSheet from "react-jss";
 import { injectIntl, intlShape } from "react-intl";
 import { Range } from 'rc-slider';
 import { connect } from "react-redux";
+import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 
 import BaseFilter from './BaseFilter';
 
@@ -21,18 +23,35 @@ const railStyle = {
   backgroundColor: '#5f5f5f',
 };
 
+const defValue = [0, 900000000];
+
 class SliderFilter extends BaseFilter {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: [0, 900000000]
+      value: defValue,
     }
   }
 
   onAfterChange() {
-    const { rootComponent } = this.props;
-    rootComponent.setState({dataRange: this.state.value});
+    const { rootComponent, intl } = this.props;
+    const filters = rootComponent.state.filters;
+      if (get(filters.chips, 'money')) {
+          delete filters.chips['money'];
+      }
+      if (!isEqual(defValue, this.state.value)) {
+        const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
+          filters.chips['money'] = {
+              labels: [('From: ').concat(`${usd} ${this.state.value[0].toLocaleString()}`).concat(' to: ')
+                  .concat(`${usd} ${this.state.value[1].toLocaleString()}`)],
+              type: 'Funding',
+          };
+      }
+    rootComponent.setState({
+            dataRange: this.state.value,
+            filters: filters,
+    });
   }
 
   render() {

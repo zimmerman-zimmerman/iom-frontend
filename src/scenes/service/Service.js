@@ -31,14 +31,9 @@ class Service extends BaseFilter {
     const { service, serviceProjects, classes } = this.props;
     const sectorId = get(this.props, 'match.params.id');
     const data = get(service, 'data.results[0]');
-    const breadcrumbItems = [
-      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/countries', text: <Trans id='main.menu.services' text='Our Service' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
-    ];
     return (
       <Spin spinning={service.request || serviceProjects.request}>
-        <Page breadcrumbItems={breadcrumbItems}>
+        <Page pageName={<Trans id='main.menu.service.detail' text='Service Detail' />}>
           {data ? <ServiceBanner data={get(service, 'data.results[0]')}/> : null}
           <Grid className={classes.service} fluid>
             <Row>
