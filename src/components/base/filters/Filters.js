@@ -36,6 +36,7 @@ class Filters extends Component {
                 optionValueName="recipient_country.name"
                 groupBy="recipient_country"
                 fieldName="recipient_country"
+                fieldLabel='Country'
                 actionRequest={actions.transactionsAggregationsCountriesRequest}
         />
     },{
@@ -53,6 +54,7 @@ class Filters extends Component {
                 optionValueName="sector.name"
                 groupBy="sector"
                 fieldName="sector"
+                fieldLabel='Project type'
                 actionRequest={actions.transactionsAggregationsSectorRequest}
         />
     },{
@@ -70,6 +72,7 @@ class Filters extends Component {
                 optionValueName="activity_status.name"
                 groupBy="activity_status"
                 fieldName="activity_status"
+                fieldLabel='Project status'
                 actionRequest={actions.transactionsAggregationsActivityStatusRequest}
         />
     },{
@@ -91,6 +94,7 @@ class Filters extends Component {
                 optionValueName="participating_organisation"
                 groupBy="participating_organisation"
                 fieldName="participating_organisation_ref"
+                fieldLabel='Donor type'
                 actionRequest={actions.transactionsAggregationsParticipatingOrganisationRequest}
         />
     },
@@ -153,6 +157,7 @@ class Filters extends Component {
               placeholder={
                 intl.formatMessage({id: 'filters.search.placeholder', defaultMessage: 'Search'})
               }
+              fieldLabel='Key word'
               fieldName="q"
             />
           </Col>

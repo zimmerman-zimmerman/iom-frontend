@@ -31,6 +31,10 @@
   "main.menu.projects": "Projects",
   "main.menu.about": "About",
   "breadcrumb.home": "Home",
+  "main.menu.service.detail": "Service Detail",
+  "main.menu.project.detail": "Project Detail",
+  "main.menu.country.detail": "Country Detail",
+  "main.menu.donor.detail": "Donor Detail",
 
   "banner.title": "IOM Transparency Portal",
   "banner.description": "[SAMPLE TEXT] Find data about IOM activities around the world. Thanks to IATI standard we share information about our daily work with migrants.",
@@ -103,7 +107,7 @@
   "donors.filters.count": "Filter(s)",
   "donors.table.donors.header.donor": "Donor",
   "donors.table.donors.header.budget": "Budget",
-  "donors.table.donors.header.projects.count": "Implementation projects",
+  "donors.table.donors.header.projects.count": "Number of projects",
 
   "donors.title": "Donors",
   "donors.description": "Introduction text about this page and what the treemap is showing, text provided by IOM",
@@ -213,6 +217,9 @@
   "footer.phone": "Tel. +41.22.717.9111",
   "footer.website": "IOM website",
   "footer.website.url": "www.iom.int",
+
+  "disclaimer.text": "Disclaimer: The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations or the International Organization for Migration.",
+  "disclaimer.button.text": "CONTINUE",
 
   "contact.info.title": "Contact info",
   "contact.info.email": "info@iom.int",
