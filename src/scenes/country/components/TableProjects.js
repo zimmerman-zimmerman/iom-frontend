@@ -124,6 +124,8 @@ class TableProjects extends Component {
     }];
     return(
       <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+             pagination={data && this.props.itemAmount
+             && data.length <= this.props.itemAmount ? false : ''}
              scroll={{ x: 1800 }}
              loading={countryActivities.request}
       />
@@ -138,7 +140,7 @@ const mapStateToProps = (state, ) => {
 };
 
 TableProjects.propTypes = {
-  intl: intlShape.isRequired
+  intl: intlShape.isRequired,
 };
 
 export default connect(mapStateToProps)(injectIntl(TableProjects));

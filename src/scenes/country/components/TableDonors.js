@@ -48,7 +48,8 @@ const TableDonors = (props) => {
     key: 'sort_by',
   }];
   return (
-    <Table dataSource={data ? addKey(data) : null} columns={columns} size="middle" pagination={{pageSize: 5}} />
+    <Table dataSource={data ? addKey(data) : null} columns={columns} size="middle" pagination={data && props.itemAmount
+    && data.length <= props.itemAmount ? false : {pageSize: 5}} />
   )
 }
 
