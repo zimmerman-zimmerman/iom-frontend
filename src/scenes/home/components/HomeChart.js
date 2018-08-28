@@ -110,10 +110,10 @@ class HomeChart extends Component {
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
             <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-              <PieRadialChart widthDivider={1.5}/>
+              <PieRadialChart widthDivider={2.3}/>
             </MediaQuery>
             <MediaQuery minWidth={screenSize.desktop.minWidth}>
-              <PieRadialChart widthDivider={3.5}/>
+              <PieRadialChart widthDivider={2.3}/>
             </MediaQuery>
           </Col>
         </Row>
