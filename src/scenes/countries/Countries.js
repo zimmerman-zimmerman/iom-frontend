@@ -43,6 +43,11 @@ class Countries extends BaseFilter {
     const data = this.filter(get(countries, 'data'));
     const donorsCount = get(donors, 'data.count');
     const showMap = get(data, '[0].recipient_country.code');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: null, text: <Trans id='countries.breadcrumb.countries' text='Countries' />},
+      {url: null, text: <Trans id='countries.breadcrumb.funding' text='Funding by countries' />},
+    ];
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
@@ -56,7 +61,7 @@ class Countries extends BaseFilter {
     };
     return (
       <Spin spinning={countries.request}>
-        <Page pageName={<Trans id='countries.breadcrumb.countries' text='Countries' />}>
+        <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>

@@ -94,6 +94,10 @@ class Projects extends BaseFilter {
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data');
     const showMap = get(dataCountries, 'results[0].recipient_country.code');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: null, text: <Trans id='main.menu.projects' text='Projects' />},
+    ];
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
@@ -107,7 +111,7 @@ class Projects extends BaseFilter {
     };
     return (
       <Spin spinning={projects.request}>
-        <Page pageName={<Trans id='main.menu.projects' text='Projects' />}>
+        <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
               <Col xs={12} md={4} lg={3}>

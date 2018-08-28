@@ -39,8 +39,13 @@ class DonorGroup extends BaseFilter {
     const group = get(this.props, 'match.params.group', '');
     const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
     const data = get(this.props, 'donor.data.results');
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
+      {url: null, text: donorGroup ? donorGroup.name : <Trans id='main.menu.detail' text='Detail' />},
+    ];
     return (
-      <Page pageName={<Trans id='main.menu.donor.group.detail' text='Donor Group Detail' />}>
+      <Page breadcrumbItems={breadcrumbItems}>
         <Grid className={classes.grid} style={pageContainer} fluid>
           <Row>
             <Col xs={12}>
