@@ -1,0 +1,141 @@
+@import "../styles/variables";
+
+/* Responsive */
+@media only screen and (min-width: 1100px) {
+  .container-fluid {
+    padding: 0 50px !important;
+  }
+  .tree-map {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .tree-map {
+    font-size: 20px;
+  }
+}
+
+/* Override Ant Menu Style */
+.ant-menu {
+  * {
+    border-bottom: none !important;
+  }
+  li {
+    text-transform: uppercase;
+    &.ant-menu-item-selected {
+      border-bottom: 7px solid #35b6b4 !important;
+    }
+  }
+}
+.ant-menu-horizontal {
+  .ant-menu-item {
+    top: -2px;
+    font-weight: 300;
+  }
+}
+.ant-collapse-header {
+  padding-left: 0 !important;
+}
+.am-drawer-sidebar {
+  z-index: 3;
+}
+.am-drawer-overlay {
+  z-index: 2;
+}
+.transparent-white {
+  background: rgba(255, 255, 255, 0.9);
+}
+.transparent-white .ant-card-body {
+  padding: 12px;
+}
+.just-white {
+  background: rgba(255, 255, 255, 1);
+}
+.just-white .ant-card-body {
+  padding: 12px;
+}
+.am-drawer-content {
+  padding-top: 0 !important;
+}
+.am-drawer-draghandle {
+  background-color: transparent;
+}
+.recharts-tooltip-wrapper {
+  opacity: 0.85;
+}
+.ant-breadcrumb {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Table */
+.ant-table-thead > tr > th {
+  background-color: transparent;
+  font-size: large;
+  color: $blue;
+}
+th.number, td.number {
+  text-align: left !important;
+}
+.ant-pagination {
+  // float: left !important;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0 !important;
+}
+.ant-pagination-item-active {
+  color: white !important;
+  background-color: $blue;
+  border-color: white;
+}
+.ant-pagination-item-active a, .ant-pagination-item-active a:hover, .ant-pagination-item-active:hover {
+  color: white !important;
+}
+tbody > tr > td {
+  word-break: normal !important;
+}
+.ant-dropdown-menu-item {
+  padding: 10px 20px;
+}
+
+.download-icon {
+  width: 20px;
+  height: 20px;
+  fill: #0035ad;
+  margin-bottom: -5px;
+}
+
+.share-icon {
+  width: 20px;
+  margin-bottom: -5px;
+  fill: #0033a1;
+  transition: fill 0.5s ease;
+}
+
+.ant-btn-circle{
+  &:hover{
+    .share-icon {
+      transition: fill 0.5s ease;
+      fill: #35b6b4;
+    }
+  }
+}
+
+/* Prevent to auto zoom on mobile */
+input,
+textarea {
+  font-size: 16px !important;
+}
+
+.flag-icon {
+  order: 1;
+  border: 1px solid rgba(220,220,220,0.7);
+  height: 44px;
+  width: 58px;
+  span {
+    vertical-align: top !important;
+    width: 56px !important;
+    height: 42px !important;
+  }
+}

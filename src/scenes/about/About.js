@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import { Layout } from 'antd';
+import React from 'react';
 
-import MainHeader from '../../components/main/MainHeader';
+import Page from '../../components/base/Page';
+import Trans from '../../locales/Trans';
 
-const { Header } = Layout;
+import AboutContent from './components/AboutContent';
 
-class About extends Component {
-  render() {
-    return (
-      <Layout>
-        <Header className="Header">
-          <MainHeader/>
-        </Header>
-      </Layout>
-    );
-  }
-}
+const About = () => {
+
+  const breadcrumbItems = [
+    {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+    {url: null, text: <Trans id='main.menu.about' text='About' />},
+  ];
+  return (
+    <Page breadcrumbItems={breadcrumbItems}>
+      <AboutContent/>
+    </Page>
+  );
+};
 
 export default About;

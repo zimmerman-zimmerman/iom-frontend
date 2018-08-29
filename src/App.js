@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './styles/App.less';
+import './styles/App.scss';
 
-import Home from './scenes/home/Home';
-import Donors from './scenes/donors/Donors';
-import Countries from './scenes/countries/Countries';
-import Services from "./scenes/services/Services";
-import Projects from "./scenes/projects/Projects";
-import About from "./scenes/about/About";
+import AsyncComponent from './components/AsyncComponent';
+
+const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
+const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
+const AsyncDonorGroup = AsyncComponent(() => import('./scenes/donorgroup/DonorGroup'));
+const AsyncDonor = AsyncComponent(() => import('./scenes/donor/Donor'));
+const AsyncCountries = AsyncComponent(() => import('./scenes/countries/Countries'));
+const AsyncCountry = AsyncComponent(() => import('./scenes/country/Country'));
+const AsyncServices = AsyncComponent(() => import('./scenes/services/Services'));
+const AsyncService = AsyncComponent(() => import('./scenes/service/Service'));
+const AsyncProjects = AsyncComponent(() => import('./scenes/projects/Projects'));
+const AsyncProject = AsyncComponent(() => import('./scenes/project/Project'));
+const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/donors" component={Donors}/>
-          <Route exact path="/countries" component={Countries}/>
-          <Route exact path="/services" component={Services}/>
-          <Route exact path="/projects" component={Projects}/>
-          <Route exact path="/about" component={About}/>
-        </div>
+        <Switch>
+          <Route exact path="/" component={AsyncHome}/>
+          <Route exact path="/donors" component={AsyncDonors}/>
+          <Route exact path="/donors/:group" component={AsyncDonorGroup}/>
+          <Route exact path="/donors/:group/:code" component={AsyncDonor}/>
+          <Route exact path="/countries" component={AsyncCountries}/>
+          <Route exact path="/countries/:code" component={AsyncCountry}/>
+          <Route exact path="/services" component={AsyncServices}/>
+          <Route exact path="/services/:id" component={AsyncService}/>
+          <Route exact path="/projects" component={AsyncProjects}/>
+          <Route exact path="/projects/:id" component={AsyncProject}/>
+          <Route exact path="/about" component={AsyncAbout}/>
+        </Switch>
       </Router>
     );
   }
