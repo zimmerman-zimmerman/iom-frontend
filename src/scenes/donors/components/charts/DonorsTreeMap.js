@@ -14,7 +14,6 @@ import DonorsTreeMapItem from './DonorsTreeMapItem';
 const CustomToolTip = props => {
   const { Content } = Layout;
   const data = get(props, 'payload[0].payload');
-  console.log(data);
   return data ?
     <Card style={{width: 270}}>
       <Content>
@@ -41,7 +40,7 @@ class DonorsTreeMap extends Component {
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
                      animationDuration={800}
             >
-              <Tooltip content={<CustomToolTip/>}/>
+              <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
             </Treemap>
           </ResponsiveContainer>
         </Col>
