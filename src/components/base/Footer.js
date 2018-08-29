@@ -75,7 +75,7 @@ const Footer = (props) => {
                            props.dispatch(genericActions.toggleModalRequest(
                                <GenericDialog text={<Trans  id="disclaimer.text" text="Disclaimer text"/>}
                                               buttonText={<Trans  id="disclaimer.button.text" text="CONTINUE"/>}
-                                              handleClick={() => props.dispatch(genericActions.toggleModalRequest())}/>))}>
+                                              handleClick={() => props.dispatch(genericActions.toggleModalRequest(null, false))}/>, true))}>
                       <Trans  id="footer.disclaimer" text="Disclaimer" />
                   </div>
               </div>

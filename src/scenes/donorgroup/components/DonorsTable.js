@@ -40,17 +40,18 @@ class DonorsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, rootComponent } = this.props;
+    const { intl, data, rootComponent, donorGroup } = this.props;
+    console.log(data);
     const { filters } = rootComponent.state;
-    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}</span>,
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'participating_organisation',
+      key: 'participating_organisation',
       width: '55%',
       render: (participating_organisation, row, index) => {
         return (
-          <Link to={`/donors/${row.code.toLowerCase()}`}>
+          <Link to={`/donors/${donorGroup.code.toLowerCase()}/${row.participating_organisation_ref}`}>
             {participating_organisation}
           </Link>
         );
@@ -64,10 +65,10 @@ class DonorsTable extends BaseFilter {
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({
         id: 'donors.table.donors.header.projects.count',
-        defaultMessage: 'Number of projects',
+        defaultMessage: 'Implementation projects'
       })}</span>,
-      dataIndex: 'project',
-      key: 'project',
+      dataIndex: 'activity_count',
+      key: 'activity_count',
       className: 'number',
     },{
       title:

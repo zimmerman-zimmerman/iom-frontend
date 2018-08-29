@@ -8,6 +8,7 @@ import AsyncComponent from './components/AsyncComponent';
 
 const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
 const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
+const AsyncDonorGroup = AsyncComponent(() => import('./scenes/donorgroup/DonorGroup'));
 const AsyncDonor = AsyncComponent(() => import('./scenes/donor/Donor'));
 const AsyncCountries = AsyncComponent(() => import('./scenes/countries/Countries'));
 const AsyncCountry = AsyncComponent(() => import('./scenes/country/Country'));
@@ -24,7 +25,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={AsyncHome}/>
           <Route exact path="/donors" component={AsyncDonors}/>
-          <Route exact path="/donors/:code" component={AsyncDonor}/>
+          <Route exact path="/donors/:group" component={AsyncDonorGroup}/>
+          <Route exact path="/donors/:group/:code" component={AsyncDonor}/>
           <Route exact path="/countries" component={AsyncCountries}/>
           <Route exact path="/countries/:code" component={AsyncCountry}/>
           <Route exact path="/services" component={AsyncServices}/>

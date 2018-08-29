@@ -76,11 +76,16 @@ class Country extends BaseFilter {
     const code = get(this.props, 'match.params.code');
     const countryJSON = find(CountriesJSON, {'code': code.toUpperCase()});
     if (countryResult) {
-      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] : 'Not found on site';
+      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] : 'No fount on site';
     }
+    const breadcrumbItems = [
+      {url: '/', text: <Trans id='main.menu.home' text='Home' />},
+      {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
+      {url: null, text: countryJSON ? countryJSON['name'] : <Trans id='main.menu.detail' text='Detail' />},
+    ];
     return (
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
-        <Page pageName={<Trans id='main.menu.country.detail' text='Country Detail' />}>
+        <Page breadcrumbItems={breadcrumbItems}>
           <BannerCountry data={countryResult} />
           <Grid className={classes.country} style={pageContainer} fluid>
             <Row middle="xs" className="gap">

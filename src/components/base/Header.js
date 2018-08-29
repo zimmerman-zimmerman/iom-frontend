@@ -9,6 +9,7 @@ import FaFeed from 'react-icons/lib/fa/feed';
 import injectSheet from 'react-jss';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import * as genericActions from '../../services/actions/generic';
 
 import { size as screenSize } from '../../helpers/screen';
 import { variables as styleVariables } from '../../helpers/style';
@@ -17,6 +18,7 @@ import Menus from './Menus';
 import logo from '../../assets/iom-logo.svg';
 import logoOnly from '../../assets/iom-logo-only.svg';
 import ShareIcon from '../../icons/share';
+import ShareDialog from '../dialogWindow/ShareDialog/ShareDialog';
 
 
 class Header extends Component {
@@ -76,7 +78,7 @@ class Header extends Component {
             <Button shape="circle" onClick={()=> window.location = 'https://www.iom.int/rss-feeds'}>
                 <FaFeed className={classes.faIcon} />
             </Button>
-            <Button shape="circle"><ShareIcon className='share-icon'/></Button>
+            <Button shape="circle" onClick={() => this.props.dispatch(genericActions.toggleModalRequest(<ShareDialog/>, true))}><ShareIcon className='share-icon'/></Button>
           </Col>
         </Row>
       )

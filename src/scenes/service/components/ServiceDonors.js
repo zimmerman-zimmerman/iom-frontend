@@ -31,7 +31,7 @@ class ServiceDonors extends React.Component {
       }
     };
   }
-  
+
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
@@ -40,7 +40,7 @@ class ServiceDonors extends React.Component {
     });
     return data;
   }
-  
+
   handleSortBy(value) {
     const newParams = this.state.params;
     newParams.order_by = value;
@@ -72,7 +72,7 @@ class ServiceDonors extends React.Component {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       key: 'participating_organisation',
       width: '50%',
-      render: obj => 
+      render: obj =>
         <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
@@ -81,7 +81,7 @@ class ServiceDonors extends React.Component {
       className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     },{
-      title: 
+      title:
         <SortBy
           options={sortByOptions}
           selectedKey={this.state.params.order_by}

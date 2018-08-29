@@ -17,7 +17,7 @@ export default class DonorsTreeMapItem extends Component {
     }
 
      componentDidMount(){
-        let label = calcLabelSizePosition(this.props.participating_organisation, this.props.width, this.props.height);
+        let label = calcLabelSizePosition(this.props.name, this.props.width, this.props.height);
         const labelFontSize = label.fontSize;
         const textArray = label.textArray;
         this.setState({

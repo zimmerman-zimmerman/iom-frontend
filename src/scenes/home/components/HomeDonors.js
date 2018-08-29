@@ -9,7 +9,6 @@ HomeDonors.defaultProps = {
     aggregations: 'value',
     group_by: 'participating_organisation',
     order_by: '-value',
-    convert_to: 'usd',
     page_size: 5,
     reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
   },

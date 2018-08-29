@@ -10,20 +10,22 @@ import get from 'lodash/get';
 import extend from 'lodash/extend';
 import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";
-import DonorProjects from "./components/DonorProjects";
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
-import DonorGroupsJSON from "../../services/data/donor_groups";
+import DonorGroupsJSON from '../../services/data/donor_groups';
+import DonorsTable from './components/DonorsTable';
 
-class Donor extends BaseFilter {
+
+class DonorGroup extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
     const { params } = this.state;
-    const code = get(this.props, 'match.params.code');
-    if (dispatch && code) {
+    const group = get(this.props, 'match.params.group', '');
+    const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
+    if (dispatch && donorGroup) {
       this.actionRequest(
-        extend({}, params, {participating_organisation_ref: code.toUpperCase()}),
+        extend({}, params, {participating_organisation_ref: donorGroup.filter}),
         'participating_organisation',
         actions.donorRequest
       );
@@ -36,33 +38,33 @@ class Donor extends BaseFilter {
     const { classes } = this.props;
     const group = get(this.props, 'match.params.group', '');
     const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
-    const code = get(this.props, 'match.params.code');
-    const data = get(this.props, 'donor.data.results[0]');
+    const data = get(this.props, 'donor.data.results');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
-      {url: `/donors/${donorGroup.code}`, text: donorGroup ? donorGroup.name : <Trans id='main.menu.donors' text='Donors' />},
-      {url: null, text: data ? data.participating_organisation : <Trans id='main.menu.detail' text='Detail' />},
+      {url: null, text: donorGroup ? donorGroup.name : <Trans id='main.menu.detail' text='Detail' />},
     ];
     return (
       <Page breadcrumbItems={breadcrumbItems}>
         <Grid className={classes.grid} style={pageContainer} fluid>
           <Row>
             <Col xs={12}>
-              <h1 className={classes.title}>{data ? data.participating_organisation : null}</h1>
+              <h1 className={classes.title}>{donorGroup ? donorGroup.name : null}</h1>
             </Col>
           </Row>
           <MediaQuery minWidth={screenSize.mobile.maxWidth}>
             <Row>
               <Col xs={12}>
-                <h2 className={classes.description}><FormattedMessage id="donor.description" defaultMessage="Description" /></h2>
+                <h2 className={classes.description}>
+                  <FormattedMessage id="donor.description" defaultMessage="Description" />
+                </h2>
               </Col>
             </Row>
           </MediaQuery>
           <hr className={classes.divider} />
           <Row className={classes.table}>
             <Col xs={12}>
-              <DonorProjects code={code}/>
+              <DonorsTable donorGroup={donorGroup} rootComponent={this} data={data ? data : null} />
             </Col>
           </Row>
         </Grid>
@@ -103,4 +105,4 @@ const styles = {
   }
 };
 
-export default injectSheet(styles)(connect(mapStateToProps)(Donor));
+export default injectSheet(styles)(connect(mapStateToProps)(DonorGroup));

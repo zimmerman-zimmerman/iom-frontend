@@ -272,7 +272,7 @@ class GeoMap extends Component {
                     this.props.dispatch(genericActions.toggleModalRequest(
                         <GenericDialog text={this.Trans('disclaimer.text')}
                                        buttonText={this.Trans('disclaimer.button.text')}
-                                       handleClick={() => this.props.dispatch(genericActions.toggleModalRequest())}/>))}>Disclaimer</div>
+                                       handleClick={() => this.props.dispatch(genericActions.toggleModalRequest(null, false))}/>, true))}>Disclaimer</div>
               </Control>
 
                 {this.props.showSummary === false &&

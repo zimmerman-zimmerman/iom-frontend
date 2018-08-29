@@ -15,10 +15,11 @@ import { formatNumberComma } from '../../../../helpers/generic';
 const CustomToolTip = props => {
   const { Content } = Layout;
   const data = get(props, 'payload[0].payload');
+  console.log(data);
   return data ?
     <Card style={{width: 270}}>
       <Content>
-        <h3>{data.participating_organisation}</h3>
+        <h3>{data.name}</h3>
         <h4>US$ {formatNumberComma(data.value)}</h4>
       </Content>
     </Card> : null;
