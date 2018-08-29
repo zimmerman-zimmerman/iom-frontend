@@ -67,7 +67,6 @@ export function calcLabelSizePosition(text, width, height) {
     let charWidth = defCharWidth;
     let textHeight = defTextHeight;
     let textArray = [];
-    let finalTextArray = [];
 
     if(text && width !== 0)
     {
@@ -182,7 +181,7 @@ export function calcLabelSizePosition(text, width, height) {
             )
         }
 
-        textArray.map((item, index) => {
+        textArray.forEach((item, index) => {
             item.yAdjust = textHeight*(index+1);
         });
     }
