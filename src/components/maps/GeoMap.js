@@ -175,7 +175,7 @@ class GeoMap extends Component {
           </div>
           <div style={{ marginTop: "10px" }}>
             <label>
-              <b>Total budget:</b> USD {format(",.0f")(feature.properties.budgetValue)}
+              <b>Total budget:</b> US$ {format(",.0f")(feature.properties.budgetValue)}
             </label>
           </div>
           <div style={{ marginTop: "10px" }}>
@@ -272,7 +272,7 @@ class GeoMap extends Component {
                     this.props.dispatch(genericActions.toggleModalRequest(
                         <GenericDialog text={this.Trans('disclaimer.text')}
                                        buttonText={this.Trans('disclaimer.button.text')}
-                                       handleClick={() => this.props.dispatch(genericActions.toggleModalRequest())}/>))}>Disclaimer</div>
+                                       handleClick={() => this.props.dispatch(genericActions.toggleModalRequest(null, false))}/>, true))}>Disclaimer</div>
               </Control>
 
                 {this.props.showSummary === false &&

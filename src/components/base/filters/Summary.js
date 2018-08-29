@@ -10,6 +10,8 @@ import PropsType from 'prop-types';
 
 import Trans from '../../../locales/Trans';
 
+import { formatNumberComma } from '../../../helpers/generic';
+
 class Summary extends Component {
   render() {
     const { data, fieldValue, fieldCount, onHideSummary, donorsCount, classes } = this.props;
@@ -21,7 +23,7 @@ class Summary extends Component {
         totalActivity += get(item, fieldCount, 1);
       });
     }
-    const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
+    const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     return (
       <Card className={classes.summary}>
         <h3><strong><Trans id="summary.title" defaultMessage="Summary"/></strong></h3>
@@ -31,7 +33,7 @@ class Summary extends Component {
         </Button>
         <Row>
           <Col xs={12}>
-            <strong>{usd}{format(".2s")(totalBudget).replace(/G/, "B")}</strong>
+            <strong>{usd}{formatNumberComma(totalBudget)}</strong>
           </Col>
         </Row>
         <Row>

@@ -228,8 +228,8 @@ export function* transactionsAggregationsParticipatingOrganisationRequest(action
   }
 }
 
-export function* toggleModalRequest(action) {
-    yield put(genericActions.toggleModalSuccess(action));
+export function* toggleModalRequest(action, open) {
+    yield put(genericActions.toggleModalSuccess(action, open));
 }
 
 export function* updateBreadcrumbsRequest(action) {

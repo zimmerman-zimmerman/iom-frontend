@@ -71,7 +71,7 @@ class TableProjects extends Component {
   render() {
     const { intl, countryActivities } = this.props;
     const data = get(countryActivities, 'data.results');
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
       key: 'donors',
@@ -124,6 +124,8 @@ class TableProjects extends Component {
     }];
     return(
       <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+             pagination={data && this.props.itemAmount
+             && data.length <= this.props.itemAmount ? false : ''}
              scroll={{ x: 1800 }}
              loading={countryActivities.request}
       />
@@ -138,7 +140,7 @@ const mapStateToProps = (state, ) => {
 };
 
 TableProjects.propTypes = {
-  intl: intlShape.isRequired
+  intl: intlShape.isRequired,
 };
 
 export default connect(mapStateToProps)(injectIntl(TableProjects));

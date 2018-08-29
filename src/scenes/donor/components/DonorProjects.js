@@ -11,6 +11,7 @@ import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
 import { tableHeader } from '../../../helpers/style';
+import { format as dateFormat } from 'date-fns';
 
 import SortBy from '../../../components/base/SortBy';
 
@@ -23,6 +24,8 @@ const sortByOptions = [
   { value: '-activity_budget_value', label: 'Total Budget (desc)' },
   { value: 'start_date', label: 'Start date (asc)' },
   { value: '-start_date', label: 'Start date (desc)' },
+    { value: 'end_date', label: 'End date (asc)' },
+    { value: '-end_date', label: 'End date (desc)' },
 ];
 
 class DonorProjects extends Component {
@@ -35,7 +38,7 @@ class DonorProjects extends Component {
         convert_to: 'usd',
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
-        ordering: 'title',
+        ordering: '-end_date',
       }
     };
   }
@@ -84,14 +87,29 @@ class DonorProjects extends Component {
     const { intl, donorProjects, classes } = this.props;
     const data = get(donorProjects, 'data.results');
     const total = get(donorProjects, 'data.count');
-    const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
+    const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
       width: '40%',
       key: 'donors',
       render: project => 
         <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
-    },{
+    },
+        {
+            title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
+            dataIndex: 'activity_dates[2].iso_date', //THe index 2 array element here is the ACTUAL START date
+            className: 'date',
+            key: 'start_date',
+            render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
+        },
+        {
+            title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
+            dataIndex: 'activity_dates[0].iso_date', //THe index 0 array element here is the ACTUAL END date
+            className: 'date',
+            key: 'end_date',
+            render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
+        },
+        {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',

@@ -41,7 +41,7 @@ class SliderFilter extends BaseFilter {
           delete filters.chips['money'];
       }
       if (!isEqual(defValue, this.state.value)) {
-        const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
+        const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
           filters.chips['money'] = {
               labels: [('From: ').concat(`${usd} ${this.state.value[0].toLocaleString()}`).concat(' to: ')
                   .concat(`${usd} ${this.state.value[1].toLocaleString()}`)],
@@ -57,7 +57,7 @@ class SliderFilter extends BaseFilter {
   render() {
     const { classes, intl, minValue, maxValue } = this.props;
     const { value } = this.state;
-    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'USD'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     return (
       <div className={classes.slider}>
         <Range
