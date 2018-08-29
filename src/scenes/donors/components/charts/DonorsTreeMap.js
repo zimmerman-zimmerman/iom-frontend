@@ -42,7 +42,7 @@ class DonorsTreeMap extends Component {
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
                      animationDuration={800}
             >
-              <Tooltip content={<CustomToolTip/>}/>
+              <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
             </Treemap>
           </ResponsiveContainer>
         </Col>

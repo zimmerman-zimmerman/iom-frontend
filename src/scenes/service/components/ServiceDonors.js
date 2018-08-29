@@ -23,7 +23,6 @@ class ServiceDonors extends React.Component {
     this.state = {
       params: {
         aggregations: 'activity_count,incoming_fund,disbursement,expenditure,value',
-        convert_to: 'usd',
         page_size: 10,
         group_by: 'participating_organisation',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
@@ -65,9 +64,8 @@ class ServiceDonors extends React.Component {
 
   render() {
     const { intl, serviceDonors, classes } = this.props;
-    const data = get(serviceDonors, 'data.results');
-    const dataSource = data ? this.addKey(data) : null;
-    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
+    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const data = get(serviceDonors, 'data.results', null);
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       key: 'participating_organisation',
@@ -98,6 +96,7 @@ class ServiceDonors extends React.Component {
                columns={columns}
                size="middle"
                loading={serviceDonors.request}
+               dataSource={data ? this.addKey(data) : null}
                className={classes.table}
         />
       </div>
