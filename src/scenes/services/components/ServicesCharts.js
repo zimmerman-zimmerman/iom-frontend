@@ -8,6 +8,8 @@ import Card from 'antd/es/card';
 
 import Trans from '../../../locales/Trans';
 
+import './ServicesCharts.scss';
+
 const CustomToolTip = props => {
   const { Content } = Layout;
   const data = get(props, 'payload[0].payload');
@@ -20,7 +22,26 @@ const CustomToolTip = props => {
       </Content>
     </Card> : null;
 };
-
+const CustomizedTick = props => {
+    const { x, y, payload } = props;
+    const textArray = payload.value.split(' ');
+    return (
+        <svg>
+            {textArray.map((word, index) => {
+          return (
+                <text
+                x={x}
+                y={y + 10 + index*15}
+                textAnchor="middle"
+                fill="#666"
+                >
+                {word}
+                </text>
+          )
+        })}
+        </svg>
+    )
+};
 class ServicesCharts extends Component {
   render() {
     const { intl, data } = this.props;
@@ -28,10 +49,10 @@ class ServicesCharts extends Component {
     return (
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
         {data !== null ?
-          <BarChart width={600} height={300} data={data} maxBarSize={50}
+          <BarChart data={data} maxBarSize={50} className='bar-chart'
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid vertical={false}/>
-            <XAxis dataKey="sector.code" tick={{ fontSize: 16, color: '#262626' }} />
+            <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick/>}/>
             <YAxis
               axisLine={false}
               tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}
@@ -40,7 +61,7 @@ class ServicesCharts extends Component {
                 fontSize: 10, marginRight: 10, color: '#262626', whiteSpace: 'nowrap', width: '200',
               }}
             />
-            <Tooltip content={<CustomToolTip/>}/>
+            <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
             <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}/>
             <Bar dataKey="value" stackId="a" fill="#1f4283" />
           </BarChart>

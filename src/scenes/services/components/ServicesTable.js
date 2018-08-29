@@ -52,11 +52,8 @@ class ServicesTable extends BaseFilter {
       width: '55%',
       render: (name, record) =>
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
-    }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.code', defaultMessage: 'Code'})}</span>,
-      dataIndex: 'sector.code',
-      key: 'code',
-    }, {
+    },
+      {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'value',
       key: 'value',
