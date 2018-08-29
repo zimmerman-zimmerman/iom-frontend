@@ -41,8 +41,12 @@ const Footer = (props) => {
           <Row>
             <Col md={6} lg={6} className={classes.share}>
               <h3 className={classes.text}><Trans id="footer.follow" text="Follow us" /></h3>
-              <Button shape="circle" icon="twitter" />
-              <Button shape="circle" className={classes.faButton}><FaFacebook className={classes.faIcon} /></Button>
+              <Button shape="circle" icon="twitter"
+                      onClick={()=> window.location = 'https://twitter.com/UNmigration'}/>
+              <Button shape="circle" className={classes.faButton}
+                      onClick={()=> window.location = 'https://www.facebook.com/IOM'}>
+                  <FaFacebook className={classes.faIcon} />
+              </Button>
             </Col>
             <Col md={6} lg={6} className={classes.gap}>
               <h3 className={classes.text}><Trans id="footer.website" text="IOM website" /></h3>
@@ -75,7 +79,7 @@ const Footer = (props) => {
                            props.dispatch(genericActions.toggleModalRequest(
                                <GenericDialog text={<Trans  id="disclaimer.text" text="Disclaimer text"/>}
                                               buttonText={<Trans  id="disclaimer.button.text" text="CONTINUE"/>}
-                                              handleClick={() => props.dispatch(genericActions.toggleModalRequest())}/>))}>
+                                              handleClick={() => props.dispatch(genericActions.toggleModalRequest(null, false))}/>, true))}>
                       <Trans  id="footer.disclaimer" text="Disclaimer" />
                   </div>
               </div>

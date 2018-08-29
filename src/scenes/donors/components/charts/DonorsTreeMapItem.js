@@ -74,9 +74,9 @@ export default class DonorsTreeMapItem extends Component {
                               x={x + 4}
                               y={y + item.yAdjust}
                               textAnchor="start"
-                              fill="#000"
+                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}
                               stroke="none"
-                              fillOpacity={0.5}
+                              fillOpacity={1}
                               fontSize={this.state.labelFontSize}
                           >
                               {item.text}

@@ -32,7 +32,7 @@ class ProjectsTable extends BaseFilter {
 
   render() {
     const { intl, data, classes, selectedSortBy, handleSortBy } = this.props;
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const total = get(data, 'count', 0);
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,

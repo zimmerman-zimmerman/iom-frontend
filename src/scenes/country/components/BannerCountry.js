@@ -12,7 +12,7 @@ import Trans from '../../../locales/Trans';
 
 const BannerCountry = (props) => {
   const { data, classes, key, intl } = props;
-  const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+  const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
   const Line = (props) => {
     return (
       <Row className={props.className} key={key}>

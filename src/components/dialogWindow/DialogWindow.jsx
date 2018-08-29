@@ -7,6 +7,7 @@ import isEqual from 'lodash/isEqual';
 const customStyles = {
     overlay: {
         backgroundColor: 'rgba(44, 44, 44, 0.8)',
+        zIndex: '10',
     },
     content : {
         margin: 'auto',
@@ -35,7 +36,7 @@ class DialogWindow extends Component {
     }
 
     closeModal() {
-        this.props.dispatch(genericActions.toggleModalRequest(null))
+        this.props.dispatch(genericActions.toggleModalRequest(null, false))
     }
 
     render() {

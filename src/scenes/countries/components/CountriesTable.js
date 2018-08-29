@@ -42,7 +42,7 @@ class CountriesTable extends BaseFilter {
   render() {
     const { intl, data, rootComponent } = this.props;
     const { filters } = rootComponent.state;
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}</span>,
       dataIndex: 'recipient_country',

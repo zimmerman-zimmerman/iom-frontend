@@ -11,7 +11,7 @@ import Trans from '../../../locales/Trans';
 
 const ProjectBanner= (props) => {
   const { data, classes, key } = props;
-  const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
+  const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
   const Line = (props) => {
     return (
       <Row className={props.className} key={key}>
