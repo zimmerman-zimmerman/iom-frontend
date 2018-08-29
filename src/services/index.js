@@ -55,3 +55,7 @@ export function activitiesRequest(values) {
 export function transactionsAggregationsRequest(values) {
   return handleRequest(hostURL('/api/transactions/aggregations'), formatJSON(values), 'get');
 }
+
+export function budgetsAggregationsRequest(values) {
+    return handleRequest(hostURL('/api/budgets/aggregations'), formatJSON(values), 'get');
+}

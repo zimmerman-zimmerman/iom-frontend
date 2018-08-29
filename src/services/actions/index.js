@@ -701,3 +701,31 @@ export function transactionsAggregationsParticipatingOrganisationFailed(error) {
     error: error
   }
 }
+
+export const NON_HUMAN_SERVICES_INITIAL = 'NON_HUMAN_SERVICES_INITIAL';
+export const NON_HUMAN_SERVICES_REQUEST = 'NON_HUMAN_SERVICES_REQUEST';
+export const NON_HUMAN_SERVICES_SUCCESS = 'NON_HUMAN_SERVICES_SUCCESS';
+export const NON_HUMAN_SERVICES_FAILED = 'NON_HUMAN_SERVICES_FAILED';
+export function nonHumanServicesInitial() {
+    return {
+        type: NON_HUMAN_SERVICES_INITIAL
+    }
+}
+export function nonHumanServicesRequest(values) {
+    return {
+        type: NON_HUMAN_SERVICES_REQUEST,
+        values: values
+    }
+}
+export function nonHumanServicesSuccess(data) {
+    return {
+        type: NON_HUMAN_SERVICES_SUCCESS,
+        data: data
+    }
+}
+export function nonHumanServicesFailed(error) {
+    return {
+        type: NON_HUMAN_SERVICES_FAILED,
+        error: error
+    }
+}
