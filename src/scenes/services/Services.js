@@ -94,6 +94,9 @@ const styles = {
     '& .chart-header': {
       color: '#1f4283',
       marginTop: 10,
+        marginLeft: '6px',
+        fontSize: '22px',
+        fontWeight: 600,
     },
     '& .service-table': {
       paddingBottom: 80,

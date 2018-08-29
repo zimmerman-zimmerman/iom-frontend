@@ -7,6 +7,7 @@ export const variables = {
 export const breadcrumbs = {
   border: 'solid 1px #d0d0d0',
   color: '#262626',
+    fontWeight: 'bold',
   colorActive: '#418fde',
   sizeFont: 18,
   height: 30,

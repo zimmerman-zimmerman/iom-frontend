@@ -24,29 +24,29 @@ const ProjectBanner= (props) => {
   const RightColumn = () => {
     const lines = [
       [
-        {line: <Trans id="project.banner.right.budget" defaultMessage="Total activity budget"/>, className: 'gap'},
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>, className: 'value'},
+        {line: <Trans id="project.banner.right.budget" defaultMessage="Total activity budget"/>, className: 'financialLabel'},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>, className: 'financialText'},
         {
           line: <Trans id="project.banner.right.incoming" defaultMessage="Total incoming funds"/>,
-          className: 'gap'
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>, className: 'value'},
-        {line: <Trans id="project.banner.right.start" defaultMessage="Start date"/>, className: 'gap'},
-        {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>, className: 'value'}
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>, className: 'financialText'},
+        {line: <Trans id="project.banner.right.start" defaultMessage="Start date"/>, className: 'financialLabel'},
+        {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>, className: 'financialText'}
       ],
       [
         {
           line: <Trans id="project.banner.right.disbursement" defaultMessage="Total disbursements"/>,
-          className: 'gap'
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>, className: 'value'},
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>, className: 'financialText'},
         {
           line: <Trans id="project.banner.right.expenditures" defaultMessage="Total expenditure"/>,
-          className: 'gap'
+          className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>, className: 'value'},
-        {line: <Trans id="project.banner.right.end" defaultMessage="End date" />, className: 'gap'},
-        {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>, className: 'value'}
+        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>, className: 'financialText'},
+        {line: <Trans id="project.banner.right.end" defaultMessage="End date" />, className: 'financialLabel'},
+        {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>, className: 'financialText'}
       ]
     ];
     return (
@@ -90,7 +90,7 @@ const ProjectBanner= (props) => {
         <div className="description">{get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}</div>
       </Col>
       <Col xs={12} md={6} lg={6}  className="right">
-        <span className="title">
+        <span className={classes.financialTitle}>
           <Trans id="project.banner.right.title" defaultMessage="Financial overview"/>
         </span>
         <RightColumn data={data} />
@@ -101,6 +101,11 @@ const ProjectBanner= (props) => {
 };
 
 const styles = {
+    financialTitle:{
+        fontSize: '32px',
+        fontWeight: 600,
+        color: '#fff',
+    },
   projectBanner: {
     width: '100%',
     marginLeft: 0,
@@ -152,6 +157,16 @@ const styles = {
       backgroundColor: '#f27f6d',
       color: 'white',
       fontWeight: 600,
+        '& .financialLabel': {
+            marginTop: '24px',
+            fontSize: '22px',
+            fontWeight: 'bold',
+            color: '#fff',
+        },
+        '& .financialText':{
+            fontSize: '28px',
+            fontWeight: 'normal',
+        },
       '& .title': {
         color: 'white',
         fontSize: 32,

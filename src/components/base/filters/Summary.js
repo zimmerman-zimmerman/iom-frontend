@@ -26,38 +26,38 @@ class Summary extends Component {
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     return (
       <Card className={classes.summary}>
-        <h3><strong><Trans id="summary.title" defaultMessage="Summary"/></strong></h3>
+        <h3><strong className={classes.title}><Trans id="summary.title" defaultMessage="Summary"/></strong></h3>
         <Divider className="Divider"/>
         <Button size="small" type="primary" ghost className="button-hide" onClick={onHideSummary}>
           <Trans id="summary.hide" defaultMessage="Hide"/>
         </Button>
         <Row>
           <Col xs={12}>
-            <strong>{usd}{formatNumberComma(totalBudget)}</strong>
+            <strong className={classes.number}>{usd}{formatNumberComma(totalBudget)}</strong>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="field">
+          <Col xs={12} className={classes.numberLabel}>
             <Trans id="summary.budget" defaultMessage="total budget"/>
           </Col>
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong>{totalActivity}</strong>
+            <strong className={classes.number}>{totalActivity}</strong>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="field">
+          <Col xs={12} className={classes.numberLabel}>
             <Trans id="summary.projects" defaultMessage="projects"/>
           </Col>
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong>{donorsCount}</strong>
+            <strong className={classes.number}>{donorsCount}</strong>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="field">
+          <Col xs={12} className={classes.numberLabel}>
             <Trans id="summary.donors" defaultMessage="donors"/>
           </Col>
         </Row>
@@ -76,6 +76,18 @@ Summary.propTypes = {
 
 
 const styles = {
+    title: {
+        color: '#262626',
+        fontSize: '18px',
+    },
+  number: {
+      color: '#262626',
+      fontSize: '14px',
+  },
+    numberLabel: {
+        color: '#262626',
+        fontSize: '10px',
+    },
   summary: {
     '& .ant-card-body': {
       padding: 12,

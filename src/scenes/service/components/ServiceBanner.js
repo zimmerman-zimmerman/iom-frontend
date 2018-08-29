@@ -25,29 +25,29 @@ class ServiceBanner extends Component {
     const RightColumn = () => {
       const lines = [
         [
-          {line: <Trans id="service.banner.right.budget" defaultMessage="Total project budget"/>, className: 'gap'},
-          {line: <span>{usd}{format(',')(get(data, 'value', 0))}</span>, className: 'value'},
+          {line: <Trans id="service.banner.right.budget" defaultMessage="Total project budget"/>, className: 'financialLabel'},
+          {line: <span>{usd}{format(',')(get(data, 'value', 0))}</span>, className: 'financialText'},
           {
             line: <Trans id="service.banner.right.incoming" defaultMessage="Total incoming funds"/>,
-            className: 'gap'
+            className: 'financialLabel'
           },
-          {line: <span>{usd}{format(',')(get(data, 'incoming_fund', 0))}</span>, className: 'value'},
-          {line: <Trans id="service.banner.right.projects" defaultMessage="Project count"/>, className: 'gap'},
-          {line: <span>{get(data, 'activity_count', 0)}</span>, className: 'value'}
+          {line: <span>{usd}{format(',')(get(data, 'incoming_fund', 0))}</span>, className: 'financialText'},
+          {line: <Trans id="service.banner.right.projects" defaultMessage="Project count"/>, className: 'financialLabel'},
+          {line: <span>{get(data, 'activity_count', 0)}</span>, className: 'financialText'}
         ],
         [
           {
             line: <Trans id="service.banner.right.disbursements" defaultMessage="Total disbursements"/>,
-            className: 'gap'
+            className: 'financialLabel'
           },
-          {line: <span>{usd}{format(',')(get(data, 'expenditure', 0))}</span>, className: 'value'},
+          {line: <span>{usd}{format(',')(get(data, 'expenditure', 0))}</span>, className: 'financialText'},
           {
             line: <Trans id="service.banner.right.expenditure" defaultMessage="Total expenditure"/>,
-            className: 'gap'
+            className: 'financialLabel'
           },
-          {line: <span>{usd}{get(data, 'expenditure', 0)}</span>, className: 'value'},
-          {line: <Trans id="service.banner.right.source.title" defaultMessage="Data source" />, className: 'gap'},
-          {line: <Trans id="service.banner.right.source" defaultMessage="IATI Registry" />, className: 'value'}
+          {line: <span>{usd}{get(data, 'expenditure', 0)}</span>, className: 'financialText'},
+          {line: <Trans id="service.banner.right.source.title" defaultMessage="Data source" />, className: 'financialLabel'},
+          {line: <Trans id="service.banner.right.source" defaultMessage="IATI Registry" />, className: 'financialText'}
         ]
       ];
       return (
@@ -93,7 +93,7 @@ class ServiceBanner extends Component {
           </div>
         </Col>
         <Col xs={12} md={6} lg={6}  className="right">
-          <span className="title">
+          <span className={classes.financialTitle}>
             <Trans id="service.banner.right.title" defaultMessage="Financial overview" />
           </span>
           <RightColumn data={data} />
@@ -105,6 +105,11 @@ class ServiceBanner extends Component {
 }
 
 const styles = {
+    financialTitle:{
+        fontSize: '32px',
+        fontWeight: 600,
+        color: '#fff',
+    },
   serviceBanner: {
     width: '100%',
     marginLeft: 0,
@@ -151,6 +156,16 @@ const styles = {
       backgroundColor: '#fdc973',
       color: 'white',
       fontWeight: 600,
+        '& .financialLabel': {
+            marginTop: '24px',
+            fontSize: '22px',
+            fontWeight: 'bold',
+            color: '#fff',
+        },
+        '& .financialText':{
+            fontSize: '28px',
+            fontWeight: 'normal',
+        },
       '& .title': {
         color: 'white',
         fontSize: 32,

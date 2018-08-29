@@ -15,7 +15,6 @@ import { formatNumberComma } from '../../../../helpers/generic';
 const CustomToolTip = props => {
   const { Content } = Layout;
   const data = get(props, 'payload[0].payload');
-  console.log(data);
   return data ?
     <Card style={{width: 270}}>
       <Content>
