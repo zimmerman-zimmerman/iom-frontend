@@ -97,6 +97,7 @@ class Country extends BaseFilter {
                   data={donors}
                   sortBy={this.state.donorTableSortBy}
                   handleDonorSortBy={e => this.handleDonorSortBy(e)}
+                  itemAmount={5}
                 />
               </Col>
               <Col xs={12} md={6} lg={6}>
@@ -116,7 +117,7 @@ class Country extends BaseFilter {
                 <h2 className="title">
                   <Trans id="country.table.projects.title" defaultMessage="Related projects"/>
                 </h2>
-                <TableProjects countryCode={ get(this.props, 'match.params.code')}  />
+                <TableProjects countryCode={ get(this.props, 'match.params.code')} itemAmount={7} />
               </Col>
             </Row>
             {firstProject ? <ContactProject id={firstProject.id} code={get(this.props, 'match.params.code')} /> : null}

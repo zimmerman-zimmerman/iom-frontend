@@ -41,8 +41,12 @@ const Footer = (props) => {
           <Row>
             <Col md={6} lg={6} className={classes.share}>
               <h3 className={classes.text}><Trans id="footer.follow" text="Follow us" /></h3>
-              <Button shape="circle" icon="twitter" />
-              <Button shape="circle" className={classes.faButton}><FaFacebook className={classes.faIcon} /></Button>
+              <Button shape="circle" icon="twitter"
+                      onClick={()=> window.location = 'https://twitter.com/UNmigration'}/>
+              <Button shape="circle" className={classes.faButton}
+                      onClick={()=> window.location = 'https://www.facebook.com/IOM'}>
+                  <FaFacebook className={classes.faIcon} />
+              </Button>
             </Col>
             <Col md={6} lg={6} className={classes.gap}>
               <h3 className={classes.text}><Trans id="footer.website" text="IOM website" /></h3>
