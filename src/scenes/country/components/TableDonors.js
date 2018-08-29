@@ -25,7 +25,7 @@ const TableDonors = (props) => {
   }
 
   const { intl, data, handleDonorSortBy } = props;
-  const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+  const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
   const columns = [{
     title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}</span>,
     key: 'participating_organisation',

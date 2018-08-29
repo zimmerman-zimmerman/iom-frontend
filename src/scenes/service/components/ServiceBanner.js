@@ -12,7 +12,7 @@ import Trans from '../../../locales/Trans';
 class ServiceBanner extends Component {
   render() {
     const { data, classes } = this.props;
-    const usd = <Trans id="currency.usd.symbol" defaultMessage="$" />;
+    const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     const Line = (props) => {
       return (
         <Row className={props.className}>

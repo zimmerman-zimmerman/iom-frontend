@@ -84,7 +84,7 @@ class DonorProjects extends Component {
     const { intl, donorProjects, classes } = this.props;
     const data = get(donorProjects, 'data.results');
     const total = get(donorProjects, 'data.count');
-    const usd = <FormattedMessage id="currency.usd.symbol" defaultMessage="$" />;
+    const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
       width: '40%',

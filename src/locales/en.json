@@ -1,4 +1,5 @@
 {
+  "currency.usd": "US$ ",
   "share.dialog.title": "Share current page",
   "share.dialog.shareable.link": "Get shareable link",
   "share.dialog.share.email": "Share via email ",
@@ -13,8 +14,6 @@
   "shared.link.copied.desc": "The link will has been copied to your clipboard",
   "shared.link.social.title": "Link shared!",
   "shared.link.social.desc": "The link was shared via social media",
-
-  "currency.usd": "USD",
   "currency.usd.symbol": "$",
 
   "filters.search.placeholder": "Search",

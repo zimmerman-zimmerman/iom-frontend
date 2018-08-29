@@ -13,6 +13,8 @@ import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import { tableHeader } from '../../../helpers/style';
 
+import './ProjectsTable.scss';
+
 const sortByOptions = [
   { value: 'title', label: 'Name (a - z)' },
   { value: '-title', label: 'Name (z - a)' },
@@ -55,7 +57,7 @@ class ProjectsTable extends BaseFilter {
     const { intl, data, classes, rootComponent } = this.props;
     const { filters } = rootComponent.state;
     const count = get(data, 'count', 0);
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}</span>,
       dataIndex: 'title',
@@ -79,7 +81,7 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'budgets',
       key: 'budgets',
       className: 'Money',
-      render: budgets => <span>{usd}{format(',.0f')(get(budgets, '[0].value.value'))}</span>,
+      render: budgets => <span className='projects-budget-item'>{usd}{format(',.0f')(get(budgets, '[0].value.value'))}</span>,
     }, {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
       dataIndex: 'sectors',
