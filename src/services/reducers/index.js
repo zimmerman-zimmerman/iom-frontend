@@ -37,6 +37,10 @@ import {
   COUNTRY_SECTORS_SUCCESS,
   COUNTRY_SECTORS_FAILED
 } from '../actions/index';
+import {
+    NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
+    NON_HUMAN_SERVICES_SUCCESS
+} from "../actions";
 
 const initial = {
   values: null,
@@ -286,6 +290,21 @@ function services(state=initial, action) {
   }
 }
 
+function nonHumanServices(state=initial, action) {
+    switch (action.type) {
+        case NON_HUMAN_SERVICES_INITIAL:
+            return updateInitial(state, action);
+        case NON_HUMAN_SERVICES_REQUEST:
+            return updateRequest(state, action);
+        case NON_HUMAN_SERVICES_SUCCESS:
+            return updateSuccess(state, action);
+        case NON_HUMAN_SERVICES_FAILED:
+            return updateFailed(state, action);
+        default:
+            return state;
+    }
+}
+
 function service(state=initial, action) {
   switch (action.type) {
     case SERVICE_INITIAL:
@@ -482,6 +501,7 @@ function transactionsAggregationsParticipatingOrganisation(state=initial, action
 }
 
 const reducers = {
+    nonHumanServices,
   homeDonors,
   homeActivities,
   homeSectors,

@@ -55,7 +55,7 @@ class ServicesTable extends BaseFilter {
     },
       {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
-      dataIndex: 'value',
+      dataIndex: 'totalValue',
       key: 'value',
       render: value => <span className='services-budget-item'>{usd}{format(',.0f')(value)}</span>,
     }, {

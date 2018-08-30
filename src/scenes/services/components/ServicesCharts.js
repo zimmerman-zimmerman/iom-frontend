@@ -17,7 +17,7 @@ const CustomToolTip = props => {
     <Card>
       <Content>
         <h5>
-          <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.value)}
+          <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.totalValue)}
         </h5>
       </Content>
     </Card> : null;
@@ -46,10 +46,14 @@ class ServicesCharts extends Component {
   render() {
     const { intl, data } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
+    let otherData = data;
+      otherData.forEach(item => {
+        item.otherValue = item.value*2;
+    });
     return (
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
-        {data !== null ?
-          <BarChart data={data} maxBarSize={50} className='bar-chart'
+        {otherData !== null ?
+          <BarChart data={otherData} maxBarSize={50} className='bar-chart'
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid vertical={false}/>
             <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick/>}/>
@@ -62,8 +66,11 @@ class ServicesCharts extends Component {
               }}
             />
             <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
-            <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}/>
-            <Bar dataKey="value" stackId="a" fill="#1f4283" />
+            <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}
+                    payload={[{ value: 'Humanitarian', type: 'rect', id: 'a', color: '#418fde' },
+                        { value: 'Non-humanitarian', type: 'rect', id: 'a', color: '#1f4283' },]}/>
+            <Bar dataKey="value" stackId='a' fill="#418fde"/>
+              <Bar dataKey="nonHumanValue" stackId='a' fill="#1f4283"/>
           </BarChart>
           : <div></div>
         }

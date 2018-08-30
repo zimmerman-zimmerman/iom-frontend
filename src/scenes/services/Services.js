@@ -13,28 +13,36 @@ import ServicesCharts from './components/ServicesCharts';
 import ServicesTable from "./components/ServicesTable";
 import injectSheet from "react-jss";
 
+import { combineData } from './ServicesHelper';
+
 class Services extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
-    const { params } = this.state;
+    let params = this.state.params;
+    params.humanitarian = 1;
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'sector', actions.servicesRequest);
+        params.humanitarian = 0;
+        this.actionRequest(params, 'sector', actions.nonHumanServicesRequest);
       } else {
         dispatch(actions.servicesInitial());
+          dispatch(actions.nonHumanServicesInitial());
       }
     }
   }
 
   render() {
-    const { services, classes } = this.props;
-    const data = this.filter(get(services, 'data'));
+    const { humanServices, classes, nonHumanServices } = this.props;
+    const humanData = this.filter(get(humanServices, 'data'));
+    const nonHumanData = this.filter(get(nonHumanServices, 'data'));
+    const data = combineData(humanData, nonHumanData);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
     ];
     return (
-      <Spin spinning={services.request}>
+      <Spin spinning={humanServices.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid fluid className={classes.services}>
             <Row>
@@ -81,7 +89,8 @@ Services.defaultProps = {
 
 const mapStateToProps = (state, ) => {
   return {
-    services: state.services
+    humanServices: state.services,
+      nonHumanServices: state.nonHumanServices,
   }
 };
 

@@ -104,7 +104,7 @@ export function* countryActivitiesRequest(action) {
 
 export function* servicesRequest(action) {
   try {
-    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    const response = yield call(api.budgetsAggregationsRequest, action.values);
     yield put(actions.servicesSuccess(response));
   } catch (error) {
     yield put(actions.servicesFailed(error));
@@ -236,8 +236,18 @@ export function* updateBreadcrumbsRequest(action) {
     yield put(genericActions.updateBreadcrumbsSuccess(action));
 }
 
+export function* nonHumanServicesRequest(action) {
+    try {
+        const response = yield call(api.budgetsAggregationsRequest, action.values);
+        yield put(actions.nonHumanServicesSuccess(response));
+    } catch (error) {
+        yield put(actions.nonHumanServicesFailed(error));
+    }
+}
+
 function* sagas() {
   yield [
+      takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
       takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
       takeLatest('UPDATE_BREADCRUMBS_REQUEST', updateBreadcrumbsRequest),
     takeLatest('HOME_DONORS_REQUEST', homeDonorsRequest),
