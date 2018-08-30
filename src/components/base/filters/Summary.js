@@ -96,7 +96,9 @@ const styles = {
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },
-    height: 450,
+    maxHeight: 450,
+    height: '50vh',
+    minHeight: 'fit-content',
     '& h3': {
       marginBottom: 0,
       fontWeight: 'bold',

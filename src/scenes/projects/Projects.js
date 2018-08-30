@@ -128,7 +128,21 @@ class Projects extends BaseFilter {
                     { showMap ?
                       <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
                               tabName="activities"
+                              onShowSummary={this.onToggleSummary.bind(this)}
+                              showSummary={showSummary}
                       /> : null
+                    }
+                    {showSummary ?
+                      <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
+                        <div className={classes.boxShadow}>
+                          <Summary data={showMap ? get(dataCountries, 'results') : null}
+                                   onHideSummary={this.onToggleSummary.bind(this)}
+                                   fieldValue="value"
+                                   fieldCount="activity_count"
+                                   donorsCount={donorsCount}
+                          />
+                        </div>
+                      </Col> : null
                     }
                   </div>
                 </MediaQuery>
@@ -204,6 +218,10 @@ const styles = {
   },
   boxShadow: {
     boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
+  },
+  noPaddingLeftAndRight: {
+    paddingLeft: 0,
+    paddingRight: 0,
   },
 };
 

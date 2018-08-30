@@ -94,6 +94,18 @@ class Countries extends BaseFilter {
                           />
                         </div> : null
                       }
+                      {showSummary ?
+                        <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
+                          <div className={classes.boxShadow}>
+                            <Summary data={showMap ? data : null}
+                                     onHideSummary={this.onToggleSummary.bind(this)}
+                                     fieldValue="value"
+                                     fieldCount="activity_count"
+                                     donorsCount={donorsCount}
+                            />
+                          </div>
+                        </Col> : null
+                      }
                     </Col>
                   </MediaQuery>
                   <MediaQuery minWidth={screenSize.desktop.minWidth}>
@@ -166,7 +178,11 @@ const styles = {
   },
   boxShadow: {
     boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
-  }
+  },
+  noPaddingLeftAndRight: {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Countries));
