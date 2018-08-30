@@ -98,7 +98,7 @@ class Header extends Component {
             {size === 'lg' ? <Menus items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
           </Col>
-          {true? <Col lg={2} className={classes.shareCol}><Share size={size} /></Col> : null}
+          {size === 'lg' ? <Col lg={2} className={classes.shareCol}><Share size={size} /></Col> : null}
         </Row>
       )
     };
