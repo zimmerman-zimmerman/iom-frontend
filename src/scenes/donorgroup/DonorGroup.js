@@ -94,7 +94,7 @@ const styles = {
     marginLeft: -16,
   },
   grid: {
-    padding: '0 137px !important',
+    padding: '0 8% !important',
     '@media (max-width: 767px)': {
       paddingLeft: '16px !important',
     },
