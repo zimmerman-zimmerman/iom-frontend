@@ -2,8 +2,9 @@ $fontFamily: 'Open Sans';
 $buttonColor: #5287b7;
 
 .container {
-  width: fit-content;
-  padding: 20px 30px 20px 30px;
+  width: 70vw;
+  max-width: 553px;
+  padding: 2% 3% 2% 3%;
 }
 
 .share-link-icon {
@@ -70,7 +71,8 @@ $buttonColor: #5287b7;
   margin-top: 12px;
   display: flex;
   height: 39px;
-  width: 410px;
+  max-width: 410px;
+  width: 100%;
   border-radius: 3px;
   background-color: #fafafa;
   border-left: solid 1px #ced9db;
@@ -83,6 +85,19 @@ $buttonColor: #5287b7;
   border: none;
   height: fit-content;
   padding: 5px;
+  width: 90%;
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 0.9em;
+  }
+  &:-moz-placeholder { /* Firefox 19+ */
+    font-size: 0.9em;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    font-size: 0.9em;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    font-size: 0.9em;
+  }
 }
 
 .send-button {
@@ -105,7 +120,7 @@ $buttonColor: #5287b7;
 }
 
 .social-button-container {
-  margin-right: 40px;
+  margin-right: 4%;
 }
 
 .social-button {
@@ -125,6 +140,7 @@ $buttonColor: #5287b7;
   letter-spacing: normal;
   text-align: left;
   color: #454e53;
+  white-space: nowrap;
 }
 
 .done-button {
