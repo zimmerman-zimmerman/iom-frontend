@@ -8,6 +8,8 @@ import injectSheet from 'react-jss';
 import BaseFilter from "./BaseFilter";
 import PropsType from "prop-types";
 
+import './styles/DateFilter.scss';
+
 const { RangePicker } = DatePicker;
 
 class StartEndDateFilter extends BaseFilter {
@@ -36,7 +38,8 @@ class StartEndDateFilter extends BaseFilter {
   render() {
     const { classes } = this.props;
     return (
-      <RangePicker onChange={(values) => this.handleChange(values)} className={classes.startEndDateFilter} />
+      <RangePicker dropdownClassName='date-popup-container'
+                   onChange={(values) => this.handleChange(values)} className={classes.startEndDateFilter} />
     )
   }
 }
