@@ -1,6 +1,5 @@
 import React from 'react';
 import Table from 'antd/es/table';
-import Icon from 'antd/es/icon';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import aboutOMG from '../../../assets/images/AboutIOM.jpg';

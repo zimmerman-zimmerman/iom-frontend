@@ -7,7 +7,6 @@ import Layout from 'antd/es/layout';
 import { connect } from "react-redux";
 import injectSheet from "react-jss";
 import PropsType from 'prop-types';
-import find from 'lodash/find';
 
 import BaseFilter from "./BaseFilter";
 

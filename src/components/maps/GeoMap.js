@@ -21,9 +21,6 @@ import GenericDialog from "../dialogWindow/GenericDialog/GenericDialog";
 
 const colors = ["#CDDC39", "#4CAF50", "#795548"];
 
-const dialogText = 'Disclaimer: The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations or the International Organization for Migration.';
-const dialogButText = 'CONTINUE';
-
 class GeoMap extends Component {
   constructor(props) {
     super(props);

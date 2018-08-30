@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropsType from 'prop-types';
 import { Button, Icon, Divider } from 'antd';
 import {injectIntl, intlShape } from 'react-intl';
 import { FacebookShareButton, GooglePlusShareButton, TwitterShareButton,

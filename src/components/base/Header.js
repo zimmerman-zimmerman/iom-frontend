@@ -30,9 +30,12 @@ class Header extends Component {
     const { classes, match, onOpenSlider, openSlider, menuItems } = this.props;
     let urlPath = match.path;
     switch (urlPath) {
-      case '/donors/:code':
+      case '/donors/:group/:code':
         urlPath = '/donors';
         break;
+        case '/donors/:group':
+            urlPath = '/donors';
+            break;
       case '/countries/:code':
         urlPath = '/countries';
         break;

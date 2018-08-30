@@ -2,7 +2,6 @@ import { Component } from 'react';
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import extend from "lodash/extend";
-import find from 'lodash/find';
 
 
 class BaseFilter extends Component {

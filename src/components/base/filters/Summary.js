@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Card from 'antd/es/card';
 import Divider from 'antd/es/divider';
 import { Row, Col } from 'react-flexbox-grid';
-import { format } from "d3-format";
 import injectSheet from 'react-jss';
 import Button from 'antd/es/button';
 import get from 'lodash/get';
