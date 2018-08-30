@@ -1,9 +1,15 @@
 $fontFamily: 'Open Sans';
 
 .confirm-container {
+  max-width: 553px;
+  width: 70vw;
+  max-height: 494px;
+  min-height: 350px;
+  height: 50vh;
+
   display: flex;
   flex-direction: column;
-  padding: 80px;
+  padding: 8%;
 }
 
 .confirm-icon {
@@ -11,6 +17,7 @@ $fontFamily: 'Open Sans';
   font-size: 80px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: auto;
 }
 
 .confirm-title {
@@ -24,7 +31,7 @@ $fontFamily: 'Open Sans';
   font-stretch: normal;
   line-height: 1.37;
   letter-spacing: normal;
-  text-align: left;
+  text-align: center;
   color: #3eb3a7;
 }
 
@@ -44,7 +51,7 @@ $fontFamily: 'Open Sans';
 }
 
 .confirm-button {
-  margin: 26px auto 6px auto;
+  margin: 26px auto auto auto;
   border-radius: 3px;
   width: 185px;
   height: 42px;
