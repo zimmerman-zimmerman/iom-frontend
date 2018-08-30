@@ -34,6 +34,9 @@ const styles = {
     '@media (max-width: 1277px)': {
       fontSize: 15,
       lineHeight: '38px',
+      '& .ant-menu-item': {
+        padding: '0 3%',
+      }
     }
   },
 };

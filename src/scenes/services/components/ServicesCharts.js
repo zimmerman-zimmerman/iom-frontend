@@ -31,9 +31,11 @@ const CustomizedTick = props => {
           return (
                 <text
                 x={x}
-                y={y + 10 + index*15}
+                y={y + 10 + index*16}
                 textAnchor="middle"
                 fill="#666"
+                // fontSize='0.78em'
+                fontSize='1vw'
                 >
                 {word}
                 </text>

@@ -125,6 +125,7 @@ const styles = {
       height: 70,
     },
     backgroundColor: styleVariables.blue,
+    padding: '0 50px !important',
   },
   logo: {
     padding: '10px 0',
@@ -141,8 +142,8 @@ const styles = {
     height: 70,
   },
   share: {
+    width: 'max-content',
     marginTop: 26,
-    float: 'right',
     '& $button': {
       marginLeft: 16,
       color: '#0033a1',
