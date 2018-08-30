@@ -1,0 +1,24 @@
+.date-popup-container {
+  .ant-calendar {
+    width: min-content;
+    .ant-calendar-panel {
+      .ant-calendar-date-panel  {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80vw;
+        max-width: 550px;
+        .ant-calendar-range-part{
+          width: 272px;
+        }
+        .ant-calendar-range-left {
+          float: none;
+          order: 1;
+        }
+        .ant-calendar-range-right {
+          float: none;
+          order: 2;
+        }
+      }
+    }
+  }
+}
