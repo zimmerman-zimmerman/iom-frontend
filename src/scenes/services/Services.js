@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 import Spin from 'antd/es/spin';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -14,6 +15,7 @@ import ServicesTable from "./components/ServicesTable";
 import injectSheet from "react-jss";
 
 import { combineData } from './ServicesHelper';
+import {size as screenSize} from "../../helpers/screen";
 
 class Services extends BaseFilter {
   componentDidMount() {
@@ -57,15 +59,18 @@ class Services extends BaseFilter {
                   <Col xs={12}>
                     <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
                     <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
-                    <hr className="divider" />
+                    <MediaQuery minWidth={screenSize.desktop.minWidth}>
+                      <hr className="divider" />
+                    </MediaQuery>
                     {data ?
-                      <Fragment>
-                        <h2 className="chart-header">
-                          <Trans id="services.chart.header" defaultMessage="Budget per service area" />
-                        </h2>
-                        <ServicesCharts data={data} />
-                      </Fragment>
-                        : null
+                      <MediaQuery minWidth={screenSize.desktop.minWidth}>
+                        <Fragment>
+                          <h2 className="chart-header">
+                            <Trans id="services.chart.header" defaultMessage="Budget per service area" />
+                          </h2>
+                          <ServicesCharts data={data} />
+                        </Fragment>
+                      </MediaQuery> : null
                     }
                   </Col>
                   <hr className="divider" />
@@ -114,7 +119,7 @@ const styles = {
     '& .divider': {
       border: 'solid 3px #173d8e',
       opacity: 0.3,
-      margin: '30px 0',
+      margin: '3% 0',
       width: '100%',
     },
   }
