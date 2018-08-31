@@ -168,7 +168,7 @@ class Filters extends Component {
               className={classes.collapse}
               showArrow={false}
               header={
-                <span>
+                <span className={classes.showFiltersLabel}>
                   <MdFilterList className={classes.icon} />
                   {intl.formatMessage({id: 'filters.show', defaultMessage: 'Show filters'})}
                 </span>
@@ -199,6 +199,10 @@ Filters.propTypes = {
 };
 
 const styles = {
+  showFiltersLabel: {
+    fontSize: '18px',
+    color: '#272727',
+  },
     filtersLabel: {
         marginLeft: 5,
         fontSize: '21px',

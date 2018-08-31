@@ -29,6 +29,9 @@ export const tableHeader = {
   fontWeight: '600',
     overflowWrap: 'normal',
     wordBreak: 'keep-all',
+  '@media (max-width: 767px)': {
+    fontSize: '17px',
+  },
 }
 
 export const pageContainer = {

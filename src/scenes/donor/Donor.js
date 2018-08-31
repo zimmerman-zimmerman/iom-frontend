@@ -82,6 +82,9 @@ const styles = {
     marginTop: 10,
     marginBottom: 15,
     fontWeight: 300,
+    '@media (max-width: 767px)': {
+      fontSize: '22px',
+    },
   },
   description: {
     marginBottom: 10,

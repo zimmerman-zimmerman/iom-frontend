@@ -67,13 +67,13 @@ class ServiceDonors extends React.Component {
     const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
     const data = get(serviceDonors, 'data.results', null);
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
       key: 'participating_organisation',
       width: '50%',
       render: obj =>
         <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
@@ -121,6 +121,9 @@ const styles = {
     '& .title': {
       color: '#0033a1',
       fontWeight: 600,
+      '@media (max-width: 767px)': {
+        fontSize: '22px',
+      },
     }
   },
   table: {

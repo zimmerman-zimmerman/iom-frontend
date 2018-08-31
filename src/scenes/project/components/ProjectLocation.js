@@ -176,6 +176,9 @@ const styles = {
             marginTop: 10,
             paddingBottom: 10,
             fontSize: 26,
+          '@media (max-width: 767px)': {
+            fontSize: 22,
+          },
         },
         '& .flag-country': {
             display: 'flex',
@@ -186,6 +189,9 @@ const styles = {
             fontSize: 22,
             marginTop: '14px',
             marginLeft: '12px',
+          '@media (max-width: 767px)': {
+            fontSize: 17,
+          },
         },
         '& .field': {
             color: '#262626',
@@ -200,9 +206,15 @@ const styles = {
         },
         '& .name': {
             fontWeight: 'bold',
+          '@media (max-width: 767px)': {
+            fontSize: 16,
+          },
         },
         '& .value': {
             marginLeft: 5,
+          '@media (max-width: 767px)': {
+            fontSize: 16,
+          },
         }
     }
 };

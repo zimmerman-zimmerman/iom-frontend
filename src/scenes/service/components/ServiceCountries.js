@@ -55,6 +55,9 @@ const styles = {
       color: '#0033a1',
       fontWeight: 600,
       marginBottom: 20,
+      '@media (max-width: 767px)': {
+        fontSize: '22px',
+      },
     },
     '& .leaflet-bottom': {
       display: 'none'

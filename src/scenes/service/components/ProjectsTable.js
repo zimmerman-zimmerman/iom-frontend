@@ -35,19 +35,19 @@ class ProjectsTable extends BaseFilter {
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const total = get(data, 'count', 0);
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
       key: 'title.narratives[0].text',
       width: '45%',
       render: obj => 
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
       className: 'number',
       render: value => <span>{usd}{format(',.0f')(value)}</span>
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}</span>,
       dataIndex: 'humanitarian',
       key: 'humanitarian',
       render: value =>
@@ -101,6 +101,9 @@ const styles = {
     '& .title': {
       color: '#0033a1',
       fontWeight: 600,
+      '@media (max-width: 767px)': {
+        fontSize: '22px',
+      },
     },
     '& .pagination': {
       padding: '20px 0',

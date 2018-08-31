@@ -58,7 +58,7 @@ class Services extends BaseFilter {
                 <Row>
                   <Col xs={12}>
                     <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
-                    <h2><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
+                    <h2 className="description"><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
                     <MediaQuery minWidth={screenSize.desktop.minWidth}>
                       <hr className="divider" />
                     </MediaQuery>
@@ -101,9 +101,17 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   services: {
+    '& .description': {
+      '@media (max-width: 767px)': {
+        fontSize: 18,
+      }
+    },
     '& .title': {
       marginTop: 15,
       fontWeight: 300,
+      '@media (max-width: 767px)': {
+        fontSize: 22,
+      }
     },
     '& .chart-header': {
       color: '#1f4283',

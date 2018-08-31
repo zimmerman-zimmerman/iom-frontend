@@ -46,7 +46,7 @@ class ServicesTable extends BaseFilter {
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}</span>,
       dataIndex: 'sector.name',
       key: 'sector',
       width: '55%',
@@ -54,12 +54,12 @@ class ServicesTable extends BaseFilter {
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     },
       {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'totalValue',
       key: 'value',
       render: value => <span className='services-budget-item'>{usd}{format(',.0f')(value)}</span>,
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
       dataIndex: 'activity_count',
       key: 'activity_count',
     },{

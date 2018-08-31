@@ -153,6 +153,9 @@ const styles = {
     '& .title': {
       color: '#1f4283',
       fontSize: 26,
+      '@media (max-width: 767px)': {
+        fontSize: '22px',
+      },
     }
   }
 };

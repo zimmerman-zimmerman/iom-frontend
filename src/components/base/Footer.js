@@ -108,6 +108,7 @@ const styles = {
   },
   text: {
     color: 'white',
+    fontWeight: 'bold',
   },
   share: {
     paddingTop: '10px',
