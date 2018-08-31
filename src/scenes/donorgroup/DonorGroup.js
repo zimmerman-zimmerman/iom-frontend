@@ -81,6 +81,9 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   title: {
+    '@media (max-width: 767px)': {
+      fontSize: '22px',
+    },
     marginTop: 10,
     marginBottom: 15,
     fontWeight: 300,

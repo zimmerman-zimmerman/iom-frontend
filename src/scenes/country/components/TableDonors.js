@@ -27,13 +27,13 @@ const TableDonors = (props) => {
   const { intl, data, handleDonorSortBy } = props;
   const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
   const columns = [{
-    title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}</span>,
+    title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}</span>,
     key: 'participating_organisation',
     width: '60%',
     render: obj => 
       <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
   }, {
-    title: <div style={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</div>,
+    title: <div className={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</div>,
     dataIndex: 'value',
     key: 'value',
     className: 'columnMoney',

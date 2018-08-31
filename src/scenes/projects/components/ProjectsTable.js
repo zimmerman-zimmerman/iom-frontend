@@ -59,7 +59,7 @@ class ProjectsTable extends BaseFilter {
     const count = get(data, 'count', 0);
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}</span>,
       dataIndex: 'title',
       key: 'title',
       className: 'Title',
@@ -67,30 +67,30 @@ class ProjectsTable extends BaseFilter {
       render: (title, record) =>
         <Link to={`/projects/${record.id}`}>{title.narratives[0].text}</Link>,
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
       dataIndex: 'activity_dates',
       key: 'start_date',
       render: activity_dates => <span>{activity_dates[1].iso_date}</span>
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
       dataIndex: 'activity_dates',
       key: 'end_date',
       render: activity_dates => <span>{activity_dates[2].iso_date}</span>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'budgets',
       key: 'budgets',
       className: 'Money',
       render: budgets => <span className='projects-budget-item'>{usd}{format(',.0f')(get(budgets, '[0].value.value'))}</span>,
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
       dataIndex: 'sectors',
       key: 'sectors',
       width: '25%',
       render: sectors => 
         <Link to={`/services/${sectors[0].sector.code}`}>{get(sectors, '[0].sector.name')}</Link>,
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}</span>,
       dataIndex: 'recipient_countries',
       key: 'recipient_countries',
       width: '20%',

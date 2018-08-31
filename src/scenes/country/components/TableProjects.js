@@ -73,42 +73,42 @@ class TableProjects extends Component {
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
       key: 'donors',
       width: '20%',
       render: obj => 
         <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}</span>,
       key: 'title',
       width: '30%',
       render: obj => 
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
       render: value => <span>{usd}{format(',.0f')(value)}</span>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
+      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
       dataIndex: 'activity_status.name',
       key: 'status'
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({
+      title: <span className={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
       })}</span>,
       key: 'type',
       render: obj => 
         <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({
+      title: <span className={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.start', defaultMessage: 'Start date'
       })}</span>,
       dataIndex: 'activity_dates[1].iso_date',
       key: 'start'
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({
+      title: <span className={tableHeader}>{intl.formatMessage({
         id: 'country.table.projects.header.end', defaultMessage: 'End date'
       })}</span>,
       dataIndex: 'activity_dates[0].iso_date',

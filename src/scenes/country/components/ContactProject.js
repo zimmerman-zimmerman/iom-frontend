@@ -94,6 +94,9 @@ const styles = {
       color: '#1f4283',
       fontSize: 26,
       fontWeight: 600,
+      '@media (max-width: 767px)': {
+        fontSize: 22,
+      }
     },
     '& .field': {
       width: '100%',

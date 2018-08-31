@@ -105,6 +105,9 @@ const styles = {
         fontSize: '32px',
         fontWeight: 600,
         color: '#fff',
+      '@media (max-width: 767px)': {
+        fontSize: 22,
+      },
     },
   projectBanner: {
     width: '100%',
@@ -119,17 +122,26 @@ const styles = {
         fontWeight: 600,
         fontSize: 32,
         color: '#1471ce',
+        '@media (max-width: 767px)': {
+          fontSize: 22,
+        },
       },
       '& .description': {
         marginTop: 40,
         color: '#1471ce',
         fontWeight: 600,
         fontSize: 21,
+        '@media (max-width: 767px)': {
+          fontSize: 16,
+        },
       },
       '& .countryLink': {
         fontSize: 21,
         marginTop: 30,
         paddingLeft: 9,
+        '@media (max-width: 767px)': {
+          fontSize: 16,
+        },
       },
       '& .menu': {
         marginTop: 20,
@@ -142,11 +154,17 @@ const styles = {
         marginRight: 20,
         fontSize: 22,
         textTransform: 'none',
+        '@media (max-width: 767px)': {
+          fontSize: 16,
+        },
       },
       '& .menu .ant-menu-item-selected': {
         color: '#1471ce',
         fontWeight: 'bold',
         borderBottom: '2px solid #1471ce !important',
+        '@media (max-width: 767px)': {
+          fontSize: 16,
+        },
       }
     },
     '& .right': {
@@ -162,10 +180,16 @@ const styles = {
             fontSize: '22px',
             fontWeight: 'bold',
             color: '#fff',
+          '@media (max-width: 767px)': {
+            fontSize: 16,
+          },
         },
         '& .financialText':{
             fontSize: '28px',
             fontWeight: 'normal',
+          '@media (max-width: 767px)': {
+            fontSize: 16,
+          },
         },
       '& .title': {
         color: 'white',

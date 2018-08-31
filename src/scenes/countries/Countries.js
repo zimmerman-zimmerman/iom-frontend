@@ -77,7 +77,7 @@ class Countries extends BaseFilter {
                     <h1 className={classes.title}>
                       <Trans id="countries.title" defaultMessage="Countries"/>
                     </h1>
-                    <h2>
+                    <h2 className={classes.description}>
                       <Trans id="countries.description" defaultMessage="Description"/>
                     </h2>
                   </Col>
@@ -158,8 +158,16 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  description: {
+    '@media (max-width: 767px)': {
+      fontSize: '18px',
+    },
+  },
   title: {
     fontWeight: 300,
+    '@media (max-width: 767px)': {
+      fontSize: '22px',
+    },
   },
   map: {
     marginTop: 15,

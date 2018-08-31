@@ -165,6 +165,9 @@ const styles = {
     fontWeight: 600,
     textAlign: 'start',
     margin: '50px 0 20px 0',
+    '@media (max-width: 767px)': {
+      fontSize: 22,
+    },
   }
 };
 

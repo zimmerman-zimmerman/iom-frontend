@@ -203,6 +203,9 @@ const styles = {
     marginTop: 12,
     fontSize: 36,
     fontWeight: 300,
+    '@media (max-width: 767px)': {
+      fontSize: 22,
+    },
   },
   map: {
     '& .leaflet-control-attribution.leaflet-control': {

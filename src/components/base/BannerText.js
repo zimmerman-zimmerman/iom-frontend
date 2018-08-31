@@ -8,7 +8,7 @@ const BannerText = (props) => {
     <Grid fluid className={classes.bannerText}>
       <Row center="xs"  middle="xs">
         <Col xs={12} md={10} lg={10} className="content">
-          <span className="title">{text}</span>
+          <span className={classes.title}>{text}</span>
         </Col>
       </Row>
     </Grid>
@@ -16,10 +16,23 @@ const BannerText = (props) => {
 };
 
 const styles = {
+  title: {
+    fontFamily: "Open Sans",
+    fontSize: '28px',
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: 1.36,
+    letterSpacing: 'normal',
+    textAlign: 'left',
+    color: '#1f4283',
+    '@media (max-width: 767px)': {
+      fontSize: '22px',
+    },
+  },
   bannerText: {
     backgroundColor: '#ececec',
     '& .content': {
-      fontSize: 'calc(1.8em + 1vw)',
       fontStyle: 'normal',
       fontStretch: 'normal',
       fontWeight: 300,
