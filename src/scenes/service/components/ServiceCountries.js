@@ -26,7 +26,7 @@ class ServiceCountries extends BaseFilter {
 
   render() {
     const { serviceCountries, classes } = this.props;
-    const data = get(serviceCountries, 'data');
+    const data = get(serviceCountries, 'data.results');
     return(
       <div className={classes.serviceCountries}>
         <h2 className="title">
