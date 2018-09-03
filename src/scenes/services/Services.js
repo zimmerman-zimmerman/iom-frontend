@@ -17,6 +17,8 @@ import injectSheet from "react-jss";
 import { combineData } from './ServicesHelper';
 import {size as screenSize} from "../../helpers/screen";
 
+import { calcDividerMargTop } from './ServicesHelper';
+
 class Services extends BaseFilter {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -73,7 +75,7 @@ class Services extends BaseFilter {
                       </MediaQuery> : null
                     }
                   </Col>
-                  <hr className="divider" />
+                  <hr className="divider" style={{ marginTop: calcDividerMargTop(data.length) }} />
                   <Col xs={12} className="service-table">
                     {data ? <ServicesTable rootComponent={this} data={data}/> : null}
                   </Col>
@@ -127,7 +129,7 @@ const styles = {
     '& .divider': {
       border: 'solid 3px #173d8e',
       opacity: 0.3,
-      margin: '3% 0',
+      marginBottom: 15,
       width: '100%',
     },
   }

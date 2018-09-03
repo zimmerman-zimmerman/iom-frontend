@@ -6,6 +6,8 @@ import get from "lodash/get";
 import Layout from 'antd/es/layout';
 import Card from 'antd/es/card';
 
+import { calcBarChartFont, calcBarChartYPos } from '../ServicesHelper';
+
 import Trans from '../../../locales/Trans';
 
 import './ServicesCharts.scss';
@@ -31,11 +33,10 @@ const CustomizedTick = props => {
           return (
                 <text
                 x={x}
-                y={y + 10 + index*16}
+                y={y + calcBarChartYPos(props.serviceAmount) + index*calcBarChartYPos(props.serviceAmount)}
                 textAnchor="middle"
                 fill="#666"
-                // fontSize='0.78em'
-                fontSize='1vw'
+                fontSize={calcBarChartFont(props.serviceAmount) + 'vw'}
                 >
                 {word}
                 </text>
@@ -58,7 +59,7 @@ class ServicesCharts extends Component {
           <BarChart data={otherData} maxBarSize={50} className='bar-chart'
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
             <CartesianGrid vertical={false}/>
-            <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick/>}/>
+            <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick serviceAmount={otherData.length}/>} />
             <YAxis
               axisLine={false}
               tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}
