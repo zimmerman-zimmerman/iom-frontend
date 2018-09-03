@@ -59,12 +59,12 @@ class Header extends Component {
     const TriggerMenu = (props) => {
       return (
         <Row end={props.size}>
-          <Col xs={3} md={2}>
+          <div >
             {!openSlider ?
               <MdMenu className={classes.triggerMenu} onClick={onOpenSlider} /> :
               <MdClose className={classes.triggerMenu} onClick={onOpenSlider} />
             }
-          </Col>
+          </div>
         </Row>
       )
     };
@@ -90,16 +90,16 @@ class Header extends Component {
     const Content = (props) => {
       const { size } = props;
       return (
-        <Row start="xs" middle="xs" >
-          <Col xs={6} md={6} lg={1}>
+        <div className={classes.innerHeader}>
+          <div className={classes.logoHeader}>
             <Logo size={size}/>
-          </Col>
-          <Col xs={6} md={6} lg={9}>
+          </div>
+          <div className={classes.tabsHeader}>
             {size === 'lg' ? <Menus items={menuItems} urlPath={urlPath} /> : null}
             {size === 'xs' || size === 'md' ? <TriggerMenu size={size} /> : null}
-          </Col>
-          {size === 'lg' ? <Col lg={2} className={classes.shareCol}><Share size={size} /></Col> : null}
-        </Row>
+          </div>
+          {size === 'lg' ? <div className={classes.shareCol}><Share size={size} /></div> : null}
+        </div>
       )
     };
 
@@ -125,8 +125,26 @@ const styles = {
       height: 70,
     },
     backgroundColor: styleVariables.blue,
-    padding: '0 50px !important',
+    padding: '0 10px !important',
+      width: '100%',
   },
+    innerHeader: {
+      display: 'flex',
+        height: 'inherit',
+    },
+    logoHeader: {
+      order: 1,
+      margin: 'auto auto auto 0',
+    },
+    tabsHeader: {
+      order:2,
+        margin: '28px 0 0 auto',
+        width: 'max-content',
+        '@media (max-width: 990px)': {
+            minHeight: '60px',
+            margin: '0 5px 0 5px',
+        },
+    },
   logo: {
     padding: '10px 0',
     height: 60,
@@ -139,11 +157,12 @@ const styles = {
     fontSize: 40,
   },
   shareCol: {
-    height: 70,
+    order: 3,
+      margin: 'auto 0 auto 20px',
   },
   share: {
     width: 'max-content',
-    marginTop: 26,
+    marginTop: 16,
     '& $button': {
       marginLeft: 16,
       color: '#0033a1',
