@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>Add email content | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-content model-emailcontent change-form"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>admin</strong>.
+            
+            
+                
+                    <a href="/">View site</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Change password</a> /
+                
+                <a href="/admin/logout/">Log out</a>
+            
+        </div>
+        
+        
+        
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="/admin/">Home</a>
+&rsaquo; <a href="/admin/content/">Content</a>
+&rsaquo; <a href="/admin/content/emailcontent/">Email contents</a>
+&rsaquo; Add email content
+</div>
+
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Add email content</h1>
+        <div id="content-main">
+
+
+
+<form action="" method="post" id="emailcontent_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="qT2lTn5vdLcQwLkK5sgakO0bUMky6fJlRAU2eVFzFA2cuvuoneNKzK8sxbagdFSE">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-type">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_type">Type:</label>
+                        
+                            <select name="type" required id="id_type">
+  <option value="" selected>---------</option>
+
+  <option value="sl">Share Link</option>
+
+</select>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-language_code">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_language_code">Language code:</label>
+                        
+                            <select name="language_code" required id="id_language_code">
+  <option value="" selected>---------</option>
+
+  <option value="en">English</option>
+
+</select>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-subject">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_subject">Subject:</label>
+                        
+                            <input type="text" name="subject" class="vTextField" maxlength="200" required id="id_subject">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-text">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_text">Text:</label>
+                        
+                            <textarea name="text" cols="40" rows="10" class="vLargeTextField" required id="id_text">
+</textarea>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-html">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_html">Html:</label>
+                        
+                            <textarea name="html" cols="40" rows="10" class="vLargeTextField" required id="id_html">
+</textarea>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+<input type="submit" value="Save" class="default" name="_save">
+
+
+<input type="submit" value="Save and add another" name="_addanother">
+<input type="submit" value="Save and continue editing" name="_continue">
+
+
+</div>
+
+
+
+    <script type="text/javascript"
+            id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            
+                data-model-name="emailcontent"
+            >
+    </script>
+
+
+
+
+<script type="text/javascript"
+        id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+        
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
