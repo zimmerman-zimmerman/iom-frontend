@@ -2,6 +2,7 @@ import { Component } from 'react';
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import extend from "lodash/extend";
+import * as actions from "../../../services/actions";
 
 
 class BaseFilter extends Component {
@@ -101,12 +102,22 @@ class BaseFilter extends Component {
       const rootComponent = get(this.props, 'rootComponent');
       if (rootComponent) {
           const filters = filterz ? filterz : rootComponent.state.filters;
-          const { groupBy, filterRequest, secondFilterRequest } = rootComponent.props;
+          const { groupBy, filterRequest, secondFilterRequest, nonHumanFilterRequest } = rootComponent.props;
           if (filters.changed) {
               const { params } = rootComponent.state;
-              this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
-              if (secondFilterRequest) {
-                  this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
+              if(params['humanitarian'] !== undefined)
+              {
+                  let paramz = params;
+                  paramz.humanitarian = 1;
+                  this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+                  params.humanitarian = 0;
+                  this.actionRequest(extend({}, params, filters.values), groupBy, nonHumanFilterRequest);
+              }else
+              {
+                  this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+                  if (secondFilterRequest) {
+                      this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
+                  }
               }
               filters.changed = false;
               rootComponent.setState({filters: filters})
