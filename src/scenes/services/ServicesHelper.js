@@ -70,3 +70,42 @@ export function combineData(human, nonHuman) {
 
     return data;
 }
+
+//These are the default values with which the labels look good
+//thus all calculations are made according to these
+const defServiceCount = 10;
+const defFontSize = 1;
+const defYAdjust = 16;
+const defDivMargTop = 76;
+
+//Cause again we using those svg elements, here's a function that will
+//calculate the label fontsize for the bar charts
+//it all depends on the amount of services
+//and is scaled with the vw unit.
+//for the calculation the default proportions are used: 1vw and 10services
+//cause with that proprotion the labels looks good
+//and it needs to be reverse proportional thus we divide one by the proportional result
+export function calcBarChartFont(serviceAmount){
+  let newFont = (1/(defFontSize*serviceAmount/defServiceCount));
+  //we dont want the font size to be more than 1vw, cause then its too big
+  if(newFont > 1)
+  {
+    newFont = 1;
+  }
+  return newFont;
+}
+
+//Because of the changing fontsizes we also need to make the y position adjustable to the fontsize
+//this will be just proportional
+export function calcBarChartYPos(serviceAmount){
+    const fontSize = calcBarChartFont(serviceAmount);
+    return (defYAdjust*fontSize/defFontSize);
+}
+
+//This calculates the margin top for the divider line underneath the bar chart, so that labels would be
+//properly seen, and its done with the divider line, because applying this kind of calculation to the
+//bar charts height doesn't work because its broken...
+export function calcDividerMargTop(serviceAmount) {
+    const fontSize = calcBarChartFont(serviceAmount);
+    return (defDivMargTop*fontSize/defFontSize);
+}
