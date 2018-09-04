@@ -89,7 +89,7 @@ class ServiceBanner extends Component {
             </Menu.Item>
           </Menu>
           <div className="description">
-            <Trans id="service.banner.left.description" defaultMessage="General description provided by IOM."/>
+            {this.props.description}
           </div>
         </Col>
         <Col xs={12} md={6} lg={6}  className="right">

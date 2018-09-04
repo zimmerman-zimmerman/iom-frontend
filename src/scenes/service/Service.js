@@ -14,6 +14,8 @@ import ServiceBanner from './components/ServiceBanner';
 import ServiceDonors from './components/ServiceDonors';
 import ServiceProjects from './components/ServiceProjects';
 import ServiceCountries from './components/ServiceCountries';
+import ServicesJSON from '../../services/data/services';
+import find from "lodash/find";
 
 class Service extends BaseFilter {
   componentDidMount() {
@@ -36,10 +38,12 @@ class Service extends BaseFilter {
       {url: '/countries', text: <Trans id='main.menu.services' text='Our Service' />},
       {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
     ];
+    const code = get(this.props, 'match.params.id');
+    const serviceJSON = find(ServicesJSON, {'code': code.toUpperCase()});
     return (
       <Spin spinning={service.request || serviceProjects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          {data ? <ServiceBanner data={get(service, 'data.results[0]')}/> : null}
+          {data ? <ServiceBanner description={serviceJSON['description']} data={get(service, 'data.results[0]')}/> : null}
           <Grid className={classes.service} fluid>
             <Row>
               <Col xs={12} lg={6}>
