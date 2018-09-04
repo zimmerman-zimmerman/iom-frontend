@@ -28,7 +28,6 @@ class DonorsTreeMap extends Component {
   render() {
     const { data } = this.props;
     const ColorPlatte = ['#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6', '#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6'];
-    console.log('TREE MAP DATA!', data);
     return (
       <Row>
         <Col xs={12}>

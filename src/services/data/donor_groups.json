@@ -26,5 +26,5 @@
   "CH": {"code": "CH", "name": "Switzerland", "filter": "CH-4,XM-DAC-11-6"},
   "GB": {"code": "GB", "name": "United Kingdom of Great Britain and Northern Ireland", "filter": "GB-6,GB-GOV-1,GB-GOV-13,GB-GOV-3,GB-GOV-8"},
   "US": {"code": "US", "name": "United States of America", "filter": "US-USAGOV,US-GOV-1"},
-  "UN": {"code": "UN", "name": "United Nation", "filter": "XM-OCHA-CERF,46002,XM-OCHA-CBPF,41AAA,41122,XM-DAC-41127,XM-DAC-41114,XI-IATI-EC_DEVCO,GB-COH-01846493"}
+  "UN": {"code": "UN", "name": "No Government", "filter": "XM-OCHA-CERF,46002,XM-OCHA-CBPF,41AAA,41122,XM-DAC-41127,XM-DAC-41114,XI-IATI-EC_DEVCO,GB-COH-01846493,XM-DAC-454,XI-IATI-EC_NEAR,XM-DAC-47066,XM-DAC-5-14,XI-IATI-EC_ECHO,XM-DAC-41141,XM-DAC-63,CH-UID-CHE-426.120.932,XM-DAC-437,44000,XM-DAC-41121,41119,XM-DAC-20,XM-DAC-11-8,XM-DAC-820-99,SA-KS-1,XM-DAC-41302,XM-DAC-7-99,XM-DAC-2-39,XM-DAC-41101,CH-UID-CHE-113.887.951,HR-1-MOI,XM-DAC-41305"}
 }
