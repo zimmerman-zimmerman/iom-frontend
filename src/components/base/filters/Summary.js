@@ -97,7 +97,10 @@ const styles = {
       display: 'none',
     },
     maxHeight: 450,
-    height: '50vh',
+      height: 450,
+      '@media (max-width: 991px)': {
+          height: '50vh',
+      },
     minHeight: 'fit-content',
     '& h3': {
       marginBottom: 0,

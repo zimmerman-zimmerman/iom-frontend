@@ -94,6 +94,7 @@ class Projects extends BaseFilter {
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data');
     const showMap = get(dataCountries, 'results[0].recipient_country.code');
+    console.log('dataCountries', dataCountries);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.projects' text='Projects' />},
