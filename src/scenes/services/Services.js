@@ -92,6 +92,7 @@ class Services extends BaseFilter {
 Services.defaultProps = {
   groupBy: 'sector',
   filterRequest: actions.servicesRequest,
+    nonHumanFilterRequest: actions.nonHumanServicesRequest,
 };
 
 const mapStateToProps = (state, ) => {
