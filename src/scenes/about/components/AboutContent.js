@@ -115,8 +115,11 @@ const AboutContent = (props) => {
 
 const styles = {
   aboutContent: {
+    width: '85vw !important',
+      maxWidth: 'none !important',
     '@media (max-width: 776px)': {
-      padding: '0 20px',
+        width: '100vw !important',
+      padding: '0 18px',
     },
     color: '#262626',
     '& .title': {

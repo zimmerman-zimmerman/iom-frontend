@@ -27,18 +27,17 @@ class Menus extends Component {
 const styles = {
   menu: {
     width: 'max-content',
+    display: 'flex',
+    zoom: 'unset',
     borderBottom: 'none',
     fontSize: 21,
     lineHeight: '38px',
       height: '42px',
+      '& .ant-menu-item': {
+          top: '0',
+      },
     '@media (max-width: 1277px)': {
       fontSize: 15,
-      lineHeight: '38px',
-      '& .ant-menu-item': {
-        marginTop: '0 !important',
-        width: 'fit-content',
-        padding: '0 3%',
-      }
     }
   },
 };
