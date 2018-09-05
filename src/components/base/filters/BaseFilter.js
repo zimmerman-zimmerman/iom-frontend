@@ -2,7 +2,6 @@ import { Component } from 'react';
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import extend from "lodash/extend";
-import * as actions from "../../../services/actions";
 
 
 class BaseFilter extends Component {
