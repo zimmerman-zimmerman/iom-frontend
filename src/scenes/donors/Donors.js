@@ -8,6 +8,7 @@ import find from 'lodash/find';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
 import MediaQuery from 'react-responsive';
+import Spin from 'antd/es/spin';
 
 import Page from '../../components/base/Page';
 import Filters from '../../components/base/filters/Filters';
@@ -66,47 +67,49 @@ class Donors extends BaseFilter {
       {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
     ];
     return (
-      <Page breadcrumbItems={breadcrumbItems}>
-        <Grid className={classes.container} style={pageContainer} fluid>
-          <Row>
-            <Col xs={12} md={4} lg={3} >
-              <Filters rootComponent={this} countResults={get(dataDonors, 'length', 0)}
-                       pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
-                       singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
-              />
-            </Col>
-            <Col xs={12} md={8} lg={9}>
-              <Row className={classes.rowGap}>
-                <Col xs={12}>
-                  <h1 className={classes.title}><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
-                </Col>
-              </Row>
-              <MediaQuery minWidth={screenSize.mobile.maxWidth}>
-                <Row>
+      <Spin spinning={donors.request}>
+        <Page breadcrumbItems={breadcrumbItems}>
+          <Grid className={classes.container} style={pageContainer} fluid>
+            <Row>
+              <Col xs={12} md={4} lg={3} >
+                <Filters rootComponent={this} countResults={get(dataDonors, 'length', 0)}
+                         pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
+                         singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
+                />
+              </Col>
+              <Col xs={12} md={8} lg={9}>
+                <Row className={classes.rowGap}>
                   <Col xs={12}>
-                    <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
+                    <h1 className={classes.title}><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
                   </Col>
                 </Row>
-              </MediaQuery>
-              <Row>
-                <Col xs={12}>
-                  <DonorsTreeMap
-                    data={sortBy(dataDonors, function(e) {
+                <MediaQuery minWidth={screenSize.mobile.maxWidth}>
+                  <Row>
+                    <Col xs={12}>
+                      <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
+                    </Col>
+                  </Row>
+                </MediaQuery>
+                <Row>
+                  <Col xs={12}>
+                    <DonorsTreeMap
+                      data={sortBy(dataDonors, function(e) {
                         return e.value;
                       }).reverse()
-                    }
+                      }
                     />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12}>
-                  <DonorsTable rootComponent={this} data={dataDonors ? dataDonors : null} />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
-      </Page>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <DonorsTable rootComponent={this} data={dataDonors ? dataDonors : null} />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Grid>
+        </Page>
+      </Spin>
     )
   }
 }

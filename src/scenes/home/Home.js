@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import MediaQuery from 'react-responsive';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import Spin from 'antd/es/spin';
 
 import Page from '../../components/base/Page';
 import BannerImage from '../../components/base/BannerImage';
@@ -11,6 +12,7 @@ import image from '../../assets/images/IOM_picture.jpg';
 import HomeDonors from './components/HomeDonors';
 import HomeActivities from './components/HomeActivities';
 import HomeSectors from './components/HomeSectors';
+import connect from "react-redux/es/connect/connect";
 
 class Home extends Component {
   render() {
@@ -30,33 +32,42 @@ class Home extends Component {
       )
     };
     return (
-      <Page pageName={<Trans id='main.menu.home' text='Home' />}>
-        <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
-          <Banner height={250} size="xs" />
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.tablet.minWidth} maxWidth={screenSize.tablet.maxWidth}>
-          <Banner height={400} size="md" />
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.desktop.minWidth}>
-          <Banner height={600} size="lg" />
-        </MediaQuery>
-        <Grid fluid>
-          <Row middle="xs">
-            <Col xs={12} md={12} lg={4}>
-              <HomeDonors />
-            </Col>
-            <Col xs={12} md={12} lg={4}>
-              <HomeActivities />
-            </Col>
-            <Col xs={12} md={12} lg={4}>
-              <HomeSectors />
-            </Col>
-          </Row>
-        </Grid>
-      </Page>
+      <Spin spinning={this.props.homeActivities.request || this.props.homeSectors.request || this.props.homeDonors.request} >
+        <Page pageName={<Trans id='main.menu.home' text='Home' />}>
+          <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
+            <Banner height={250} size="xs" />
+          </MediaQuery>
+          <MediaQuery minWidth={screenSize.tablet.minWidth} maxWidth={screenSize.tablet.maxWidth}>
+            <Banner height={400} size="md" />
+          </MediaQuery>
+          <MediaQuery minWidth={screenSize.desktop.minWidth}>
+            <Banner height={600} size="lg" />
+          </MediaQuery>
+          <Grid fluid>
+            <Row middle="xs">
+              <Col xs={12} md={12} lg={4}>
+                <HomeDonors />
+              </Col>
+              <Col xs={12} md={12} lg={4}>
+                <HomeActivities />
+              </Col>
+              <Col xs={12} md={12} lg={4}>
+                <HomeSectors />
+              </Col>
+            </Row>
+          </Grid>
+        </Page>
+      </Spin>
     );
   }
 }
 
+const mapStateToProps = (state, ) => {
+  return {
+    homeDonors: state.homeDonors,
+    homeSectors: state.homeSectors,
+    homeActivities: state.homeActivities,
+  }
+};
 
-export default Home;
+export default connect(mapStateToProps)(Home);
