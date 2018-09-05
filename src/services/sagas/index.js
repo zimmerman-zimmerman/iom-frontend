@@ -165,6 +165,15 @@ export function* projectRequest(action) {
   }
 }
 
+export function* projectTransactionsRequest(action) {
+  try {
+    const response = yield call(api.activityTransactionsRequest, action.code);
+    yield put(actions.projectTransactionsSuccess(response));
+  } catch (error) {
+    yield put(actions.projectTransactionsFailed(error));
+  }
+}
+
 export function* projectLocationRequest(action) {
   try {
     const response = yield call(api.countryRequest, action.code);
@@ -247,6 +256,7 @@ export function* nonHumanServicesRequest(action) {
 
 function* sagas() {
   yield [
+    takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
       takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
       takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
       takeLatest('UPDATE_BREADCRUMBS_REQUEST', updateBreadcrumbsRequest),
