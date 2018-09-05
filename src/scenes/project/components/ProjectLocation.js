@@ -2,13 +2,15 @@ import React, { Component, Fragment } from 'react';
 import ReactCountryFlag from "react-country-flag";
 import get from 'lodash/get';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 
 import * as actions from '../../../services/actions';
 import Trans from '../../../locales/Trans';
 import CountryMap from "../../../components/maps/CountryMap";
+
+import { formatSectors } from '../ProjectHelper';
 
 class ProjectLocation extends Component {
     constructor(props) {
@@ -21,6 +23,8 @@ class ProjectLocation extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(actions.projectLocationInitial());
+        const projectID = get(this.props, 'match.params.id');
+        dispatch(actions.projectTransactionsRequest(projectID));
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -71,6 +75,15 @@ class ProjectLocation extends Component {
             )
         };
 
+        //DAC SECTORS are where vocabulary code === 1
+        const dacSectors = formatSectors(get(data, 'sectors',[]), '1');
+        //Service area(at least in this context) are where vocabulary code === 98
+        const serviceAreas = formatSectors(get(data, 'sectors',[]), '98');
+        //Project type (at least in this context) are where vocabulary code === 99
+        const projectTypes = formatSectors(get(data, 'sectors',[]), '99');
+        const aidType = get(this.props.projectTransactions, 'data.results[0].aid_type.name', '');
+        const financeType = get(this.props.projectTransactions, 'data.results[0].finance_type.name', '');
+        const flowType = get(this.props.projectTransactions, 'data.results[0].flow_type.name', '');
         const websiteLink = get(data, 'contact_info[0].website','-').includes('http') ? get(data, 'contact_info[0].website','-') : 'https://' + get(data, 'contact_info[0].website','-');
         const fields = [
             {
@@ -106,8 +119,44 @@ class ProjectLocation extends Component {
                     },
                     {
                         name: {id: "project.location.fields.dac", defaultMessage: "DAC 5 sector:"},
-                        value: <Link to={`/services/${get(data, 'sectors[0].sector.code', '')}`}>{get(data, 'sectors[0].sector.code','')} {get(data, 'sectors[0].sector.name','')}</Link>
-                    }
+                        value: <div className={classes.sectorLinks}>{
+                            dacSectors.map( sector => {
+                              return <Link to={sector.url}>{sector.name} </Link>
+                            })
+                        } </div>
+                    },
+                  {
+                    name: {id: "project.location.fields.type", defaultMessage: "Project type:"},
+                    value: <div className={classes.sectorLinks}>{
+                      projectTypes.map( sector => {
+                        return <Link to={sector.url}>{sector.name} </Link>
+                      })
+                    } </div>
+                  },
+                  {
+                    name: {id: "project.location.fields.ceb.category", defaultMessage:"CEB Category:"},
+                    value: <span>-</span>
+                  },
+                  {
+                    name: {id: "project.location.fields.service", defaultMessage: "Service area:"},
+                    value: <div className={classes.sectorLinks}>{
+                      serviceAreas.map( sector => {
+                        return <Link to={sector.url}>{sector.name} </Link>
+                      })
+                    } </div>
+                  },
+                  {
+                    name: {id: "project.location.fields.finance.type", defaultMessage:"Finance type:"},
+                    value: <span>{financeType}</span>
+                  },
+                  {
+                    name: {id: "project.location.fields.flow.type", defaultMessage:"Flow type:"},
+                    value: <span>{flowType}</span>
+                  },
+                  {
+                    name: {id: "project.location.fields.aid.type", defaultMessage:"Aid type:"},
+                    value: <span>{aidType}</span>
+                  },
                 ]
             },
             {
@@ -149,11 +198,15 @@ class ProjectLocation extends Component {
 
 const mapStateToProps = (state, ) => {
     return {
+      projectTransactions: state.projectTransactions,
         projectLocation: state.projectLocation,
     }
 };
 
 const styles = {
+    sectorLinks:{
+        display: 'inline',
+    },
     projectLocation: {
         '& .left': {
             paddingLeft: '85px !important',
@@ -219,4 +272,4 @@ const styles = {
     }
 };
 
-export default injectSheet(styles)(connect(mapStateToProps)(ProjectLocation));
+export default injectSheet(styles)(withRouter(connect(mapStateToProps)(ProjectLocation)));

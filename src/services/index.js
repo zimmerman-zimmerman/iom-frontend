@@ -44,6 +44,10 @@ export function countryRequest(code) {
   return handleRequest(hostURL(`/api/countries/${code}`), formatJSON({}), 'get');
 }
 
+export function activityTransactionsRequest(code) {
+  return handleRequest(hostURL(`/api/activities/${code}/transactions`), formatJSON({}), 'get');
+}
+
 export function activityRequest(id) {
   return handleRequest(hostURL(`/api/activities/${id}`), formatJSON({}), 'get');
 }

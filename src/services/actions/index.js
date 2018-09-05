@@ -729,3 +729,31 @@ export function nonHumanServicesFailed(error) {
         error: error
     }
 }
+
+export const PROJECT_TRANSACTIONS_INITIAL = 'PROJECT_TRANSACTIONS_INITIAL';
+export const PROJECT_TRANSACTIONS_REQUEST = 'PROJECT_TRANSACTIONS_REQUEST';
+export const PROJECT_TRANSACTIONS_SUCCESS = 'PROJECT_TRANSACTIONS_SUCCESS';
+export const PROJECT_TRANSACTIONS_FAILED = 'PROJECT_TRANSACTIONS_FAILED';
+export function projectTransactionsInitial() {
+  return {
+    type: PROJECT_TRANSACTIONS_INITIAL
+  }
+}
+export function projectTransactionsRequest(code) {
+  return {
+    type: PROJECT_TRANSACTIONS_REQUEST,
+    code: code
+  }
+}
+export function projectTransactionsSuccess(data) {
+  return {
+    type: PROJECT_TRANSACTIONS_SUCCESS,
+    data: data
+  }
+}
+export function projectTransactionsFailed(error) {
+  return {
+    type: PROJECT_TRANSACTIONS_FAILED,
+    error: error
+  }
+}
