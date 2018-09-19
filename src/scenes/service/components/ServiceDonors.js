@@ -64,7 +64,7 @@ class ServiceDonors extends React.Component {
 
   render() {
     const { intl, serviceDonors, classes } = this.props;
-    const usd = intl.formatMessage({id: 'currency.usd.symbol', defaultMessage: '$'});
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const data = get(serviceDonors, 'data.results', null);
     const columns = [{
       title: <span className={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,

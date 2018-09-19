@@ -19,15 +19,16 @@ const CustomToolTip = props => {
     <Card style={{width: 270}}>
       <Content>
         <h3>{data.name}</h3>
-        <h4>US$ {formatNumberComma(data.value)}</h4>
+        <h4>{props.usd} {formatNumberComma(data.value)}</h4>
       </Content>
     </Card> : null;
 };
 
 class DonorsTreeMap extends Component {
   render() {
-    const { data } = this.props;
+    const { data, intl } = this.props;
     const ColorPlatte = ['#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6', '#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6'];
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     return (
       <Row>
         <Col xs={12}>
@@ -41,7 +42,7 @@ class DonorsTreeMap extends Component {
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
                      animationDuration={800}
             >
-              <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
+              <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip usd={usd}/>}/>
             </Treemap>
           </ResponsiveContainer>
         </Col>
