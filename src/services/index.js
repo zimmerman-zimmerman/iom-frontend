@@ -63,3 +63,7 @@ export function transactionsAggregationsRequest(values) {
 export function budgetsAggregationsRequest(values) {
     return handleRequest(hostURL('/api/budgets/aggregations'), formatJSON(values), 'get');
 }
+
+export function localeRequest() {
+  return handleRequest(process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/api/locale/'), formatJSON({}), 'get');
+}

@@ -24,8 +24,8 @@ const sortByOptions = [
   { value: '-activity_budget_value', label: 'Total Budget (desc)' },
   { value: 'start_date', label: 'Start date (asc)' },
   { value: '-start_date', label: 'Start date (desc)' },
-    { value: 'end_date', label: 'End date (asc)' },
-    { value: '-end_date', label: 'End date (desc)' },
+  { value: 'end_date', label: 'End date (asc)' },
+  { value: '-end_date', label: 'End date (desc)' },
 ];
 
 class DonorProjects extends Component {
@@ -92,7 +92,7 @@ class DonorProjects extends Component {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
       width: '40%',
       key: 'donors',
-      render: project => 
+      render: project =>
         <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
     },
         {
@@ -124,10 +124,10 @@ class DonorProjects extends Component {
       title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'})}</span>,
       className: 'Sector',
       key: 'sector',
-      render: project => 
+      render: project =>
         <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
     },{
-      title: 
+      title:
         <SortBy
           options={sortByOptions}
           selectedKey={this.state.params.ordering}
