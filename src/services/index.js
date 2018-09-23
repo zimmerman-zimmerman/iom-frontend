@@ -65,5 +65,8 @@ export function budgetsAggregationsRequest(values) {
 }
 
 export function localeRequest() {
-  return handleRequest(process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/api/locale/'), formatJSON({}), 'get');
+  return handleRequest(
+    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/language-content/en/ui/'),
+    formatJSON({}), 'get'
+  );
 }
