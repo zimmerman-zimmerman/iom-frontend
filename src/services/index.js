@@ -70,3 +70,12 @@ export function localeRequest() {
     formatJSON({}), 'get'
   );
 }
+
+export function orgsanisationDocumentLinksRequest() {
+  return handleRequest(
+    process.env.REACT_APP_OIPA_YODA_HOST.concat('/api/organisations/organisation-file/')
+      .concat(process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER)
+      .concat('/organisation-document-link-list/'),
+    formatJSON({}), 'get'
+  );
+}

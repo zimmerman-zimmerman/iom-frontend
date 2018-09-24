@@ -784,3 +784,30 @@ export function localeFailed(error) {
     error: error
   }
 }
+
+export const ORGANISATION_DOCUMENT_LINKS_INITIAL = 'ORGANISATION_DOCUMENT_LINKS_INITIAL';
+export const ORGANISATION_DOCUMENT_LINKS_REQUEST = 'ORGANISATION_DOCUMENT_LINKS_REQUEST';
+export const ORGANISATION_DOCUMENT_LINKS_SUCCESS = 'ORGANISATION_DOCUMENT_LINKS_SUCCESS';
+export const ORGANISATION_DOCUMENT_LINKS_FAILED = 'ORGANISATION_DOCUMENT_LINKS_FAILED';
+export function orgsanisationDocumentLinksInitial() {
+  return {
+    type: ORGANISATION_DOCUMENT_LINKS_INITIAL
+  }
+}
+export function orgsanisationDocumentLinksRequest() {
+  return {
+    type: ORGANISATION_DOCUMENT_LINKS_REQUEST
+  }
+}
+export function orgsanisationDocumentLinksSuccess(data) {
+  return {
+    type: ORGANISATION_DOCUMENT_LINKS_SUCCESS,
+    data: data
+  }
+}
+export function orgsanisationDocumentLinksFailed(error) {
+  return {
+    type: ORGANISATION_DOCUMENT_LINKS_FAILED,
+    error: error
+  }
+}

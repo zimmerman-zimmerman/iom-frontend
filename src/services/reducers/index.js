@@ -107,7 +107,11 @@ import {
   LOCALE_INITIAL,
   LOCALE_REQUEST,
   LOCALE_SUCCESS,
-  LOCALE_FAILED
+  LOCALE_FAILED,
+  ORGANISATION_DOCUMENT_LINKS_INITIAL,
+  ORGANISATION_DOCUMENT_LINKS_REQUEST,
+  ORGANISATION_DOCUMENT_LINKS_SUCCESS,
+  ORGANISATION_DOCUMENT_LINKS_FAILED
 } from '../actions/index';
 import {
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
@@ -602,6 +606,21 @@ function locale(state=initial, action) {
   }
 }
 
+function organisationDocumentLinks(state=initial, action) {
+  switch (action.type) {
+    case ORGANISATION_DOCUMENT_LINKS_INITIAL:
+      return updateInitial(state, action);
+    case ORGANISATION_DOCUMENT_LINKS_REQUEST:
+      return updateRequest(state, action);
+    case ORGANISATION_DOCUMENT_LINKS_SUCCESS:
+      return updateSuccess(state, action);
+    case ORGANISATION_DOCUMENT_LINKS_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   projectTransactions,
   nonHumanServices,
@@ -631,6 +650,7 @@ const reducers = {
   transactionsAggregationsSector,
   transactionsAggregationsParticipatingOrganisation,
   locale,
+  organisationDocumentLinks,
 };
 
 export default reducers;
