@@ -7,9 +7,10 @@ import {  Row, Col } from 'react-flexbox-grid';
 import { Treemap, ResponsiveContainer, Tooltip } from 'recharts';
 import get from 'lodash/get';
 
-import { format } from "d3-format";
-
 import SectorsTreeMapItem from './SectorsTreeMapItem';
+
+import { formatNumberComma } from '../../../helpers/generic';
+import {injectIntl, intlShape} from "react-intl";
 
 const CustomToolTip = props => {
   const { Content } = Layout;
@@ -18,14 +19,15 @@ const CustomToolTip = props => {
     <Card style={{width: 270}}>
       <Content>
         <h3>{data.sector.name}</h3>
-        <h4>{format(".2s")(data.value)}</h4>
+        <h4>{props.usd} {formatNumberComma(data.value)}</h4>
       </Content>
     </Card> : null;
 };
 
 class SectorsMap extends Component {
   render() {
-    const { data } = this.props;
+    const { data, intl } = this.props;
+    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const ColorPlatte = ['#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6', '#4663a8', '#6f7db6', '#c3cbe3', '#e9ebf6'];
     return (
       <Row>
@@ -39,7 +41,7 @@ class SectorsMap extends Component {
                      stroke="#fff"
                      content={<SectorsTreeMapItem bgColors={ColorPlatte}/>}
             >
-              <Tooltip content={<CustomToolTip/>}/>
+              <Tooltip content={<CustomToolTip usd={usd}/>}/>
             </Treemap>
           </ResponsiveContainer>
         </Col>
@@ -48,4 +50,8 @@ class SectorsMap extends Component {
   }
 }
 
-export default SectorsMap;
+SectorsMap.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(SectorsMap);
