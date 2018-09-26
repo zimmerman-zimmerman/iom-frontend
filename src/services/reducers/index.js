@@ -103,7 +103,11 @@ import {
   PROJECT_TRANSACTIONS_INITIAL,
   PROJECT_TRANSACTIONS_REQUEST,
   PROJECT_TRANSACTIONS_SUCCESS,
-  PROJECT_TRANSACTIONS_FAILED
+  PROJECT_TRANSACTIONS_FAILED,
+  LOCALE_INITIAL,
+  LOCALE_REQUEST,
+  LOCALE_SUCCESS,
+  LOCALE_FAILED
 } from '../actions/index';
 import {
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
@@ -583,9 +587,24 @@ function projectTransactions(state=initial, action) {
   }
 }
 
+function locale(state=initial, action) {
+  switch (action.type) {
+    case LOCALE_INITIAL:
+      return updateInitial(state, action);
+    case LOCALE_REQUEST:
+      return updateRequest(state, action);
+    case LOCALE_SUCCESS:
+      return updateSuccess(state, action);
+    case LOCALE_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   projectTransactions,
-    nonHumanServices,
+  nonHumanServices,
   homeDonors,
   homeActivities,
   homeSectors,
@@ -610,7 +629,8 @@ const reducers = {
   transactionsAggregationsCountries,
   transactionsAggregationsActivityStatus,
   transactionsAggregationsSector,
-  transactionsAggregationsParticipatingOrganisation
+  transactionsAggregationsParticipatingOrganisation,
+  locale,
 };
 
 export default reducers;

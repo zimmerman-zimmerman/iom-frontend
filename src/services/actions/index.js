@@ -757,3 +757,30 @@ export function projectTransactionsFailed(error) {
     error: error
   }
 }
+
+export const LOCALE_INITIAL = 'LOCALE_INITIAL';
+export const LOCALE_REQUEST = 'LOCALE_REQUEST';
+export const LOCALE_SUCCESS = 'LOCALE_SUCCESS';
+export const LOCALE_FAILED = 'LOCALE_FAILED';
+export function localeInitial() {
+  return {
+    type: LOCALE_INITIAL
+  }
+}
+export function localeRequest() {
+  return {
+    type: LOCALE_REQUEST
+  }
+}
+export function localeSuccess(data) {
+  return {
+    type: LOCALE_SUCCESS,
+    data: data
+  }
+}
+export function localeFailed(error) {
+  return {
+    type: LOCALE_FAILED,
+    error: error
+  }
+}

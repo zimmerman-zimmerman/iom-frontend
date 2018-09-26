@@ -254,12 +254,21 @@ export function* nonHumanServicesRequest(action) {
     }
 }
 
+export function* localeRequest() {
+  try {
+    const response = yield call(api.localeRequest);
+    yield put(actions.localeSuccess(response));
+  } catch (error) {
+    yield put(actions.localeFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
-      takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
-      takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
-      takeLatest('UPDATE_BREADCRUMBS_REQUEST', updateBreadcrumbsRequest),
+    takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
+    takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
+    takeLatest('UPDATE_BREADCRUMBS_REQUEST', updateBreadcrumbsRequest),
     takeLatest('HOME_DONORS_REQUEST', homeDonorsRequest),
     takeLatest('HOME_ACTIVITIES_REQUEST', homeActivitiesRequest),
     takeLatest('HOME_SECTORS_REQUEST', homeSectorsRequest),
@@ -288,6 +297,7 @@ function* sagas() {
       'TRANSACTIONS_AGGREGATIONS_PARTICIPATING_ORGANISATION_REQUEST',
       transactionsAggregationsParticipatingOrganisationRequest
     ),
+    takeLatest('LOCALE_REQUEST', localeRequest),
   ]
 }
 
