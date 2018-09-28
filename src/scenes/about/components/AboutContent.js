@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import aboutOMG from '../../../assets/images/AboutIOM.jpg';
 import injectSheet from "react-jss";
 import { pageContainer } from '../../../helpers/style';
+import { checkProtocol } from '../../../helpers/utils';
 
 import DownloadIcon from '../../../icons/download';
 import * as actions from '../../../services/actions/index';
@@ -34,7 +35,6 @@ class AboutContent extends Component  {
   render() {
     const { classes, organisationDocumentLinks } = this.props;
     const data = get(organisationDocumentLinks, 'data.results');
-    console.log(data);
     const columns = [{
       title: 'Title',
       dataIndex: 'title.narratives[0].text',
@@ -47,7 +47,7 @@ class AboutContent extends Component  {
       key: 'link',
       render: (text, record) => (
         <span>
-        <a href={`${text}`} target="_blank" className="ant-dropdown-link">
+        <a href={`${checkProtocol(text)}`} target="_blank" className="ant-dropdown-link">
           <DownloadIcon className='download-icon'/>
         </a>
       </span>
