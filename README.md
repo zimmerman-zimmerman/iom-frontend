@@ -1,4 +1,4 @@
-#IOM FRONTEND
+# IOM FRONTEND
 This project is the React JS Application as User Interface of the IOM Portal Website to visualized the open data of the IOM Project Activities.
 
 ## Background Setup & Configuration
