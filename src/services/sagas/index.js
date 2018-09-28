@@ -263,6 +263,15 @@ export function* localeRequest() {
   }
 }
 
+export function* orgsanisationDocumentLinksRequest() {
+  try {
+    const response = yield call(api.orgsanisationDocumentLinksRequest);
+    yield put(actions.orgsanisationDocumentLinksSuccess(response));
+  } catch (error) {
+    yield put(actions.orgsanisationDocumentLinksFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
@@ -298,6 +307,7 @@ function* sagas() {
       transactionsAggregationsParticipatingOrganisationRequest
     ),
     takeLatest('LOCALE_REQUEST', localeRequest),
+    takeLatest('ORGANISATION_DOCUMENT_LINKS_REQUEST', orgsanisationDocumentLinksRequest),
   ]
 }
 
