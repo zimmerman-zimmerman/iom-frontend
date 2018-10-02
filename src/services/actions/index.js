@@ -789,25 +789,53 @@ export const ORGANISATION_DOCUMENT_LINKS_INITIAL = 'ORGANISATION_DOCUMENT_LINKS_
 export const ORGANISATION_DOCUMENT_LINKS_REQUEST = 'ORGANISATION_DOCUMENT_LINKS_REQUEST';
 export const ORGANISATION_DOCUMENT_LINKS_SUCCESS = 'ORGANISATION_DOCUMENT_LINKS_SUCCESS';
 export const ORGANISATION_DOCUMENT_LINKS_FAILED = 'ORGANISATION_DOCUMENT_LINKS_FAILED';
-export function orgsanisationDocumentLinksInitial() {
+export function organisationDocumentLinksInitial() {
   return {
     type: ORGANISATION_DOCUMENT_LINKS_INITIAL
   }
 }
-export function orgsanisationDocumentLinksRequest() {
+export function organisationDocumentLinksRequest() {
   return {
     type: ORGANISATION_DOCUMENT_LINKS_REQUEST
   }
 }
-export function orgsanisationDocumentLinksSuccess(data) {
+export function organisationDocumentLinksSuccess(data) {
   return {
     type: ORGANISATION_DOCUMENT_LINKS_SUCCESS,
     data: data
   }
 }
-export function orgsanisationDocumentLinksFailed(error) {
+export function organisationDocumentLinksFailed(error) {
   return {
     type: ORGANISATION_DOCUMENT_LINKS_FAILED,
+    error: error
+  }
+}
+
+export const HOME_MEDIA_CONTENT_INITIAL = 'HOME_MEDIA_CONTENT_INITIAL';
+export const HOME_MEDIA_CONTENT_REQUEST = 'HOME_MEDIA_CONTENT_REQUEST';
+export const HOME_MEDIA_CONTENT_SUCCESS = 'HOME_MEDIA_CONTENT_SUCCESS';
+export const HOME_MEDIA_CONTENT_FAILED = 'HOME_MEDIA_CONTENT_FAILED';
+export function homeMediaContentInitial() {
+  return {
+    type: HOME_MEDIA_CONTENT_INITIAL
+  }
+}
+export function homeMediaContentRequest(slug) {
+  return {
+    type: HOME_MEDIA_CONTENT_REQUEST,
+    slug: slug
+  }
+}
+export function homeMediaContentSuccess(data) {
+  return {
+    type: HOME_MEDIA_CONTENT_SUCCESS,
+    data: data
+  }
+}
+export function homeMediaContentFailed(error) {
+  return {
+    type: HOME_MEDIA_CONTENT_FAILED,
     error: error
   }
 }

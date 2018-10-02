@@ -71,11 +71,17 @@ export function localeRequest() {
   );
 }
 
-export function orgsanisationDocumentLinksRequest() {
+export function organisationDocumentLinksRequest() {
   return handleRequest(
     process.env.REACT_APP_OIPA_YODA_HOST.concat('/api/organisations/organisation-file/')
       .concat(process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER)
       .concat('/organisation-document-link-list/'),
     formatJSON({}), 'get'
+  );
+}
+
+export function mediaContentRequest(slug) {
+  return handleRequest(
+    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/media-content/').concat(slug).concat('/'), formatJSON({}), 'get'
   );
 }

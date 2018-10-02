@@ -263,12 +263,21 @@ export function* localeRequest() {
   }
 }
 
-export function* orgsanisationDocumentLinksRequest() {
+export function* organisationDocumentLinksRequest() {
   try {
-    const response = yield call(api.orgsanisationDocumentLinksRequest);
-    yield put(actions.orgsanisationDocumentLinksSuccess(response));
+    const response = yield call(api.organisationDocumentLinksRequest);
+    yield put(actions.organisationDocumentLinksSuccess(response));
   } catch (error) {
-    yield put(actions.orgsanisationDocumentLinksFailed(error));
+    yield put(actions.organisationDocumentLinksFailed(error));
+  }
+}
+
+export function* homeMediaContentRequest(action) {
+  try {
+    const response = yield call(api.mediaContentRequest, action.slug);
+    yield put(actions.homeMediaContentSuccess(response));
+  } catch (error) {
+    yield put(actions.homeMediaContentFailed(error));
   }
 }
 
@@ -307,7 +316,8 @@ function* sagas() {
       transactionsAggregationsParticipatingOrganisationRequest
     ),
     takeLatest('LOCALE_REQUEST', localeRequest),
-    takeLatest('ORGANISATION_DOCUMENT_LINKS_REQUEST', orgsanisationDocumentLinksRequest),
+    takeLatest('ORGANISATION_DOCUMENT_LINKS_REQUEST', organisationDocumentLinksRequest),
+    takeLatest('HOME_MEDIA_CONTENT_REQUEST', homeMediaContentRequest),
   ]
 }
 

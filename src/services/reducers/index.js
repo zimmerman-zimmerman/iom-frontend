@@ -111,7 +111,11 @@ import {
   ORGANISATION_DOCUMENT_LINKS_INITIAL,
   ORGANISATION_DOCUMENT_LINKS_REQUEST,
   ORGANISATION_DOCUMENT_LINKS_SUCCESS,
-  ORGANISATION_DOCUMENT_LINKS_FAILED
+  ORGANISATION_DOCUMENT_LINKS_FAILED,
+  HOME_MEDIA_CONTENT_INITIAL,
+  HOME_MEDIA_CONTENT_REQUEST,
+  HOME_MEDIA_CONTENT_SUCCESS,
+  HOME_MEDIA_CONTENT_FAILED
 } from '../actions/index';
 import {
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
@@ -621,6 +625,21 @@ function organisationDocumentLinks(state=initial, action) {
   }
 }
 
+function homeMediaContent(state=initial, action) {
+  switch (action.type) {
+    case HOME_MEDIA_CONTENT_INITIAL:
+      return updateInitial(state, action);
+    case HOME_MEDIA_CONTENT_REQUEST:
+      return updateRequest(state, action);
+    case HOME_MEDIA_CONTENT_SUCCESS:
+      return updateSuccess(state, action);
+    case HOME_MEDIA_CONTENT_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   projectTransactions,
   nonHumanServices,
@@ -651,6 +670,7 @@ const reducers = {
   transactionsAggregationsParticipatingOrganisation,
   locale,
   organisationDocumentLinks,
+  homeMediaContent,
 };
 
 export default reducers;
