@@ -17,9 +17,9 @@ class AboutContent extends Component  {
   componentDidMount() {
     const { dispatch } = this.props;
     if (dispatch) {
-      dispatch(actions.orgsanisationDocumentLinksRequest());
+      dispatch(actions.organisationDocumentLinksRequest());
     } else {
-      dispatch(actions.orgsanisationDocumentLinksInitial());
+      dispatch(actions.organisationDocumentLinksInitial());
     }
   }
 
