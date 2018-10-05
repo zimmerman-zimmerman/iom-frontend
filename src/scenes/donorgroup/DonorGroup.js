@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
-import MediaQuery from 'react-responsive';
-import { FormattedMessage } from "react-intl";
 
 import Page from '../../components/base/Page';
 import BaseFilter from '../../components/base/filters/BaseFilter';
@@ -11,7 +9,6 @@ import extend from 'lodash/extend';
 import * as actions from "../../services/actions/index";
 import {connect} from "react-redux";
 import Trans from '../../locales/Trans';
-import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
 import DonorGroupsJSON from '../../services/data/donor_groups';
 import DonorsTable from './components/DonorsTable';
@@ -52,15 +49,6 @@ class DonorGroup extends BaseFilter {
               <h1 className={classes.title}>{donorGroup ? donorGroup.name : null}</h1>
             </Col>
           </Row>
-          <MediaQuery minWidth={screenSize.mobile.maxWidth}>
-            <Row>
-              <Col xs={12}>
-                <h2 className={classes.description}>
-                  <FormattedMessage id="donor.description" defaultMessage="Description" />
-                </h2>
-              </Col>
-            </Row>
-          </MediaQuery>
           <hr className={classes.divider} />
           <Row className={classes.table}>
             <Col xs={12}>
@@ -86,7 +74,7 @@ const styles = {
     },
     marginTop: 10,
     marginBottom: 15,
-    fontWeight: 300,
+    fontWeight: 'bold',
   },
   description: {
     marginBottom: 10,

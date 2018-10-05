@@ -7,7 +7,6 @@ import forEach from 'lodash/forEach';
 import find from 'lodash/find';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
-import MediaQuery from 'react-responsive';
 import Spin from 'antd/es/spin';
 
 import Page from '../../components/base/Page';
@@ -17,7 +16,6 @@ import BaseFilter from '../../components/base/filters/BaseFilter';
 import * as actions from "../../services/actions";
 import DonorsTreeMap from './components/charts/DonorsTreeMap';
 import DonorsTable from './components/DonorsTable';
-import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
 
 import DonorGroups from '../../services/data/donor_groups';
@@ -80,18 +78,6 @@ class Donors extends BaseFilter {
               <Col xs={12} md={8} lg={9}>
                 <Row className={classes.rowGap}>
                   <Col xs={12}>
-                    <h1 className={classes.title}><FormattedMessage id="donors.title" defaultMessage="Donors" /></h1>
-                  </Col>
-                </Row>
-                <MediaQuery minWidth={screenSize.mobile.maxWidth}>
-                  <Row>
-                    <Col xs={12}>
-                      <h2><FormattedMessage id="donors.description" defaultMessage="Description" /></h2>
-                    </Col>
-                  </Row>
-                </MediaQuery>
-                <Row>
-                  <Col xs={12}>
                     <DonorsTreeMap
                       data={sortBy(dataDonors, function(e) {
                         return e.value;
@@ -132,7 +118,7 @@ const styles = {
     }
   },
   rowGap: {
-    marginTop: 10
+    marginTop: 18
   },
   title: {
     fontWeight: 300,

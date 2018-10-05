@@ -134,7 +134,7 @@
   "donor.table.projects.header.end": "End date",
   "donor.table.projects.header.budget": "Budget",
   "donor.table.projects.header.status": "Project status",
-  "donor.table.projects.header.sector": "DAC sector",
+  "donor.table.projects.header.sector": "Project type",
   "donor.description": "Below is a list of all related governmental agencies providing funding to IOM.",
 
   "projects.title": "IOM Projects overview",
