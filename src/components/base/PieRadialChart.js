@@ -3,11 +3,12 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
 import {format} from "d3-format";
 import get from "lodash/get";
 import Card from 'antd/es/card';
+import { withRouter } from 'react-router';
 
 import { pieRadialChart as style } from "../../helpers/style";
 
 const PieRadialChart = (props) => {
-  const {data, prefixLegend, innerRadius, outerRadius} = props;
+  const {data, prefixLegend, innerRadius, outerRadius, linkPage, donorGroupJson} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
@@ -24,6 +25,13 @@ const PieRadialChart = (props) => {
           innerRadius={innerRadius}
           fill={style.fillColor}
           dataKey="value"
+          onClick={(e) => {
+            let donorExtra = '';
+            if(linkPage === '/donors') {
+              donorExtra = `${get(donorGroupJson.data.content, e.payload.id)}/`;
+            }
+            props.history.push(`${linkPage}/${donorExtra}${e.payload.id}`);
+        }}
         >
           {data.map((entry, index) => <Cell fill={style.colors[index % style.colors.length]} key={index}/>)}
         </Pie>
@@ -33,4 +41,4 @@ const PieRadialChart = (props) => {
   )
 };
 
-export default PieRadialChart;
+export default withRouter(PieRadialChart);
