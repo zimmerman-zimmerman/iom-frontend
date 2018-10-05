@@ -20,41 +20,44 @@ import DonorsTable from './components/DonorsTable';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
 
-import DonorGroups from '../../services/data/donor_groups';
-import DonorsByGroup from '../../services/data/donors_by_group';
-
 class Donors extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, donorsGroupsJsonSlug, donorGroupJsonSlug } = this.props;
     const { params } = this.state;
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'participating_organisation', actions.donorsRequest);
+        dispatch(actions.donorsGroupsJsonRequest(donorsGroupsJsonSlug));
+        dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
       } else {
-        dispatch(actions.donorsInitial());
+        dispatch(actions.donorsGroupsJsonInitial());
+        dispatch(actions.donorGroupJsonInitial());
       }
     }
   }
 
   createDonorsByGroup(donors) {
+    const { donorsGroupsJson, donorGroupJson } = this.props;
     let dataGroup = [];
-    forEach(donors, function(donor) {
-      const code = get(DonorsByGroup, donor.participating_organisation_ref);
-      const group = get(DonorGroups, code);
-      let donorGroup = find(dataGroup, {code: code});
-      if (!donorGroup) {
-        donorGroup = {
-          code: code,
-          name: group.name,
-          value:  donor.value,
-          project: donor.activity_count,
-        };
-        dataGroup.push(donorGroup);
-      } else {
-        donorGroup.value = donorGroup.value + donor.value;
-        donorGroup.project = donorGroup.project + donor.activity_count;
-      }
-    });
+    if (donorsGroupsJson.success && donorGroupJson.success) {
+      forEach(donors, function (donor) {
+        const code = get(donorGroupJson.data.content, donor.participating_organisation_ref);
+        const group = get(donorsGroupsJson.data.content, code);
+        let donorGroup = find(dataGroup, {code: code});
+        if (!donorGroup) {
+          donorGroup = {
+            code: code,
+            name: group.name,
+            value: donor.value,
+            project: donor.activity_count,
+          };
+          dataGroup.push(donorGroup);
+        } else {
+          donorGroup.value = donorGroup.value + donor.value;
+          donorGroup.project = donorGroup.project + donor.activity_count;
+        }
+      });
+    }
     return dataGroup;
   }
 
@@ -117,11 +120,15 @@ class Donors extends BaseFilter {
 Donors.defaultProps = {
   groupBy: 'participating_organisation',
   filterRequest: actions.donorsRequest,
+  donorsGroupsJsonSlug: 'donors-groups-json',
+  donorGroupJsonSlug: 'donor-group-json',
 };
 
 const mapStateToProps = (state, ) => {
   return {
-    donors: state.donors
+    donors: state.donors,
+    donorsGroupsJson: state.donorsGroupsJson,
+    donorGroupJson: state.donorGroupJson,
   }
 };
 

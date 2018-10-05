@@ -115,7 +115,15 @@ import {
   HOME_MEDIA_CONTENT_INITIAL,
   HOME_MEDIA_CONTENT_REQUEST,
   HOME_MEDIA_CONTENT_SUCCESS,
-  HOME_MEDIA_CONTENT_FAILED
+  HOME_MEDIA_CONTENT_FAILED,
+  DONORS_GROUPS_JSON_INITIAL,
+  DONORS_GROUPS_JSON_REQUEST,
+  DONORS_GROUPS_JSON_SUCCESS,
+  DONORS_GROUPS_JSON_FAILED,
+  DONOR_GROUP_JSON_INITIAL,
+  DONOR_GROUP_JSON_REQUEST,
+  DONOR_GROUP_JSON_SUCCESS,
+  DONOR_GROUP_JSON_FAILED
 } from '../actions/index';
 import {
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
@@ -640,6 +648,36 @@ function homeMediaContent(state=initial, action) {
   }
 }
 
+function donorsGroupsJson(state=initial, action) {
+  switch (action.type) {
+    case DONORS_GROUPS_JSON_INITIAL:
+      return updateInitial(state, action);
+    case DONORS_GROUPS_JSON_REQUEST:
+      return updateRequest(state, action);
+    case DONORS_GROUPS_JSON_SUCCESS:
+      return updateSuccess(state, action);
+    case DONORS_GROUPS_JSON_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
+function donorGroupJson(state=initial, action) {
+  switch (action.type) {
+    case DONOR_GROUP_JSON_INITIAL:
+      return updateInitial(state, action);
+    case DONOR_GROUP_JSON_REQUEST:
+      return updateRequest(state, action);
+    case DONOR_GROUP_JSON_SUCCESS:
+      return updateSuccess(state, action);
+    case DONOR_GROUP_JSON_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   projectTransactions,
   nonHumanServices,
@@ -671,6 +709,8 @@ const reducers = {
   locale,
   organisationDocumentLinks,
   homeMediaContent,
+  donorsGroupsJson,
+  donorGroupJson,
 };
 
 export default reducers;
