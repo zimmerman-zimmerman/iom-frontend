@@ -13,31 +13,40 @@ import {connect} from "react-redux";
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
-import DonorGroupsJSON from '../../services/data/donor_groups';
 import DonorsTable from './components/DonorsTable';
 
 
 class DonorGroup extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
-    const { params } = this.state;
+    const { dispatch, donorsGroupsJsonSlug } = this.props;
+    this.setState({actionRequest: true});
+    if (dispatch) {
+      dispatch(actions.donorsGroupsJsonRequest(donorsGroupsJsonSlug));
+    } else {
+      dispatch(actions.donorsGroupsJsonInitial());
+      actions.donorInitial();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { donorsGroupsJson } = this.props;
+    const { params, actionRequest } = this.state;
     const group = get(this.props, 'match.params.group', '');
-    const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
-    if (dispatch && donorGroup) {
+    const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
+    if (donorGroup && actionRequest){
       this.actionRequest(
         extend({}, params, {participating_organisation_ref: donorGroup.filter}),
         'participating_organisation',
         actions.donorRequest
       );
-    } else {
-      actions.donorInitial();
+      this.setState({actionRequest: false});
     }
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, donorsGroupsJson } = this.props;
     const group = get(this.props, 'match.params.group', '');
-    const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
+    const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
     const data = get(this.props, 'donor.data.results');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -64,7 +73,9 @@ class DonorGroup extends BaseFilter {
           <hr className={classes.divider} />
           <Row className={classes.table}>
             <Col xs={12}>
-              <DonorsTable donorGroup={donorGroup} rootComponent={this} data={data ? data : null} />
+              { donorGroup ?
+                <DonorsTable donorGroup={donorGroup} rootComponent={this} data={data ? data : null} /> : null
+              }
             </Col>
           </Row>
         </Grid>
@@ -73,9 +84,14 @@ class DonorGroup extends BaseFilter {
   }
 }
 
+DonorGroup.defaultProps = {
+  donorsGroupsJsonSlug: 'donors-groups-json',
+};
+
 const mapStateToProps = (state, ) => {
   return {
     donor: state.donor,
+    donorsGroupsJson: state.donorsGroupsJson,
   }
 };
 

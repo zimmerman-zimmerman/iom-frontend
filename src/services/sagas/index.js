@@ -254,9 +254,9 @@ export function* nonHumanServicesRequest(action) {
     }
 }
 
-export function* localeRequest() {
+export function* localeRequest(action) {
   try {
-    const response = yield call(api.localeRequest);
+    const response = yield call(api.JSONContentRequest, action.slug);
     yield put(actions.localeSuccess(response));
   } catch (error) {
     yield put(actions.localeFailed(error));
@@ -278,6 +278,24 @@ export function* homeMediaContentRequest(action) {
     yield put(actions.homeMediaContentSuccess(response));
   } catch (error) {
     yield put(actions.homeMediaContentFailed(error));
+  }
+}
+
+export function* donorsGroupsJsonRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.donorsGroupsJsonSuccess(response));
+  } catch (error) {
+    yield put(actions.donorsGroupsJsonFailed(error));
+  }
+}
+
+export function* donorGroupJsonRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.donorGroupJsonSuccess(response));
+  } catch (error) {
+    yield put(actions.donorGroupJsonFailed(error));
   }
 }
 
@@ -318,6 +336,8 @@ function* sagas() {
     takeLatest('LOCALE_REQUEST', localeRequest),
     takeLatest('ORGANISATION_DOCUMENT_LINKS_REQUEST', organisationDocumentLinksRequest),
     takeLatest('HOME_MEDIA_CONTENT_REQUEST', homeMediaContentRequest),
+    takeLatest('DONORS_GROUPS_JSON_REQUEST', donorsGroupsJsonRequest),
+    takeLatest('DONOR_GROUP_JSON_REQUEST', donorGroupJsonRequest),
   ]
 }
 
