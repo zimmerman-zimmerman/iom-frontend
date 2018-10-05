@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { injectIntl, intlShape } from 'react-intl';
+import { withRouter } from 'react-router';
 
 import Card from 'antd/es/card';
 import Layout from 'antd/es/layout';
@@ -41,6 +42,7 @@ class DonorsTreeMap extends Component {
                      stroke="#fff"
                      content={<DonorsTreeMapItem bgColors={ColorPlatte}/>}
                      animationDuration={800}
+                     onClick={e => this.props.history.push(`/donors/${e.code.toLowerCase()}`)}
             >
               <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip usd={usd}/>}/>
             </Treemap>
@@ -55,4 +57,4 @@ DonorsTreeMap.propTypes = {
     intl: intlShape.isRequired
 };
 
-export default injectIntl(DonorsTreeMap);
+export default withRouter(injectIntl(DonorsTreeMap));
