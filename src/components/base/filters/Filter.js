@@ -55,6 +55,7 @@ class Filter extends BaseFilter {
                 <Select placeholder={placeholder}
                         className={classes.filter}
                         onChange={this.handleFilterChange}
+                        value={placeholder}
                 >
                     {options}
                 </Select>
@@ -65,6 +66,7 @@ class Filter extends BaseFilter {
                     placeholder={placeholder}
                     className={classes.filter}
                     onChange={this.handleFilterChange}
+                    value={placeholder}
             >
                 {options}
             </Select>
@@ -102,6 +104,9 @@ const styles = {
         },
         '& .ant-select-selection__rendered': {
             marginTop: 6,
+        },
+        '& .ant-select-selection-selected-value': {
+            opacity: '0.4 !important',
         }
     },
 };
