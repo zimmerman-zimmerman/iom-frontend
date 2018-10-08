@@ -82,6 +82,14 @@ export function organisationDocumentLinksRequest() {
 
 export function mediaContentRequest(slug) {
   return handleRequest(
-    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/media-content/').concat(slug).concat('/'), formatJSON({}), 'get'
+    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/media/').concat(slug).concat('/'),
+    formatJSON({}), 'get'
+  );
+}
+
+export function JSONContentRequest(slug) {
+  return handleRequest(
+    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/json/').concat(slug).concat('/'),
+    formatJSON({}), 'get'
   );
 }
