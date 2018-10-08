@@ -129,8 +129,8 @@ const styles = {
       '& .description': {
         marginTop: 40,
         color: '#1471ce',
-        fontWeight: 600,
-        fontSize: 21,
+        fontWeight: 500,
+        fontSize: 20,
         '@media (max-width: 767px)': {
           fontSize: 16,
         },
