@@ -73,16 +73,6 @@ class Countries extends BaseFilter {
               </Col>
               <Col xs={12} md={8} lg={9} className={classes.map}>
                 <Row>
-                  <Col xs={12} className={classes.gapBottom}>
-                    <h1 className={classes.title}>
-                      <Trans id="countries.title" defaultMessage="Countries"/>
-                    </h1>
-                    <h2 className={classes.description}>
-                      <Trans id="countries.description" defaultMessage="Description"/>
-                    </h2>
-                  </Col>
-                </Row>
-                <Row>
                   <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                     <Col xs={12}>
                       { showMap ?
@@ -170,7 +160,7 @@ const styles = {
     },
   },
   map: {
-    marginTop: 15,
+    marginTop: 18,
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },

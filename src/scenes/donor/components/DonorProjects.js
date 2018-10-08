@@ -121,7 +121,7 @@ class DonorProjects extends Component {
       className: 'Status',
       key: 'status'
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'DAC sector'})}</span>,
+      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'Project type'})}</span>,
       className: 'Sector',
       key: 'sector',
       render: project =>
