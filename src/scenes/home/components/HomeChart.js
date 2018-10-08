@@ -5,11 +5,13 @@ import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from 'react-intl';
 import { Row, Col } from 'react-flexbox-grid';
+import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 import List from 'antd/es/list';
 import Badge from 'antd/es/badge';
 import Button from 'antd/es/button';
 import { Link } from 'react-router-dom';
+import * as actions from "../../../services/actions";
 
 import { pieRadialChart as pieRadialChartStyle, variables as variablesStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
@@ -24,18 +26,20 @@ class HomeChart extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
-    const { dispatch, params, request, initial } = this.props;
+    const { dispatch, params, request, initial, donorGroupJsonSlug } = this.props;
     if (dispatch) {
       if (params) {
         dispatch(request(params));
+        dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
       } else {
         dispatch(initial());
+        dispatch(actions.donorGroupJsonInitial());
       }
     }
   }
 
   render() {
-    const { reducer, localeTitle, intl, idField, nameField, valueField, localeButtonText, linkPage } = this.props;
+    const { reducer, localeTitle, intl, idField, nameField, valueField, localeButtonText, linkPage, donorGroupJson } = this.props;
     const data = [];
     forEach(get(reducer, 'data.results'), function(item){
       data.push({
@@ -62,7 +66,7 @@ class HomeChart extends Component {
       const height = window.innerWidth / widthDivider;
       return (
         <ResponsivePieRadialChart respoHeight={props.respoHeight} height={height - 10} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={props.innerRadius}
+                                  innerRadius={props.innerRadius} linkPage={linkPage} donorGroupJson={donorGroupJson}
         />
       )
     };
@@ -74,14 +78,20 @@ class HomeChart extends Component {
             <List
               itemLayout="horizontal"
               dataSource={data}
-              renderItem={(item, index) => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
-                    title={<Link to={`${linkPage}/${item.id}`}>{item.name}</Link>}
-                  />
-                </List.Item>
-              )}
+              renderItem={(item, index) => {
+                let donorExtra = '';
+                if(linkPage === '/donors' && donorGroupJson.success) {
+                  donorExtra = `${get(donorGroupJson.data.content, item.id)}/`;
+                }
+                return (
+                  <List.Item>
+                    <List.Item.Meta
+                      avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
+                      title={<Link to={`${linkPage}/${donorExtra}${item.id}`}>{item.name}</Link>}
+                    />
+                  </List.Item>
+                )
+              }}
             />
           </Col>
         </Row>
@@ -192,4 +202,14 @@ HomeChart.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default injectIntl(HomeChart);
+HomeChart.defaultProps = {
+  donorGroupJsonSlug: 'donor-group-json',
+};
+
+const mapStateToProps = (state, ) => {
+  return {
+    donorGroupJson: state.donorGroupJson,
+  }
+};
+
+export default injectIntl(connect(mapStateToProps)(HomeChart));
