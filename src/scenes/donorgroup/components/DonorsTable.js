@@ -41,7 +41,6 @@ class DonorsTable extends BaseFilter {
 
   render() {
     const { intl, data, rootComponent, donorGroup } = this.props;
-    console.log(data);
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{

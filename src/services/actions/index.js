@@ -767,9 +767,10 @@ export function localeInitial() {
     type: LOCALE_INITIAL
   }
 }
-export function localeRequest() {
+export function localeRequest(slug) {
   return {
-    type: LOCALE_REQUEST
+    type: LOCALE_REQUEST,
+    slug: slug
   }
 }
 export function localeSuccess(data) {
@@ -836,6 +837,62 @@ export function homeMediaContentSuccess(data) {
 export function homeMediaContentFailed(error) {
   return {
     type: HOME_MEDIA_CONTENT_FAILED,
+    error: error
+  }
+}
+
+export const DONORS_GROUPS_JSON_INITIAL = 'DONORS_GROUPS_JSON_INITIAL';
+export const DONORS_GROUPS_JSON_REQUEST = 'DONORS_GROUPS_JSON_REQUEST';
+export const DONORS_GROUPS_JSON_SUCCESS = 'DONORS_GROUPS_JSON_SUCCESS';
+export const DONORS_GROUPS_JSON_FAILED = 'DONORS_GROUPS_JSON_FAILED';
+export function donorsGroupsJsonInitial() {
+  return {
+    type: DONORS_GROUPS_JSON_INITIAL
+  }
+}
+export function donorsGroupsJsonRequest(slug) {
+  return {
+    type: DONORS_GROUPS_JSON_REQUEST,
+    slug: slug
+  }
+}
+export function donorsGroupsJsonSuccess(data) {
+  return {
+    type: DONORS_GROUPS_JSON_SUCCESS,
+    data: data
+  }
+}
+export function donorsGroupsJsonFailed(error) {
+  return {
+    type: DONORS_GROUPS_JSON_FAILED,
+    error: error
+  }
+}
+
+export const DONOR_GROUP_JSON_INITIAL = 'DONOR_GROUP_JSON_INITIAL';
+export const DONOR_GROUP_JSON_REQUEST = 'DONOR_GROUP_JSON_REQUEST';
+export const DONOR_GROUP_JSON_SUCCESS = 'DONOR_GROUP_JSON_SUCCESS';
+export const DONOR_GROUP_JSON_FAILED = 'DONOR_GROUP_JSON_FAILED';
+export function donorGroupJsonInitial() {
+  return {
+    type: DONOR_GROUP_JSON_INITIAL
+  }
+}
+export function donorGroupJsonRequest(slug) {
+  return {
+    type: DONOR_GROUP_JSON_REQUEST,
+    slug: slug
+  }
+}
+export function donorGroupJsonSuccess(data) {
+  return {
+    type: DONOR_GROUP_JSON_SUCCESS,
+    data: data
+  }
+}
+export function donorGroupJsonFailed(error) {
+  return {
+    type: DONOR_GROUP_JSON_FAILED,
     error: error
   }
 }

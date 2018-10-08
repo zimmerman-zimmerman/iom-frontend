@@ -11,11 +11,10 @@ import {connect} from "react-redux";
 import DonorProjects from "./components/DonorProjects";
 import Trans from '../../locales/Trans';
 import { pageContainer } from '../../helpers/style';
-import DonorGroupsJSON from "../../services/data/donor_groups";
 
 class Donor extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, donorsGroupsJsonSlug } = this.props;
     const { params } = this.state;
     const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
@@ -24,23 +23,28 @@ class Donor extends BaseFilter {
         'participating_organisation',
         actions.donorRequest
       );
+      dispatch(actions.donorsGroupsJsonRequest(donorsGroupsJsonSlug));
     } else {
       actions.donorInitial();
+      dispatch(actions.donorsGroupsJsonInitial());
     }
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, donorsGroupsJson } = this.props;
     const group = get(this.props, 'match.params.group', '');
-    const donorGroup = get(DonorGroupsJSON, group.toUpperCase());
+    const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
     const code = get(this.props, 'match.params.code');
     const data = get(this.props, 'donor.data.results[0]');
-    const breadcrumbItems = [
+    const breadcrumbItems =  donorsGroupsJson.success ? [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
-      {url: `/donors/${donorGroup.code}`, text: donorGroup ? donorGroup.name : <Trans id='main.menu.donors' text='Donors' />},
+      {
+        url: `/donors/${donorGroup.code}`,
+        text: donorGroup ? donorGroup.name : <Trans id='main.menu.donors' text='Donors' />
+      },
       {url: null, text: data ? data.participating_organisation : <Trans id='main.menu.detail' text='Detail' />},
-    ];
+    ] : null;
     return (
       <Page breadcrumbItems={breadcrumbItems}>
         <Grid className={classes.grid} style={pageContainer} fluid>
@@ -61,9 +65,14 @@ class Donor extends BaseFilter {
   }
 }
 
+Donor.defaultProps = {
+  donorsGroupsJsonSlug: 'donors-groups-json',
+};
+
 const mapStateToProps = (state, ) => {
   return {
     donor: state.donor,
+    donorsGroupsJson: state.donorsGroupsJson,
   }
 };
 

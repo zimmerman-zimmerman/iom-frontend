@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import get from 'lodash/get';
 
 import './styles/App.less';
 import './styles/App.scss';
@@ -32,10 +33,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, enLocaleSlug } = this.props;
     const { localeRequest } = this.state;
     if (dispatch && localeRequest ) {
-      dispatch(actions.localeRequest());
+      dispatch(actions.localeRequest(enLocaleSlug));
     } else {
       dispatch(actions.localeInitial());
     }
@@ -47,7 +48,10 @@ class App extends Component {
     const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
     const messages = {en: enMessages};
     return (
-      <IntlProvider locale={language} messages={locale.success ? locale.data : messages[languageWithoutRegionCode]}>
+      <IntlProvider
+        locale={language}
+        messages={locale.success ? get(locale.data, 'content') : messages[languageWithoutRegionCode]}
+      >
         <Router>
           <Switch>
             <Route exact path="/" component={AsyncHome}/>
@@ -67,6 +71,10 @@ class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  enLocaleSlug: 'en-locale',
+};
 
 const mapStateToProps = (state, ) => {
   return {
