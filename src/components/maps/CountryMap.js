@@ -19,7 +19,7 @@ class CountryMap extends Component {
             defaultCenter={
               {lat: data.location.coordinates[1], lng: data.location.coordinates[0]}
             }
-            defaultZoom={5}
+            defaultZoom={6}
           >
             <Flag
               lat={data.location.coordinates[1]}

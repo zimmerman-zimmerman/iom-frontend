@@ -7,6 +7,7 @@ import { format } from 'd3-format';
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
 import { tableHeader } from '../../../helpers/style';
+import injectSheet from 'react-jss';
 
 import * as actions from "../../../services/actions/index";
 
@@ -69,7 +70,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { intl, countryActivities } = this.props;
+    const { classes, intl, countryActivities } = this.props;
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -121,6 +122,11 @@ class TableProjects extends Component {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return(
       <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
@@ -139,8 +145,16 @@ const mapStateToProps = (state, ) => {
   }
 };
 
+const styles = {
+  fixedTH: {
+    right: 0,
+    position: 'absolute',
+    backgroundColor: '#fff !important',
+  }
+};
+
 TableProjects.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default connect(mapStateToProps)(injectIntl(TableProjects));
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(TableProjects)));
