@@ -122,7 +122,6 @@ class Projects extends BaseFilter {
                 />
               </Col>
               <Col xs={12} md={8} lg={9} className={classes.map}>
-                <h2 className={classes.title}><Trans id="projects.title" defaultMessage="IOM Projects overview" /></h2>
                 <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                   <div className={classes.boxShadow}>
                     { showMap ?
@@ -211,6 +210,7 @@ const styles = {
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },
+    marginTop: 18,
     marginBottom: 20,
   },
   noPaddingLeft: {
