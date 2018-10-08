@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { injectIntl, intlShape } from "react-intl";
 import { format } from "d3-format";
@@ -57,7 +58,8 @@ class ServicesCharts extends Component {
       <ResponsiveContainer width='100%' aspect={15.0/5.5}>
         {otherData !== null ?
           <BarChart data={otherData} maxBarSize={50} className='bar-chart'
-                    margin={{top: 20, right: 30, left: 20, bottom: 5}}>
+                    margin={{top: 20, right: 30, left: 20, bottom: 5}}
+                    onClick={e => this.props.history.push(`/services/${e.activePayload[0].payload.sector.code}`)}>
             <CartesianGrid vertical={false}/>
             <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick serviceAmount={otherData.length}/>} />
             <YAxis
@@ -86,4 +88,4 @@ ServicesCharts.propTypes = {
   intl: intlShape.isRequired
 };
 
-export default injectIntl(ServicesCharts);
+export default withRouter(injectIntl(ServicesCharts));
