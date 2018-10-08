@@ -80,7 +80,7 @@ class HomeChart extends Component {
               dataSource={data}
               renderItem={(item, index) => {
                 let donorExtra = '';
-                if(linkPage === '/donors') {
+                if(linkPage === '/donors' && donorGroupJson.success) {
                   donorExtra = `${get(donorGroupJson.data.content, item.id)}/`;
                 }
                 return (
