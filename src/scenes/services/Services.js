@@ -59,11 +59,6 @@ class Services extends BaseFilter {
               <Col xs={12} md={8} lg={9}>
                 <Row>
                   <Col xs={12}>
-                    <h1 className="title"><Trans id="services.title" defaultMessage="Our services" /></h1>
-                    <h2 className="description"><Trans id="services.descriptions" defaultMessage="Descriptions" /></h2>
-                    <MediaQuery minWidth={screenSize.desktop.minWidth}>
-                      <hr className="divider" />
-                    </MediaQuery>
                     {data ?
                       <MediaQuery minWidth={screenSize.desktop.minWidth}>
                         <Fragment>
@@ -118,8 +113,8 @@ const styles = {
     },
     '& .chart-header': {
       color: '#1f4283',
-      marginTop: 10,
-        marginLeft: '6px',
+      marginTop: 11,
+        // marginLeft: '6px',
         fontSize: '22px',
         fontWeight: 600,
     },

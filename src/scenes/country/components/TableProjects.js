@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'antd/es/table';
+import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import {connect} from "react-redux";
 import get from 'lodash/get';
@@ -69,7 +70,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { intl, countryActivities } = this.props;
+    const { classes, intl, countryActivities } = this.props;
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -121,6 +122,11 @@ class TableProjects extends Component {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return(
       <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
@@ -139,8 +145,16 @@ const mapStateToProps = (state, ) => {
   }
 };
 
+const styles = {
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  }
+};
+
 TableProjects.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default connect(mapStateToProps)(injectIntl(TableProjects));
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(TableProjects)));

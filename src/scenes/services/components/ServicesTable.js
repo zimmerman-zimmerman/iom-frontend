@@ -70,6 +70,11 @@ class ServicesTable extends BaseFilter {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return (
       <Table dataSource={this.addKey(data)} columns={columns} size="middle"
@@ -92,9 +97,14 @@ const styles = {
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',
-      }
-    }
-  }
+      },
+    },
+  },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  },
 }
 
 export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ServicesTable)));

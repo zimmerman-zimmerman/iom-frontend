@@ -20,9 +20,9 @@ class CountryMap extends Component {
             defaultCenter={
               {lat: data.location.coordinates[1], lng: data.location.coordinates[0]}
             }
-            defaultZoom={5}
             onClick={() => this.props.history.push(`/countries/${data.code}`)}
             onChildClick={() => this.props.history.push(`/countries/${data.code}`)}
+            defaultZoom={6}
           >
             <Flag
               lat={data.location.coordinates[1]}

@@ -62,6 +62,11 @@ class ProjectsTable extends BaseFilter {
           handleChange={e => handleSortBy(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return(
       <div className={classes.projectsTable}>
@@ -117,7 +122,12 @@ const styles = {
         paddingBottom: 12,
       }
     }
-  }
+  },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ProjectsTable)));

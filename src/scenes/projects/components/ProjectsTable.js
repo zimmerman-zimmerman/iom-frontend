@@ -109,6 +109,11 @@ class ProjectsTable extends BaseFilter {
           handleChange={e => this.handleChange(e, "ordering")}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return (
       <Fragment>
@@ -143,6 +148,11 @@ const styles = {
   rowGap: {
     marginTop: 20
   },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  }
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(ProjectsTable)));

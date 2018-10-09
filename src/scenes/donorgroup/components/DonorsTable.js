@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import { format } from "d3-format";
 import get from 'lodash/get';
+import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
@@ -40,7 +41,7 @@ class DonorsTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, rootComponent, donorGroup } = this.props;
+    const { classes, intl, data, rootComponent, donorGroup } = this.props;
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -77,6 +78,11 @@ class DonorsTable extends BaseFilter {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return (
       <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
@@ -90,8 +96,16 @@ DonorsTable.propTypes = {
   intl: intlShape.isRequired
 };
 
+const styles = {
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  }
+};
+
 const mapStateToProps = (state, ) => {
   return {}
 };
 
-export default injectIntl(connect(mapStateToProps)(DonorsTable));
+export default injectSheet(styles)(injectIntl(connect(mapStateToProps)(DonorsTable)));
