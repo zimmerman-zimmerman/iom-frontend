@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import get from 'lodash/get';
 import { format } from "d3-format";
+import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
@@ -40,7 +41,7 @@ class CountriesTable extends BaseFilter {
   }
 
   render() {
-    const { intl, data, rootComponent } = this.props;
+    const { classes, intl, data, rootComponent } = this.props;
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -71,9 +72,14 @@ class CountriesTable extends BaseFilter {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return (
-      <Table className="CountriesTable" dataSource={data ? this.addKey(data) : null} columns={columns}
+      <Table className={classes.CountriesTable} dataSource={data ? this.addKey(data) : null} columns={columns}
              scroll={{ x: 900 }}
              size="middle"
       />
@@ -85,8 +91,19 @@ CountriesTable.propTypes = {
   intl: intlShape.isRequired
 };
 
+const styles = {
+  CountriesTable: {
+    marginTop: 5
+  },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
+  }
+};
+
 const mapStateToProps = (state, ) => {
   return {}
 };
 
-export default injectIntl(connect(mapStateToProps)(CountriesTable));
+export default injectSheet(styles)(injectIntl(connect(mapStateToProps)(CountriesTable)));

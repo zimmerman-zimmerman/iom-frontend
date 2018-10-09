@@ -86,6 +86,11 @@ class ServiceDonors extends React.Component {
           handleChange={e => this.handleSortBy(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return(
       <div className={classes.serviceDonors}>
@@ -132,6 +137,11 @@ const styles = {
         paddingLeft: '0px !important',
       }
     }
+  },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
   }
 };
 
