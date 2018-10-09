@@ -178,7 +178,7 @@ class ProjectLocation extends Component {
                         <GroupFields fields={fields} />
                     </Col>
                     <Col xs={12} md={6} className="right">
-                        <CountryMap data={country}/>
+                        <CountryMap data={country} history={this.props.history}/>
                     </Col>
                 </Row>
             </Grid>
