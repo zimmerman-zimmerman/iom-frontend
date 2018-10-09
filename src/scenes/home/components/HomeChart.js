@@ -123,7 +123,7 @@ class HomeChart extends Component {
               <PieRadialChart widthDivider={3} innerRadius={100} respoHeight={400}/>
             </MediaQuery>
             <MediaQuery minWidth={screenSize.desktop.minWidth}>
-              <PieRadialChart widthDivider={2.3} innerRadius={115} respoHeight={400}/>
+              <PieRadialChart widthDivider={2.3} innerRadius={80} respoHeight={400}/>
             </MediaQuery>
           </Col>
         </Row>
