@@ -126,7 +126,8 @@ const styles = {
     },
     backgroundColor: styleVariables.blue,
     padding: '0 10px !important',
-      width: '100%',
+    width: '100%',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
   },
     innerHeader: {
       display: 'flex',
