@@ -30,7 +30,7 @@
 .ant-menu-horizontal {
   .ant-menu-item {
     top: -2px;
-    font-weight: 300;
+    font-weight: normal;
   }
 }
 .ant-collapse-header {
@@ -64,7 +64,7 @@
   opacity: 0.85;
 }
 .ant-breadcrumb {
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
