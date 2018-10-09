@@ -134,6 +134,11 @@ class DonorProjects extends Component {
           handleChange={e => this.handleChange(e)}
         />,
       key: 'sort_by',
+      onHeaderCell: c => {
+        return {
+          className: classes.fixedTH
+        }
+      },
     }];
     return (
       <Spin spinning={donorProjects.request}>
@@ -164,6 +169,11 @@ DonorProjects.propTypes = {
 const styles = {
   pagination: {
     marginTop: 10
+  },
+  fixedTH: {
+    right: 0,
+    position: 'sticky',
+    backgroundColor: '#fff !important',
   },
 };
 

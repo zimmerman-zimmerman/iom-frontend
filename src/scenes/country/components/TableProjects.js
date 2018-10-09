@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'antd/es/table';
+import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import {connect} from "react-redux";
 import get from 'lodash/get';
@@ -7,7 +8,6 @@ import { format } from 'd3-format';
 import { Link } from 'react-router-dom';
 import SortBy from '../../../components/base/SortBy';
 import { tableHeader } from '../../../helpers/style';
-import injectSheet from 'react-jss';
 
 import * as actions from "../../../services/actions/index";
 
@@ -148,7 +148,7 @@ const mapStateToProps = (state, ) => {
 const styles = {
   fixedTH: {
     right: 0,
-    position: 'absolute',
+    position: 'sticky',
     backgroundColor: '#fff !important',
   }
 };
