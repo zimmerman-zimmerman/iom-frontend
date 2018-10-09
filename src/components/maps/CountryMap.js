@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import ReactCountryFlag from "react-country-flag";
 import Layout from 'antd/es/layout';
+import connect from "react-redux/es/connect/connect";
 
 const { Content } = Layout;
 const Flag = ({ data }) => <span style={{fontSize: 15}}>
@@ -19,6 +20,8 @@ class CountryMap extends Component {
             defaultCenter={
               {lat: data.location.coordinates[1], lng: data.location.coordinates[0]}
             }
+            onClick={() => this.props.history.push(`/countries/${data.code}`)}
+            onChildClick={() => this.props.history.push(`/countries/${data.code}`)}
             defaultZoom={6}
           >
             <Flag
@@ -33,4 +36,4 @@ class CountryMap extends Component {
   }
 }
 
-export default CountryMap;
+export default (connect(null))(CountryMap);

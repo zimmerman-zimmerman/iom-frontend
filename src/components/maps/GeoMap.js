@@ -10,13 +10,13 @@ import { withRouter } from "react-router";
 import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
-import ReactCountryFlag from "react-country-flag";
 import { injectIntl, intlShape } from "react-intl";
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
 import {connect} from "react-redux";
 import GenericDialog from "../dialogWindow/GenericDialog/GenericDialog";
+import MapToolTip from "./MapToolTip/MapToolTip";
 
 
 const colors = ["#CDDC39", "#4CAF50", "#795548"];
@@ -161,29 +161,13 @@ class GeoMap extends Component {
 
     if (feature.properties && feature.properties.name) {
       const tooltipContent = ReactDOMServer.renderToString(
-        <div className="country-tooltip-container">
-          <div>
-            <span className="inline-block" style={{ fontSize: "25px", marginTop: "-10px" }}>
-              <ReactCountryFlag code={feature.properties.code} svg />
-            </span>
-            <span className="inline-block">
-              <h5>{feature.properties.name}</h5>
-            </span>
-          </div>
-          <div style={{ marginTop: "10px" }}>
-            <label>
-              <b>Total budget:</b> US$ {format(",.0f")(feature.properties.budgetValue)}
-            </label>
-          </div>
-          <div style={{ marginTop: "10px" }}>
-            <a href={`/countries/${feature.properties.code}`}>Visit country page</a>
-          </div>
-        </div>
+        <MapToolTip code={feature.properties.code} name={feature.properties.name}
+                    budgetValue={feature.properties.budgetValue}/>
       );
 
       layer.bindPopup(tooltipContent);
 
-      layer.on("mouseenter", function(e) {
+      layer.on("mouseover", function(e) {
         this.openPopup();
       });
 
@@ -191,7 +175,7 @@ class GeoMap extends Component {
       layer.on("click", function(e) {
         that.setState({
           bounds: e.target._bounds
-        });
+        }, that.props.history.push(`/countries/${feature.properties.code}`));
       });
     }
   }
