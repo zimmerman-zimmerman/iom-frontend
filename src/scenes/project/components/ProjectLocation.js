@@ -11,6 +11,7 @@ import Trans from '../../../locales/Trans';
 import CountryMap from "../../../components/maps/CountryMap";
 
 import { formatSectors } from '../ProjectHelper';
+import GeoMap from "../../../components/maps/GeoMap";
 
 class ProjectLocation extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class ProjectLocation extends Component {
 
     render() {
         const { data, projectLocation, classes } = this.props;
-        const country = get(projectLocation, 'data', null);
+        const countryData = get(projectLocation, 'data', null);
         const GroupFields = (props) => {
             const { fields } = props;
             return (
@@ -178,7 +179,13 @@ class ProjectLocation extends Component {
                         <GroupFields fields={fields} />
                     </Col>
                     <Col xs={12} md={6} className="right">
-                        <CountryMap data={country} history={this.props.history}/>
+                        {countryData ?
+                        <GeoMap data={countryData} zoom={6} country='nl' height={450} tooltipName="Activities:"
+                                tabName="activities"
+                                defCenter={[countryData.location.coordinates[1], countryData.location.coordinates[0]]}
+                                detailMap
+                        /> : null}
+                        {/*<CountryMap data={country} history={this.props.history}/>*/}
                     </Col>
                 </Row>
             </Grid>

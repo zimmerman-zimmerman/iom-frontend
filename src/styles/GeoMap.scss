@@ -24,6 +24,14 @@
   }
 }
 
+.detail-map-flag {
+  position: absolute;
+  font-size: 20px;
+  bottom: 54%;
+  left: 46%;
+  z-index: 400;
+};
+
 #perspective-map {
   a {
     margin-right: 0px;

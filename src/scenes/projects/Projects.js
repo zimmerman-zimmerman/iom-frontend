@@ -101,7 +101,7 @@ class Projects extends BaseFilter {
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
-          <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+          <GeoMap data={dataCountries} country='nl' height={450} tooltipName="Activities:"
                   tabName="activities"
                   onShowSummary={this.onToggleSummary.bind(this)}
                   showSummary={showSummary}
@@ -125,7 +125,7 @@ class Projects extends BaseFilter {
                 <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                   <div className={classes.boxShadow}>
                     { showMap ?
-                      <GeoMap data={dataCountries} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                      <GeoMap data={dataCountries} country='nl' height={450} tooltipName="Activities:"
                               tabName="activities"
                               onShowSummary={this.onToggleSummary.bind(this)}
                               showSummary={showSummary}
