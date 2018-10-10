@@ -64,7 +64,7 @@ class Countries extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
-              <Col xs={12} md={4} lg={3}>
+              <Col xs={12} md={4} lg={3} className={classes.filtersCol}>
                 <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="countries.filters.countries" defaultMessage="Countries"/>}
                          singularMessage={ <Trans id="countries.filters.country" defaultMessage="Country"/>}
@@ -181,6 +181,9 @@ const styles = {
     paddingLeft: 0,
     paddingRight: 0,
   },
+    filtersCol:{
+        backgroundColor:'#e9ebf7',
+    },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Countries));
