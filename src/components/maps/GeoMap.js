@@ -157,9 +157,6 @@ class GeoMap extends Component {
       fillOpacity: 0.6,//0.2 + (feature.properties.value / this.state.maxValue * 0.6),
       fillColor: getColor(feature.properties.value)
     });
-
-    layer.add(<div> lol </div>);
-
     // TODO: value is project_amount or value
 
     if (feature.properties && feature.properties.name) {
@@ -201,6 +198,11 @@ class GeoMap extends Component {
 
   render() {
     const { center, bounds, geoJSONData, mapColour, legendValues } = this.state;
+
+    const geoJson = this.props.geoJson ? this.props.geoJson : geoJSONData;
+
+    console.log(geoJson);
+
     const getColor = scaleLinear()
       .domain([this.state.minValue, this.state.midValue, this.state.maxValue])
       .range(colors);
@@ -244,18 +246,9 @@ class GeoMap extends Component {
                 url="https://api.mapbox.com/styles/v1/zimmerman2014/cjg5196po1i442sp5gd40vspl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemltbWVybWFuMjAxNCIsImEiOiJhNUhFM2YwIn0.sedQBdUN7PJ1AjknVVyqZw"
               />
 
-                {this.props.detailMap && <Rectangle bounds={bounds} lol={console.log(desiredCenter)}/>}
-
-                {this.props.detailMap && <span className='detail-map-flag'><ReactCountryFlag
-                    lol={console.log(this.props.data.code)}
-                    code={this.props.data.code}
-                    svg
-                />
-                </span>}
-
               <GeoJsonUpdatable
                 ref="geojson"
-                data={geoJSONData}
+                data={geoJson}
                 style={{
                   color: "white",
                   fillColor: mapColour,
