@@ -31,7 +31,8 @@ const styles = {
     zoom: 'unset',
     borderBottom: 'none',
     fontSize: 21,
-    lineHeight: '38px',
+    lineHeight: 1.5,
+    fontWeight: 'normal',
       height: '42px',
       '& .ant-menu-item': {
           top: '0',
