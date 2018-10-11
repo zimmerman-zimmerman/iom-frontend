@@ -6,16 +6,9 @@ import { connect } from 'react-redux';
 import { format } from 'd3-format';
 import get from 'lodash/get';
 import injectSheet from "react-jss";
-import { tableHeader } from '../../../helpers/style';
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
-const sortByOptions = [
-  { value: 'participating_organisation', label: 'Name (a - z)' },
-  { value: '-participating_organisation', label: 'Name (z - a)' },
-  { value: 'value', label: 'Total Budget (asc)' },
-  { value: '-value', label: 'Total Budget (desc)' },
-];
 
 class ServiceDonors extends React.Component {
   constructor(props) {
@@ -29,6 +22,7 @@ class ServiceDonors extends React.Component {
         order_by: 'participating_organisation',
       }
     };
+    this.handleSortBy = this.handleSortBy.bind(this);
   }
 
   addKey(dataSource) {
@@ -67,31 +61,29 @@ class ServiceDonors extends React.Component {
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const data = get(serviceDonors, 'data.results', null);
     const columns = [{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}
+              sortValue={this.state.params.order_by}
+              defSortValue={'participating_organisation'}
+              onSort={this.handleSortBy}
+              />,
       key: 'participating_organisation',
       width: '50%',
       render: obj =>
         <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}</span>,
+      title:
+          <SortHeader
+              title={intl.formatMessage({id: 'service.donors.header.total', defaultMessage: 'Total donor funding value'})}
+              sortValue={this.state.params.order_by}
+              defSortValue={'value'}
+              onSort={this.handleSortBy}
+          />,
       dataIndex: 'value',
       key: 'value',
       className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
-    },{
-      title:
-        <SortBy
-          options={sortByOptions}
-          selectedKey={this.state.params.order_by}
-          handleChange={e => this.handleSortBy(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return(
       <div className={classes.serviceDonors}>
         <h2 className="title">

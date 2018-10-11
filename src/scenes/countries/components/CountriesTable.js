@@ -6,18 +6,8 @@ import { format } from "d3-format";
 import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
-import { tableHeader } from '../../../helpers/style';
-
-const sortByOptions = [
-  { value: 'recipient_country', label: 'Name (a - z)' },
-  { value: '-recipient_country', label: 'Name (z - a)' },
-  { value: 'value', label: 'Total Budget (asc)' },
-  { value: '-value', label: 'Total Budget (desc)' },
-  { value: 'activity_count', label: 'Projects count (asc)' },
-  { value: '-activity_count', label: 'Projects count (desc)' },
-];
+import SortHeader from '../../../components/SortHeader/SortHeader';
 
 class CountriesTable extends BaseFilter {
   addKey(dataSource) {
@@ -45,39 +35,47 @@ class CountriesTable extends BaseFilter {
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'recipient_country'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'recipient_country',
       key: 'recipient_country',
       render: recipient_country =>
         <Link to={`/countries/${recipient_country.code.toLowerCase()}`}>{recipient_country.name}</Link>,
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'value'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'value',
       key: 'value',
       render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'activity_count'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'activity_count',
       key: 'count',
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}</span>,
+      // TODO adjust this when we have region backend sorting
+      title: <SortHeader
+              title={intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}
+              sortValue={filters.values.order_by}
+              // defSortValue={'recipient_country'}
+              onSort={() => console.log('we need backend functionality for this')}
+              />,
       dataIndex: 'recipient_country',
       key: 'region',
       render: recipient_country => <span>{recipient_country.region.name}</span>,
-    },{
-      title: 
-        <SortBy
-          options={sortByOptions}
-          selectedKey={filters.values['order_by']}
-          handleChange={e => this.handleChange(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return (
       <Table className={classes.CountriesTable} dataSource={data ? this.addKey(data) : null} columns={columns}
              scroll={{ x: 900 }}
