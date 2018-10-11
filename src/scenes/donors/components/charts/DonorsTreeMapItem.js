@@ -71,7 +71,7 @@ export default class DonorsTreeMapItem extends Component {
                   this.state.textArray.length > 0 && this.state.textArray.map(item => {
                       return (
                           <Text
-                              x={x + 4}
+                              x={x + 10}
                               y={y + item.yAdjust}
                               textAnchor="start"
                               fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}

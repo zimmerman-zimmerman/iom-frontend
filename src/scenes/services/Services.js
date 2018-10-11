@@ -50,7 +50,7 @@ class Services extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid fluid className={classes.services}>
             <Row>
-              <Col xs={12} md={4} lg={3}>
+              <Col xs={12} md={4} lg={3} className={classes.filtersCol}>
                 <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="services.filters.services" defaultMessage="Services" />}
                          singularMessage={<Trans id="services.filters.service" defaultMessage="Service" />}
@@ -128,7 +128,10 @@ const styles = {
       marginBottom: 15,
       width: '100%',
     },
-  }
+  },
+    filtersCol:{
+        backgroundColor:'#e9ebf7',
+    },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Services));

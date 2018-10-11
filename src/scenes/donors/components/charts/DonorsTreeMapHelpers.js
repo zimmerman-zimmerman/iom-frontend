@@ -2,11 +2,11 @@
 //so if ever the words seem to not fit, just recheck and change these default values to work
 //with your text properties
 //default font size for labels
-const defFontSize = 40;
+const defFontSize = 25;
 //Default char width when fontsize is 40
 const defCharWidth = 20;
 //Default text height when fontsize is 40
-const defTextHeight = 55;
+const defTextHeight = 30;
 
 //Calculates the font size for the percentage label
 export function calcPercFontSize(text, width, height) {

@@ -27,13 +27,14 @@ class ServiceCountries extends BaseFilter {
   render() {
     const { serviceCountries, classes } = this.props;
     const data = get(serviceCountries, 'data.results');
+    const geomapHeight = window.innerWidth > 2000 ? 650 : 450;
     return(
       <div className={classes.serviceCountries}>
         <h2 className="title">
           <Trans id="service.countries.title" defaultMessage="Explore what countries the funds go to"/>
         </h2>
         { serviceCountries.success ?
-          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                   tabName="activities"
           /> : null
         }

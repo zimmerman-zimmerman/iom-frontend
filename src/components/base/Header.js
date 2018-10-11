@@ -124,9 +124,13 @@ const styles = {
     '@media (min-width: 992px)': {
       height: 70,
     },
+      position:'sticky',
+      top: 0,
+      zIndex:100,
     backgroundColor: styleVariables.blue,
     padding: '0 30px !important',
-      width: '100%',
+    width: '100%',
+    boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
   },
     innerHeader: {
       display: 'flex',

@@ -1,0 +1,30 @@
+.sort-header {
+  display: flex;
+  cursor: pointer;
+}
+
+.sort-title {
+  order: 1;
+  font-size: 22px;
+  font-weight: 600;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  @media (max-width: 767px) {
+    font-size: 17px;
+  }
+}
+
+.sort-arrow {
+  margin-left: 8px;
+  order: 2;
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  .anticon {
+    font-size: 14px;
+  }
+}
+
+.no-arrow {
+  display: none;
+}

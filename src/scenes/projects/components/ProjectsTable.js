@@ -9,23 +9,13 @@ import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 import size from 'lodash/size';
 
-import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
-import { tableHeader } from '../../../helpers/style';
 
 import './ProjectsTable.scss';
-
-const sortByOptions = [
-  { value: 'title', label: 'Name (a - z)' },
-  { value: '-title', label: 'Name (z - a)' },
-  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
-  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
-  { value: 'start_date', label: 'Start date (asc)' },
-  { value: '-start_date', label: 'Start date (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 class ProjectsTable extends BaseFilter {
-  handleChange(value, fieldName) {
+  handleChange(value, fieldName='ordering') {
     const { rootComponent } = this.props;
     const { filters } = rootComponent.state;
     if (get(filters.values, fieldName)) {
@@ -59,7 +49,12 @@ class ProjectsTable extends BaseFilter {
     const count = get(data, 'count', 0);
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.project.title', defaultMessage: 'Project title'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'title'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'title',
       key: 'title',
       className: 'Title',
@@ -67,32 +62,57 @@ class ProjectsTable extends BaseFilter {
       render: (title, record) =>
         <Link to={`/projects/${record.id}`}>{title.narratives[0].text}</Link>,
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'start_date'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'activity_dates',
       key: 'start_date',
       render: activity_dates => <span>{activity_dates[1].iso_date}</span>
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'end_date'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'activity_dates',
       key: 'end_date',
       render: activity_dates => <span>{activity_dates[2].iso_date}</span>
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'activity_budget_value'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'budgets',
-      key: 'budgets',
+      key: 'activity_budget_value',
       className: 'Money',
       render: budgets => <span className='projects-budget-item'>{usd}{format(',.0f')(get(budgets, '[0].value.value'))}</span>,
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}
+              sortValue={filters.values.ordering}
+              // defSortValue={'sectors'}
+              onSort={() => console.log('we need backend functionality for this')}
+              />,
       dataIndex: 'sectors',
       key: 'sectors',
       width: '25%',
       render: sectors => 
         <Link to={`/services/${sectors[0].sector.code}`}>{get(sectors, '[0].sector.name')}</Link>,
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'recipient_country'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'recipient_countries',
-      key: 'recipient_countries',
+      key: 'recipient_country',
       width: '20%',
       render: recipient_countries => {
         if (size(recipient_countries) > 0) {
@@ -101,20 +121,7 @@ class ProjectsTable extends BaseFilter {
           return <span></span>
         }
       }
-    },{
-      title: 
-        <SortBy
-          options={sortByOptions}
-          selectedKey={filters.values['ordering']}
-          handleChange={e => this.handleChange(e, "ordering")}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return (
       <Fragment>
         <Table dataSource={data ? this.addKey(data.results) : null}

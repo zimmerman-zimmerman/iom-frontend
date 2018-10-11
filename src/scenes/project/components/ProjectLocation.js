@@ -8,9 +8,12 @@ import injectSheet from 'react-jss';
 
 import * as actions from '../../../services/actions';
 import Trans from '../../../locales/Trans';
-import CountryMap from "../../../components/maps/CountryMap";
 
-import { formatSectors } from '../ProjectHelper';
+import {formatSectors} from '../ProjectHelper';
+import { formatMapData } from "../../../helpers/generic";
+import GeoMap from "../../../components/maps/GeoMap";
+
+import mock from './ProjectLocation.mock';
 
 class ProjectLocation extends Component {
     constructor(props) {
@@ -32,13 +35,20 @@ class ProjectLocation extends Component {
         const code = get(data, 'recipient_countries[0].country.code', null);
         if (code && this.state.requestProjectLocation) {
             dispatch(actions.projectLocationRequest(code));
+            dispatch(actions.countryRequest({
+                ...mock.countryParams,
+                recipient_country: code,
+            }));
             this.setState({requestProjectLocation: false});
         }
     }
 
+
+
     render() {
-        const { data, projectLocation, classes } = this.props;
-        const country = get(projectLocation, 'data', null);
+        const { data, projectLocation, classes, country } = this.props;
+        const countryTransactionData = get(country, 'data.results[0]', null);
+        const countryData = get(projectLocation, 'data', null);
         const GroupFields = (props) => {
             const { fields } = props;
             return (
@@ -171,6 +181,7 @@ class ProjectLocation extends Component {
                 ]
             }
         ];
+
         return (
             <Grid fluid className={classes.projectLocation}>
                 <Row middle="xs">
@@ -178,7 +189,13 @@ class ProjectLocation extends Component {
                         <GroupFields fields={fields} />
                     </Col>
                     <Col xs={12} md={6} className="right">
-                        <CountryMap data={country} history={this.props.history}/>
+                        {countryData ?
+                        <GeoMap data={formatMapData(countryData,
+                            countryTransactionData.activity_count, countryTransactionData.value)}
+                                zoom={6} country='nl' height={450} tooltipName="Activities:"
+                                tabName="activities"
+                                defCenter={[countryData.location.coordinates[1], countryData.location.coordinates[0]]}
+                        /> : null}
                     </Col>
                 </Row>
             </Grid>
@@ -190,6 +207,7 @@ const mapStateToProps = (state, ) => {
     return {
       projectTransactions: state.projectTransactions,
         projectLocation: state.projectLocation,
+        country: state.country,
     }
 };
 

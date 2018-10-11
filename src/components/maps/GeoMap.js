@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
 import { namedGeoJson } from "./country_data";
-import { Map, TileLayer, ZoomControl } from "react-leaflet";
+import { Map, TileLayer, ZoomControl, Rectangle } from "react-leaflet";
 import _ from "lodash";
 import { format } from "d3-format";
 import { scaleLinear } from 'd3-scale'
@@ -11,6 +11,7 @@ import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
+import ReactCountryFlag from "react-country-flag";
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
@@ -156,7 +157,6 @@ class GeoMap extends Component {
       fillOpacity: 0.6,//0.2 + (feature.properties.value / this.state.maxValue * 0.6),
       fillColor: getColor(feature.properties.value)
     });
-
     // TODO: value is project_amount or value
 
     if (feature.properties && feature.properties.name) {
@@ -183,10 +183,18 @@ class GeoMap extends Component {
   getZoomValue() {
     const width = window.innerWidth;
 
-    if(width > 2000) {
+    if(this.props.zoom)
+    {
+      return this.props.zoom;
+    }
+    else if(width > 3000 || (width > 1800 && width <= 2000)) {
       return 3
-    } else if (width > 1800 && width <= 2000) {
-      return 2.5
+    } else if (width > 2000 && width <= 2700) {
+      return 2
+    } else if (width > 2000 && width <= 3000) {
+      return 3
+    } else if (width <= 1400) {
+      return 1
     } else {
       return 2
     }
@@ -194,6 +202,11 @@ class GeoMap extends Component {
 
   render() {
     const { center, bounds, geoJSONData, mapColour, legendValues } = this.state;
+
+    const geoJson = this.props.geoJson ? this.props.geoJson : geoJSONData;
+
+    console.log(geoJson);
+
     const getColor = scaleLinear()
       .domain([this.state.minValue, this.state.midValue, this.state.maxValue])
       .range(colors);
@@ -214,16 +227,19 @@ class GeoMap extends Component {
       );
     });
 
+    const desiredCenter = this.props.defCenter ? this.props.defCenter : center;
+
+
     return (
       <div>
         <div id="perspective-map" style={{ maxHeight: this.props.height, overflowY: "hidden" }}>
           <div id="map">
             <Map
               ref="map"
-              center={center}
+              center={desiredCenter}
               boundsOptions={bounds}
               zoom={this.getZoomValue()}
-              minZoom={2}
+              minZoom={this.getZoomValue()}
               zoomControl={false}
               worldCopyJump={true}
               scrollWheelZoom={false}
@@ -236,7 +252,7 @@ class GeoMap extends Component {
 
               <GeoJsonUpdatable
                 ref="geojson"
-                data={geoJSONData}
+                data={geoJson}
                 style={{
                   color: "white",
                   fillColor: mapColour,
