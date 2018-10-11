@@ -96,11 +96,11 @@ const styles = {
     '& .leaflet-control-attribution.leaflet-control': {
       display: 'none',
     },
-    maxHeight: 450,
-      height: 450,
-      '@media (max-width: 991px)': {
-          height: '50vh',
-      },
+    maxHeight: (props) => props.height,
+    height: (props) => props.height,
+    '@media (max-width: 991px)': {
+      height: '50vh',
+    },
     minHeight: 'fit-content',
     '& h3': {
       marginBottom: 0,

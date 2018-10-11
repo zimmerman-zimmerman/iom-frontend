@@ -8,17 +8,9 @@ import {connect} from "react-redux";
 import {injectIntl, intlShape} from "react-intl";
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
 
 import Trans from '../../../locales/Trans';
-import { tableHeader } from '../../../helpers/style';
-
-const sortByOptions = [
-  { value: 'title', label: 'Name (a - z)' },
-  { value: '-title', label: 'Name (z - a)' },
-  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
-  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -35,39 +27,42 @@ class ProjectsTable extends BaseFilter {
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const total = get(data, 'count', 0);
     const columns = [{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
+      title:
+          <SortHeader
+              title={intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}
+              sortValue={selectedSortBy}
+              defSortValue={'title'}
+              onSort={handleSortBy}
+          />,
       key: 'title.narratives[0].text',
       width: '45%',
-      render: obj => 
+      render: obj =>
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}
+              sortValue={selectedSortBy}
+              defSortValue={'activity_budget_value'}
+              onSort={handleSortBy}
+              />,
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
       className: 'number',
       render: value => <span>{usd}{format(',.0f')(value)}</span>
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}</span>,
+      title: <SortHeader
+            title={intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}
+            sortValue={selectedSortBy}
+            // defSortValue={'activity_budget_value'}
+            onSort={() => console.log('we need backend functionality for this')}
+            />,
       dataIndex: 'humanitarian',
       key: 'humanitarian',
       render: value =>
         <span>{value ? intl.formatMessage({id: 'service.projects.yes', defaultMessage: 'Yes'}) :
           intl.formatMessage({id: 'service.projects.no', defaultMessage: 'No'})}
         </span>
-    },{
-      title: 
-        <SortBy
-          options={sortByOptions}
-          selectedKey={selectedSortBy}
-          handleChange={e => handleSortBy(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return(
       <div className={classes.projectsTable}>
         <h2 className="title">

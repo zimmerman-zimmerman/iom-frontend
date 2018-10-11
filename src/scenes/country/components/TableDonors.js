@@ -3,16 +3,8 @@ import Table from 'antd/es/table';
 import { injectIntl, intlShape } from "react-intl";
 import get from "lodash/get";
 import { format } from "d3-format";
-import { tableHeader } from '../../../helpers/style';
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
-
-const sortByOptions = [
-  { value: 'participating_organisation', label: 'Donor (a - z)' },
-  { value: '-participating_organisation', label: 'Donor (z - a)' },
-  { value: 'value', label: 'Total Budget (asc)' },
-  { value: '-value', label: 'Total Budget (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 const TableDonors = (props) => {
   function addKey(dataSource) {
@@ -27,26 +19,29 @@ const TableDonors = (props) => {
   const { intl, data, handleDonorSortBy } = props;
   const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
   const columns = [{
-    title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}</span>,
+    title:
+      <SortHeader
+          title={intl.formatMessage({id: 'country.table.donors.header.donors', defaultMessage: 'Donor'})}
+          sortValue={props.sortBy}
+          defSortValue={'participating_organisation'}
+          onSort={handleDonorSortBy}
+      />,
     key: 'participating_organisation',
     width: '60%',
-    render: obj => 
+    render: obj =>
       <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
   }, {
-    title: <div className={tableHeader}>{intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}</div>,
+    title: <SortHeader
+            title={intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}
+            sortValue={props.sortBy}
+            defSortValue={'value'}
+            onSort={handleDonorSortBy}
+            />,
     dataIndex: 'value',
     key: 'value',
     className: 'columnMoney',
     render: value => <span>{usd}{format(',.2f')(value)}</span>
-  },{
-    title: 
-      <SortBy
-        options={sortByOptions}
-        selectedKey={props.sortBy}
-        handleChange={e => handleDonorSortBy(e)}
-      />,
-    key: 'sort_by',
-  }];
+  },];
   return (
     <Table dataSource={data ? addKey(data) : null} columns={columns} size="middle" pagination={data && props.itemAmount
     && data.length <= props.itemAmount ? false : {pageSize: 5}} />

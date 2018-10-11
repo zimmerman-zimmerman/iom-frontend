@@ -48,10 +48,11 @@ class Countries extends BaseFilter {
       {url: null, text: <Trans id='countries.breadcrumb.countries' text='Countries' />},
       {url: null, text: <Trans id='countries.breadcrumb.funding' text='Funding by countries' />},
     ];
+    const geomapHeight = window.innerWidth > 2000 ? 650 : 450;
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
-          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+          <GeoMap data={data} zoom={3.2} country='nl' height={geomapHeight} tooltipName="Activities:"
                   tabName="activities"
                   onShowSummary={this.onToggleSummary.bind(this)}
                   showSummary={showSummary}
@@ -77,7 +78,7 @@ class Countries extends BaseFilter {
                     <Col xs={12}>
                       { showMap ?
                         <div className={classes.boxShadow}>
-                          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                          <GeoMap data={data} zoom={3.2} country='nl' height={geomapHeight} tooltipName="Activities:"
                                   tabName="activities"
                                   onShowSummary={this.onToggleSummary.bind(this)}
                                   showSummary={showSummary}
@@ -92,6 +93,7 @@ class Countries extends BaseFilter {
                                      fieldValue="value"
                                      fieldCount="activity_count"
                                      donorsCount={donorsCount}
+                                     height={geomapHeight}
                             />
                           </div>
                         </Col> : null
@@ -112,6 +114,7 @@ class Countries extends BaseFilter {
                                    fieldValue="value"
                                    fieldCount="activity_count"
                                    donorsCount={donorsCount}
+                                   height={geomapHeight}
                           />
                         </div>
                       </Col> : null

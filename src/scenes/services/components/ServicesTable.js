@@ -5,21 +5,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Table from 'antd/es/table';
 import { format } from "d3-format";
-import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
-import { tableHeader } from '../../../helpers/style';
 import injectSheet from "react-jss";
 
 import './Services.scss';
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
-const sortByOptions = [
-  { value: 'sector', label: 'Name (a - z)' },
-  { value: '-sector', label: 'Name (z - a)' },
-  { value: 'value', label: 'Total Budget (asc)' },
-  { value: '-value', label: 'Total Budget (desc)' },
-  { value: 'activity_count', label: 'Projects count (asc)' },
-  { value: '-activity_count', label: 'Projects count (desc)' },
-];
 class ServicesTable extends BaseFilter {
   addKey(dataSource) {
     let data = [];
@@ -46,7 +37,12 @@ class ServicesTable extends BaseFilter {
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'sector'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'sector.name',
       key: 'sector',
       width: '55%',
@@ -54,28 +50,25 @@ class ServicesTable extends BaseFilter {
         <Link to={`/services/${record.sector.code}`}>{name}</Link>,
     },
       {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'value'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'totalValue',
       key: 'value',
       render: value => <span className='services-budget-item'>{usd}{format(',.0f')(value)}</span>,
     }, {
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}
+              sortValue={filters.values.order_by}
+              defSortValue={'activity_count'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'activity_count',
       key: 'activity_count',
-    },{
-      title: 
-        <SortBy
-          options={sortByOptions}
-          selectedKey={filters.values['order_by']}
-          handleChange={e => this.handleChange(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return (
       <Table dataSource={this.addKey(data)} columns={columns} size="middle"
                    pagination={false} scroll={{ x: 900 }} className={classes.table}

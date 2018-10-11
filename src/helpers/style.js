@@ -24,16 +24,6 @@ export const slider = {
   width: 300
 };
 
-export const tableHeader = {
-    fontSize: '22px',
-  fontWeight: '600',
-    overflowWrap: 'normal',
-    wordBreak: 'keep-all',
-  '@media (max-width: 767px)': {
-    fontSize: '17px',
-  },
-}
-
 export const pageContainer = {
   minHeight: 'calc(100vh - 262px)',
 }

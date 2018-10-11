@@ -6,106 +6,98 @@ import get from 'lodash/get';
 import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
-import { tableHeader } from '../../../helpers/style';
-
-const sortByOptions = [
-  { value: 'participating_organisation', label: 'Name (a - z)' },
-  { value: '-participating_organisation', label: 'Name (z - a)' },
-  { value: 'value', label: 'Total Budget (asc)' },
-  { value: '-value', label: 'Total Budget (desc)' },
-  { value: 'activity_count', label: 'Projects count (asc)' },
-  { value: '-activity_count', label: 'Projects count (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 class DonorsTable extends BaseFilter {
-  addKey(dataSource) {
-    let data = [];
-    dataSource.forEach(function(item) {
-      item.key = get(item, 'participating_organisation_ref');
-      data.push(item);
-    });
-    return data;
-  }
-
-  handleChange(value) {
-    const { rootComponent } = this.props;
-    const { filters } = rootComponent.state;
-    if (get(filters.values, 'order_by')) {
-      delete filters.values['order_by'];
+    addKey(dataSource) {
+        let data = [];
+        dataSource.forEach(function(item) {
+            item.key = get(item, 'participating_organisation_ref');
+            data.push(item);
+        });
+        return data;
     }
-    filters.values['order_by'] = value;
-    filters.changed = true;
-    this.setState({filters: filters});
-  }
 
-  render() {
-    const { classes, intl, data, rootComponent } = this.props;
-    const { filters } = rootComponent.state;
-    const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
-    const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}</span>,
-      dataIndex: 'name',
-      key: 'name',
-      width: '55%',
-      render: (participating_organisation, row, index) => {
-        return (
-          <Link to={`/donors/${row.code.toLowerCase()}`}>
-            {participating_organisation}
-          </Link>
-        );
-      },
-    }, {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}</span>,
-      dataIndex: 'value',
-      key: 'value',
-      className: 'number',
-      render: value => <span>{usd}{format(",.0f")(value)}</span>
-    }, {
-      title: <span style={tableHeader}>{intl.formatMessage({
-        id: 'donors.table.donors.header.projects.count',
-        defaultMessage: 'Number of projects',
-      })}</span>,
-      dataIndex: 'project',
-      key: 'project',
-      className: 'number',
-    },{
-      title:
-        <SortBy
-          options={sortByOptions}
-          selectedKey={filters.values['order_by']}
-          handleChange={e => this.handleChange(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
+    handleChange(value) {
+        const { rootComponent } = this.props;
+        const { filters } = rootComponent.state;
+        if (get(filters.values, 'order_by')) {
+            delete filters.values['order_by'];
         }
-      },
-    }];
-    return (
-      <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
-             scroll={{ x: 900 }}
-      />
-    )
-  }
+        filters.values['order_by'] = value;
+        filters.changed = true;
+        this.setState({filters: filters});
+    }
+
+    render() {
+        const { intl, data, rootComponent } = this.props;
+        const { filters } = rootComponent.state;
+        const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
+        const columns = [{
+            title: <SortHeader
+                title={intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}
+                sortValue={filters.values.order_by}
+                defSortValue={'participating_organisation'}
+                onSort={this.handleChange}
+            />,
+            dataIndex: 'name',
+            key: 'participating_organisation',
+            width: '55%',
+            render: (participating_organisation, row, index) => {
+                return (
+                    <Link to={`/donors/${row.code.toLowerCase()}`}>
+                        {participating_organisation}
+                    </Link>
+                );
+            },
+        }, {
+            title: <SortHeader
+                title={intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}
+                sortValue={filters.values.order_by}
+                defSortValue={'value'}
+                onSort={this.handleChange}
+            />,
+            dataIndex: 'value',
+            key: 'value',
+            className: 'number',
+            render: value => <span>{usd}{format(",.0f")(value)}</span>
+        }, {
+            title: <SortHeader
+                title={intl.formatMessage({
+                    id: 'donors.table.donors.header.projects.count',
+                    defaultMessage: 'Number of projects',
+                })}
+                sortValue={filters.values.order_by}
+                defSortValue={'activity_count'}
+                onSort={this.handleChange}
+            />,
+            dataIndex: 'project',
+            key: 'activity_count',
+            className: 'number',
+        },];
+        return (
+            <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
+                   scroll={{ x: 900 }}
+            />
+        )
+    }
 }
 
 DonorsTable.propTypes = {
-  intl: intlShape.isRequired
+    intl: intlShape.isRequired
 };
 
 const styles = {
-  fixedTH: {
-    right: 0,
-    position: 'sticky',
-    backgroundColor: '#fff !important',
-  }
+    fixedTH: {
+        right: 0,
+        position: 'sticky',
+        backgroundColor: '#fff !important',
+    }
 };
 
 const mapStateToProps = (state, ) => {
-  return {}
+    return {}
 };
 
 export default injectSheet(styles)(injectIntl(connect(mapStateToProps)(DonorsTable)));
