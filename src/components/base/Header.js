@@ -124,6 +124,9 @@ const styles = {
     '@media (min-width: 992px)': {
       height: 70,
     },
+      position:'sticky',
+      top: 0,
+      zIndex:100,
     backgroundColor: styleVariables.blue,
     padding: '0 10px !important',
       width: '100%',
