@@ -10,23 +10,10 @@ import get from 'lodash/get';
 import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
-import { tableHeader } from '../../../helpers/style';
 import { format as dateFormat } from 'date-fns';
 
-import SortBy from '../../../components/base/SortBy';
-
 import * as actions from '../../../services/actions/index';
-
-const sortByOptions = [
-  { value: 'title', label: 'Name (a - z)' },
-  { value: '-title', label: 'Name (z - a)' },
-  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
-  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
-  { value: 'start_date', label: 'Start date (asc)' },
-  { value: '-start_date', label: 'Start date (desc)' },
-  { value: 'end_date', label: 'End date (asc)' },
-  { value: '-end_date', label: 'End date (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 class DonorProjects extends Component {
   constructor(props) {
@@ -41,6 +28,7 @@ class DonorProjects extends Component {
         ordering: '-end_date',
       }
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -89,57 +77,74 @@ class DonorProjects extends Component {
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'donor.table.projects.header.title', defaultMessage: 'Project title'})}
+              sortValue={this.state.params.ordering}
+              defSortValue={'title'}
+              onSort={this.handleChange}
+              />,
       width: '40%',
       key: 'donors',
       render: project =>
         <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
     },
         {
-            title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}</span>,
+            title: <SortHeader
+                    title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
+                    sortValue={this.state.params.ordering}
+                    defSortValue={'start_date'}
+                    onSort={this.handleChange}
+                    />,
             dataIndex: 'activity_dates[2].iso_date', //THe index 2 array element here is the ACTUAL START date
             className: 'date',
             key: 'start_date',
             render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
         },
         {
-            title: <span style={tableHeader}>{intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}</span>,
+            title: <SortHeader
+                    title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
+                    sortValue={this.state.params.ordering}
+                    defSortValue={'end_date'}
+                    onSort={this.handleChange}
+                    />,
             dataIndex: 'activity_dates[0].iso_date', //THe index 0 array element here is the ACTUAL END date
             className: 'date',
             key: 'end_date',
             render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
         },
         {
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}
+              sortValue={this.state.params.ordering}
+              defSortValue={'activity_budget_value'}
+              onSort={this.handleChange}
+             />,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
       render: (value) => <span>{usd}{format(",.0f")(value)}</span>
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'})}
+              sortValue={this.state.params.ordering}
+              // defSortValue={'activity_status_name'}
+              onSort={() => console.log('backend functionality needs to be implemented')}
+              />,
       dataIndex: 'activity_status.name',
       className: 'Status',
       key: 'status'
     },{
-      title: <span style={tableHeader}>{intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'Project type'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'donor.table.projects.header.sector', defaultMessage: 'Project type'})}
+              sortValue={this.state.params.ordering}
+              defSortValue={'sector'}
+              onSort={this.handleChange}
+              />,
       className: 'Sector',
       key: 'sector',
       render: project =>
         <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
-    },{
-      title:
-        <SortBy
-          options={sortByOptions}
-          selectedKey={this.state.params.ordering}
-          handleChange={e => this.handleChange(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return (
       <Spin spinning={donorProjects.request}>
           <Table className="DonorsTable"

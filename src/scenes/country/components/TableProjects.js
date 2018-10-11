@@ -6,19 +6,9 @@ import {connect} from "react-redux";
 import get from 'lodash/get';
 import { format } from 'd3-format';
 import { Link } from 'react-router-dom';
-import SortBy from '../../../components/base/SortBy';
-import { tableHeader } from '../../../helpers/style';
 
 import * as actions from "../../../services/actions/index";
-
-const sortByOptions = [
-  { value: 'title', label: 'Name (a - z)' },
-  { value: '-title', label: 'Name (z - a)' },
-  { value: 'activity_budget_value', label: 'Total Budget (asc)' },
-  { value: '-activity_budget_value', label: 'Total Budget (desc)' },
-  { value: 'start_date', label: 'Start date (asc)' },
-  { value: '-start_date', label: 'Start date (desc)' },
-];
+import SortHeader from "../../../components/SortHeader/SortHeader";
 
 class TableProjects extends Component {
   constructor(props) {
@@ -34,6 +24,7 @@ class TableProjects extends Component {
         ordering: 'title',
       }
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +44,7 @@ class TableProjects extends Component {
   }
 
   handleChange(value) {
+    console.log(value);
     const newParams = this.state.params;
     newParams.ordering = value;
     this.setState({params: newParams}, () => {
@@ -74,60 +66,82 @@ class TableProjects extends Component {
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}
+              sortValue={this.state.params.ordering}
+              // defSortValue={'title'}
+              onSort={() => console.log('we need backend functionality for this')}
+            />,
       key: 'donors',
       width: '20%',
       render: obj => 
         <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}
+              sortValue={this.state.params.ordering}
+              // defSortValue={'title'}
+              onSort={() => console.log('we need backend functionality for this')}
+              />,
       key: 'title',
       width: '30%',
       render: obj => 
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}
+              sortValue={this.state.params.ordering}
+              defSortValue={'activity_budget_value'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
       render: value => <span>{usd}{format(',.0f')(value)}</span>
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}
+              sortValue={this.state.params.ordering}
+              // defSortValue={'status'}
+              onSort={() => console.log('we need backend functionality for this')}
+              />,
       dataIndex: 'activity_status.name',
       key: 'status'
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({
-        id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
-      })}</span>,
+      title: <SortHeader
+          title={intl.formatMessage({
+              id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
+          })}
+          sortValue={this.state.params.ordering}
+          // defSortValue={'type'}
+          onSort={() => console.log('we need backend functionality for this')}
+      />,
       key: 'type',
       render: obj => 
         <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({
-        id: 'country.table.projects.header.start', defaultMessage: 'Start date'
-      })}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({
+                  id: 'country.table.projects.header.start', defaultMessage: 'Start date'
+              })}
+              sortValue={this.state.params.ordering}
+              defSortValue={'start_date'}
+              onSort={this.handleChange}
+              />,
       dataIndex: 'activity_dates[1].iso_date',
       key: 'start'
     },{
-      title: <span className={tableHeader}>{intl.formatMessage({
-        id: 'country.table.projects.header.end', defaultMessage: 'End date'
-      })}</span>,
+      title: <SortHeader
+              title={intl.formatMessage({
+                  id: 'country.table.projects.header.end', defaultMessage: 'End date'
+              })}
+              sortValue={this.state.params.ordering}
+              // defSortValue={'type'}
+              onSort={() => console.log('we need backend functionality for this')}
+              />,
       dataIndex: 'activity_dates[0].iso_date',
       key: 'end'
-    },{
-      title: 
-        <SortBy
-          options={sortByOptions}
-          selectedKey={this.state.params.ordering}
-          handleChange={e => this.handleChange(e)}
-        />,
-      key: 'sort_by',
-      onHeaderCell: c => {
-        return {
-          className: classes.fixedTH
-        }
-      },
-    }];
+    },];
     return(
       <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
              pagination={data && this.props.itemAmount
