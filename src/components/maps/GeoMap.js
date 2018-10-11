@@ -187,10 +187,14 @@ class GeoMap extends Component {
     {
       return this.props.zoom;
     }
-    else if(width > 2000) {
+    else if(width > 3000 || (width > 1800 && width <= 2000)) {
       return 3
-    } else if (width > 1800 && width <= 2000) {
-      return 2.5
+    } else if (width > 2000 && width <= 2700) {
+      return 2
+    } else if (width > 2000 && width <= 3000) {
+      return 3
+    } else if (width <= 1400) {
+      return 1
     } else {
       return 2
     }
@@ -235,7 +239,7 @@ class GeoMap extends Component {
               center={desiredCenter}
               boundsOptions={bounds}
               zoom={this.getZoomValue()}
-              minZoom={2}
+              minZoom={this.getZoomValue()}
               zoomControl={false}
               worldCopyJump={true}
               scrollWheelZoom={false}
