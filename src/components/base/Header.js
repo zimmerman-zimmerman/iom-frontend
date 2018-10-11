@@ -125,7 +125,7 @@ const styles = {
       height: 70,
     },
     backgroundColor: styleVariables.blue,
-    padding: '0 10px !important',
+    padding: '0 30px !important',
       width: '100%',
   },
     innerHeader: {
