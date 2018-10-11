@@ -65,8 +65,9 @@ class HomeChart extends Component {
       const { widthDivider } = props;
       const height = window.innerWidth / widthDivider;
       return (
-        <ResponsivePieRadialChart respoHeight={props.respoHeight} height={height - 10} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={props.innerRadius} linkPage={linkPage} donorGroupJson={donorGroupJson}
+        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend}
+                                  innerRadius={height / 5} outerRadius={height / 4 + 35} linkPage={linkPage}
+                                  donorGroupJson={donorGroupJson}
         />
       )
     };
@@ -120,10 +121,10 @@ class HomeChart extends Component {
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
             <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-              <PieRadialChart widthDivider={3} innerRadius={100} respoHeight={400}/>
+              <PieRadialChart widthDivider={1.5} />
             </MediaQuery>
             <MediaQuery minWidth={screenSize.desktop.minWidth}>
-              <PieRadialChart widthDivider={2.3} innerRadius={115} respoHeight={400}/>
+              <PieRadialChart widthDivider={2.3} />
             </MediaQuery>
           </Col>
         </Row>
