@@ -86,6 +86,7 @@ AccordionFilter.propTypes = {
 
 const styles = {
     accordionFilter: {
+        backgroundColor:'#e9ebf7',
         marginTop: 5,
         '& .am-accordion .am-accordion-item .am-accordion-header': {
             paddingLeft: 0,
