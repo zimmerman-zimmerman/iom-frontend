@@ -52,7 +52,7 @@ class Countries extends BaseFilter {
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
-          <GeoMap data={data} zoom={3.2} country='nl' height={geomapHeight} tooltipName="Activities:"
+          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                   tabName="activities"
                   onShowSummary={this.onToggleSummary.bind(this)}
                   showSummary={showSummary}
@@ -78,7 +78,7 @@ class Countries extends BaseFilter {
                     <Col xs={12}>
                       { showMap ?
                         <div className={classes.boxShadow}>
-                          <GeoMap data={data} zoom={3.2} country='nl' height={geomapHeight} tooltipName="Activities:"
+                          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                                   tabName="activities"
                                   onShowSummary={this.onToggleSummary.bind(this)}
                                   showSummary={showSummary}

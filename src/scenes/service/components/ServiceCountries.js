@@ -34,7 +34,7 @@ class ServiceCountries extends BaseFilter {
           <Trans id="service.countries.title" defaultMessage="Explore what countries the funds go to"/>
         </h2>
         { serviceCountries.success ?
-          <GeoMap data={data} zoom={3.2} country='nl' height={geomapHeight} tooltipName="Activities:"
+          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                   tabName="activities"
           /> : null
         }
