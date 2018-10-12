@@ -72,7 +72,7 @@ class Donors extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid className={classes.container} style={pageContainer} fluid>
             <Row>
-              <Col xs={12} md={4} lg={3} >
+              <Col xs={12} md={4} lg={3}  className={classes.filtersCol}>
                 <Filters rootComponent={this} countResults={get(dataDonors, 'length', 0)}
                          pluralMessage={<FormattedMessage id="donors.filters.donors" defaultMessage="Donors" />}
                          singularMessage={<FormattedMessage id="donors.filters.donor" defaultMessage="Donor" />}
@@ -130,7 +130,10 @@ const styles = {
   title: {
     fontWeight: 300,
       marginTop: '8px',
-  }
+  },
+  filtersCol:{
+    backgroundColor:'#e9ebf7',
+  },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Donors));

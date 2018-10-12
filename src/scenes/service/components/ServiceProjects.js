@@ -23,6 +23,7 @@ class ServiceProjects extends BaseFilter {
       update: false,
       filters: {values: {}, changed: false, chips: {}},
     };
+    this.handleSortBy = this.handleSortBy.bind(this);
   }
 
   handleSortBy(value) {

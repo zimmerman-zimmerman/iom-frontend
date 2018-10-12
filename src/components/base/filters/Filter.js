@@ -98,6 +98,7 @@ Filter.propTypes = {
 
 const styles = {
     filter: {
+        backgroundColor:'#e9ebf7',
         width: '100%',
         '& .ant-select-selection': {
             minHeight: 44,

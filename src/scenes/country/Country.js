@@ -12,13 +12,14 @@ import BannerCountry from './components/BannerCountry';
 import BaseFilter from "../../components/base/filters/BaseFilter";
 import * as actions from "../../services/actions";
 import TableDonors from "./components/TableDonors";
-import CountryMap from "../../components/maps/CountryMap";
 import TableProjects from "./components/TableProjects";
 import Trans from '../../locales/Trans';
 import ContactProject from './components/ContactProject';
 import SectorsMap from './components/SectorsMap';
 import { pageContainer } from '../../helpers/style';
 import CountriesJSON from '../../services/data/countries.json';
+import GeoMap from "../../components/maps/GeoMap";
+import { formatMapData } from "../../helpers/generic";
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -84,6 +85,9 @@ class Country extends BaseFilter {
       {url: '/countries', text: <Trans id='main.menu.countries' text='Countries' />},
       {url: null, text: countryJSON ? countryJSON['name'] : <Trans id='main.menu.detail' text='Detail' />},
     ];
+
+    const countryData = get(countryResult, 'recipient_country');
+
     return (
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
@@ -102,7 +106,12 @@ class Country extends BaseFilter {
                 />
               </Col>
               <Col xs={12} md={6} lg={6}>
-                <CountryMap data={get(countryResult, 'recipient_country')}/>
+                  {countryData ?
+                      <GeoMap data={formatMapData(countryData, countryResult.activity_count, countryResult.value)}
+                              zoom={6} country='nl' height={450} tooltipName="Activities:"
+                              tabName="activities"
+                              defCenter={[countryData.location.coordinates[1], countryData.location.coordinates[0]]}
+                      /> : null}
               </Col>
             </Row>
             <Row className="gap">

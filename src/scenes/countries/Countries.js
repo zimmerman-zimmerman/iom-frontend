@@ -48,10 +48,11 @@ class Countries extends BaseFilter {
       {url: null, text: <Trans id='countries.breadcrumb.countries' text='Countries' />},
       {url: null, text: <Trans id='countries.breadcrumb.funding' text='Funding by countries' />},
     ];
+    const geomapHeight = window.innerWidth > 2000 ? 650 : 450;
     const ShowSummary = () => {
       return (
         <div className={classes.boxShadow}>
-          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                   tabName="activities"
                   onShowSummary={this.onToggleSummary.bind(this)}
                   showSummary={showSummary}
@@ -64,7 +65,7 @@ class Countries extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
-              <Col xs={12} md={4} lg={3}>
+              <Col xs={12} md={4} lg={3} className={classes.filtersCol}>
                 <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="countries.filters.countries" defaultMessage="Countries"/>}
                          singularMessage={ <Trans id="countries.filters.country" defaultMessage="Country"/>}
@@ -77,7 +78,7 @@ class Countries extends BaseFilter {
                     <Col xs={12}>
                       { showMap ?
                         <div className={classes.boxShadow}>
-                          <GeoMap data={data} zoom={3.2} country='nl' height={450} tooltipName="Activities:"
+                          <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                                   tabName="activities"
                                   onShowSummary={this.onToggleSummary.bind(this)}
                                   showSummary={showSummary}
@@ -92,6 +93,7 @@ class Countries extends BaseFilter {
                                      fieldValue="value"
                                      fieldCount="activity_count"
                                      donorsCount={donorsCount}
+                                     height={geomapHeight}
                             />
                           </div>
                         </Col> : null
@@ -112,6 +114,7 @@ class Countries extends BaseFilter {
                                    fieldValue="value"
                                    fieldCount="activity_count"
                                    donorsCount={donorsCount}
+                                   height={geomapHeight}
                           />
                         </div>
                       </Col> : null
@@ -181,6 +184,9 @@ const styles = {
     paddingLeft: 0,
     paddingRight: 0,
   },
+    filtersCol:{
+        backgroundColor:'#e9ebf7',
+    },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Countries));
