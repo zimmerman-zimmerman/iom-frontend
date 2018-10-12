@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
 import { namedGeoJson } from "./country_data";
-import { Map, TileLayer, ZoomControl, Rectangle } from "react-leaflet";
+import { Map, TileLayer, ZoomControl } from "react-leaflet";
 import _ from "lodash";
 import { format } from "d3-format";
 import { scaleLinear } from 'd3-scale'
@@ -11,7 +11,6 @@ import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
-import ReactCountryFlag from "react-country-flag";
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";

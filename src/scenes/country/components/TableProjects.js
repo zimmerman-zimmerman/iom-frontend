@@ -62,7 +62,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { classes, intl, countryActivities } = this.props;
+    const { intl, countryActivities } = this.props;
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -74,7 +74,7 @@ class TableProjects extends Component {
             />,
       key: 'donors',
       width: '20%',
-      render: obj => 
+      render: obj =>
         <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
     },{
       title: <SortHeader
@@ -85,7 +85,7 @@ class TableProjects extends Component {
               />,
       key: 'title',
       width: '30%',
-      render: obj => 
+      render: obj =>
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
       title: <SortHeader
@@ -117,7 +117,7 @@ class TableProjects extends Component {
           onSort={() => console.log('we need backend functionality for this')}
       />,
       key: 'type',
-      render: obj => 
+      render: obj =>
         <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
     },{
       title: <SortHeader
