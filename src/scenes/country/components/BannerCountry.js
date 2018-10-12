@@ -96,8 +96,12 @@ const BannerCountry = (props) => {
               </Menu>
               <Row className="description">
                 <Col span={24}>
-                  <div dangerouslySetInnerHTML={{__html: data.recipient_country.description}} />
-                </Col>
+                  {
+                    data.recipient_country.description ?
+                      <div dangerouslySetInnerHTML={{__html: data.recipient_country.description}} /> :
+                      <Trans id='country.not.found' text='Not found on site' />
+                  }
+                  </Col>
               </Row>
               <Row>
                 <Col span={24} className="countryLink">

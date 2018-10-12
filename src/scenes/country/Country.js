@@ -77,8 +77,7 @@ class Country extends BaseFilter {
     const code = get(this.props, 'match.params.code');
     const countryJSON = find(CountriesJSON, {'code': code.toUpperCase()});
     if (countryResult) {
-      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] :
-        <Trans id="country.not.found" defaultMessage="Not found on site"/>;
+      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] : null;
     }
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
