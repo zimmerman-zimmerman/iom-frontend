@@ -70,7 +70,7 @@ class ServicesCharts extends Component {
                 fontSize: 10, marginRight: 10, color: '#262626', whiteSpace: 'nowrap', width: '200',
               }}
             />
-            <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>}/>
+            <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>} cursor={{ opacity: '0.1' }}/>
             <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}
                     payload={[{ value: 'Humanitarian', type: 'rect', id: 'a', color: '#418fde' },
                         { value: 'Non-humanitarian', type: 'rect', id: 'a', color: '#1f4283' },]}/>
