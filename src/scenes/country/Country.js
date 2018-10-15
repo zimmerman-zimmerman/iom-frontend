@@ -149,7 +149,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   country: {
-    padding: '0 137px !important',
+    padding: '0 50px !important',
     '@media (max-width: 767px)': {
       padding: '0px 25px !important',
     },
