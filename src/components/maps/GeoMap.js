@@ -204,8 +204,6 @@ class GeoMap extends Component {
 
     const geoJson = this.props.geoJson ? this.props.geoJson : geoJSONData;
 
-    console.log(geoJson);
-
     const getColor = scaleLinear()
       .domain([this.state.minValue, this.state.midValue, this.state.maxValue])
       .range(colors);

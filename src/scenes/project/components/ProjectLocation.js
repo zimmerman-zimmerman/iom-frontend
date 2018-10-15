@@ -93,6 +93,11 @@ class ProjectLocation extends Component {
         const financeType = get(this.props.projectTransactions, 'data.results[0].finance_type.name', '');
         const flowType = get(this.props.projectTransactions, 'data.results[0].flow_type.name', '');
         const websiteLink = get(data, 'contact_info[0].website','-').includes('http') ? get(data, 'contact_info[0].website','-') : 'https://' + get(data, 'contact_info[0].website','-');
+
+        const cebCategory = get(data, 'humanitarian','-') ?
+            <Trans id='project.location.humanitarian' text='Humanitarian' /> :
+            <Trans id='project.location.development' text='Development' />;
+
         const fields = [
             {
                 title: {id: "project.location.title", defaultMessage: "Project Location"},
@@ -135,7 +140,7 @@ class ProjectLocation extends Component {
                   },
                   {
                     name: {id: "project.location.fields.ceb.category", defaultMessage:"CEB Category:"},
-                    value: <span>-</span>
+                    value: cebCategory,
                   },
                   {
                     name: {id: "project.location.fields.service", defaultMessage: "Service area:"},
@@ -189,7 +194,7 @@ class ProjectLocation extends Component {
                         <GroupFields fields={fields} />
                     </Col>
                     <Col xs={12} md={6} className="right">
-                        {countryData ?
+                        {countryData && countryTransactionData ?
                         <GeoMap data={formatMapData(countryData,
                             countryTransactionData.activity_count, countryTransactionData.value)}
                                 zoom={6} country='nl' height={450} tooltipName="Activities:"

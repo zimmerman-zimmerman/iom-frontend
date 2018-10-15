@@ -14,6 +14,12 @@ import DonorsTable from './components/DonorsTable';
 
 
 class DonorGroup extends BaseFilter {
+  componentWillMount() {
+    if (get(this.props, 'match.params.group.length', 0) > 2) {
+      this.props.history.replace(`${get(this.props.donorGroupJson.data, `content.${this.props.match.params.group}`, '').toLowerCase()}/${this.props.match.params.group}`);
+    }
+  }
+
   componentDidMount() {
     const { dispatch, donorsGroupsJsonSlug } = this.props;
     this.setState({actionRequest: true});
@@ -80,6 +86,7 @@ const mapStateToProps = (state, ) => {
   return {
     donor: state.donor,
     donorsGroupsJson: state.donorsGroupsJson,
+    donorGroupJson: state.donorGroupJson,
   }
 };
 
