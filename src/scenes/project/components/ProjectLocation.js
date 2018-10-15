@@ -189,7 +189,7 @@ class ProjectLocation extends Component {
                         <GroupFields fields={fields} />
                     </Col>
                     <Col xs={12} md={6} className="right">
-                        {countryData ?
+                        {countryData && countryTransactionData ?
                         <GeoMap data={formatMapData(countryData,
                             countryTransactionData.activity_count, countryTransactionData.value)}
                                 zoom={6} country='nl' height={450} tooltipName="Activities:"
