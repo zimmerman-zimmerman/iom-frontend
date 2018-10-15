@@ -157,14 +157,13 @@ const styles = {
         }
       },
       '& .description': {
-        marginTop: 20,
-        color: '#1471ce',
-        fontWeight: 600,
-        fontSize: 21,
-        paddingLeft: 9,
-        '@media (max-width: 767px)': {
-          fontSize: '16px',
-        },
+          marginTop: 40,
+          color: '#1471ce',
+          fontWeight: 500,
+          fontSize: 20,
+          '@media (max-width: 767px)': {
+              fontSize: 16,
+          },
       },
       '& .countryLink': {
         fontSize: 21,
