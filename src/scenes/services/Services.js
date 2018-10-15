@@ -105,14 +105,14 @@ const mapStateToProps = (state, ) => {
 const styles = {
   services: {
     '& .description': {
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: 18,
       }
     },
     '& .title': {
       marginTop: 15,
       fontWeight: 300,
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: 22,
       }
     },

@@ -36,7 +36,7 @@ const styles = {
       '& .ant-menu-item': {
           top: '0',
       },
-    '@media (max-width: 1277px)': {
+    '@media (maxWidth: 1277px)': {
       fontSize: 15,
     }
   },

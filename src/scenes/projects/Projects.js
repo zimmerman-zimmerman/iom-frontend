@@ -203,7 +203,7 @@ const styles = {
     marginTop: 12,
     fontSize: 36,
     fontWeight: 300,
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: 22,
     },
   },

@@ -19,7 +19,7 @@ class ContactProject extends Component {
 
   render() {
     const data = get(this.props.project, 'data', null);
-    
+
     const Line = (props) => {
       return (
         <Row className="line" key={props.key}>
@@ -94,7 +94,7 @@ const styles = {
       color: '#1f4283',
       fontSize: 26,
       fontWeight: 600,
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: 22,
       }
     },
@@ -106,14 +106,14 @@ const styles = {
     '& .label': {
       fontSize: 22,
       fontWeight: 600,
-      '@media (max-width: 776px)': {
+      '@media (maxWidth: 776px)': {
         fontSize: 18,
       },
     },
     '& .value': {
       marginLeft: 10,
       fontSize: 22,
-      '@media (max-width: 776px)': {
+      '@media (maxWidth: 776px)': {
         fontSize: 18,
       },
     },

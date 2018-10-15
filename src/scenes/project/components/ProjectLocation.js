@@ -200,7 +200,7 @@ const styles = {
     projectLocation: {
         '& .left': {
             paddingLeft: '85px !important',
-            '@media (max-width: 767px)': {
+            '@media (maxWidth: 767px)': {
                 padding: '0px 25px !important',
             },
         },
@@ -208,7 +208,7 @@ const styles = {
             marginTop: -200,
             paddingRight: '8px !important',
             paddingLeft: '0px !important',
-            '@media (max-width: 767px)': {
+            '@media (maxWidth: 767px)': {
                 marginTop: 40,
                 padding: '0px 25px !important',
             },
@@ -219,7 +219,7 @@ const styles = {
             marginTop: 10,
             paddingBottom: 10,
             fontSize: 26,
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: 22,
           },
         },
@@ -232,7 +232,7 @@ const styles = {
             fontSize: 22,
             marginTop: '14px',
             marginLeft: '12px',
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: 17,
           },
         },
@@ -249,13 +249,13 @@ const styles = {
         },
         '& .name': {
             fontWeight: 'bold',
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: 16,
           },
         },
         '& .value': {
             marginLeft: 5,
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: 16,
           },
         }

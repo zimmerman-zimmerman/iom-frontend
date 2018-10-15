@@ -130,15 +130,15 @@ const styles = {
     fontSize: 'calc(1em + 1vw)',
     fontWeight: 300,
     height: 90,
-    '@media only screen (max-width: 1033px)': {
+    '@media only screen (maxWidth: 1033px)': {
       height: 80,
     }
   },
   listItems: {
-    '@media only screen and (min-width: 992px)': {
+    '@media only screen and (minWidth: 992px)': {
       height: 350,
     },
-    '@media only screen and (max-width: 767px)': {
+    '@media only screen and (maxWidth: 767px)': {
       padding: '0 0 30px 0',
     },
     padding: '0 40px 30px 40px',
@@ -164,14 +164,14 @@ const styles = {
       maxWidth: '100%',
       fontSize: 21,
       lineHeight: 1.33,
-      '@media only screen and (max-width: 767px)': {
+      '@media only screen and (maxWidth: 767px)': {
         fontSize: 15,
       }
     }
   },
   linkButton: {
     marginTop: 80,
-    '@media only screen and (max-width: 767px)': {
+    '@media only screen and (maxWidth: 767px)': {
       marginTop: 0,
       padding: '0 0 30px 0',
     },

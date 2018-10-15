@@ -138,7 +138,7 @@ const styles = {
   aboutContent: {
     width: '85vw !important',
       maxWidth: 'none !important',
-    '@media (max-width: 776px)': {
+    '@media (maxWidth: 776px)': {
         width: '100vw !important',
       padding: '0 18px',
     },
@@ -147,7 +147,7 @@ const styles = {
       fontSize: 42,
       fontWeight: 300,
       marginTop: 20,
-      '@media (max-width: 776px)': {
+      '@media (maxWidth: 776px)': {
         fontSize: 36,
       },
     },
@@ -158,7 +158,7 @@ const styles = {
       fontSize: 22,
       fontWeight: 300,
       padding: '8px 0',
-      '@media (max-width: 776px)': {
+      '@media (maxWidth: 776px)': {
         fontSize: 18,
       },
     },
@@ -189,7 +189,7 @@ const styles = {
     fontWeight: 600,
     textAlign: 'start',
     margin: '50px 0 20px 0',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: 22,
     },
   }

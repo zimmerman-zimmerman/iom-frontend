@@ -29,7 +29,7 @@ export const tableHeader = {
   fontWeight: '600',
     overflowWrap: 'normal',
     wordBreak: 'keep-all',
-  '@media (max-width: 767px)': {
+  '@media (maxWidth: 767px)': {
     fontSize: '17px',
   },
 }

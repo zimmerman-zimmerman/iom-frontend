@@ -767,9 +767,10 @@ export function localeInitial() {
     type: LOCALE_INITIAL
   }
 }
-export function localeRequest() {
+export function localeRequest(slug) {
   return {
-    type: LOCALE_REQUEST
+    type: LOCALE_REQUEST,
+    slug: slug
   }
 }
 export function localeSuccess(data) {

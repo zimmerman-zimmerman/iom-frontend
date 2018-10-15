@@ -42,21 +42,21 @@ const styles = {
     fontWeight: 300,
     display: 'block',
     height: 'fit-content',
-    '@media (max-width: 768px)': {
+    '@media (maxWidth: 768px)': {
       fontSize: 26,
     }
   },
   description: {
     fontSize: 21,
     fontWeight: 300,
-    '@media (max-width: 768px)': {
+    '@media (maxWidth: 768px)': {
       fontSize: 16,
     }
   },
   detail: {
     fontSize: 21,
     fontWeight: 300,
-    '@media (max-width: 768px)': {
+    '@media (maxWidth: 768px)': {
       fontSize: 16,
     }
   }

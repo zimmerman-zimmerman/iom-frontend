@@ -82,7 +82,7 @@ const styles = {
     marginTop: 10,
     marginBottom: 15,
     fontWeight: 300,
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '22px',
     },
   },
@@ -96,7 +96,7 @@ const styles = {
   },
   grid: {
     padding: '0 8% !important',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       paddingLeft: '16px !important',
     },
   },

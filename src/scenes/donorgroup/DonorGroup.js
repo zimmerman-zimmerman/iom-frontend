@@ -81,7 +81,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   title: {
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '22px',
     },
     marginTop: 10,
@@ -98,7 +98,7 @@ const styles = {
   },
   grid: {
     padding: '0 8% !important',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       paddingLeft: '16px !important',
     },
   },

@@ -76,7 +76,7 @@ const styles = {
   service: {
     marginTop: 60,
     paddingLeft: '135px !important',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       padding: '0px 25px !important',
     },
     '& .map-row': {

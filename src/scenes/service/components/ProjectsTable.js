@@ -38,7 +38,7 @@ class ProjectsTable extends BaseFilter {
       title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}</span>,
       key: 'title.narratives[0].text',
       width: '45%',
-      render: obj => 
+      render: obj =>
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     }, {
       title: <span className={tableHeader}>{intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}</span>,
@@ -55,7 +55,7 @@ class ProjectsTable extends BaseFilter {
           intl.formatMessage({id: 'service.projects.no', defaultMessage: 'No'})}
         </span>
     },{
-      title: 
+      title:
         <SortBy
           options={sortByOptions}
           selectedKey={selectedSortBy}
@@ -101,7 +101,7 @@ const styles = {
     '& .title': {
       color: '#0033a1',
       fontWeight: 600,
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: '22px',
       },
     },

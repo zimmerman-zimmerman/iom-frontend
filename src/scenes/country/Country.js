@@ -141,7 +141,7 @@ const mapStateToProps = (state, ) => {
 const styles = {
   country: {
     padding: '0 137px !important',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       padding: '0px 25px !important',
     },
     '& .gap': {
@@ -153,7 +153,7 @@ const styles = {
     '& .title': {
       color: '#1f4283',
       fontSize: 26,
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: '22px',
       },
     }

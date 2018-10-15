@@ -254,9 +254,9 @@ export function* nonHumanServicesRequest(action) {
     }
 }
 
-export function* localeRequest() {
+export function* localeRequest(action) {
   try {
-    const response = yield call(api.localeRequest);
+    const response = yield call(api.JSONContentRequest, action.slug);
     yield put(actions.localeSuccess(response));
   } catch (error) {
     yield put(actions.localeFailed(error));

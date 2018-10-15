@@ -121,7 +121,7 @@ class Header extends Component {
 
 const styles = {
   header: {
-    '@media (min-width: 992px)': {
+    '@media (minWidth: 992px)': {
       height: 70,
     },
     backgroundColor: styleVariables.blue,
@@ -140,7 +140,7 @@ const styles = {
       order:2,
         margin: '28px 0 0 auto',
         width: 'max-content',
-        '@media (max-width: 990px)': {
+        '@media (maxWidth: 990px)': {
             minHeight: '60px',
             margin: '0 5px 0 5px',
         },
@@ -148,7 +148,7 @@ const styles = {
   logo: {
     padding: '10px 0',
     height: 60,
-    '@media (max-width: 991px)': {
+    '@media (maxWidth: 991px)': {
       height: 50
     },
   },
@@ -163,7 +163,7 @@ const styles = {
   share: {
     width: 'max-content',
     marginTop: 16,
-    '& $button': {
+    '& button': {
       marginLeft: 16,
       color: '#0033a1',
       size: 32,
@@ -171,7 +171,7 @@ const styles = {
         color: '#35b6b4',
       }
     },
-    '& $button:first-child': {
+    '& button:first-child': {
       marginLeft: 0,
     }
   },

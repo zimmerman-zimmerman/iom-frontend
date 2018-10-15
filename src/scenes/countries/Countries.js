@@ -159,13 +159,13 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   description: {
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '18px',
     },
   },
   title: {
     fontWeight: 300,
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '22px',
     },
   },

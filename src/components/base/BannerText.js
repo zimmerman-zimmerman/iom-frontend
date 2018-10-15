@@ -26,7 +26,7 @@ const styles = {
     letterSpacing: 'normal',
     textAlign: 'left',
     color: '#1f4283',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '22px',
     },
   },

@@ -129,7 +129,7 @@ const styles = {
     fontSize: '32px',
       fontWeight: 600,
       color: '#fff',
-    '@media (max-width: 767px)': {
+    '@media (maxWidth: 767px)': {
       fontSize: '22px',
     },
   },
@@ -138,7 +138,7 @@ const styles = {
     marginLeft: 0,
     '& .left': {
       padding: '40px 137px 100px 137px',
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         padding: '20px 25px'
       },
       backgroundColor: '#efefef',
@@ -147,7 +147,7 @@ const styles = {
         '& .name': {
           margin: '3px 10px',
           color: '#1471ce',
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: '22px',
           },
         }
@@ -158,7 +158,7 @@ const styles = {
         fontWeight: 600,
         fontSize: 21,
         paddingLeft: 9,
-        '@media (max-width: 767px)': {
+        '@media (maxWidth: 767px)': {
           fontSize: '16px',
         },
       },
@@ -166,7 +166,7 @@ const styles = {
         fontSize: 21,
         marginTop: 30,
         paddingLeft: 9,
-        '@media (max-width: 767px)': {
+        '@media (maxWidth: 767px)': {
           fontSize: '16px',
         },
       },
@@ -181,7 +181,7 @@ const styles = {
         marginRight: 20,
         fontSize: 22,
         textTransform: 'none',
-        '@media (max-width: 767px)': {
+        '@media (maxWidth: 767px)': {
           fontSize: '18px',
         },
       },
@@ -193,7 +193,7 @@ const styles = {
     },
     '& .right': {
       padding: '55px 65px 100px 65px',
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         padding: '20px 25px'
       },
       backgroundColor: '#54c8c3',
@@ -208,14 +208,14 @@ const styles = {
             fontSize: '22px',
             fontWeight: 'bold',
             color: '#fff',
-          '@media (max-width: 767px)': {
+          '@media (maxWidth: 767px)': {
             fontSize: '18px',
           },
         },
       '& .financialText':{
           fontSize: '28px',
           fontWeight: 'normal',
-        '@media (max-width: 767px)': {
+        '@media (maxWidth: 767px)': {
           fontSize: '18px',
         },
       },

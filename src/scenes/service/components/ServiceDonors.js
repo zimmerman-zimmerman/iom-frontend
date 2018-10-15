@@ -121,7 +121,7 @@ const styles = {
     '& .title': {
       color: '#0033a1',
       fontWeight: 600,
-      '@media (max-width: 767px)': {
+      '@media (maxWidth: 767px)': {
         fontSize: '22px',
       },
     }

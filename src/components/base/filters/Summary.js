@@ -98,7 +98,7 @@ const styles = {
     },
     maxHeight: 450,
       height: 450,
-      '@media (max-width: 991px)': {
+      '@media (maxWidth: 991px)': {
           height: '50vh',
       },
     minHeight: 'fit-content',
