@@ -33,10 +33,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, enLocaleSlug } = this.props;
+    const { dispatch, enLocaleSlug, donorGroupJson } = this.props;
     const { localeRequest } = this.state;
     if (dispatch && localeRequest ) {
       dispatch(actions.localeRequest(enLocaleSlug));
+      if (donorGroupJson.data === null) {
+        dispatch(actions.donorGroupJsonRequest('donor-group-json'));      
+      }
     } else {
       dispatch(actions.localeInitial());
     }
@@ -78,7 +81,8 @@ App.defaultProps = {
 
 const mapStateToProps = (state, ) => {
   return {
-    locale: state.locale
+    locale: state.locale,
+    donorGroupJson: state.donorGroupJson,
   }
 };
 
