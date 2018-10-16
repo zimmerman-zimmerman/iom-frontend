@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from "../../../components/SortHeader/SortHeader";
 
+import './DonorsTabel.scss';
+
 class DonorsTable extends BaseFilter {
     addKey(dataSource) {
         let data = [];
