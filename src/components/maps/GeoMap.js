@@ -244,7 +244,7 @@ class GeoMap extends Component {
               <ZoomControl position="bottomright" />
 
               <TileLayer
-                url="https://api.mapbox.com/styles/v1/zimmerman2014/cjg5196po1i442sp5gd40vspl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemltbWVybWFuMjAxNCIsImEiOiJhNUhFM2YwIn0.sedQBdUN7PJ1AjknVVyqZw"
+                url="https://api.mapbox.com/styles/v1/zimmerman2014/cjn4ez3tm82me2rser5uhs08w/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemltbWVybWFuMjAxNCIsImEiOiJhNUhFM2YwIn0.sedQBdUN7PJ1AjknVVyqZw"
               />
 
               <GeoJsonUpdatable
