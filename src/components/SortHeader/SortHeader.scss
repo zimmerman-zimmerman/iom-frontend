@@ -5,9 +5,12 @@
 
 .sort-title {
   order: 1;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: bold;
   overflow-wrap: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
   word-break: keep-all;
   @media (max-width: 767px) {
     font-size: 17px;
