@@ -47,6 +47,7 @@ class Home extends Component {
           <BannerImage image={imageBanner} height={height} title={title} description={description} detail={detail}
                        size={size}
           />
+          <BannerText text={bannerText} />
         </Fragment>
       )
     };
