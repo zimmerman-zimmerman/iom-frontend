@@ -7,6 +7,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import isEqual from 'lodash/isEqual';
 import './styles/AccordionFilter.scss';
 import BaseFilter from './BaseFilter';
+import FilterHeader from "./components/FilterHeader/FilterHeader";
 
 const Panel = Collapse.Panel;
 
@@ -68,7 +69,8 @@ class AccordionFilter  extends BaseFilter{
             <Col xs={12}>
                 <Collapse bordered={false} className={classes.accordionFilter}>
                     {panels.map((item, index) =>
-                        <Panel header={item.headerString} key={index}>
+                        <Panel header={<FilterHeader headerString={item.headerString} onClick={() => console.log('lol')}/>}
+                               key={index} showArrow={false}>
                             {item.component}
                         </Panel>
                     )}
@@ -86,7 +88,6 @@ AccordionFilter.propTypes = {
 
 const styles = {
     accordionFilter: {
-        backgroundColor:'#e9ebf7',
         marginTop: 5,
         '& .am-accordion .am-accordion-item .am-accordion-header': {
             paddingLeft: 0,
@@ -108,7 +109,7 @@ const styles = {
             borderBottom: '0 !important',
             '& .ant-collapse-header': {
                 fontFamily: 'Open Sans',
-                fontSize: '20px',
+                fontSize: '16px',
                 fontWeight: 'bold',
                 fontStyle: 'normal',
                 fontStretch: 'normal',
@@ -116,16 +117,21 @@ const styles = {
                 letterSpacing: 'normal',
                 textAlign: 'left',
                 color: '#262626',
-                '& .arrow': {
-                  marginLeft: '88%',
-                    transform: 'rotate(90deg)',
-                    color: '#418fde',
-                    marginTop: '4px',
+                '& .filter-header-component': {
+                    '& .filter-header-arrow': {
+                        order: 2,
+                        fill: '#418fde',
+                        marginLeft: 'auto',
+                        transition: 'transform .4s',
+                    },
                 },
             },
             '& .ant-collapse-header[aria-expanded="true"]': {
-                '& .arrow': {
-                    transform: 'rotate(270deg)',
+                '& .filter-header-component': {
+                    '& .filter-header-arrow': {
+                        transform: 'rotate(180deg)',
+                        transition: 'transform .4s',
+                    },
                 },
             },
         },

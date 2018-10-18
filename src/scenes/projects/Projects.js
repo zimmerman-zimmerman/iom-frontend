@@ -115,7 +115,7 @@ class Projects extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
-              <Col xs={12} md={4} lg={3} className={classes.filtersCol}>
+              <Col xs={12} md={4} lg={3} >
                 <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}
                          pluralMessage={<Trans id="projects.filters.projects" defaultMessage="Projects" />}
                          singularMessage={<Trans id="projects.filters.project" defaultMessage="Project" />}
@@ -229,9 +229,6 @@ const styles = {
     paddingLeft: 0,
     paddingRight: 0,
   },
-    filtersCol:{
-        backgroundColor:'#e9ebf7',
-    },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Projects));
