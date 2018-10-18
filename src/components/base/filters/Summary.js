@@ -88,6 +88,7 @@ const styles = {
         fontSize: '10px',
     },
   summary: {
+        maxWidth: '232px',
     '& .ant-card-body': {
       padding: 12,
     },
