@@ -38,7 +38,7 @@ class App extends Component {
     if (dispatch && localeRequest ) {
       dispatch(actions.localeRequest(enLocaleSlug));
       if (donorGroupJson.data === null) {
-        dispatch(actions.donorGroupJsonRequest('donor-group-json'));      
+        dispatch(actions.donorGroupJsonRequest('donor-group-json'));
       }
     } else {
       dispatch(actions.localeInitial());
@@ -46,9 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { locale } = this.props;
-    const language = (navigator.languages && navigator.languages[0]) || navigator.language;
-    const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+    const { locale, language, languageWithoutRegionCode } = this.props;
     const messages = {en: enMessages};
     return (
       <IntlProvider
@@ -77,6 +75,8 @@ class App extends Component {
 
 App.defaultProps = {
   enLocaleSlug: 'en-locale',
+  languageWithoutRegionCode: 'en',
+  language: 'en-US'
 };
 
 const mapStateToProps = (state, ) => {

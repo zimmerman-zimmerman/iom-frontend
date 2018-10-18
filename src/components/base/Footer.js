@@ -114,7 +114,7 @@ const styles = {
     paddingTop: '10px',
     paddingBottom: '10px',
     float: 'right',
-    '& $button': {
+    '& button': {
       color: '#0033a1',
       '&:hover': {
         color: '#35b6b4',
