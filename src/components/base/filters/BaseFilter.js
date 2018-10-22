@@ -16,7 +16,7 @@ class BaseFilter extends Component {
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       },
       update: false,
-      filters: {values: {}, changed: false, chips: {}},
+      filters: {values: { order_by: '-value'}, changed: false, chips: {}},
       dataRange: [],
       donorTableSortBy: 'participating_organisation',
     };

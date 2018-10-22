@@ -27,9 +27,10 @@ class Projects extends BaseFilter {
         fields: 'id,iati_identifier,title,activity_dates,budgets,recipient_countries,sectors',
         order_by: '-id',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
+          ordering: '-activity_budget_value',
       },
       update: false,
-      filters: {values: {}, changed: false, chips: {}},
+      filters: {values: { ordering: '-activity_budget_value' }, changed: false, chips: {}},
     };
   }
 
