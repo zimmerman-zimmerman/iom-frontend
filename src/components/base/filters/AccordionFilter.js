@@ -69,7 +69,7 @@ class AccordionFilter  extends BaseFilter{
             <Col xs={12}>
                 <Collapse bordered={false} className={classes.accordionFilter}>
                     {panels.map((item, index) =>
-                        <Panel header={<FilterHeader headerString={item.headerString} onClick={() => console.log('lol')}/>}
+                        <Panel header={<FilterHeader headerString={item.headerString} />}
                                key={index} showArrow={false}>
                             {item.component}
                         </Panel>
