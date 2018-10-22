@@ -147,11 +147,12 @@ class DonorProjects extends Component {
     },];
     return (
       <Spin spinning={donorProjects.request}>
-          <Table className="DonorsTable"
-                 dataSource={data ? this.addKey(data) : null}
+          <Table dataSource={data ? this.addKey(data) : null}
+                 className={classes.table}
                  columns={columns} size="middle"
                  pagination={false}
                  scroll={{ x: 1200 }}
+                 rowClassName={classes.donorsRow}
           />
           {total > 10 &&
             <Pagination size="small" total={total} className={classes.pagination} onChange={this.onPageChange}/>
@@ -172,6 +173,22 @@ DonorProjects.propTypes = {
 };
 
 const styles = {
+    table: {
+        marginTop: 10,
+    },
+    donorsRow: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
   pagination: {
     marginTop: 10
   },

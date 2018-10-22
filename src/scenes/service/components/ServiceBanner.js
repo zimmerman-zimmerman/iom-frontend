@@ -51,7 +51,7 @@ class ServiceBanner extends Component {
         ]
       ];
       return (
-        <Row>
+        <Row className={classes.bannerContent}>
           {
             lines.map((items, index) => {
               return (
@@ -82,10 +82,8 @@ class ServiceBanner extends Component {
               <Trans id="service.banner.left.menu.overview" defaultMessage="Overview"/>
             </Menu.Item>
             <Menu.Item key="related">
-              <span data-tip="Under construction" data-effect="solid" data-place="top" data-type="light">
                 <Icon type="book"/>
                 <Trans id="service.banner.left.menu.detail" defaultMessage="detail report"/>
-              </span>
             </Menu.Item>
           </Menu>
           <div className="description">
@@ -113,6 +111,9 @@ const styles = {
         fontSize: '22px',
       },
     },
+    bannerContent: {
+        marginTop: 28,
+    },
   serviceBanner: {
     width: '100%',
     marginLeft: 0,
@@ -131,16 +132,17 @@ const styles = {
         },
       },
       '& .description': {
+          lineHeight: '28px',
           marginTop: 40,
           color: '#1471ce',
-          fontWeight: 500,
-          fontSize: 20,
+          fontWeight: 600,
+          fontSize: 21,
           '@media (max-width: 767px)': {
               fontSize: 16,
           },
       },
       '& .menu': {
-        marginTop: 32,
+        marginTop: 40,
         lineHeight: '30px',
         borderBottomStyle: 'none',
       },
@@ -169,7 +171,6 @@ const styles = {
       color: 'white',
       fontWeight: 600,
         '& .financialLabel': {
-            marginTop: '24px',
             fontSize: '22px',
             fontWeight: 'bold',
             color: '#fff',
@@ -178,6 +179,7 @@ const styles = {
           },
         },
         '& .financialText':{
+            marginBottom: '46px',
             fontSize: '28px',
             fontWeight: 'normal',
           '@media (max-width: 767px)': {

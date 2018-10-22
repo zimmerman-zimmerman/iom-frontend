@@ -8,6 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Slider from './Slider';
 import Breadcrumbs from './Breadcrumbs';
+import injectSheet from "react-jss";
 
 class Page extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Page extends Component {
   }
 
   render() {
-    const { children, breadcrumbItems } = this.props;
+    const { children, breadcrumbItems, classes } = this.props;
     const { openSlider } = this.state;
     const menuItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -35,22 +36,28 @@ class Page extends Component {
     ];
     return (
       <Fragment>
-        <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
-        <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-          <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
-            {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
-            {children}
-            <Footer/>
-          </Slider>
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+          <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
           {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
-          {children}
+          <div className={classes.pageStyle}>
+              <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
+                  <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
+                      {children}
+                  </Slider>
+              </MediaQuery>
+              <MediaQuery minWidth={screenSize.desktop.minWidth}>
+                  {children}
+              </MediaQuery>
+          </div>
           <Footer/>
-        </MediaQuery>
       </Fragment>
     )
   }
 }
 
-export default Page;
+const styles = {
+  pageStyle: {
+    padding: '0 30px',
+  },
+};
+
+export default injectSheet(styles)(Page);

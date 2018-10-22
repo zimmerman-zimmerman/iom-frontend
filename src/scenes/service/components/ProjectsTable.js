@@ -33,6 +33,7 @@ class ProjectsTable extends BaseFilter {
               sortValue={selectedSortBy}
               defSortValue={'title'}
               onSort={handleSortBy}
+              style={{ fontSize: 22, fontWeight: 'bold' }}
           />,
       key: 'title.narratives[0].text',
       width: '45%',
@@ -44,6 +45,7 @@ class ProjectsTable extends BaseFilter {
               sortValue={selectedSortBy}
               defSortValue={'activity_budget_value'}
               onSort={handleSortBy}
+              style={{ fontSize: 22, fontWeight: 'bold' }}
               />,
       dataIndex: 'aggregations.activity.budget_value',
       key: 'aggregations.activity.budget_value',
@@ -55,6 +57,7 @@ class ProjectsTable extends BaseFilter {
             sortValue={selectedSortBy}
             // defSortValue={'activity_budget_value'}
             onSort={() => console.log('we need backend functionality for this')}
+            style={{ fontSize: 22, fontWeight: 'bold' }}
             />,
       dataIndex: 'humanitarian',
       key: 'humanitarian',
@@ -73,6 +76,7 @@ class ProjectsTable extends BaseFilter {
                pagination={false}
                scroll={{ x: 650 }}
                className={classes.table}
+               rowClassName={classes.row}
         />
           {total > 10 &&
               <Pagination className="pagination"
@@ -96,10 +100,24 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+    row: {
+      fontSize: 22,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
   projectsTable: {
     paddingTop: 20,
     '& .title': {
       color: '#0033a1',
+        fontSize: 26,
       fontWeight: 600,
       '@media (max-width: 767px)': {
         fontSize: '22px',
@@ -110,6 +128,7 @@ const styles = {
     }
   },
   table: {
+      marginTop: 20,
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',

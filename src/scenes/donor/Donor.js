@@ -47,7 +47,7 @@ class Donor extends BaseFilter {
     ] : null;
     return (
       <Page breadcrumbItems={breadcrumbItems}>
-        <Grid className={classes.grid} style={pageContainer} fluid>
+        <Grid style={pageContainer} fluid>
           <Row>
             <Col xs={12}>
               <h1 className={classes.title}>{data ? data.participating_organisation : null}</h1>
@@ -80,7 +80,8 @@ const styles = {
   title: {
     marginTop: 10,
     marginBottom: 15,
-    fontWeight: 'bold',
+    fontWeight: 300,
+      fontSize: 36,
     '@media (max-width: 767px)': {
       fontSize: '22px',
     },
@@ -93,14 +94,8 @@ const styles = {
     marginBottom: 15,
     marginLeft: -16,
   },
-  grid: {
-    padding: '0 8% !important',
-    '@media (max-width: 767px)': {
-      paddingLeft: '16px !important',
-    },
-  },
   divider: {
-    border: 'solid 3px #173d8e',
+    border: 'solid 2px #173d8e',
     opacity: 0.3,
   }
 };

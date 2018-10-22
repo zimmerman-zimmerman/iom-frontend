@@ -10,6 +10,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from "../../../components/SortHeader/SortHeader";
 
 import './DonorsTabel.scss';
+import Pagination from "antd/es/pagination";
 
 class DonorsTable extends BaseFilter {
     addKey(dataSource) {
@@ -33,7 +34,7 @@ class DonorsTable extends BaseFilter {
     }
 
     render() {
-        const { intl, data, rootComponent } = this.props;
+        const { intl, data, rootComponent, classes } = this.props;
         const { filters } = rootComponent.state;
         const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
         const columns = [{
@@ -79,9 +80,11 @@ class DonorsTable extends BaseFilter {
             className: 'number',
         },];
         return (
-            <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
-                   scroll={{ x: 900 }}
-            />
+            <div>
+                <Table className={classes.donorsTable} dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
+                       scroll={{ x: 900 }} rowClassName={classes.donorsRow}
+                />
+            </div>
         )
     }
 }
@@ -91,6 +94,22 @@ DonorsTable.propTypes = {
 };
 
 const styles = {
+    donorsTable: {
+      marginTop: 30,
+    },
+    donorsRow: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
     fixedTH: {
         right: 0,
         position: 'sticky',

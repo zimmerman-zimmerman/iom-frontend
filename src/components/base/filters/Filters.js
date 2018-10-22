@@ -213,7 +213,7 @@ const styles = {
   },
   countNumber: {
     fontSize: 32,
-    fontWeight: 300,
+    fontWeight: 400,
   },
   countLabel: {
     fontSize: 24,

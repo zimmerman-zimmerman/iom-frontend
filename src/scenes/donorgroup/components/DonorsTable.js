@@ -31,7 +31,7 @@ class DonorsTable extends BaseFilter {
     }
 
     render() {
-        const { intl, data, rootComponent, donorGroup } = this.props;
+        const { intl, data, rootComponent, donorGroup, classes } = this.props;
         const { filters } = rootComponent.state;
         const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
         const columns = [{
@@ -77,8 +77,8 @@ class DonorsTable extends BaseFilter {
             className: 'number',
         },];
         return (
-            <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
-                   scroll={{ x: 900 }}
+            <Table className={classes.donorsTable} dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
+                   scroll={{ x: 900 }} rowClassName={classes.donorsRow}
             />
         )
     }
@@ -89,6 +89,22 @@ DonorsTable.propTypes = {
 };
 
 const styles = {
+    donorsTable: {
+      marginTop: 10,
+    },
+    donorsRow: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
     fixedTH: {
         right: 0,
         position: 'sticky',

@@ -279,23 +279,25 @@ class GeoMap extends Component {
                     </Control>
                 }
 
-              <Control position="bottomleft" className="supportLegend">
-                <div>
-                  <label>N of activities</label>
-                  {
-                    legendItems.reverse().map((l) => {
-                      return l
-                    })
-                  }
-                  <div className="legend-item">
-                    <i
-                      className="leaflet-legend-color-box"
-                      style={{ color: "#dedede", background: "#dedede" }}
-                    />
-                    <label>no data</label>
-                  </div>
-                </div>
-              </Control>
+                {!this.props.detail &&
+                    <Control position="bottomleft" className="supportLegend">
+                        <div>
+                            <label>N of activities</label>
+                            {
+                                legendItems.reverse().map((l) => {
+                                    return l
+                                })
+                            }
+                            <div className="legend-item">
+                                <i
+                                    className="leaflet-legend-color-box"
+                                    style={{ color: "#dedede", background: "#dedede" }}
+                                />
+                                <label>no data</label>
+                            </div>
+                        </div>
+                    </Control>
+                }
             </Map>
           </div>
         </div>

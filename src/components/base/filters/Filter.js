@@ -50,6 +50,7 @@ class Filter extends BaseFilter {
 
     select(options) {
         const { placeholder, classes } = this.props;
+        console.log(placeholder);
         if (/Android/i.test(navigator.userAgent)) {
             return (
                 <Select placeholder={placeholder}
@@ -98,6 +99,7 @@ Filter.propTypes = {
 
 const styles = {
     filter: {
+        fontSize: 15,
         backgroundColor:'#e9ebf7',
         width: '100%',
         '& .ant-select-selection': {

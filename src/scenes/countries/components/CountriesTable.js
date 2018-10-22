@@ -77,8 +77,8 @@ class CountriesTable extends BaseFilter {
       render: recipient_country => <span>{recipient_country.region.name}</span>,
     },];
     return (
-      <Table className={classes.CountriesTable} dataSource={data ? this.addKey(data) : null} columns={columns}
-             scroll={{ x: 900 }}
+      <Table className={classes.table} dataSource={data ? this.addKey(data) : null} columns={columns}
+             scroll={{ x: 900 }} rowClassName={classes.row}
              size="middle"
       />
     )
@@ -90,9 +90,22 @@ CountriesTable.propTypes = {
 };
 
 const styles = {
-  CountriesTable: {
-    marginTop: 5
-  },
+    table: {
+        marginTop: 18,
+    },
+    row: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
   fixedTH: {
     right: 0,
     position: 'sticky',

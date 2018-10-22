@@ -2,11 +2,11 @@
 //so if ever the words seem to not fit, just recheck and change these default values to work
 //with your text properties
 //default font size for labels
-const defFontSize = 25;
-//Default char width when fontsize is 40
-const defCharWidth = 20;
-//Default text height when fontsize is 40
-const defTextHeight = 30;
+const defFontSize = 26;
+//Default char width when fontsize is 26
+const defCharWidth = 15.5;
+//Default text height when fontsize is 26
+const defTextHeight = 36;
 
 //Calculates the font size for the percentage label
 export function calcPercFontSize(text, width, height) {
@@ -102,7 +102,6 @@ export function calcLabelSizePosition(text, width, height) {
                                 textWidth = currentText.length*charWidth;
                                 textHeight = fontSize*defTextHeight/defFontSize;
                             }
-
                             textArray.unshift({
                                 text: brokenWord,
                                 yAdjust: textHeight,
@@ -183,6 +182,16 @@ export function calcLabelSizePosition(text, width, height) {
 
         textArray.forEach((item, index) => {
             item.yAdjust = textHeight*(index+1);
+            item.xAdjust = 0;
+        });
+
+        //And here we adjust the x position to be centered, cause someone doesn't like it aligned at the start
+        //When aligning at the start this xAdjust is not needed.
+        textArray.forEach((item) => {
+            const itemCharWidth = textHeight*defCharWidth/defTextHeight;
+            const textWidth = itemCharWidth*item.text.length;
+            const theLeftWidth = width - textWidth;
+            item.xAdjust = theLeftWidth/2;
         });
     }
 

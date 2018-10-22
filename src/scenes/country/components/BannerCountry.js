@@ -51,7 +51,7 @@ const BannerCountry = (props) => {
       ]
     ];
     return (
-      <Row>
+      <Row className={classes.bannerContent}>
         {
           lines.map((items, index) => {
             return (
@@ -137,6 +137,9 @@ const styles = {
       fontSize: '22px',
     },
   },
+    bannerContent: {
+        marginTop: 28,
+    },
   bannerCountry: {
     width: '100%',
     marginLeft: 0,
@@ -157,10 +160,11 @@ const styles = {
         }
       },
       '& .description': {
+          lineHeight: '28px',
         marginTop: 20,
         color: '#1471ce',
-        fontWeight: 500,
-        fontSize: 20,
+        fontWeight: 600,
+        fontSize: 21,
         paddingLeft: 9,
         '@media (max-width: 767px)': {
           fontSize: '16px',
@@ -175,7 +179,8 @@ const styles = {
         },
       },
       '& .menu': {
-        marginTop: 20,
+        marginTop: 40,
+          marginBottom: 40,
         lineHeight: '30px',
         borderBottomStyle: 'none',
       },
@@ -208,7 +213,6 @@ const styles = {
         fontSize: 32,
       },
         '& .financialLabel': {
-        marginTop: '24px',
             fontSize: '22px',
             fontWeight: 'bold',
             color: '#fff',
@@ -217,6 +221,7 @@ const styles = {
           },
         },
       '& .financialText':{
+          marginBottom: '46px',
           fontSize: '28px',
           fontWeight: 'normal',
         '@media (max-width: 767px)': {

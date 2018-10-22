@@ -48,7 +48,7 @@ const styles = {
   },
   description: {
     fontSize: 21,
-    fontWeight: 300,
+    fontWeight: 600,
     '@media (max-width: 768px)': {
       fontSize: 16,
     }

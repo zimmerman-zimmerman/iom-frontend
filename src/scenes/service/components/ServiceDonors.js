@@ -66,8 +66,10 @@ class ServiceDonors extends React.Component {
               sortValue={this.state.params.order_by}
               defSortValue={'participating_organisation'}
               onSort={this.handleSortBy}
+              style={{fontSize: 22, fontWeight: 'bold'}}
               />,
       key: 'participating_organisation',
+        className: 'title',
       width: '50%',
       render: obj =>
         <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
@@ -78,6 +80,7 @@ class ServiceDonors extends React.Component {
               sortValue={this.state.params.order_by}
               defSortValue={'value'}
               onSort={this.handleSortBy}
+              style={{fontSize: 22, fontWeight: 'bold'}}
           />,
       dataIndex: 'value',
       key: 'value',
@@ -118,17 +121,37 @@ const styles = {
     '& .title': {
       color: '#0033a1',
       fontWeight: 600,
+        fontSize: 26,
       '@media (max-width: 767px)': {
         fontSize: '22px',
       },
     }
   },
   table: {
+      marginTop: 30,
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',
       }
-    }
+    },
+      '& .title': {
+          fontSize: 16,
+          fontWeight: 'normal',
+          lineHeight: '22px',
+          color: '#0033a1',
+              '& a': {
+                  color: '#0033a1',
+                  '&:hover': {
+                      color: '#418fde',
+                  },
+              },
+      },
+      '& .number': {
+          fontSize: 22,
+          fontWeight: 'normal',
+          lineHeight: '22px',
+          color: '#0033a1',
+      }
   },
   fixedTH: {
     right: 0,

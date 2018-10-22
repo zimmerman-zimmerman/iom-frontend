@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Text } from 'recharts';
 import sumBy from 'lodash/sumBy';
 
-import { calcPercFontSize, calcPercXPosition, calcPercYPosition, calcLabelSizePosition } from './DonorsTreeMapHelpers';
+import { calcPercFontSize, calcPercXPosition, calcPercYPosition, calcXPosition,
+    calcLabelSizePosition } from './DonorsTreeMapHelpers';
 
 export default class DonorsTreeMapItem extends Component {
   static displayName = 'DonorsTreeMapItem';
@@ -53,7 +54,10 @@ export default class DonorsTreeMapItem extends Component {
     const percFontSize = calcPercFontSize(textPercent+'', this.props.width, this.props.height);
     const percXPos = x + calcPercXPosition(textPercent+'', this.props.width, percFontSize);
     const percYPos = y + calcPercYPosition(height);
-
+    // gonna use this to adjust that annoying first item, cause it don't stand right
+    //  And doing more proper calculations is gonna take a lot of time
+    //  I wait for the day we use them nivo charts for this.
+    const defXAdjust = this.props.code === 'US' ? 20 : this.props.code === 'GB' ? 10 : 0;
     return (
       <g>
         <rect
@@ -68,16 +72,18 @@ export default class DonorsTreeMapItem extends Component {
         />
           {
               depth === 1 ? (
-                  this.state.textArray.length > 0 && this.state.textArray.map(item => {
+                  this.state.textArray.length > 0 && this.state.textArray.map((item) => {
                       return (
                           <Text
-                              x={x + 10}
+                              x={x + item.xAdjust + defXAdjust}
                               y={y + item.yAdjust}
-                              textAnchor="start"
+                              className={'lol'}
+                              // textAnchor="start"
                               fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}
                               stroke="none"
                               fillOpacity={1}
                               fontSize={this.state.labelFontSize}
+                              fontWeight={600}
                           >
                               {item.text}
                           </Text>

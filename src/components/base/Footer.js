@@ -107,8 +107,9 @@ const styles = {
     },
   },
   text: {
+    fontSize: 18,
     color: 'white',
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   share: {
     paddingTop: '10px',

@@ -62,7 +62,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { intl, countryActivities } = this.props;
+    const { intl, countryActivities, classes } = this.props;
     const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -148,6 +148,7 @@ class TableProjects extends Component {
              && data.length <= this.props.itemAmount ? false : ''}
              scroll={{ x: 1800 }}
              loading={countryActivities.request}
+             rowClassName={classes.row}
       />
     )
   }
@@ -160,6 +161,19 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  row: {
+    fontSize: 16,
+      lineHeight: '22px',
+      color: '#0033a1',
+      '& td': {
+          '& a': {
+              color: '#0033a1',
+              '&:hover': {
+                  color: '#418fde',
+              },
+          },
+      },
+  },
   fixedTH: {
     right: 0,
     position: 'sticky',

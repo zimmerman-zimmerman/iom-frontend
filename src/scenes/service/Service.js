@@ -75,10 +75,6 @@ const mapStateToProps = (state, ) => {
 const styles = {
   service: {
     marginTop: 60,
-    paddingLeft: '135px !important',
-    '@media (max-width: 767px)': {
-      padding: '0px 25px !important',
-    },
     '& .map-row': {
       marginTop: 30,
       marginBottom: 40,
