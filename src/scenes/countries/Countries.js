@@ -77,7 +77,7 @@ class Countries extends BaseFilter {
                   <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                     <Col xs={12}>
                       { showMap ?
-                        <div className={classes.boxShadow}>
+                        <div>
                           <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
                                   tabName="activities"
                                   onShowSummary={this.onToggleSummary.bind(this)}
@@ -87,7 +87,7 @@ class Countries extends BaseFilter {
                       }
                       {showSummary ?
                         <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
-                          <div className={classes.boxShadow}>
+                          <div>
                             <Summary data={showMap ? data : null}
                                      onHideSummary={this.onToggleSummary.bind(this)}
                                      fieldValue="value"
@@ -108,7 +108,7 @@ class Countries extends BaseFilter {
                     </Col>
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
-                        <div className={classes.boxShadow}>
+                        <div>
                           <Summary data={showMap ? data : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"

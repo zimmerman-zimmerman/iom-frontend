@@ -167,7 +167,7 @@ const styles = {
   share: {
     width: 'max-content',
     marginTop: 16,
-    '& $button': {
+    '& button': {
       marginLeft: 16,
       color: '#0033a1',
       size: 32,
@@ -175,7 +175,7 @@ const styles = {
         color: '#35b6b4',
       }
     },
-    '& $button:first-child': {
+    '& button:first-child': {
       marginLeft: 0,
     }
   },
