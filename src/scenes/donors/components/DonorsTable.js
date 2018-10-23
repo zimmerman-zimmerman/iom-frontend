@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import { format } from "d3-format";
@@ -10,6 +10,8 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from "../../../components/SortHeader/SortHeader";
 
 import './DonorsTabel.scss';
+import Pagination from "../../../components/Pagination/Pagination";
+import {paginate} from "../../../helpers/tableHelpers";
 
 class DonorsTable extends BaseFilter {
     addKey(dataSource) {
@@ -33,7 +35,7 @@ class DonorsTable extends BaseFilter {
     }
 
     render() {
-        const { intl, data, rootComponent } = this.props;
+        const { intl, rootComponent } = this.props;
         const { filters } = rootComponent.state;
         const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
         const columns = [{
@@ -78,10 +80,19 @@ class DonorsTable extends BaseFilter {
             key: 'activity_count',
             className: 'number',
         },];
+        const data = paginate(this.state.page, this.state.pageSize, this.props.data);
         return (
-            <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
-                   scroll={{ x: 900 }}
-            />
+            <Fragment>
+                <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
+                       scroll={{ x: 900 }} pagination={false}
+                />
+                {this.props.data && this.props.data.length > 10 &&
+                        <Pagination pageCount={Math.ceil(this.props.data.length/10)}
+                                    onPageChange={(value) => this.setState({ page: value.selected+1 })}
+                                    forcePage={this.state.page-1}
+                        />
+                }
+            </Fragment>
         )
     }
 }

@@ -18,6 +18,7 @@ class ServiceProjects extends BaseFilter {
         hierarchy: 1,
         sector: get(props, 'sectorId'),
         page_size: 5,
+          page: 1,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
       },
       update: false,
