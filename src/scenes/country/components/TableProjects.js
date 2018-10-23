@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import Table from 'antd/es/table';
 import injectSheet from 'react-jss';
 import { injectIntl, intlShape } from "react-intl";
@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 import * as actions from "../../../services/actions/index";
 import SortHeader from "../../../components/SortHeader/SortHeader";
+import Pagination from "../../../components/Pagination/Pagination";
+import {paginate} from "../../../helpers/tableHelpers";
 
 class TableProjects extends Component {
   constructor(props) {
@@ -21,8 +23,10 @@ class TableProjects extends Component {
         recipient_country: props.countryCode.toUpperCase(),
         page_size: 50,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
-        ordering: 'title',
-      }
+        ordering: '-activity_budget_value',
+      },
+      page: 1,
+        pageSize: 7,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -63,7 +67,6 @@ class TableProjects extends Component {
 
   render() {
     const { intl, countryActivities, classes } = this.props;
-    const data = get(countryActivities, 'data.results');
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
@@ -142,14 +145,23 @@ class TableProjects extends Component {
       dataIndex: 'activity_dates[0].iso_date',
       key: 'end'
     },];
+      const allData = get(countryActivities, 'data.results');
+      const data = paginate(this.state.page, this.state.pageSize, allData);
     return(
-      <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
-             pagination={data && this.props.itemAmount
-             && data.length <= this.props.itemAmount ? false : ''}
-             scroll={{ x: 1800 }}
-             loading={countryActivities.request}
-             rowClassName={classes.row}
-      />
+        <Fragment>
+            <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+                   pagination={false}
+                   scroll={{ x: 1800 }}
+                   loading={countryActivities.request}
+                   rowClassName={classes.row}
+            />
+            {allData && allData.length > this.state.pageSize &&
+            <Pagination pageCount={Math.ceil(allData.length/this.state.pageSize)}
+                        onPageChange={(value) => this.setState({ page: value.selected+1 })}
+                        forcePage={this.state.page-1}
+            />
+            }
+        </Fragment>
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import get from 'lodash/get';
 import Table from 'antd/es/table';
-import Pagination from 'antd/es/pagination';
+import Pagination from '../../../components/Pagination/Pagination';
 import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import { format } from "d3-format";
@@ -33,14 +33,6 @@ class ProjectsTable extends BaseFilter {
       data.push(item);
     });
     return data;
-  }
-
-  getCurrentPage() {
-    const { filters } = this.props.rootComponent.state;
-    if (get(filters.values, 'page')) {
-       return filters.values['page'];
-    }
-    return 1
   }
 
   render() {
@@ -102,7 +94,7 @@ class ProjectsTable extends BaseFilter {
       dataIndex: 'sectors',
       key: 'sectors',
       width: '25%',
-      render: sectors => 
+      render: sectors =>
         <Link to={`/services/${sectors[0].sector.code}`}>{get(sectors, '[0].sector.name')}</Link>,
     }, {
       title: <SortHeader
@@ -133,10 +125,9 @@ class ProjectsTable extends BaseFilter {
                rowClassName={classes.row}
         />
           {count > 10 &&
-            <Pagination size="small"
-                        className={classes.rowGap}
-                        total={count} onChange={(page) => this.handleChange(page, "page")}
-                        current={this.getCurrentPage()}
+            <Pagination pageCount={Math.ceil(count/10)}
+                        onPageChange={(value) => this.handleChange(value.selected+1, "page")}
+                        forcePage={get(this.props.rootComponent.state.filters.values, 'page', 1)-1}
             />
           }
       </Fragment>

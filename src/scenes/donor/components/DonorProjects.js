@@ -26,6 +26,7 @@ class DonorProjects extends Component {
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         ordering: '-end_date',
+          page: 1,
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -155,7 +156,10 @@ class DonorProjects extends Component {
                  rowClassName={classes.donorsRow}
           />
           {total > 10 &&
-            <Pagination size="small" total={total} className={classes.pagination} onChange={this.onPageChange}/>
+              <Pagination pageCount={Math.ceil(total/10)}
+                          onPageChange={(value) => this.onPageChange(value.selected+1)}
+                          forcePage={this.state.params.page-1}
+              />
           }
       </Spin>
     )

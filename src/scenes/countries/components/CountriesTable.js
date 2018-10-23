@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { connect } from "react-redux";
 import Table from 'antd/es/table';
 import get from 'lodash/get';
@@ -8,6 +8,8 @@ import { injectIntl, intlShape } from "react-intl";
 import { Link } from 'react-router-dom';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from '../../../components/SortHeader/SortHeader';
+import Pagination from "../../../components/Pagination/Pagination";
+import { paginate } from '../../../helpers/tableHelpers';
 
 class CountriesTable extends BaseFilter {
   addKey(dataSource) {
@@ -31,7 +33,7 @@ class CountriesTable extends BaseFilter {
   }
 
   render() {
-    const { classes, intl, data, rootComponent } = this.props;
+    const { classes, intl, rootComponent } = this.props;
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -76,11 +78,22 @@ class CountriesTable extends BaseFilter {
       key: 'region',
       render: recipient_country => <span>{recipient_country.region.name}</span>,
     },];
+    const data = paginate(this.state.page, this.state.pageSize, this.props.data);
     return (
-      <Table className={classes.table} dataSource={data ? this.addKey(data) : null} columns={columns}
-             scroll={{ x: 900 }} rowClassName={classes.row}
-             size="middle"
-      />
+        <Fragment>
+            <Table className={classes.table} dataSource={data ? this.addKey(data) : null} columns={columns}
+                   pagination={false}
+                   scroll={{ x: 900 }}
+                   size="middle"
+                   rowClassName={classes.row}
+            />
+            {this.props.data && this.props.data.length > 10 &&
+                    <Pagination pageCount={Math.ceil(this.props.data.length/10)}
+                                onPageChange={(value) => this.setState({ page: value.selected+1 })}
+                                forcePage={this.state.page-1}
+                    />
+            }
+        </Fragment>
     )
   }
 }

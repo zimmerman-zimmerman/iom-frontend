@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Icon from "antd/es/icon";
+import SortUpArrow from '../../icons/SortUpArrow';
+import SortDownArrow from '../../icons/SortDownArrow';
 
 import './SortHeader.scss';
 
@@ -9,10 +10,14 @@ class SortHeader extends Component {
         this.state = {
             defValue: props.defSortValue,
             arrowClassName: 'no-arrow',
-            iconType: 'caret-up',
+            icon: <SortDownArrow className={'arrow-icon-down'} />,
         };
         this.handleSort = this.handleSort.bind(this);
         this.changeArrow = this.changeArrow.bind(this);
+    }
+
+    componentDidMount(){
+        this.changeArrow();
     }
 
     componentDidUpdate(prevProps){
@@ -40,13 +45,13 @@ class SortHeader extends Component {
             if(this.props.sortValue.indexOf('-') !== -1){
                 this.setState({
                     arrowClassName: 'sort-arrow',
-                    iconType: 'caret-up',
+                    icon: <SortUpArrow className={'arrow-icon-up'} />,
                 })
             }else
             {
                 this.setState({
                     arrowClassName: 'sort-arrow',
-                    iconType: 'caret-down',
+                    icon: <SortDownArrow className={'arrow-icon-down'} />,
                 })
             }
 
@@ -61,9 +66,8 @@ class SortHeader extends Component {
     render() {
         return (
             <div className={'sort-header'} onClick={() => this.handleSort()}>
-                <div className={'sort-title'}>
-                    {this.props.title}</div>
-                <div className={this.state.arrowClassName}> <Icon type={this.state.iconType} /> </div>
+                <div className={'sort-title'}>{this.props.title}</div>
+                <div className={this.state.arrowClassName}> {this.state.icon} </div>
             </div>
         );
     }

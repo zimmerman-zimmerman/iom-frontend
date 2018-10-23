@@ -1,6 +1,5 @@
 import React from 'react';
 import Table from 'antd/es/table';
-import Pagination from 'antd/es/pagination';
 import { format } from "d3-format";
 import get from "lodash/get";
 import BaseFilter from "../../../components/base/filters/BaseFilter";
@@ -11,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 import Trans from '../../../locales/Trans';
 import SortHeader from "../../../components/SortHeader/SortHeader";
+import Pagination from "../../../components/Pagination/Pagination";
 
 class ProjectsTable extends BaseFilter {
   addKey(dataSource) {
@@ -21,6 +21,17 @@ class ProjectsTable extends BaseFilter {
     });
     return data;
   }
+
+    handleChange(value, fieldName='page') {
+        const { rootComponent } = this.props;
+        const { filters } = rootComponent.state;
+        if (get(filters.values, fieldName)) {
+            delete filters.values[fieldName];
+        }
+        filters.values[fieldName] = value;
+        filters.changed = true;
+        this.setState({filters: filters});
+    }
 
   render() {
     const { intl, data, classes, selectedSortBy, handleSortBy } = this.props;
@@ -78,14 +89,12 @@ class ProjectsTable extends BaseFilter {
                className={classes.table}
                rowClassName={classes.row}
         />
-          {total > 10 &&
-              <Pagination className="pagination"
-                          size="small"
-                          total={total}
-                          onChange={(page) => this.handleChange(page)}
-              />
+          {total > 5 &&
+            <Pagination pageCount={Math.ceil(total/5)}
+                        onPageChange={(value) => this.handleChange(value.selected+1)}
+                        forcePage={get(this.props.rootComponent.state.filters.values, 'page', 1)-1}
+            />
           }
-
       </div>
     )
   }
