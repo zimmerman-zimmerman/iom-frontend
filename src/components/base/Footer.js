@@ -95,6 +95,7 @@ const styles = {
   footer: {
     backgroundColor: styleVariables.blue,
     color: 'white',
+      padding: '0 30px !important',
   },
   gap: {
     paddingTop: '10px',
