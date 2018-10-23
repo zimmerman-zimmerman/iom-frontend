@@ -101,7 +101,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
     row: {
-      fontSize: 22,
+      fontSize: 16,
         lineHeight: '22px',
         color: '#0033a1',
         '& td': {

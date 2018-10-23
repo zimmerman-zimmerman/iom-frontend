@@ -8,7 +8,6 @@ import Header from './Header';
 import Footer from './Footer';
 import Slider from './Slider';
 import Breadcrumbs from './Breadcrumbs';
-import injectSheet from "react-jss";
 
 class Page extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ class Page extends Component {
       <Fragment>
           <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
           {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
-          <div className={classes.pageStyle}>
+          <div >
               <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
                   <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
                       {children}
@@ -54,10 +53,4 @@ class Page extends Component {
   }
 }
 
-const styles = {
-  pageStyle: {
-    padding: '0 30px',
-  },
-};
-
-export default injectSheet(styles)(Page);
+export default Page;

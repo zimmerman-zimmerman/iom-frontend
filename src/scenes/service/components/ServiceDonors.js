@@ -66,7 +66,6 @@ class ServiceDonors extends React.Component {
               sortValue={this.state.params.order_by}
               defSortValue={'participating_organisation'}
               onSort={this.handleSortBy}
-              style={{fontSize: 22, fontWeight: 'bold'}}
               />,
       key: 'participating_organisation',
         className: 'title',
@@ -80,7 +79,6 @@ class ServiceDonors extends React.Component {
               sortValue={this.state.params.order_by}
               defSortValue={'value'}
               onSort={this.handleSortBy}
-              style={{fontSize: 22, fontWeight: 'bold'}}
           />,
       dataIndex: 'value',
       key: 'value',
@@ -147,7 +145,7 @@ const styles = {
               },
       },
       '& .number': {
-          fontSize: 22,
+          fontSize: 16,
           fontWeight: 'normal',
           lineHeight: '22px',
           color: '#0033a1',

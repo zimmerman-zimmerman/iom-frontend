@@ -61,8 +61,7 @@ class SortHeader extends Component {
     render() {
         return (
             <div className={'sort-header'} onClick={() => this.handleSort()}>
-                <div className={'sort-title'}
-                     style={this.props.style ? this.props.style : {}}>
+                <div className={'sort-title'}>
                     {this.props.title}</div>
                 <div className={this.state.arrowClassName}> <Icon type={this.state.iconType} /> </div>
             </div>

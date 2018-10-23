@@ -26,7 +26,6 @@ const TableDonors = (props) => {
           sortValue={props.sortBy}
           defSortValue={'participating_organisation'}
           onSort={handleDonorSortBy}
-          style={{fontSize: 22, fontWeight: 600}}
       />,
     key: 'participating_organisation',
     width: '60%',
@@ -38,7 +37,6 @@ const TableDonors = (props) => {
             sortValue={props.sortBy}
             defSortValue={'value'}
             onSort={handleDonorSortBy}
-            style={{fontSize: 22, fontWeight: 600}}
             />,
     dataIndex: 'value',
     key: 'value',
@@ -53,7 +51,7 @@ const TableDonors = (props) => {
 
 const styles = {
     row: {
-        fontSize: 22,
+        fontSize: 16,
         lineHeight: '22px',
         color: '#0033a1',
         '& td': {
