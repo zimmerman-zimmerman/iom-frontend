@@ -108,6 +108,7 @@ const styles = {
         fontSize: '10px',
     },
   summary: {
+        maxWidth: '232px',
     '& .ant-card-body': {
       padding: 12,
     },
@@ -119,7 +120,9 @@ const styles = {
     maxHeight: (props) => props.height,
     height: (props) => props.height,
     '@media (max-width: 991px)': {
-      height: '50vh',
+      height: 'min-content !important',
+        maxWidth: 'unset',
+        width: '100%',
     },
     minHeight: 'fit-content',
     '& h3': {
