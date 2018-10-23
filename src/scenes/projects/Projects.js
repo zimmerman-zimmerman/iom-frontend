@@ -116,7 +116,7 @@ class Projects extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           <Grid style={pageContainer} fluid>
             <Row>
-              <Col xs={12} md={4} lg={3} className={classes.filtersCol}>
+              <Col xs={12} md={4} lg={3} >
                 <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}
                          pluralMessage={<Trans id="projects.filters.projects" defaultMessage="Projects" />}
                          singularMessage={<Trans id="projects.filters.project" defaultMessage="Project" />}
@@ -125,17 +125,18 @@ class Projects extends BaseFilter {
               </Col>
               <Col xs={12} md={8} lg={9} className={classes.map}>
                 <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-                  <div className={classes.boxShadow}>
                     { showMap ?
-                      <GeoMap data={dataCountries} country='nl' height={geomapHeight} tooltipName="Activities:"
-                              tabName="activities"
-                              onShowSummary={this.onToggleSummary.bind(this)}
-                              showSummary={showSummary}
-                      /> : null
+                        <div className={classes.boxShadow}>
+                          <GeoMap data={dataCountries} country='nl' height={geomapHeight} tooltipName="Activities:"
+                                  tabName="activities"
+                                  onShowSummary={this.onToggleSummary.bind(this)}
+                                  showSummary={showSummary}
+                          />
+                        </div>: null
                     }
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
-                        <div className={classes.boxShadow}>
+                        <div >
                           <Summary data={showMap ? get(dataCountries, 'results') : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
@@ -146,7 +147,6 @@ class Projects extends BaseFilter {
                         </div>
                       </Col> : null
                     }
-                  </div>
                 </MediaQuery>
                 <MediaQuery minWidth={screenSize.desktop.minWidth}>
                   <Row>
@@ -157,7 +157,7 @@ class Projects extends BaseFilter {
                     </Col>
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
-                        <div className={classes.boxShadow}>
+                        <div >
                           <Summary data={showMap ? get(dataCountries, 'results') : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
@@ -230,9 +230,6 @@ const styles = {
     paddingLeft: 0,
     paddingRight: 0,
   },
-    filtersCol:{
-        backgroundColor:'#e9ebf7',
-    },
 };
 
 export default injectSheet(styles)(connect(mapStateToProps)(Projects));
