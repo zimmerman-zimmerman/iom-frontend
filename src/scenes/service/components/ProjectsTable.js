@@ -114,6 +114,7 @@ const styles = {
         },
     },
   projectsTable: {
+      width: '100%',
     paddingTop: 20,
     '& .title': {
       color: '#0033a1',
