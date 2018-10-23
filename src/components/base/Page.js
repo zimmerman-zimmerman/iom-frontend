@@ -23,7 +23,7 @@ class Page extends Component {
   }
 
   render() {
-    const { children, breadcrumbItems } = this.props;
+    const { children, breadcrumbItems, classes } = this.props;
     const { openSlider } = this.state;
     const menuItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -35,19 +35,19 @@ class Page extends Component {
     ];
     return (
       <Fragment>
-        <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
-        <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
-          <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
-            {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
-            {children}
-            <Footer/>
-          </Slider>
-        </MediaQuery>
-        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+          <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
           {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
-          {children}
+          <div >
+              <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
+                  <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
+                      {children}
+                  </Slider>
+              </MediaQuery>
+              <MediaQuery minWidth={screenSize.desktop.minWidth}>
+                  {children}
+              </MediaQuery>
+          </div>
           <Footer/>
-        </MediaQuery>
       </Fragment>
     )
   }

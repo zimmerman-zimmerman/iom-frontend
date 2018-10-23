@@ -89,6 +89,7 @@ const styles = {
   contactProject: {
     '& .line': {
       marginBottom: 10,
+        marginTop: 26,
     },
     '& .Title': {
       color: '#1f4283',

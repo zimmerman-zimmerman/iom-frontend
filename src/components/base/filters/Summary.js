@@ -25,11 +25,13 @@ class Summary extends Component {
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     return (
       <Card className={classes.summary}>
-        <h3><strong className={classes.title}><Trans id="summary.title" defaultMessage="Summary"/></strong></h3>
-        <Divider className="Divider"/>
-        <Button size="small" type="primary" ghost className="button-hide" onClick={onHideSummary}>
-          <Trans id="summary.hide" defaultMessage="Hide"/>
-        </Button>
+          <div className={classes.header}>
+              <h3><strong className={classes.title}><Trans id="summary.title" defaultMessage="Summary"/></strong></h3>
+              <Button size="small" type="primary" ghost className={classes.buttonHide} onClick={onHideSummary}>
+                  <Trans id="summary.hide" defaultMessage="Hide"/>
+              </Button>
+          </div>
+          <Divider className="Divider"/>
         <Row>
           <Col xs={12}>
             <strong className={classes.number}>{usd}{formatNumberComma(totalBudget)}</strong>
@@ -75,9 +77,27 @@ Summary.propTypes = {
 
 
 const styles = {
+    header: {
+      display: 'flex',
+    },
+    buttonHide: {
+        order: 2,
+        fontSize: 10,
+        lineHeight: '14px',
+        border: 'solid 1px #418fde',
+        width: 49.4,
+        height: 20.8,
+        borderRadius: 3,
+        fontWeight: 'bold',
+        marginLeft: 'auto',
+        marginTop: 4,
+    },
     title: {
+        order: 1,
         color: '#262626',
         fontSize: '18px',
+        fontWeight: 700,
+        lineHeight: '19px',
     },
   number: {
       color: '#262626',
@@ -112,12 +132,6 @@ const styles = {
     '& .field': {
       color: '#959595',
       fontSize: 11
-    },
-    '& .button-hide': {
-      position: 'absolute',
-      borderRadius: 2,
-      right: 12,
-      top: 12,
     },
     '& .gap-row': {
       marginTop: 15

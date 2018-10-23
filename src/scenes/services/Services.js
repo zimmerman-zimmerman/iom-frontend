@@ -70,7 +70,7 @@ class Services extends BaseFilter {
                       </MediaQuery> : null
                     }
                   </Col>
-                  <hr className="divider" style={{ marginTop: calcDividerMargTop(data.length) }} />
+                  <hr className="divider" style={{ marginTop: calcDividerMargTop(data.length)+10 }} />
                   <Col xs={12} className="service-table">
                     {data ? <ServicesTable rootComponent={this} data={data}/> : null}
                   </Col>
@@ -123,7 +123,7 @@ const styles = {
       paddingLeft: 0,
     },
     '& .divider': {
-      border: 'solid 3px #173d8e',
+      border: 'solid 2px #173d8e',
       opacity: 0.3,
       marginBottom: 15,
       width: '100%',

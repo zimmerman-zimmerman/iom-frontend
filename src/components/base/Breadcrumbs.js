@@ -4,6 +4,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectSheet from "react-jss";
 import { Link } from 'react-router-dom';
 
+import ArrowRight from '../../icons/ArrowRight';
+
 import { breadcrumbs as styleBreadcrumbs } from '../../helpers/style';
 import './styles/Breadcrumbs.scss';
 
@@ -19,7 +21,7 @@ const Breadcrumbs = (props) => {
     <Grid fluid className={classes.border}>
       <Row middle={size} className={classes.row}>
         <Col md={12} lg={12}>
-          <Breadcrumb className='one-breadcrumb' separator={styleBreadcrumbs.separator}>
+          <Breadcrumb className='one-breadcrumb' separator={<ArrowRight className={classes.separator} />}>
             {breadcrumbs}
           </Breadcrumb>
         </Col>
@@ -29,16 +31,16 @@ const Breadcrumbs = (props) => {
 };
 
 const styles = {
-  container: {
-    "span": {
-        ".ant-breadcrumb-separator": {
-            color: 'red !important',
-        },
-    },
+  separator: {
+    height: 12,
+      width: 12,
+      verticalAlign: '-1px',
   },
   border: {
     marginTop: styleBreadcrumbs.marginTop,
     borderBottom: styleBreadcrumbs.border,
+      paddingLeft: '30px !important',
+      paddingRight: '30px !important',
   },
   row: {
     height: styleBreadcrumbs.height,

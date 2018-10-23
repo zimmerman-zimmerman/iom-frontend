@@ -18,7 +18,7 @@ const BannerText = (props) => {
 const styles = {
   title: {
     fontFamily: "Open Sans",
-    fontSize: '28px',
+    fontSize: '40px',
     fontWeight: 'normal',
     fontStyle: 'normal',
     fontStretch: 'normal',

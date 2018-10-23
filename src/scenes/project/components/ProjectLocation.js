@@ -55,9 +55,10 @@ class ProjectLocation extends Component {
                 <Fragment>
                     {
                         fields.map((item, index) => {
+                            const contact = item.title.defaultMessage.indexOf('Contact') !== -1;
                             return (
                                 <Fragment key={index}>
-                                    <Row className="title">
+                                    <Row className='title' style={{ marginTop: contact ? 50 : 10 }}>
                                         <Col xs={12}>
                                             <Trans {...item.title}/>
                                         </Col>
@@ -68,7 +69,9 @@ class ProjectLocation extends Component {
                                                 <Row className="field" key={index}>
                                                     {
                                                         item.name ? <Col xs={12}>
-                                                            <span className="name"><Trans {...item.name} /></span>
+                                                            <span className="name"
+                                                                  style={{ fontWeight: contact ? 600 : 'bold' }}>
+                                                                <Trans {...item.name} /></span>
                                                             <span className="value">{item.value}</span>
                                                         </Col> : item.value
                                                     }
@@ -199,6 +202,7 @@ class ProjectLocation extends Component {
                             countryTransactionData.activity_count, countryTransactionData.value)}
                                 zoom={6} country='nl' height={450} tooltipName="Activities:"
                                 tabName="activities"
+                                detail
                                 defCenter={[countryData.location.coordinates[1], countryData.location.coordinates[0]]}
                         /> : null}
                     </Col>
@@ -221,19 +225,10 @@ const styles = {
         display: 'inline',
     },
     projectLocation: {
-        '& .left': {
-            paddingLeft: '85px !important',
-            '@media (max-width: 767px)': {
-                padding: '0px 25px !important',
-            },
-        },
         '& .right': {
             marginTop: -200,
-            paddingRight: '8px !important',
-            paddingLeft: '0px !important',
             '@media (max-width: 767px)': {
                 marginTop: 40,
-                padding: '0px 25px !important',
             },
         },
         margin: '60px 0',
@@ -242,6 +237,7 @@ const styles = {
             marginTop: 10,
             paddingBottom: 10,
             fontSize: 26,
+            fontWeight: 600,
           '@media (max-width: 767px)': {
             fontSize: 22,
           },
@@ -251,6 +247,7 @@ const styles = {
         },
         '& .country-name': {
             order: 2,
+            fontWeight: 600,
             color: '#1f4283',
             fontSize: 22,
             marginTop: '14px',
@@ -272,12 +269,14 @@ const styles = {
         },
         '& .name': {
             fontWeight: 'bold',
+            fontSize: 22,
           '@media (max-width: 767px)': {
             fontSize: 16,
           },
         },
         '& .value': {
             marginLeft: 5,
+            fontSize: 22,
           '@media (max-width: 767px)': {
             fontSize: 16,
           },

@@ -6,10 +6,10 @@ export const variables = {
 
 export const breadcrumbs = {
   border: 'solid 1px #d0d0d0',
-  color: '#262626',
+  color: '#418fde',
     fontWeight: 'bold',
-  colorActive: '#418fde',
-  sizeFont: 18,
+  colorActive: '#262626',
+  sizeFont: 14,
   height: 30,
   marginTop: 5,
   separator: '>',
@@ -26,4 +26,4 @@ export const slider = {
 
 export const pageContainer = {
   minHeight: 'calc(100vh - 262px)',
-}
+};

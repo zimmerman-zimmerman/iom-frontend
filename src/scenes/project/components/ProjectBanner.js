@@ -50,7 +50,7 @@ const ProjectBanner= (props) => {
       ]
     ];
     return (
-      <Row>
+      <Row className={classes.bannerContent}>
         {
           lines.map((items, index) => {
             return (
@@ -80,11 +80,9 @@ const ProjectBanner= (props) => {
             <Icon type="appstore"/>
             <Trans id="project.banner.left.menu.overview" defaultMessage="Overview"/>
           </Menu.Item>
-          <Menu.Item key="related">
-            <span data-tip="Under construction" data-effect="solid" data-place="top" data-type="light">
-              <Icon type="book"/>
-              <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
-            </span>
+          <Menu.Item key="related" >
+                <Icon type="book"/>
+                <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
           </Menu.Item>
         </Menu>
         <div className="description">{get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}</div>
@@ -109,6 +107,9 @@ const styles = {
         fontSize: 22,
       },
     },
+    bannerContent: {
+      marginTop: 28,
+    },
   projectBanner: {
     width: '100%',
     marginLeft: 0,
@@ -127,10 +128,11 @@ const styles = {
         },
       },
       '& .description': {
+          lineHeight: '28px',
         marginTop: 40,
         color: '#1471ce',
-        fontWeight: 500,
-        fontSize: 20,
+        fontWeight: 600,
+        fontSize: 21,
         '@media (max-width: 767px)': {
           fontSize: 16,
         },
@@ -144,7 +146,7 @@ const styles = {
         },
       },
       '& .menu': {
-        marginTop: 20,
+        marginTop: 40,
         lineHeight: '30px',
         borderBottomStyle: 'none',
       },
@@ -176,7 +178,6 @@ const styles = {
       color: 'white',
       fontWeight: 600,
         '& .financialLabel': {
-            marginTop: '24px',
             fontSize: '22px',
             fontWeight: 'bold',
             color: '#fff',
@@ -187,6 +188,7 @@ const styles = {
         '& .financialText':{
             fontSize: '28px',
             fontWeight: 'normal',
+            marginBottom: '46px',
           '@media (max-width: 767px)': {
             fontSize: 16,
           },

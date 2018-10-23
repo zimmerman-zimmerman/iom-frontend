@@ -64,9 +64,12 @@ class HomeChart extends Component {
     const PieRadialChart = (props) => {
       const { widthDivider } = props;
       const height = window.innerWidth / widthDivider;
+      const innerRadius = height / 5;
+      const outerRadius = height / 4 + 35;
+      const desiredHeight = innerRadius + outerRadius + 80;
       return (
-        <ResponsivePieRadialChart height={height - 10} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={height / 5} outerRadius={height / 4 + 35} linkPage={linkPage}
+        <ResponsivePieRadialChart height={desiredHeight} data={data} prefixLegend={prefixLegend}
+                                  innerRadius={innerRadius} outerRadius={outerRadius} linkPage={linkPage}
                                   donorGroupJson={donorGroupJson}
         />
       )
@@ -138,12 +141,13 @@ class HomeChart extends Component {
 const styles = {
   title: {
     padding: '30px 20px 0 20px',
-    fontSize: 'calc(1em + 1vw)',
+    fontSize: '31px',
     fontWeight: 300,
-    height: 90,
-    '@media only screen (max-width: 1033px)': {
-      height: 80,
-    }
+      height: 122,
+      '@media only screen and (max-width: 767px)': {
+          height: 'unset',
+          fontSize: '18px',
+      },
   },
   listItems: {
     '@media only screen and (min-width: 992px)': {
@@ -174,6 +178,7 @@ const styles = {
       maxHeight: 54,
       maxWidth: '100%',
       fontSize: 21,
+        fontWeight: 500,
       lineHeight: 1.33,
       '@media only screen and (max-width: 767px)': {
         fontSize: 15,

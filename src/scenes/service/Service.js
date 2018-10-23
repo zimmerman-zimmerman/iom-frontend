@@ -45,11 +45,9 @@ class Service extends BaseFilter {
         <Page breadcrumbItems={breadcrumbItems}>
           {data ? <ServiceBanner description={serviceJSON['description']} data={get(service, 'data.results[0]')}/> : null}
           <Grid className={classes.service} fluid>
-            <Row>
-              <Col xs={12} lg={6}>
+            <Row xs={12} lg={6}>
+              <Col xs={12} lg={6} className={classes.listsContainer}>
                 <ServiceDonors sectorId={sectorId} />
-              </Col>
-              <Col xs={12} lg={6}>
                 <ServiceProjects sectorId={sectorId} />
               </Col>
             </Row>
@@ -73,12 +71,15 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  listsContainer: {
+    marginLeft: 'auto',
+      marginRight: 'auto',
+      maxWidth: 'unset !important',
+      flexBasis: 'unset !important',
+      width: '100%',
+  },
   service: {
     marginTop: 60,
-    paddingLeft: '135px !important',
-    '@media (max-width: 767px)': {
-      padding: '0px 25px !important',
-    },
     '& .map-row': {
       marginTop: 30,
       marginBottom: 40,

@@ -81,10 +81,11 @@ class CountriesTable extends BaseFilter {
     const data = paginate(this.state.page, this.state.pageSize, this.props.data);
     return (
         <Fragment>
-            <Table className={classes.CountriesTable} dataSource={data ? this.addKey(data) : null} columns={columns}
+            <Table className={classes.table} dataSource={data ? this.addKey(data) : null} columns={columns}
                    pagination={false}
                    scroll={{ x: 900 }}
                    size="middle"
+                   rowClassName={classes.row}
             />
             {this.props.data && this.props.data.length > 10 &&
                     <Pagination pageCount={Math.ceil(this.props.data.length/10)}
@@ -102,9 +103,22 @@ CountriesTable.propTypes = {
 };
 
 const styles = {
-  CountriesTable: {
-    marginTop: 5
-  },
+    table: {
+        marginTop: 18,
+    },
+    row: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
   fixedTH: {
     right: 0,
     position: 'sticky',

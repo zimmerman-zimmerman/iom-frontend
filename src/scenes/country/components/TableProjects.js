@@ -66,7 +66,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { intl, countryActivities } = this.props;
+    const { intl, countryActivities, classes } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
@@ -153,6 +153,7 @@ class TableProjects extends Component {
                    pagination={false}
                    scroll={{ x: 1800 }}
                    loading={countryActivities.request}
+                   rowClassName={classes.row}
             />
             {allData && allData.length > this.state.pageSize &&
             <Pagination pageCount={Math.ceil(allData.length/this.state.pageSize)}
@@ -172,6 +173,19 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  row: {
+    fontSize: 16,
+      lineHeight: '22px',
+      color: '#0033a1',
+      '& td': {
+          '& a': {
+              color: '#0033a1',
+              '&:hover': {
+                  color: '#418fde',
+              },
+          },
+      },
+  },
   fixedTH: {
     right: 0,
     position: 'sticky',

@@ -33,7 +33,7 @@ class DonorsTable extends BaseFilter {
     }
 
     render() {
-        const { intl, rootComponent, donorGroup } = this.props;
+        const { intl, rootComponent, donorGroup, classes } = this.props;
         const { filters } = rootComponent.state;
         const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
         const columns = [{
@@ -81,8 +81,8 @@ class DonorsTable extends BaseFilter {
         const data = paginate(this.state.page, this.state.pageSize, this.props.data);
         return (
             <Fragment>
-                <Table className="DonorsTable" dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
-                       scroll={{ x: 900 }}  pagination={false}
+                <Table className={classes.donorsTable} dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
+                       scroll={{ x: 900 }}  pagination={false} rowClassName={classes.donorsRow}
                 />
                 {this.props.data && this.props.data.length > 10 &&
                     <Pagination pageCount={Math.ceil(this.props.data.length/10)}
@@ -100,6 +100,22 @@ DonorsTable.propTypes = {
 };
 
 const styles = {
+    donorsTable: {
+      marginTop: 10,
+    },
+    donorsRow: {
+        fontSize: 16,
+        lineHeight: '22px',
+        color: '#0033a1',
+        '& td': {
+            '& a': {
+                color: '#0033a1',
+                '&:hover': {
+                    color: '#418fde',
+                },
+            },
+        },
+    },
     fixedTH: {
         right: 0,
         position: 'sticky',

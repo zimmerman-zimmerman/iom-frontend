@@ -95,6 +95,7 @@ const styles = {
   footer: {
     backgroundColor: styleVariables.blue,
     color: 'white',
+      padding: '0 30px !important',
   },
   gap: {
     paddingTop: '10px',
@@ -107,8 +108,9 @@ const styles = {
     },
   },
   text: {
+    fontSize: 18,
     color: 'white',
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   share: {
     paddingTop: '10px',

@@ -122,6 +122,7 @@ class ProjectsTable extends BaseFilter {
                pagination={false}
                scroll={{ x: 1200 }}
                className={classes.rowGap}
+               rowClassName={classes.row}
         />
           {count > 10 &&
             <Pagination pageCount={Math.ceil(count/10)}
@@ -143,6 +144,19 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  row: {
+    fontSize: 16,
+      lineHeight: '22px',
+      color: '#0033a1',
+      '& td': {
+          '& a': {
+              color: '#0033a1',
+              '&:hover': {
+                  color: '#418fde',
+              },
+          },
+      },
+  },
   rowGap: {
     marginTop: 20
   },

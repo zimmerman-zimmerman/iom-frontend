@@ -73,12 +73,13 @@ export default class SectorsTreeMapItem extends Component {
                   this.state.textArray.length > 0 && this.state.textArray.map(item => {
                       return (
                           <Text
-                              x={x + 4}
+                              x={x + item.xAdjust}
                               y={y + item.yAdjust}
-                              textAnchor="start"
+                              // textAnchor="start"
                               fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}
                               stroke="none"
                               fillOpacity={1}
+                              fontWeight={600}
                               fontSize={this.state.labelFontSize}
                           >
                               {item.text}

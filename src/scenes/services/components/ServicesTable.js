@@ -72,6 +72,7 @@ class ServicesTable extends BaseFilter {
     return (
       <Table dataSource={this.addKey(data)} columns={columns} size="middle"
                    pagination={false} scroll={{ x: 900 }} className={classes.table}
+             rowClassName={classes.row}
       />
     )
   }
@@ -86,7 +87,21 @@ const mapStateToProps = (state, ) => {
 };
 
 const styles = {
+  row: {
+    fontSize: 16,
+      lineHeight: '22px',
+      color: '#0033a1',
+      '& td': {
+          '& a': {
+              color: '#0033a1',
+              '&:hover': {
+                  color: '#418fde',
+              },
+          },
+      },
+  },
   table: {
+    marginTop: 8,
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',

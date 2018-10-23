@@ -27,12 +27,28 @@ const styles = {
     '& button': {
       height: 44,
       width: 50,
-      backgroundColor: '#418fde',
+      backgroundColor: '#70bea5',
+        borderColor: '#70bea5',
     },
     '& .ant-input-suffix': {
       zIndex: 1,
       boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)',
-    }
+    },
+      '& .ant-input::-webkit-input-placeholder': { /* Chrome/Opera/Safari */
+          fontSize: 18,
+      },
+      '& .ant-input::-moz-placeholder': { /* Firefox 19+ */
+          fontSize: 18,
+      },
+      '& .ant-input:-ms-input-placeholder': { /* IE 10+ */
+          fontSize: 18,
+      },
+      '& .ant-input:-moz-placeholder': { /* Firefox 18- */
+          fontSize: 18,
+      },
+      '& .ant-input::placeholder': {
+          fontSize: 18,
+      },
   },
 };
 

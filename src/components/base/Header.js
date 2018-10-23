@@ -141,6 +141,12 @@ const styles = {
       margin: 'auto auto auto 0',
     },
     tabsHeader: {
+        '& .ant-menu': {
+            fontSize: 18,
+            '& .ant-menu-item-selected': {
+                borderBottom: '6px solid #35b6b4 !important',
+            }
+        },
       order:2,
         margin: '28px 0 0 auto',
         width: 'max-content',

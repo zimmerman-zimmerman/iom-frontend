@@ -108,6 +108,7 @@ class Country extends BaseFilter {
                   {countryData ?
                       <GeoMap data={formatMapData(countryData, countryResult.activity_count, countryResult.value)}
                               zoom={6} country='nl' height={450} tooltipName="Activities:"
+                              detail
                               tabName="activities"
                               defCenter={[countryData.location.coordinates[1], countryData.location.coordinates[0]]}
                       /> : null}
@@ -149,10 +150,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   country: {
-    padding: '0 50px !important',
-    '@media (max-width: 767px)': {
-      padding: '0px 25px !important',
-    },
+    marginTop: 34,
     '& .gap': {
       padding: '30px 0'
     },
@@ -162,6 +160,7 @@ const styles = {
     '& .title': {
       color: '#1f4283',
       fontSize: 26,
+        fontWeight: 600,
       '@media (max-width: 767px)': {
         fontSize: '22px',
       },

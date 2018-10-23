@@ -3,13 +3,15 @@
     .ant-breadcrumb-separator{
       font-weight: bold;
       color: #262626;
+      margin-left: 9px;
+      margin-right: 9px;
     }
   }
 }
 
 .breadcrumb-link {
-  color: #262626 !important;
+  color: #418fde !important;
   &:hover{
-    color: #418fde !important;
+    color: #262626 !important;
   }
 }
