@@ -8,6 +8,7 @@ import get from 'lodash/get';
 import injectSheet from "react-jss";
 import { Link } from 'react-router-dom';
 import SortHeader from "../../../components/SortHeader/SortHeader";
+import Pagination from "../../../components/Pagination/Pagination";
 
 
 class ServiceDonors extends React.Component {
@@ -16,11 +17,12 @@ class ServiceDonors extends React.Component {
     this.state = {
       params: {
         aggregations: 'activity_count,incoming_fund,disbursement,expenditure,value',
-        page_size: 10,
         group_by: 'participating_organisation',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         order_by: 'participating_organisation',
-      }
+          page: 1,
+          page_size: 7,
+      },
     };
     this.handleSortBy = this.handleSortBy.bind(this);
   }
@@ -42,6 +44,14 @@ class ServiceDonors extends React.Component {
     });
   }
 
+  handlePageChange(page) {
+      const newParams = this.state.params;
+      newParams.page = page;
+      this.setState({params: newParams}, () => {
+          this.getDonors();
+      });
+  }
+
   getDonors() {
     const { dispatch, sectorId } = this.props;
     const { params } = this.state;
@@ -59,7 +69,6 @@ class ServiceDonors extends React.Component {
   render() {
     const { intl, serviceDonors, classes } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
-    const data = get(serviceDonors, 'data.results', null);
     const columns = [{
       title: <SortHeader
               title={intl.formatMessage({id: 'service.donors.header.donor', defaultMessage: 'Donor'})}
@@ -84,6 +93,8 @@ class ServiceDonors extends React.Component {
       className: 'number',
       render: value => <span>{usd}{format(',.2f')(value)}</span>
     },];
+    const data = get(serviceDonors, 'data.results', null);
+    const count = get(serviceDonors, 'data.count', 0);
     return(
       <div className={classes.serviceDonors}>
         <h2 className="title">
@@ -95,7 +106,14 @@ class ServiceDonors extends React.Component {
                loading={serviceDonors.request}
                dataSource={data ? this.addKey(data) : null}
                className={classes.table}
+               pagination={false}
         />
+          {data && count > this.state.params.page_size &&
+          <Pagination pageCount={Math.ceil(count/this.state.params.page_size)}
+                      onPageChange={(value) => this.handlePageChange(value.selected+1)}
+                      forcePage={this.state.params.page-1}
+          />
+          }
       </div>
     )
   }
