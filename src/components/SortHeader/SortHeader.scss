@@ -1,3 +1,5 @@
+$arrowColor: #0033a1;
+
 .sort-header {
   display: flex;
   cursor: pointer;
@@ -17,15 +19,27 @@
   }
 }
 
+.arrow-icon-up {
+  height: 20px;
+  width: 20px;
+  top: 8px;
+  position: relative;
+  left: 6px;
+  fill: $arrowColor;
+}
+
+.arrow-icon-down {
+  height: 20px;
+  width: 20px;
+  fill: $arrowColor;
+}
+
 .sort-arrow {
   margin-left: 8px;
   order: 2;
   height: fit-content;
   margin-top: auto;
   margin-bottom: auto;
-  .anticon {
-    font-size: 14px;
-  }
 }
 
 .no-arrow {

@@ -23,7 +23,7 @@ class TableProjects extends Component {
         recipient_country: props.countryCode.toUpperCase(),
         page_size: 50,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
-        ordering: 'title',
+        ordering: '-activity_budget_value',
       },
       page: 1,
         pageSize: 7,

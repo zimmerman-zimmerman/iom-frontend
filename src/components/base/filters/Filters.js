@@ -243,7 +243,6 @@ const styles = {
   },
   container: {
     paddingRight: 20,
-      backgroundColor:'#e9ebf7',
   }
 };
 
