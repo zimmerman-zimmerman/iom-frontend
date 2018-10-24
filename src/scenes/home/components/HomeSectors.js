@@ -22,6 +22,7 @@ HomeSectors.defaultProps = {
   localeTitle: {id: 'home.sectors.title', defaultMessage: 'How the expenditures are classified'},
   localeButtonText: {id: 'home.sectors.button', defaultMessage: 'See All Publisher Services'},
   linkPage: '/services',
+  dataResult: 'data.results',
 };
 
 const mapStateToProps = (state, ) => {

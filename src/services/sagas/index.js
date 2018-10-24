@@ -299,6 +299,15 @@ export function* donorGroupJsonRequest(action) {
   }
 }
 
+export function* homeFundingGoesRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.homeFundingGoesSuccess(response));
+  } catch (error) {
+    yield put(actions.homeFundingGoesFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
@@ -338,6 +347,7 @@ function* sagas() {
     takeLatest('HOME_MEDIA_CONTENT_REQUEST', homeMediaContentRequest),
     takeLatest('DONORS_GROUPS_JSON_REQUEST', donorsGroupsJsonRequest),
     takeLatest('DONOR_GROUP_JSON_REQUEST', donorGroupJsonRequest),
+    takeLatest('HOME_FUNDING_GOES_REQUEST', homeFundingGoesRequest),
   ]
 }
 

@@ -896,3 +896,31 @@ export function donorGroupJsonFailed(error) {
     error: error
   }
 }
+
+export const HOME_FUNDING_GOES_INITIAL = 'HOME_FUNDING_GOES_INITIAL';
+export const HOME_FUNDING_GOES_REQUEST = 'HOME_FUNDING_GOES_REQUEST';
+export const HOME_FUNDING_GOES_SUCCESS = 'HOME_FUNDING_GOES_SUCCESS';
+export const HOME_FUNDING_GOES_FAILED = 'HOME_FUNDING_GOES_FAILED';
+export function homeFundingGoesInitial() {
+  return {
+    type: HOME_FUNDING_GOES_INITIAL
+  }
+}
+export function homeFundingGoesRequest(slug) {
+  return {
+    type: HOME_FUNDING_GOES_REQUEST,
+    slug: slug
+  }
+}
+export function homeFundingGoesSuccess(data) {
+  return {
+    type: HOME_FUNDING_GOES_SUCCESS,
+    data: data
+  }
+}
+export function homeFundingGoesFailed(error) {
+  return {
+    type: HOME_FUNDING_GOES_FAILED,
+    error: error
+  }
+}

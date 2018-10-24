@@ -10,8 +10,8 @@ import BannerText from '../../components/base/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import HomeDonors from './components/HomeDonors';
-import HomeActivities from './components/HomeActivities';
 import HomeSectors from './components/HomeSectors';
+import HomeFundingGoes from './components/HomeFundingGoes';
 import connect from "react-redux/es/connect/connect";
 import * as actions from "../../services/actions";
 
@@ -71,7 +71,7 @@ class Home extends Component {
                 <HomeDonors />
               </Col>
               <Col xs={12} md={12} lg={4}>
-                <HomeActivities />
+                <HomeFundingGoes />
               </Col>
               <Col xs={12} md={12} lg={4}>
                 <HomeSectors />
