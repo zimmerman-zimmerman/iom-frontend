@@ -106,15 +106,13 @@ class BaseFilter extends Component {
           const { groupBy, filterRequest, secondFilterRequest, nonHumanFilterRequest } = rootComponent.props;
           if (filters.changed) {
               const { params } = rootComponent.state;
-              if(params['humanitarian'] !== undefined)
-              {
+              if(params['humanitarian'] !== undefined) {
                   let paramz = params;
                   paramz.humanitarian = 1;
                   this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
                   params.humanitarian = 0;
                   this.actionRequest(extend({}, params, filters.values), groupBy, nonHumanFilterRequest);
-              }else
-              {
+              } else {
                   this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
                   if (secondFilterRequest) {
                       this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
