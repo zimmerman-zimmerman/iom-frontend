@@ -11,9 +11,9 @@ HomeFundingGoes.defaultProps = {
   idField: 'participating_organisation_ref',
   nameField: 'participating_organisation',
   valueField: 'value',
-  localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Comes From'},
-  localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'},
-  linkPage: '/donors',
+  localeTitle: {id: 'home.activities.title', defaultMessage: 'Where the Funding Goes'},
+  localeButtonText: {id: 'home.activities.button', defaultMessage: 'See All Publisher Services'},
+  linkPage: '/projects',
   dataResult: 'data.content'
 };
 
