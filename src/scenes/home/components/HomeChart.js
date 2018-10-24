@@ -44,7 +44,6 @@ class HomeChart extends Component {
       localeButtonText, linkPage, donorGroupJson, dataResult
     } = this.props;
     const data = [];
-    console.log(reducer, dataResult, get(reducer, dataResult));
     forEach(get(reducer, dataResult), function(item){
       data.push({
         id: get(item, idField),
