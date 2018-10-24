@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text } from 'recharts';
 import sumBy from 'lodash/sumBy';
 
-import { calcPercFontSize, calcPercXPosition, calcPercYPosition, calcXPosition,
+import { calcPercFontSize, calcPercXPosition, calcPercYPosition,
     calcLabelSizePosition } from './DonorsTreeMapHelpers';
 
 export default class DonorsTreeMapItem extends Component {

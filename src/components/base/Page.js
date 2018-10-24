@@ -23,7 +23,7 @@ class Page extends Component {
   }
 
   render() {
-    const { children, breadcrumbItems, classes } = this.props;
+    const { children, breadcrumbItems } = this.props;
     const { openSlider } = this.state;
     const menuItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
