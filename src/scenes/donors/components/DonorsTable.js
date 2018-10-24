@@ -49,8 +49,9 @@ class DonorsTable extends BaseFilter {
             key: 'participating_organisation',
             width: '55%',
             render: (participating_organisation, row, index) => {
+                const code = typeof row.code === 'string' ? row.code.toLowerCase() : row.code;
                 return (
-                    <Link to={`/donors/${row.code.toLowerCase()}`}>
+                    <Link to={`/donors/${code}`}>
                         {participating_organisation}
                     </Link>
                 );
