@@ -123,7 +123,11 @@ import {
   DONOR_GROUP_JSON_INITIAL,
   DONOR_GROUP_JSON_REQUEST,
   DONOR_GROUP_JSON_SUCCESS,
-  DONOR_GROUP_JSON_FAILED
+  DONOR_GROUP_JSON_FAILED,
+  HOME_FUNDING_GOES_INITIAL,
+  HOME_FUNDING_GOES_REQUEST,
+  HOME_FUNDING_GOES_SUCCESS,
+  HOME_FUNDING_GOES_FAILED
 } from '../actions/index';
 import {
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
@@ -678,6 +682,21 @@ function donorGroupJson(state=initial, action) {
   }
 }
 
+function homeFundingGoes(state=initial, action) {
+  switch (action.type) {
+    case HOME_FUNDING_GOES_INITIAL:
+      return updateInitial(state, action);
+    case HOME_FUNDING_GOES_REQUEST:
+      return updateRequest(state, action);
+    case HOME_FUNDING_GOES_SUCCESS:
+      return updateSuccess(state, action);
+    case HOME_FUNDING_GOES_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   projectTransactions,
   nonHumanServices,
@@ -711,6 +730,7 @@ const reducers = {
   homeMediaContent,
   donorsGroupsJson,
   donorGroupJson,
+  homeFundingGoes,
 };
 
 export default reducers;

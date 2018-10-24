@@ -39,13 +39,16 @@ class HomeChart extends Component {
   }
 
   render() {
-    const { reducer, localeTitle, intl, idField, nameField, valueField, localeButtonText, linkPage, donorGroupJson } = this.props;
+    const {
+      reducer, localeTitle, intl, idField, nameField, valueField,
+      localeButtonText, linkPage, donorGroupJson, dataResult
+    } = this.props;
     const data = [];
-    forEach(get(reducer, 'data.results'), function(item){
+    forEach(get(reducer, dataResult), function(item){
       data.push({
         id: get(item, idField),
         name: get(item, nameField),
-        value: get(item, valueField),
+        value: parseFloat(get(item, valueField)),
       });
     });
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});

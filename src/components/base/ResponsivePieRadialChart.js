@@ -1,6 +1,5 @@
 import React from 'react';
 import PieRadialChart from './PieRadialChart';
-import {variables as variablesStyle} from "../../helpers/style";
 import injectSheet from "react-jss";
 
 const ResponsivePieRadialChart = (props) => {

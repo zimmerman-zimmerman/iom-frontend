@@ -88,8 +88,5 @@ export function mediaContentRequest(slug) {
 }
 
 export function JSONContentRequest(slug) {
-  return handleRequest(
-    process.env.REACT_APP_SIMPLECONTENT_HOST.concat('/content/json/').concat(slug).concat('/'),
-    formatJSON({}), 'get'
-  );
+  return handleRequest(`${process.env.REACT_APP_SIMPLECONTENT_HOST}/content/json/${slug}/`, formatJSON({}), 'get');
 }
