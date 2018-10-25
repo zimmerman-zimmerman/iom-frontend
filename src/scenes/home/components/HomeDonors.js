@@ -20,6 +20,7 @@ HomeDonors.defaultProps = {
   localeTitle: {id: 'home.donors.title', defaultMessage: 'Where the Funding Comes From'},
   localeButtonText: {id: 'home.donors.button', defaultMessage: 'See All Publisher Donors'},
   linkPage: '/donors',
+  dataResult: 'data.results',
 };
 
 const mapStateToProps = (state, ) => {
