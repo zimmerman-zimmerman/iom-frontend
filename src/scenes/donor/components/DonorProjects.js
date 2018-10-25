@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Table from 'antd/es/table';
-import Pagination from 'antd/es/pagination';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
@@ -13,7 +12,8 @@ import injectSheet from 'react-jss';
 import { format as dateFormat } from 'date-fns';
 
 import * as actions from '../../../services/actions/index';
-import SortHeader from "../../../components/SortHeader/SortHeader";
+import SortHeader from '../../../components/SortHeader/SortHeader';
+import Pagination from '../../../components/Pagination/Pagination';
 
 class DonorProjects extends Component {
   constructor(props) {
