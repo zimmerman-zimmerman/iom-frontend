@@ -30,7 +30,7 @@ const PieRadialChart = (props) => {
             if(linkPage === '/donors') {
               donorExtra = `${get(donorGroupJson.data.content, e.payload.id)}/`;
             }
-            e.payload.id !== '-' ? props.history.push(`${linkPage}/${donorExtra}${e.payload.id}`) : null;
+            return e.payload.id !== '-' ? props.history.push(`${linkPage}/${donorExtra}${e.payload.id}`) : null;
         }}
         >
           {data.map((entry, index) => <Cell fill={style.colors[index % style.colors.length]} key={index}/>)}
