@@ -30,6 +30,7 @@ class DonorsTable extends BaseFilter {
         filters.values['order_by'] = value;
         filters.changed = true;
         this.setState({filters: filters});
+        rootComponent.setState({filters: filters, actionRequest: true});
     }
 
     render() {

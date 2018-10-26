@@ -96,6 +96,7 @@ class ProjectLocation extends Component {
         const financeType = get(this.props.projectTransactions, 'data.results[0].finance_type.name', '');
         const flowType = get(this.props.projectTransactions, 'data.results[0].flow_type.name', '');
         const websiteLink = get(data, 'contact_info[0].website','-').includes('http') ? get(data, 'contact_info[0].website','-') : 'https://' + get(data, 'contact_info[0].website','-');
+        const countryFlag = get(data, 'recipient_countries[0].country.code','');
 
         const cebCategory = get(data, 'humanitarian','-') ?
             <Trans id='project.location.humanitarian' text='Humanitarian' /> :
@@ -108,7 +109,7 @@ class ProjectLocation extends Component {
                     {
                         value: <Col xs={12} className="flag-country">
                             <div className='flag-icon'>
-                                <ReactCountryFlag code={get(data, 'recipient_countries[0].country.code','')} svg />
+                                {countryFlag !== '' && <ReactCountryFlag code={countryFlag} svg />}
                             </div>
                             <span className="country-name">{get(data, 'recipient_countries[0].country.name','')}</span>
                         </Col>

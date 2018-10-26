@@ -37,12 +37,12 @@ class DonorGroup extends BaseFilter {
 
   componentDidUpdate(prevProps) {
     const { donorsGroupsJson } = this.props;
-    const { params, actionRequest } = this.state;
+    const { params, filters, actionRequest } = this.state;
     const group = get(this.props, 'match.params.group', '');
     const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
     if (donorGroup && actionRequest){
       this.actionRequest(
-        extend({}, params, {participating_organisation_ref: donorGroup.filter}),
+        extend({}, params, filters.values, {participating_organisation_ref: donorGroup.filter}),
         'participating_organisation',
         actions.donorRequest
       );
@@ -83,6 +83,8 @@ class DonorGroup extends BaseFilter {
 }
 
 DonorGroup.defaultProps = {
+  groupBy: 'participating_organisation',
+  filterRequest: actions.donorRequest,
   donorsGroupsJsonSlug: 'donors-groups-json',
 };
 
