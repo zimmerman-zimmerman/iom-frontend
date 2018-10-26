@@ -15,9 +15,13 @@ import DonorsTable from './components/DonorsTable';
 
 class DonorGroup extends BaseFilter {
   componentWillMount() {
-    if (get(this.props, 'match.params.group.length', 0) > 2) {
-      this.props.history.replace(`${get(this.props.donorGroupJson.data, `content.${this.props.match.params.group}`, '').toLowerCase()}/${this.props.match.params.group}`);
-    }
+    // This is used for donors that are not part of a group, to instantly go to its donor detail page,
+      // but do we really need that?
+    // if (get(this.props, 'match.params.group.length', 0) > 2) {
+    //   const groupCode = get(this.props.donorGroupJson.data, `content.${this.props.match.params.group}`, '');
+    //   const group = typeof groupCode === 'string' ? groupCode.toLowerCase() : groupCode;
+    //   this.props.history.replace(`${group}/${this.props.match.params.group}`);
+    // }
   }
 
   componentDidMount() {
