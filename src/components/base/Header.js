@@ -50,9 +50,9 @@ class Header extends Component {
 
     const Logo = (props) => {
       if (props.size === 'xs') {
-        return <img src={logoOnly} alt="logo" className={classes.logo} />;
+        return <img src={logoOnly} alt="logo" className={classes.logo} onClick={() => this.props.history.push('/')}/>;
       } else {
-        return <img src={logo} alt="logo" className={classes.logo} />;
+        return <img src={logo} alt="logo" className={classes.logo} onClick={() => this.props.history.push('/')}/>;
       }
     };
 
@@ -157,6 +157,9 @@ const styles = {
     },
   logo: {
     padding: '10px 0',
+      '&:hover':{
+        cursor: 'pointer',
+      },
     height: 60,
     '@media (max-width: 991px)': {
       height: 50
