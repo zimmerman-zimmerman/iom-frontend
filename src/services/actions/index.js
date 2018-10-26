@@ -924,3 +924,31 @@ export function homeFundingGoesFailed(error) {
     error: error
   }
 }
+
+export const ABOUT_MEDIA_CONTENT_INITIAL = 'ABOUT_MEDIA_CONTENT_INITIAL';
+export const ABOUT_MEDIA_CONTENT_REQUEST = 'ABOUT_MEDIA_CONTENT_REQUEST';
+export const ABOUT_MEDIA_CONTENT_SUCCESS = 'ABOUT_MEDIA_CONTENT_SUCCESS';
+export const ABOUT_MEDIA_CONTENT_FAILED = 'ABOUT_MEDIA_CONTENT_FAILED';
+export function aboutMediaContentInitial() {
+    return {
+        type: ABOUT_MEDIA_CONTENT_INITIAL
+    }
+}
+export function aboutMediaContentRequest(slug) {
+    return {
+        type: ABOUT_MEDIA_CONTENT_REQUEST,
+        slug: slug
+    }
+}
+export function aboutMediaContentSuccess(data) {
+    return {
+        type: ABOUT_MEDIA_CONTENT_SUCCESS,
+        data: data
+    }
+}
+export function aboutMediaContentFailed(error) {
+    return {
+        type: ABOUT_MEDIA_CONTENT_FAILED,
+        error: error
+    }
+}

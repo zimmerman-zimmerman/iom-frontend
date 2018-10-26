@@ -50,7 +50,6 @@ class Filter extends BaseFilter {
 
     select(options) {
         const { placeholder, classes } = this.props;
-        console.log(placeholder);
         if (/Android/i.test(navigator.userAgent)) {
             return (
                 <Select placeholder={placeholder}

@@ -48,7 +48,6 @@ class TableProjects extends Component {
   }
 
   handleChange(value) {
-    console.log(value);
     const newParams = this.state.params;
     newParams.ordering = value;
     this.setState({params: newParams}, () => {
