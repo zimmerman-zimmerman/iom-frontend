@@ -94,7 +94,9 @@ class HomeChart extends Component {
                   <List.Item>
                     <List.Item.Meta
                       avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
-                      title={<Link to={`${linkPage}/${donorExtra}${item.id}`}>{item.name}</Link>}
+                      title={item.id !== '-' ?
+                        <Link to={`${linkPage}/${donorExtra}${item.id}`}>{item.name}</Link> : item.name
+                      }
                     />
                   </List.Item>
                 )
