@@ -19,10 +19,13 @@ const CustomToolTip = props => {
   const { Content } = Layout;
   const data = get(props, 'payload[0].payload');
   return data ?
-    <Card>
+    <Card title={get(props, 'label', '')}>
       <Content>
-        <h5>
-          <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.totalValue)}
+        <h5 className={props.classes.tooltipHuman}>
+          Humanitarian: <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.value)}
+        </h5>
+        <h5 className={props.classes.tooltipNonhuman}>        
+          Non-humanitarian: <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.nonHumanValue)}
         </h5>
       </Content>
     </Card> : null;
@@ -41,7 +44,7 @@ const CustomizedTick = props => {
                 fill="#666"
                 fontSize={calcBarChartFont(props.serviceAmount) + 'vw'}
                 >
-                {word}
+                  {word}
                 </text>
           )
         })}
@@ -63,7 +66,7 @@ class ServicesCharts extends Component {
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}
                     onClick={e => this.props.history.push(`/services/${e.activePayload[0].payload.sector.code}`)}>
             <CartesianGrid vertical={false}/>
-            <XAxis dataKey='sector.name' interval={0} tick={<CustomizedTick serviceAmount={otherData.length}/>} />
+            <XAxis dataKey='sector.name' interval={0} tick={false} />
             <YAxis
               axisLine={false}
               tickFormatter={value => {return `${usd}${format(",.0f")(value)}`}}
@@ -72,13 +75,13 @@ class ServicesCharts extends Component {
                 fontSize: 10, marginRight: 10, color: '#262626', whiteSpace: 'nowrap', width: '200',
               }}
             />
-            <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip/>} cursor={{ opacity: '0.1' }}/>
+            <Tooltip wrapperStyle={{ opacity: '1' }} content={<CustomToolTip classes={classes} />} cursor={{ opacity: '0.1' }}/>
             <Legend verticalAlign="top" align="right" wrapperStyle={{ marginTop: -10 }}
                     payload={[{ value: 'Humanitarian', type: 'rect', id: 'a', color: '#418fde'},
                         { value: 'Non-humanitarian', type: 'rect', id: 'a', color: '#1f4283' },]}
                     content={<BarChartLegend/>}/>
             <Bar dataKey="value" stackId='a' fill="#418fde"/>
-              <Bar dataKey="nonHumanValue" stackId='a' fill="#1f4283"/>
+            <Bar dataKey="nonHumanValue" stackId='a' fill="#1f4283"/>
           </BarChart>
           : <div></div>
         }
@@ -98,6 +101,14 @@ const styles = {
             marginTop: '-20px !important',
         },
     },
+    tooltipHuman: {
+      color: '#418fde',
+      fontSize: 14
+    },
+    tooltipNonhuman: {
+      color: '#1f4283',
+      fontSize: 14
+    }
 };
 
 export default injectSheet(styles)(withRouter(injectIntl(ServicesCharts)));
