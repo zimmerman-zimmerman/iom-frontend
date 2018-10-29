@@ -130,6 +130,8 @@ import {
   HOME_FUNDING_GOES_FAILED
 } from '../actions/index';
 import {
+    ABOUT_MEDIA_CONTENT_FAILED,
+    ABOUT_MEDIA_CONTENT_INITIAL, ABOUT_MEDIA_CONTENT_REQUEST, ABOUT_MEDIA_CONTENT_SUCCESS,
     NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
     NON_HUMAN_SERVICES_SUCCESS
 } from "../actions";
@@ -697,7 +699,23 @@ function homeFundingGoes(state=initial, action) {
   }
 }
 
+function aboutMediaContent(state=initial, action) {
+    switch (action.type) {
+        case ABOUT_MEDIA_CONTENT_INITIAL:
+            return updateInitial(state, action);
+        case ABOUT_MEDIA_CONTENT_REQUEST:
+            return updateRequest(state, action);
+        case ABOUT_MEDIA_CONTENT_SUCCESS:
+            return updateSuccess(state, action);
+        case ABOUT_MEDIA_CONTENT_FAILED:
+            return updateFailed(state, action);
+        default:
+            return state;
+    }
+}
+
 const reducers = {
+    aboutMediaContent,
   projectTransactions,
   nonHumanServices,
   homeDonors,

@@ -308,8 +308,18 @@ export function* homeFundingGoesRequest(action) {
   }
 }
 
+export function* aboutMediaContentRequest(action) {
+    try {
+        const response = yield call(api.mediaContentRequest, action.slug);
+        yield put(actions.aboutMediaContentSuccess(response));
+    } catch (error) {
+        yield put(actions.aboutMediaContentFailed(error));
+    }
+}
+
 function* sagas() {
   yield [
+      takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
     takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
     takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Table from 'antd/es/table';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import ReactHtmlParser from 'react-html-parser';
 
-import aboutOMG from '../../../assets/images/AboutIOM.jpg';
 import injectSheet from "react-jss";
 import { pageContainer } from '../../../helpers/style';
 import { checkProtocol } from '../../../helpers/utils';
@@ -12,14 +12,18 @@ import * as actions from '../../../services/actions/index';
 import connect from "react-redux/es/connect/connect";
 import get from "lodash/get";
 import Spin from "antd/es/spin";
+import Trans from '../../../locales/Trans';
+import {injectIntl, intlShape} from "react-intl";
 
 class AboutContent extends Component  {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, aboutRequestSlug } = this.props;
     if (dispatch) {
       dispatch(actions.organisationDocumentLinksRequest());
+        dispatch(actions.aboutMediaContentRequest(aboutRequestSlug));
     } else {
       dispatch(actions.organisationDocumentLinksInitial());
+        dispatch(actions.aboutMediaContentInitial());
     }
   }
 
@@ -30,6 +34,10 @@ class AboutContent extends Component  {
       data.push(item);
     });
     return data;
+  }
+
+  getTrans(id, text){
+      return this.props.intl.formatMessage({id: id, defaultMessage: text});
   }
 
   render() {
@@ -58,70 +66,32 @@ class AboutContent extends Component  {
       document: 'Document 1',
       link: 'link'
     }];
+    const aboutImage = this.props.simpleContentHost.concat(get(this.props.aboutMediaContent, 'data.image', ''));
     return (
       <Spin spinning={organisationDocumentLinks.request} >
         <Grid className={classes.aboutContent} style={pageContainer}>
           <Row center="xs">
             <Col xs={12} md={8} lg={8}>
-              <h2 className="title">About IOM Transparency portal</h2>
-              <p style={{fontWeight: 600}}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Integer ut mi neque. Nulla consectetur laoreet orci.
-                Etiam consequat quam et magna consectetur pulvinar.
-                Suspendisse bibendum nisi ex, nec finibus tortor ultricies quis.
-                Curabitur lobortis augue velit, vel faucibus odio elementum et.
-                Cras placerat consectetur libero, eu vestibulum magna posuere sed.
-                Integer enim turpis, efficitur eget dignissim vel, lacinia eu magna.
-              </p>
-              <p>
-                Ut placerat magna id diam hendrerit, a scelerisque massa rutrum.
-                Pellentesque aliquet erat ut placerat tempor.
-                Nulla quis leo consectetur, venenatis neque et, sodales arcu.
-                Nullam at orci turpis. Etiam pulvinar nulla leo, ut tincidunt lacus suscipit at.
-                Vestibulum elementum massa in laoreet tincidunt. Mauris et placerat erat.
-              </p>
-              <p>
-                Curabitur quis felis finibus, vestibulum justo a, gravida magna.
-                Aliquam id libero vitae dui elementum convallis. In at eros quam.
-                Phasellus rhoncus, velit at aliquet convallis, quam ipsum sagittis orci,
-                non pretium eros dui sit amet augue.
-                Integer id lectus ac magna venenatis mollis.
-                Integer sed massa venenatis, accumsan ligula id, mollis dolor.
-                Fusce convallis at lacus vel tristique. Proin eu nibh euismod, semper erat lobortis, volutpat dolor.
-                Praesent venenatis ipsum ut velit lacinia convallis.
-                Aliquam elementum lorem eget ex iaculis vehicula ac nec libero.
-                Aliquam euismod dolor at ipsum gravida feugiat.
-              </p>
+              <h2 className="title"><Trans id='about.title' text='About IOM Transparency portal' /></h2>
             </Col>
           </Row>
-          <Row center="xs">
-            <Col xs={12} md={8} lg={8}>
-              <img src={aboutOMG} width="100%" alt="IOM"/>
-            </Col>
-          </Row>
-          <Row center="xs">
-            <Col xs={12} md={8} lg={8}>
-              <p>
-                Ut placerat magna id diam hendrerit, a scelerisque massa rutrum.
-                Pellentesque aliquet erat ut placerat tempor. Nulla quis leo consectetur, venenatis neque et,
-                sodales arcu. Nullam at orci turpis.
-                Etiam pulvinar nulla leo, ut tincidunt lacus suscipit at.
-                Vestibulum elementum massa in laoreet tincidunt. Mauris et placerat erat.
-              </p>
-              <p>
-                Curabitur quis felis finibus, vestibulum justo a, gravida magna.
-                Aliquam id libero vitae dui elementum convallis. In at eros quam.
-                Phasellus rhoncus, velit at aliquet convallis, quam ipsum sagittis orci,
-                non pretium eros dui sit amet augue. Integer id lectus ac magna venenatis mollis.
-                Integer sed massa venenatis, accumsan ligula id, mollis dolor.
-                Fusce convallis at lacus vel tristique.
-                Proin eu nibh euismod, semper erat lobortis, volutpat dolor.
-                Praesent venenatis ipsum ut velit lacinia convallis.
-                Aliquam elementum lorem eget ex iaculis vehicula ac nec libero.
-                Aliquam euismod dolor at ipsum gravida feugiat.
-              </p>
-            </Col>
-          </Row>
+              <div>
+                  <Row center="xs">
+                      <Col xs={12} md={8} lg={8} style={{ textAlign: 'start' }}>
+                          {ReactHtmlParser(this.getTrans('about.content.one', 'content one'))}
+                      </Col>
+                  </Row>
+                  <Row center="xs">
+                      <Col xs={12} md={8} lg={8}>
+                          <img src={aboutImage} width="100%" alt="IOM"/>
+                      </Col>
+                  </Row>
+                  <Row center="xs">
+                      <Col xs={12} md={8} lg={8} style={{ textAlign: 'start' }}>
+                          {ReactHtmlParser(this.getTrans('about.content.two', 'content two'))}
+                      </Col>
+                  </Row>
+              </div>
           <Row center="xs" className="document-table">
             <Col xs={12} md={8} lg={8}>
               <h3 className={classes.tableHeading}>DOCUMENTS</h3>
@@ -136,6 +106,7 @@ class AboutContent extends Component  {
 
 const styles = {
   aboutContent: {
+    fontSize: 22,
     width: '85vw !important',
       maxWidth: 'none !important',
     '@media (max-width: 776px)': {
@@ -149,17 +120,6 @@ const styles = {
       marginTop: 20,
       '@media (max-width: 776px)': {
         fontSize: 36,
-      },
-    },
-    '& p, & h2': {
-      textAlign: 'left',
-    },
-    '& p': {
-      fontSize: 22,
-      fontWeight: 300,
-      padding: '8px 0',
-      '@media (max-width: 776px)': {
-        fontSize: 18,
       },
     },
     '& img': {
@@ -195,10 +155,20 @@ const styles = {
   }
 };
 
+AboutContent.propTypes = {
+    intl: intlShape.isRequired,
+};
+
+AboutContent.defaultProps = {
+    aboutRequestSlug: 'aboutcontentpic',
+    simpleContentHost: process.env.REACT_APP_SIMPLECONTENT_HOST
+};
+
 const mapStateToProps = (state, ) => {
   return {
-    organisationDocumentLinks: state.organisationDocumentLinks
+    organisationDocumentLinks: state.organisationDocumentLinks,
+      aboutMediaContent: state.aboutMediaContent,
   }
 };
 
-export default connect(mapStateToProps)(injectSheet(styles)(AboutContent));
+export default injectIntl(connect(mapStateToProps)(injectSheet(styles)(AboutContent)));
