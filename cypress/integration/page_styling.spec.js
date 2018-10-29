@@ -36,8 +36,8 @@ context('Check page condition', () => {
 
     it('Scroll down and up', () => {
         cy.visit(targetURL);
-        cy.scrollTo('bottom', {easing: 'linear', duration: 1000});
-        cy.scrollTo('top', {easing: 'linear', duration: 1000});
+        cy.scrollTo('bottom', {easing: 'linear', duration: 2000});
+        cy.scrollTo('top', {easing: 'linear', duration: 2000});
     });
 
     it('Check body text formatting', () => {
