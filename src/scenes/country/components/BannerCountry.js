@@ -144,7 +144,7 @@ const styles = {
     width: '100%',
     marginLeft: 0,
     '& .left': {
-      padding: '40px 137px 100px 137px',
+      padding: '40px 137px 100px 100px',
       '@media (max-width: 767px)': {
         padding: '20px 25px'
       },
