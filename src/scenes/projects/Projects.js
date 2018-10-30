@@ -40,7 +40,6 @@ class Projects extends BaseFilter {
       aggregations: 'activity_count,incoming_fund,disbursement,value',
       group_by: '',
       order_by: '-value',
-      convert_to: 'usd',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
     const filterDataRange = dataRange ? {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]} : {};
@@ -75,6 +74,7 @@ class Projects extends BaseFilter {
       if (params) {
         this.actionRequest(params, null, actions.projectsRequest);
         this.countriesRequest();
+          this.actionRequest(params, 'recipient_country', actions.countriesRequest);
       } else {
         dispatch(actions.projectsInitial());
         dispatch(actions.countriesInitial());
