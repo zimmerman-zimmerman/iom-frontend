@@ -137,7 +137,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
                         <div >
-                          <Summary data={showMap ? get(dataCountries, 'results') : null}
+                          <Summary data={showMap ? dataCountries : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
@@ -158,7 +158,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div >
-                          <Summary data={showMap ? get(dataCountries, 'results') : null}
+                          <Summary data={showMap ? dataCountries : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
