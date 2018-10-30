@@ -40,7 +40,6 @@ class Projects extends BaseFilter {
       aggregations: 'activity_count,incoming_fund,disbursement,value',
       group_by: '',
       order_by: '-value',
-      convert_to: 'usd',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
     const filterDataRange = dataRange ? {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]} : {};
@@ -75,6 +74,7 @@ class Projects extends BaseFilter {
       if (params) {
         this.actionRequest(params, null, actions.projectsRequest);
         this.countriesRequest();
+          this.actionRequest(params, 'recipient_country', actions.countriesRequest);
       } else {
         dispatch(actions.projectsInitial());
         dispatch(actions.countriesInitial());
@@ -137,7 +137,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
                         <div >
-                          <Summary data={showMap ? get(dataCountries, 'results') : null}
+                          <Summary data={showMap ? dataCountries : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
@@ -158,7 +158,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div >
-                          <Summary data={showMap ? get(dataCountries, 'results') : null}
+                          <Summary data={showMap ? dataCountries : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
