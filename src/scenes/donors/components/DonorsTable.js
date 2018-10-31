@@ -51,7 +51,10 @@ class DonorsTable extends BaseFilter {
             render: (participating_organisation, row, index) => {
                 const code = typeof row.code === 'string' ? row.code.toLowerCase() : row.code;
                 return (
-                    <Link to={`/donors/${code}`}>
+                    <Link to={{
+                              pathname: `/donors/${code}`,
+                              state: { filterValues: filters.values }
+                          }}>
                         {participating_organisation}
                     </Link>
                 );

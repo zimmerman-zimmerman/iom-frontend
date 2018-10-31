@@ -14,6 +14,7 @@ import { format as dateFormat } from 'date-fns';
 import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
+import { addFilterValues } from "../../../helpers/generic";
 
 class DonorProjects extends Component {
   constructor(props) {
@@ -32,13 +33,16 @@ class DonorProjects extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.getProjects();
+  componentDidMount(){
+      this.getProjects();
   }
 
   getProjects() {
     const { dispatch } = this.props;
     const { params } = this.state;
+    //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+      // params works as a reference when passed in this function
+    addFilterValues(this.props.filterValues, params);
     if (dispatch) {
       if (params) {
         dispatch(actions.donorProjectsRequest(params));
