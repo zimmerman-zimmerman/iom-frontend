@@ -123,7 +123,11 @@ class Filters extends Component {
   content() {
     const { intl, rootComponent, classes, panels, rootData } = this.props;
     const filters = get(rootComponent, 'state.filters.values');
-    const filterCount = has(filters, 'page') ? size(filters) - 1 : size(filters);
+    const filterCount = has(filters, 'page') && has(filters, 'order_by')
+      ? size(filters) - 2
+      : has(filters, 'page') || has(filters, 'order_by')
+        ? size(filters) - 1
+        : size(filters);
     return (
       <Fragment>
         <Row>
