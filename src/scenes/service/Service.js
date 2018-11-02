@@ -15,7 +15,8 @@ import ServiceDonors from './components/ServiceDonors';
 import ServiceProjects from './components/ServiceProjects';
 import ServiceCountries from './components/ServiceCountries';
 import ServicesJSON from '../../services/data/services';
-import find from "lodash/find";
+import find from 'lodash/find';
+import { addFilterValues } from '../../helpers/generic';
 
 class Service extends BaseFilter {
   componentDidMount() {
@@ -23,6 +24,11 @@ class Service extends BaseFilter {
     const { params } = this.state;
     const id = get(this.props, 'match.params.id');
     if (dispatch && id) {
+        if(this.props.location.state){
+            //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+            // params works as a reference when passed in this function
+            addFilterValues(this.props.location.state.filterValues, params);
+        }
       this.actionRequest(extend({}, params, {sector: id}), 'sector', actions.serviceRequest);
     } else {
       actions.serviceInitial();
@@ -40,6 +46,7 @@ class Service extends BaseFilter {
     ];
     const code = get(this.props, 'match.params.id');
     const serviceJSON = find(ServicesJSON, {'code': code.toUpperCase()});
+    const prevFilters = this.props.location.state ? this.props.location.state.filterValues : false;
     return (
       <Spin spinning={service.request || serviceProjects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
@@ -47,13 +54,13 @@ class Service extends BaseFilter {
           <Grid className={classes.service} fluid>
             <Row xs={12} lg={6}>
               <Col xs={12} lg={6} className={classes.listsContainer}>
-                <ServiceDonors sectorId={sectorId} />
-                <ServiceProjects sectorId={sectorId} />
+                <ServiceDonors sectorId={sectorId} filterValues={prevFilters}/>
+                <ServiceProjects sectorId={sectorId} filterValues={prevFilters}/>
               </Col>
             </Row>
             <Row className="map-row">
               <Col xs={12}>
-                <ServiceCountries sectorId={sectorId} />
+                <ServiceCountries sectorId={sectorId} filterValues={prevFilters}/>
               </Col>
             </Row>
           </Grid>

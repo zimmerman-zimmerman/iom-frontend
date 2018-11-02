@@ -25,8 +25,8 @@ export function formatMapData(data, activityCount, budgetValue) {
 }
 
 //Adds values from the oldFIlters to the new ones
-//Used for donor-group/donor detail pages
-//Cause it was requested for filters from the donors page to be applied to those ^ pages as well
+// It was requested that overview pages filters would be applied to their drill downs/detail pages
+//Except Projects, projects filters should only be applied for the Project overview page
 export function addFilterValues(oldFilters, filterValuez) {
     const filterValues = filterValuez;
     for (let key in oldFilters){

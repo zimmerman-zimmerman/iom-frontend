@@ -46,7 +46,12 @@ class CountriesTable extends BaseFilter {
       dataIndex: 'recipient_country',
       key: 'recipient_country',
       render: recipient_country =>
-        <Link to={`/countries/${recipient_country.code.toLowerCase()}`}>{recipient_country.name}</Link>,
+        <Link to={{
+            pathname: `/countries/${recipient_country.code.toLowerCase()}`,
+            state: { filterValues: filters.values }
+        }}>
+            {recipient_country.name}
+        </Link>
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}

@@ -47,7 +47,12 @@ class ServicesTable extends BaseFilter {
       key: 'sector',
       width: '55%',
       render: (name, record) =>
-        <Link to={`/services/${record.sector.code}`}>{name}</Link>,
+        <Link to={{
+            pathname: `/services/${record.sector.code}`,
+            state: { filterValues: filters.values }
+        }}>
+            {name}
+        </Link>
     },
       {
       title: <SortHeader

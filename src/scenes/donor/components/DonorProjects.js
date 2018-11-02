@@ -40,9 +40,11 @@ class DonorProjects extends Component {
   getProjects() {
     const { dispatch } = this.props;
     const { params } = this.state;
-    //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
-      // params works as a reference when passed in this function
-    addFilterValues(this.props.filterValues, params);
+    if(this.props.filterValues){
+        //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+        // params works as a reference when passed in this function
+        addFilterValues(this.props.filterValues, params);
+    }
     if (dispatch) {
       if (params) {
         dispatch(actions.donorProjectsRequest(params));

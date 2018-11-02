@@ -18,8 +18,8 @@ import ContactProject from './components/ContactProject';
 import SectorsMap from './components/SectorsMap';
 import { pageContainer } from '../../helpers/style';
 import CountriesJSON from '../../services/data/countries.json';
-import GeoMap from "../../components/maps/GeoMap";
-import { formatMapData } from "../../helpers/generic";
+import GeoMap from '../../components/maps/GeoMap';
+import { addFilterValues, formatMapData } from '../../helpers/generic';
 
 class Country extends BaseFilter {
   componentDidMount() {
@@ -28,6 +28,13 @@ class Country extends BaseFilter {
     const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
       if (params) {
+        if(this.props.location.state)
+        {
+            //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+            // 'params' works as a reference when passed in this function
+            addFilterValues(this.props.location.state.filterValues, params);
+            console.log(params);
+        }
         this.actionRequest(
           extend({}, params, {recipient_country: code.toUpperCase()}),
           'recipient_country',
@@ -86,7 +93,7 @@ class Country extends BaseFilter {
     ];
 
     const countryData = get(countryResult, 'recipient_country');
-
+    const prevFilters = this.props.location.state ? this.props.location.state.filterValues : false;
     return (
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
@@ -127,7 +134,8 @@ class Country extends BaseFilter {
                 <h2 className="title">
                   <Trans id="country.table.projects.title" defaultMessage="Related projects"/>
                 </h2>
-                <TableProjects countryCode={ get(this.props, 'match.params.code')} itemAmount={7} />
+                <TableProjects countryCode={ get(this.props, 'match.params.code')}
+                               itemAmount={7} filterValues={prevFilters}/>
               </Col>
             </Row>
             {firstProject ? <ContactProject id={firstProject.id} code={get(this.props, 'match.params.code')} /> : null}
