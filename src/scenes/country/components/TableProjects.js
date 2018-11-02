@@ -1,16 +1,17 @@
 import React, {Component, Fragment} from 'react';
 import Table from 'antd/es/table';
 import injectSheet from 'react-jss';
-import { injectIntl, intlShape } from "react-intl";
-import {connect} from "react-redux";
+import { injectIntl, intlShape } from 'react-intl';
+import {connect} from 'react-redux';
 import get from 'lodash/get';
 import { format } from 'd3-format';
 import { Link } from 'react-router-dom';
 
-import * as actions from "../../../services/actions/index";
-import SortHeader from "../../../components/SortHeader/SortHeader";
-import Pagination from "../../../components/Pagination/Pagination";
-import {paginate} from "../../../helpers/tableHelpers";
+import * as actions from '../../../services/actions/index';
+import SortHeader from '../../../components/SortHeader/SortHeader';
+import Pagination from '../../../components/Pagination/Pagination';
+import { paginate } from '../../../helpers/tableHelpers';
+import { addFilterValues } from '../../../helpers/generic';
 
 class TableProjects extends Component {
   constructor(props) {
@@ -38,6 +39,12 @@ class TableProjects extends Component {
   getProjects() {
     const { dispatch } = this.props;
     const { params } = this.state;
+    if(this.props.filterValues)
+    {
+        //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+        // params works as a reference when passed in this function
+        addFilterValues(this.props.filterValues, params);
+    }
     if (dispatch) {
       if (params) {
         dispatch(actions.countryActivitiesRequest(params));
@@ -148,7 +155,7 @@ class TableProjects extends Component {
       const data = paginate(this.state.page, this.state.pageSize, allData);
     return(
         <Fragment>
-            <Table dataSource={data ? this.addKey(data) : null} columns={columns} size="middle"
+            <Table dataSource={data ? this.addKey(data) : null} columns={columns} size='middle'
                    pagination={false}
                    scroll={{ x: 1800 }}
                    loading={countryActivities.request}

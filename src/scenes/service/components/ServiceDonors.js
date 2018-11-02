@@ -9,6 +9,7 @@ import injectSheet from "react-jss";
 import { Link } from 'react-router-dom';
 import SortHeader from "../../../components/SortHeader/SortHeader";
 import Pagination from "../../../components/Pagination/Pagination";
+import {addFilterValues} from "../../../helpers/generic";
 
 
 class ServiceDonors extends React.Component {
@@ -56,6 +57,12 @@ class ServiceDonors extends React.Component {
     const { dispatch, sectorId } = this.props;
     const { params } = this.state;
     if (dispatch && sectorId) {
+        if(this.props.filterValues)
+        {
+            //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+            // params works as a reference when passed in this function
+            addFilterValues(this.props.filterValues, params);
+        }
       dispatch(actions.serviceDonorsRequest({ ...params, sector: sectorId }));
     } else {
       dispatch(actions.serviceDonorsInitial());

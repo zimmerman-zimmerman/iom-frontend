@@ -35,19 +35,18 @@ class Projects extends BaseFilter {
   }
 
   countriesRequest() {
-    const { filters, dataRange } = this.state;
+    const { filters } = this.state;
     const params = {
       aggregations: 'activity_count,incoming_fund,disbursement,value',
       group_by: '',
       order_by: '-value',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
-    const filterDataRange = dataRange ? {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]} : {};
     this.actionRequest(
-      extend({}, params, filters.values, filterDataRange), 'recipient_country', actions.countriesRequest
+      extend({}, params, filters.values), 'recipient_country', actions.countriesRequest
     );
     this.actionRequest(
-      extend({}, params, filters.values, filterDataRange), 'participating_organisation', actions.countryDonorsRequest
+      extend({}, params, filters.values), 'participating_organisation', actions.countryDonorsRequest
     );
   }
 
@@ -55,10 +54,10 @@ class Projects extends BaseFilter {
     if (prevState !== this.state) {
       this.countriesRequest();
       if (prevState.dataRange !== this.state.dataRange) {
-        const { params, filters, dataRange } = this.state;
+        const { params, filters } = this.state;
         delete filters.values['page'];
         this.actionRequest(
-          extend({}, params, filters.values, {total_budget_gte: dataRange[0], total_budget_lte: dataRange[1]}),
+          extend({}, params, filters.values),
           null,
           actions.projectsRequest
         );

@@ -6,6 +6,7 @@ import get from 'lodash/get';
 
 import BaseFilter from '../../../components/base/filters/BaseFilter';
 import ProjectsTable from '../components/ProjectsTable';
+import {addFilterValues} from "../../../helpers/generic";
 
 class ServiceProjects extends BaseFilter {
   constructor(props) {
@@ -40,6 +41,12 @@ class ServiceProjects extends BaseFilter {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
+          if(this.props.filterValues)
+          {
+              //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+              // params works as a reference when passed in this function
+              addFilterValues(this.props.filterValues, params);
+          }
         dispatch(actions.serviceProjectsRequest(params));
       } else {
         dispatch(actions.serviceProjectsInitial());

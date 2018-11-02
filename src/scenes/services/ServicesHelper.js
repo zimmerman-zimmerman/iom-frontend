@@ -21,6 +21,7 @@ export function combineData(human, nonHuman) {
             let nonHumanItem = nonHuman[j];
             if(humanItem.sector.code === nonHumanItem.sector.code){
               let item = humanItem;
+              item.activity_count = humanItem.activity_count + nonHumanItem.activity_count;
               item.nonHumanValue = nonHumanItem.value;
               data.push(item);
               //So if a human and nonhuman data association is found we give the nonHuman item

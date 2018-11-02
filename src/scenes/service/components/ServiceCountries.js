@@ -8,6 +8,7 @@ import BaseFilter from '../../../components/base/filters/BaseFilter';
 import * as actions from '../../../services/actions';
 import GeoMap from '../../../components/maps/GeoMap';
 import Trans from '../../../locales/Trans';
+import {addFilterValues} from "../../../helpers/generic";
 
 class ServiceCountries extends BaseFilter {
   componentDidMount() {
@@ -15,6 +16,12 @@ class ServiceCountries extends BaseFilter {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
+          if(this.props.filterValues)
+          {
+              //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+              // params works as a reference when passed in this function
+              addFilterValues(this.props.filterValues, params);
+          }
         this.actionRequest(
           extend({}, params, {sector: sectorId}), 'recipient_country', actions.serviceCountriesRequest
         );

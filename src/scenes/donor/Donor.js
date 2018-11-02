@@ -45,6 +45,7 @@ class Donor extends BaseFilter {
       },
       {url: null, text: data ? data.participating_organisation : <Trans id='main.menu.detail' text='Detail' />},
     ] : null;
+    const prevFilters = this.props.location.state ? this.props.location.state.filterValues : false;
     return (
       <Page breadcrumbItems={breadcrumbItems}>
         <Grid style={pageContainer} fluid>
@@ -56,7 +57,7 @@ class Donor extends BaseFilter {
           <hr className={classes.divider} />
           <Row className={classes.table}>
             <Col xs={12}>
-              <DonorProjects code={code} filterValues={this.props.location.state.filterValues}/>
+              <DonorProjects code={code} filterValues={prevFilters}/>
             </Col>
           </Row>
         </Grid>
