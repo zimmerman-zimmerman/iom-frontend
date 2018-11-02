@@ -11,7 +11,7 @@ import {connect} from "react-redux";
 import Trans from '../../locales/Trans';
 import { pageContainer } from '../../helpers/style';
 import DonorsTable from './components/DonorsTable';
-
+import { addFilterValues } from '../../helpers/generic';
 
 class DonorGroup extends BaseFilter {
   componentWillMount() {
@@ -33,6 +33,16 @@ class DonorGroup extends BaseFilter {
       dispatch(actions.donorsGroupsJsonInitial());
       actions.donorInitial();
     }
+
+    // Here we add the filter values from donors, to our current donorGroup filter values
+    //  As it was requested by Siem. THat the filters applied in donors page, would be applied here as well
+    // Well at least thats how i understood it lol. #Morty
+      if(this.props.location.state && this.props.location.state.filterValues)
+      {
+          //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+          //this.state.filters.values works as a reference when passed in this function
+          addFilterValues(this.props.location.state.filterValues, this.state.filters.values);
+      }
   }
 
   componentDidUpdate(prevProps) {

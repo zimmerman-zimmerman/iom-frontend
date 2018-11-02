@@ -56,7 +56,7 @@ class Donor extends BaseFilter {
           <hr className={classes.divider} />
           <Row className={classes.table}>
             <Col xs={12}>
-              <DonorProjects code={code}/>
+              <DonorProjects code={code} filterValues={this.props.location.state.filterValues}/>
             </Col>
           </Row>
         </Grid>
