@@ -7,7 +7,7 @@ import get from "lodash/get";
 import Layout from 'antd/es/layout';
 import Card from 'antd/es/card';
 
-import { calcBarChartFont, calcBarChartYPos } from '../ServicesHelper';
+// import { calcBarChartFont, calcBarChartYPos } from '../ServicesHelper';
 import BarChartLegend from './BarChartLegend';
 
 import Trans from '../../../locales/Trans';
@@ -30,27 +30,27 @@ const CustomToolTip = props => {
       </Content>
     </Card> : null;
 };
-const CustomizedTick = props => {
-    const { x, y, payload } = props;
-    const textArray = payload.value.split(' ');
-    return (
-        <svg>
-            {textArray.map((word, index) => {
-          return (
-                <text
-                x={x}
-                y={y + calcBarChartYPos(props.serviceAmount) + index*calcBarChartYPos(props.serviceAmount)}
-                textAnchor="middle"
-                fill="#666"
-                fontSize={calcBarChartFont(props.serviceAmount) + 'vw'}
-                >
-                  {word}
-                </text>
-          )
-        })}
-        </svg>
-    )
-};
+// const CustomizedTick = props => {
+//     const { x, y, payload } = props;
+//     const textArray = payload.value.split(' ');
+//     return (
+//         <svg>
+//             {textArray.map((word, index) => {
+//           return (
+//                 <text
+//                 x={x}
+//                 y={y + calcBarChartYPos(props.serviceAmount) + index*calcBarChartYPos(props.serviceAmount)}
+//                 textAnchor="middle"
+//                 fill="#666"
+//                 fontSize={calcBarChartFont(props.serviceAmount) + 'vw'}
+//                 >
+//                   {word}
+//                 </text>
+//           )
+//         })}
+//         </svg>
+//     )
+// };
 class ServicesCharts extends Component {
   render() {
     const { intl, data, classes } = this.props;
