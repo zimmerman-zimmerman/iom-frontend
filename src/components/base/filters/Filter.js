@@ -1,6 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import sortBy from 'lodash/sortBy';
 import Select from 'antd/es/select';
 import Spin from 'antd/es/spin';
 import Layout from 'antd/es/layout';
@@ -45,7 +46,7 @@ class Filter extends BaseFilter {
 
     options(results) {
         const { optionKeyName, optionValueName } = this.props;
-        return results.map(item => <Option key={get(item, optionKeyName)}>{get(item, optionValueName)}</Option>)
+        return sortBy(results, optionValueName).map(item => <Option key={get(item, optionKeyName)}>{get(item, optionValueName)}</Option>)
     }
 
     select(options) {
