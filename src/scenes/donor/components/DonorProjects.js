@@ -6,11 +6,9 @@ import Table from 'antd/es/table';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
-import find from 'lodash/find';
 import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
-import { format as dateFormat } from 'date-fns';
 
 import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
@@ -74,13 +72,15 @@ class DonorProjects extends Component {
     return data;
   }
 
-  onPageChange = (page) => {
+  onPageChange(page) {
     this.setState({ page });
   };
 
   render() {
     const { intl, donorProjects, classes } = this.props;
-    const data = genericSort(paginate(this.state.page, 10, donorProjectsFormatter(get(donorProjects, 'data.results'))), this.state.params.ordering);
+    let data = donorProjectsFormatter(get(donorProjects, 'data.results'));
+    data = genericSort(data, this.state.params.ordering);
+    data = paginate(this.state.page, 10, data);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
@@ -163,7 +163,7 @@ class DonorProjects extends Component {
           {total > 10 &&
               <Pagination pageCount={Math.ceil(total/10)}
                           onPageChange={(value) => this.onPageChange(value.selected+1)}
-                          forcePage={this.state.params.page-1}
+                          forcePage={this.state.page-1}
               />
           }
       </Spin>
