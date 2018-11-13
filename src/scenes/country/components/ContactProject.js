@@ -58,8 +58,8 @@ class ContactProject extends Component {
       <div className="field">
         <strong className="label"><Trans id='project.location.contact.website' defaultMessage='Website:' /></strong>
         <span className="value">
-          <a href={`https://www.iom.int/countries/${this.props.code}`} target="_blank">
-            https://www.iom.int/countries/{this.props.code}
+          <a href={get(data, 'contact_info.website', '')} target="_blank">
+            {get(data, 'contact_info.website', '')}
           </a>
         </span>
       </div>

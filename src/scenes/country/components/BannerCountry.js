@@ -11,7 +11,7 @@ import {injectIntl, intlShape} from "react-intl";
 import Trans from '../../../locales/Trans';
 
 const BannerCountry = (props) => {
-  const { data, classes, key, intl } = props;
+  const { data, classes, key, intl, code, countryMappingJson } = props;
   const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
   const Line = (props) => {
     return (
@@ -105,8 +105,8 @@ const BannerCountry = (props) => {
               </Row>
               <Row>
                 <Col span={24} className="countryLink">
-                  <a href={`https://www.iom.int/countries/${data.recipient_country.name.replace(' ', '-').toLowerCase()}`} target="_blank">
-                    https://www.iom.int/countries/{data.recipient_country.name.replace(' ', '-').toLowerCase()}
+                  <a href={`https://www.iom.int/countries/${get(countryMappingJson, code, '')}`} target="_blank">
+                    {`https://www.iom.int/countries/${get(countryMappingJson, code, '')}`}
                   </a>
                 </Col>
               </Row>
