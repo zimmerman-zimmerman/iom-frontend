@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
 import find from 'lodash/find';
+import reverse from 'lodash/reverse';
 import injectSheet from 'react-jss';
 import { FormattedMessage } from "react-intl";
 import Spin from 'antd/es/spin';
@@ -34,6 +35,20 @@ class Donors extends BaseFilter {
     }
   }
 
+  sortDonors(donors) {
+    let ordering = this.state.filters.values.order_by;
+    ordering = ordering === 'participating_organisation' || ordering === '-participating_organisation'
+      ? ordering[0] === '-' ? '-name' : 'name'
+      : ordering === 'activity_count' || ordering === '-activity_count'
+        ? ordering[0] === '-' ? '-project' : 'project'
+        : ordering;
+    if (ordering[0] === '-') {
+      return reverse(sortBy(donors, ordering.substr(1)));
+    } else {
+      return sortBy(donors, ordering);
+    }
+  }
+
   createDonorsByGroup(donors) {
     const { donorsGroupsJson, donorGroupJson } = this.props;
     let dataGroup = [];
@@ -56,7 +71,7 @@ class Donors extends BaseFilter {
         }
       });
     }
-    return dataGroup;
+    return this.sortDonors(dataGroup);
   }
 
   render() {
