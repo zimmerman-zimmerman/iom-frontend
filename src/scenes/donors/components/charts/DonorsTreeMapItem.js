@@ -79,7 +79,7 @@ export default class DonorsTreeMapItem extends Component {
                               y={y + item.yAdjust}
                               className={'lol'}
                               // textAnchor="start"
-                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}
+                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#262626'}
                               stroke="none"
                               fillOpacity={1}
                               fontSize={this.state.labelFontSize}
@@ -97,8 +97,8 @@ export default class DonorsTreeMapItem extends Component {
                 x={percXPos}
                 y={percYPos}
                 verticalAnchor="end"
-              fill="#fff"
-              fillOpacity={0.9}
+              fill="#262626"
+              stroke="#262626"
               fontSize={percFontSize}
             >
                 {textPercent}

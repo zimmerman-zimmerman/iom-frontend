@@ -33,10 +33,10 @@ class DonorsTreeMap extends Component {
         '#ffca55',
         '#ffdc8e',
         '#ffeabb',
-        '#4663a8',
-        '#6f7db6',
-        '#c3cbe3',
-        '#e9ebf6'];
+        '#ffb81c',
+        '#ffca55',
+        '#ffdc8e',
+        '#ffeabb'];
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     return (
       <Row>
