@@ -45,7 +45,7 @@ export default class DonorsTreeMapItem extends Component {
     const { depth, x, y, width, height, index, bgColors } = this.props;
 
     const total = sumBy(this.props.root.children, 'value');
-    const percent = parseFloat(this.props.value / total * 100).toFixed(2);
+    const percent = parseFloat(this.props.value / total * 90).toFixed(2);
     //We need the percentage calculations to be done in the render
     // Because they need to be centered, horizontally
     // and this treemap still does some resizing/animations even though
@@ -79,11 +79,11 @@ export default class DonorsTreeMapItem extends Component {
                               y={y + item.yAdjust}
                               className={'lol'}
                               // textAnchor="start"
-                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#262626'}
+                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#0033a1'}
                               stroke="none"
                               fillOpacity={1}
                               fontSize={this.state.labelFontSize}
-                              fontWeight={600}
+                              fontWeight={400}
                           >
                               {item.text}
                           </Text>
@@ -97,8 +97,8 @@ export default class DonorsTreeMapItem extends Component {
                 x={percXPos}
                 y={percYPos}
                 verticalAnchor="end"
-              fill="#262626"
-              stroke="#262626"
+              fill="#0033a1"
+              stroke="none"
               fontSize={percFontSize}
             >
                 {textPercent}
