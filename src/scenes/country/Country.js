@@ -81,6 +81,7 @@ class Country extends BaseFilter {
     const donors = get(this.props, 'countryDonors.data.results');
     const sectors = get(this.props, 'countrySectors.data.results', []);
     const firstProject = get(countryActivities, 'data.results[0]');
+    console.log(firstProject);
     const code = get(this.props, 'match.params.code');
     const countryJSON = find(CountriesJSON, {'code': code.toUpperCase()});
     if (countryResult) {
