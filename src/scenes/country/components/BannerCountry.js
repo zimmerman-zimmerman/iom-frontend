@@ -105,8 +105,8 @@ const BannerCountry = (props) => {
               </Row>
               <Row>
                 <Col span={24} className="countryLink">
-                  <a href={`https://www.iom.int/countries/${data.recipient_country.code.toLowerCase()}`} target="_blank">
-                    https://www.iom.int/countries/{data.recipient_country.code.toLowerCase()}
+                  <a href={`https://www.iom.int/countries/${data.recipient_country.name.replace(' ', '-').toLowerCase()}`} target="_blank">
+                    https://www.iom.int/countries/{data.recipient_country.name.replace(' ', '-').toLowerCase()}
                   </a>
                 </Col>
               </Row>
