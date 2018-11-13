@@ -67,9 +67,9 @@ class HomeChart extends Component {
     const PieRadialChart = (props) => {
       const { widthDivider } = props;
       const height = window.innerWidth / widthDivider;
-      const innerRadius = height / 5;
+      const innerRadius = height / 12;
       const outerRadius = height / 4 + 35;
-      const desiredHeight = innerRadius + outerRadius + 80;
+      const desiredHeight = height / 5 + outerRadius + 120;
       return (
         <ResponsivePieRadialChart height={desiredHeight} data={data} prefixLegend={prefixLegend}
                                   innerRadius={innerRadius} outerRadius={outerRadius} linkPage={linkPage}
