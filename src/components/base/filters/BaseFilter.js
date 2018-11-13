@@ -15,6 +15,7 @@ class BaseFilter extends Component {
         hierarchy: 1,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       },
+        orderBy: 'value',
         page: 1,
         pageSize: 10,
       update: false,

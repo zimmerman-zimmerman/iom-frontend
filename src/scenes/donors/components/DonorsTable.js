@@ -11,7 +11,7 @@ import SortHeader from "../../../components/SortHeader/SortHeader";
 
 import './DonorsTabel.scss';
 import Pagination from "../../../components/Pagination/Pagination";
-import {paginate} from "../../../helpers/tableHelpers";
+import { paginate, genericSort } from "../../../helpers/tableHelpers";
 
 class DonorsTable extends BaseFilter {
     addKey(dataSource) {
@@ -23,15 +23,10 @@ class DonorsTable extends BaseFilter {
         return data;
     }
 
-    handleChange(value) {
-        const { rootComponent } = this.props;
-        const { filters } = rootComponent.state;
-        if (get(filters.values, 'order_by')) {
-            delete filters.values['order_by'];
-        }
-        filters.values['order_by'] = value;
-        filters.changed = true;
-        this.setState({filters: filters});
+    handleSort(value) {
+        this.setState({
+            orderBy: value,
+        });
     }
 
     render() {
@@ -41,9 +36,9 @@ class DonorsTable extends BaseFilter {
         const columns = [{
             title: <SortHeader
                 title={intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}
-                sortValue={filters.values.order_by}
-                defSortValue={'participating_organisation'}
-                onSort={this.handleChange}
+                sortValue={this.state.orderBy}
+                defSortValue={'name'}
+                onSort={(value) => this.handleSort(value)}
             />,
             dataIndex: 'name',
             key: 'participating_organisation',
@@ -62,9 +57,9 @@ class DonorsTable extends BaseFilter {
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}
-                sortValue={filters.values.order_by}
+                sortValue={this.state.orderBy}
                 defSortValue={'value'}
-                onSort={this.handleChange}
+                onSort={(value) => this.handleSort(value)}
             />,
             dataIndex: 'value',
             key: 'value',
@@ -76,15 +71,18 @@ class DonorsTable extends BaseFilter {
                     id: 'donors.table.donors.header.projects.count',
                     defaultMessage: 'Number of projects',
                 })}
-                sortValue={filters.values.order_by}
-                defSortValue={'activity_count'}
-                onSort={this.handleChange}
+                sortValue={this.state.orderBy}
+                defSortValue={'project'}
+                onSort={(value) => this.handleSort(value)}
             />,
             dataIndex: 'project',
             key: 'activity_count',
             className: 'number',
         },];
-        const data = paginate(this.state.page, this.state.pageSize, this.props.data);
+        //Frontend sort
+        let data = genericSort(this.props.data, this.state.orderBy);
+        //Frontend paginate
+        data = paginate(this.state.page, this.state.pageSize, data);
         return (
             <Fragment>
                 <Table className={classes.donorsTable} dataSource={data !== null ? this.addKey(data) : null} columns={columns} size="middle"
