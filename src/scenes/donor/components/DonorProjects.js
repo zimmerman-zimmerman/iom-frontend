@@ -16,19 +16,21 @@ import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
 import { addFilterValues } from "../../../helpers/generic";
+import { donorProjectsFormatter, genericSort, paginate } from '../../../helpers/tableHelpers';
 
 class DonorProjects extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       params: {
         fields: 'id,title,iati_identifier,activity_dates,activity_status,sectors,' +
         'participating_organisations,aggregations',
         convert_to: 'usd',
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
+        page_size: 300,
         ordering: '-end_date',
-          page: 1,
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -59,7 +61,7 @@ class DonorProjects extends Component {
     const newParams = this.state.params;
     newParams.ordering = value;
     this.setState({params: newParams}, () => {
-      this.getProjects();
+      // this.getProjects();
     });
   }
 
@@ -73,15 +75,12 @@ class DonorProjects extends Component {
   }
 
   onPageChange = (page) => {
-    const { dispatch } = this.props;
-    const { params } = this.state;
-    params.page = page;
-    dispatch(actions.donorProjectsRequest(params));
+    this.setState({ page });
   };
 
   render() {
     const { intl, donorProjects, classes } = this.props;
-    const data = get(donorProjects, 'data.results');
+    const data = genericSort(paginate(this.state.page, 10, donorProjectsFormatter(get(donorProjects, 'data.results'))), this.state.params.ordering);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
@@ -94,52 +93,39 @@ class DonorProjects extends Component {
       width: '40%',
       key: 'donors',
       render: project =>
-        <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
+        <Link to={`/projects/${project.id}`}>{project.title}</Link>
     },
         {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'start_date'}
+                    defSortValue={'raw_start_date'}
                     onSort={this.handleChange}
                     />,
+            dataIndex: 'start_date',
             className: 'date',
             key: 'start_date',
-            render: (value, record, i) => {
-              const date = find(record.activity_dates, d => {
-                return d.type.code === "1"; // Planned start date => code = 1
-              });
-              return (
-                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
-              );
-            }
+            
         },
         {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'end_date'}
+                    defSortValue={'raw_end_date'}
                     onSort={this.handleChange}
                     />,
+            dataIndex: 'end_date',
             className: 'date',
             key: 'end_date',
-            render: (value, record, i) => {
-              const date = find(record.activity_dates, d => {
-                return d.type.code === "3"; // Planned end date => code = 3
-              });
-              return (
-                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
-              );
-            }
         },
         {
       title: <SortHeader
               title={intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}
               sortValue={this.state.params.ordering}
-              defSortValue={'activity_budget_value'}
+              defSortValue={'budget'}
               onSort={this.handleChange}
              />,
-      dataIndex: 'aggregations.activity.budget_value',
+      dataIndex: 'budget',
       className: 'number',
       key: 'budget',
       render: (value) => <span>{usd}{format(",.0f")(value)}</span>
@@ -147,10 +133,10 @@ class DonorProjects extends Component {
       title: <SortHeader
               title={intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'})}
               sortValue={this.state.params.ordering}
-              // defSortValue={'activity_status_name'}
-              onSort={() => console.log('backend functionality needs to be implemented')}
+              defSortValue={'status'}
+              onSort={this.handleChange}
               />,
-      dataIndex: 'activity_status.name',
+      dataIndex: 'status',
       className: 'Status',
       key: 'status'
     },{
@@ -163,7 +149,7 @@ class DonorProjects extends Component {
       className: 'Sector',
       key: 'sector',
       render: project =>
-        <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
+        <Link to={`/services/${project.sector_id}`}>{project.sector}</Link>
     },];
     return (
       <Spin spinning={donorProjects.request}>
