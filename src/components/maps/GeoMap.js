@@ -11,6 +11,7 @@ import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
 import { json as requestJson } from 'd3-request';
+import isEqual from 'lodash/isEqual';
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
@@ -127,6 +128,10 @@ class GeoMap extends Component {
     if (prevProps.country !== this.props.country) {
       this.getCenter();
     }
+    if(!isEqual(prevState.bounds !== this.state.bounds) && Object.keys(this.state.bounds).length !== 0)
+    {
+      this.refs.map.leafletElement.fitBounds(this.state.bounds);
+    }
   }
 
   componentDidMount() {
@@ -178,11 +183,15 @@ class GeoMap extends Component {
         this.openPopup();
       });
 
+        if(this.props.detail)
+        {
+          this.setState({
+              bounds: layer.getBounds(),
+          });
+        }
       const that = this;
       layer.on("click", function(e) {
-        that.setState({
-          bounds: e.target._bounds
-        }, that.props.history.push(`/countries/${feature.properties.code}`));
+        that.props.history.push(`/countries/${feature.properties.code}`);
       });
     }
   }
@@ -244,7 +253,7 @@ class GeoMap extends Component {
               center={desiredCenter}
               boundsOptions={bounds}
               zoom={this.getZoomValue()}
-              minZoom={this.getZoomValue()}
+              minZoom={1}
               zoomControl={false}
               worldCopyJump={true}
               scrollWheelZoom={false}
