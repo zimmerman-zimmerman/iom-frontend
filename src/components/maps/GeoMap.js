@@ -135,7 +135,7 @@ class GeoMap extends Component {
           if (!error) {
             this.setState({
                 namedGeoJson: response,
-            }, this.initializeLayers)
+            }, this.initializeLayers);
           }
       });
   }
