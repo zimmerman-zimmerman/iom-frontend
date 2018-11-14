@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from "../../../components/Pagination/Pagination";
-import { paginate } from '../../../helpers/tableHelpers';
+import { paginate, genericSort } from '../../../helpers/tableHelpers';
+import { countriesFormatter } from '../../../helpers/data-formatters';
 
 class CountriesTable extends BaseFilter {
   addKey(dataSource) {
@@ -22,50 +23,43 @@ class CountriesTable extends BaseFilter {
   }
 
   handleChange(value) {
-    const { rootComponent } = this.props;
-    const { filters } = rootComponent.state;
-    if (get(filters.values, 'order_by')) {
-      delete filters.values['order_by'];
-    }
-    filters.values['order_by'] = value;
-    filters.changed = true;
-    this.setState({filters: filters});
+    this.setState({countriesTableSortBy: value});
   }
 
   render() {
     const { classes, intl, rootComponent } = this.props;
     const { filters } = rootComponent.state;
+    const { countriesTableSortBy } = this.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.country', defaultMessage: 'Country name'})}
-              sortValue={filters.values.order_by}
-              defSortValue={'recipient_country'}
+              sortValue={countriesTableSortBy}
+              defSortValue={'title'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'recipient_country',
       key: 'recipient_country',
-      render: recipient_country =>
+      render: (country) =>
         <Link to={{
-            pathname: `/countries/${recipient_country.code.toLowerCase()}`,
+            pathname: `/countries/${country.code.toLowerCase()}`,
             state: { filterValues: filters.values }
         }}>
-            {recipient_country.name}
+            {country.title}
         </Link>
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.budget', defaultMessage: 'Budget'})}
-              sortValue={filters.values.order_by}
-              defSortValue={'value'}
+              sortValue={countriesTableSortBy}
+              defSortValue={'budget'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'value',
+      dataIndex: 'budget',
       key: 'value',
       render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}
-              sortValue={filters.values.order_by}
+              sortValue={countriesTableSortBy}
               defSortValue={'activity_count'}
               onSort={this.handleChange}
               />,
@@ -75,15 +69,16 @@ class CountriesTable extends BaseFilter {
       // TODO adjust this when we have region backend sorting
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}
-              sortValue={filters.values.order_by}
-              // defSortValue={'recipient_country'}
-              onSort={() => console.log('we need backend functionality for this')}
+              sortValue={countriesTableSortBy}
+              defSortValue={'region'}
+              onSort={this.handleChange}
               />,
-      dataIndex: 'recipient_country',
+      dataIndex: 'region',
       key: 'region',
-      render: recipient_country => <span>{recipient_country.region.name}</span>,
     },];
-    const data = paginate(this.state.page, this.state.pageSize, this.props.data);
+    let data = countriesFormatter(this.props.data);
+    data = genericSort(data, countriesTableSortBy);
+    data = paginate(this.state.page, this.state.pageSize, data);
     return (
         <Fragment>
             <Table className={classes.table} dataSource={data ? this.addKey(data) : null} columns={columns}

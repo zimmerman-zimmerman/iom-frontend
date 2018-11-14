@@ -33,7 +33,7 @@ class Country extends BaseFilter {
             //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
             // 'params' works as a reference when passed in this function
             addFilterValues(this.props.location.state.filterValues, params);
-            console.log(params);
+            // console.log(params);
         }
         this.actionRequest(
           extend({}, params, {recipient_country: code.toUpperCase()}),
@@ -76,7 +76,7 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const { country, countryDonors, countryActivities, countrySectors, classes, project } = this.props;
+    const { country, countryDonors, countryActivities, countrySectors, classes, project, countryMappingJson } = this.props;
     const countryResult = get(this.props, 'country.data.results[0]');
     const donors = get(this.props, 'countryDonors.data.results');
     const sectors = get(this.props, 'countrySectors.data.results', []);
@@ -97,7 +97,11 @@ class Country extends BaseFilter {
     return (
       <Spin spinning={country.request || countryDonors.request || countryActivities.request || countrySectors.request || project.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          <BannerCountry data={countryResult} />
+          <BannerCountry
+            code={code}
+            data={countryResult}
+            countryMappingJson={get(countryMappingJson.data, 'content', {})}
+          />
           <Grid className={classes.country} style={pageContainer} fluid>
             <Row middle="xs" className="gap">
               <Col xs={12} md={6} lg={6}>
@@ -152,7 +156,8 @@ const mapStateToProps = (state, ) => {
     countryDonors: state.countryDonors,
     countryActivities: state.countryActivities,
     countrySectors: state.countrySectors,
-    project: state.project
+    project: state.project,
+    countryMappingJson: state.countryMappingJson,
   }
 };
 

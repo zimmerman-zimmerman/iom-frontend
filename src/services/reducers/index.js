@@ -127,7 +127,11 @@ import {
   HOME_FUNDING_GOES_INITIAL,
   HOME_FUNDING_GOES_REQUEST,
   HOME_FUNDING_GOES_SUCCESS,
-  HOME_FUNDING_GOES_FAILED
+  HOME_FUNDING_GOES_FAILED,
+  COUNTRY_MAPPING_JSON_INITIAL,
+  COUNTRY_MAPPING_JSON_REQUEST,
+  COUNTRY_MAPPING_JSON_SUCCESS,
+  COUNTRY_MAPPING_JSON_FAILED
 } from '../actions/index';
 import {
     ABOUT_MEDIA_CONTENT_FAILED,
@@ -714,8 +718,23 @@ function aboutMediaContent(state=initial, action) {
     }
 }
 
+function countryMappingJson(state=initial, action) {
+  switch (action.type) {
+      case COUNTRY_MAPPING_JSON_INITIAL:
+          return updateInitial(state, action);
+      case COUNTRY_MAPPING_JSON_REQUEST:
+          return updateRequest(state, action);
+      case COUNTRY_MAPPING_JSON_SUCCESS:
+          return updateSuccess(state, action);
+      case COUNTRY_MAPPING_JSON_FAILED:
+          return updateFailed(state, action);
+      default:
+          return state;
+  }
+}
+
 const reducers = {
-    aboutMediaContent,
+  aboutMediaContent,
   projectTransactions,
   nonHumanServices,
   homeDonors,
@@ -749,6 +768,7 @@ const reducers = {
   donorsGroupsJson,
   donorGroupJson,
   homeFundingGoes,
+  countryMappingJson,
 };
 
 export default reducers;

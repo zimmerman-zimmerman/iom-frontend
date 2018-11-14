@@ -76,10 +76,10 @@ export default class SectorsTreeMapItem extends Component {
                               x={x + item.xAdjust}
                               y={y + item.yAdjust}
                               // textAnchor="start"
-                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#fff'}
+                              fill={bgColors[index % 6] === '#e9ebf6' ? '#5287b7' : '#0033a1'}
                               stroke="none"
                               fillOpacity={1}
-                              fontWeight={600}
+                              fontWeight={400}
                               fontSize={this.state.labelFontSize}
                           >
                               {item.text}
@@ -94,7 +94,8 @@ export default class SectorsTreeMapItem extends Component {
                       x={percXPos}
                       y={percYPos}
                       verticalAnchor="end"
-                      fill="#fff"
+                      fill="#0033a1"
+                      stroke="none"
                       fillOpacity={0.9}
                       fontSize={percFontSize}
                   >
