@@ -3,6 +3,7 @@ import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
 import { Map, TileLayer, ZoomControl } from "react-leaflet";
 import _ from "lodash";
+import find from 'lodash/find';
 import { format } from "d3-format";
 import { scaleLinear } from 'd3-scale'
 import { withRouter } from "react-router";
@@ -146,9 +147,30 @@ class GeoMap extends Component {
   }
 
   getLegendValues(maxValue, minValue) {
-    const formatValue = maxValue > 10 ? ".2s" : maxValue > 0.1 ? ".2f" : ".4f";
+    const formatValue = ".0f";
     var x = scaleLinear().domain([minValue, maxValue * 1.2]);
-    return x.ticks(6).map(o => {
+    const initTicks = x.ticks(6);
+    const ticks = [];
+    for (let i = 0; i < initTicks.length; i++) {
+      const t = initTicks[i];
+      if (Math.floor(t) > 0) {
+        if (ticks.length > 0) {
+          for (let i2 = 0; i2 < ticks.length; i2++) {
+            const t2 = ticks[i2];
+            if ((Math.ceil(t2) !== Math.ceil(t) && t2 !== t) || t !== 0) {
+              if (!find(ticks, (_t) => {
+                return Math.ceil(_t) === Math.ceil(t);
+              })) {
+                ticks.push(Math.ceil(t));
+              }
+            }
+          }
+        } else {
+          ticks.push(Math.ceil(t));
+        }
+      }
+    }
+    return ticks.map(o => {
       return {
         value: o,
         text: format(formatValue)(o)
