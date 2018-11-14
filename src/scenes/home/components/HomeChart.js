@@ -11,7 +11,6 @@ import List from 'antd/es/list';
 import Badge from 'antd/es/badge';
 import Button from 'antd/es/button';
 import { Link } from 'react-router-dom';
-import * as actions from "../../../services/actions";
 
 import { pieRadialChart as pieRadialChartStyle, variables as variablesStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
