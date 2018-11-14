@@ -6,29 +6,30 @@ import Table from 'antd/es/table';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
-import find from 'lodash/find';
 import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
-import { format as dateFormat } from 'date-fns';
 
 import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
 import { addFilterValues } from "../../../helpers/generic";
+import { genericSort, paginate } from '../../../helpers/tableHelpers';
+import { donorProjectsFormatter } from '../dataFormatter';
 
 class DonorProjects extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       params: {
         fields: 'id,title,iati_identifier,activity_dates,activity_status,sectors,' +
         'participating_organisations,aggregations',
         convert_to: 'usd',
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
-        ordering: '-end_date',
-          page: 1,
+        page_size: 300,
+        ordering: '-rawEndDate',
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -59,7 +60,7 @@ class DonorProjects extends Component {
     const newParams = this.state.params;
     newParams.ordering = value;
     this.setState({params: newParams}, () => {
-      this.getProjects();
+      // this.getProjects();
     });
   }
 
@@ -72,16 +73,15 @@ class DonorProjects extends Component {
     return data;
   }
 
-  onPageChange = (page) => {
-    const { dispatch } = this.props;
-    const { params } = this.state;
-    params.page = page;
-    dispatch(actions.donorProjectsRequest(params));
+  onPageChange(page) {
+    this.setState({ page });
   };
 
   render() {
     const { intl, donorProjects, classes } = this.props;
-    const data = get(donorProjects, 'data.results');
+    let data = donorProjectsFormatter(get(donorProjects, 'data.results'));
+    data = genericSort(data, this.state.params.ordering);
+    data = paginate(this.state.page, 10, data);
     const total = get(donorProjects, 'data.count');
     const usd = <FormattedMessage id="currency.usd" defaultMessage="US$ " />;
     const columns = [{
@@ -94,52 +94,39 @@ class DonorProjects extends Component {
       width: '40%',
       key: 'donors',
       render: project =>
-        <Link to={`/projects/${project.id}`}>{project.title.narratives[0].text}</Link>
+        <Link to={`/projects/${project.id}`}>{project.title}</Link>
     },
         {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'start_date'}
+                    defSortValue={'rawStartDate'}
                     onSort={this.handleChange}
                     />,
+            dataIndex: 'startDate',
             className: 'date',
             key: 'start_date',
-            render: (value, record, i) => {
-              const date = find(record.activity_dates, d => {
-                return d.type.code === "1"; // Planned start date => code = 1
-              });
-              return (
-                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
-              );
-            }
+            
         },
         {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'end_date'}
+                    defSortValue={'rawEndDate'}
                     onSort={this.handleChange}
                     />,
+            dataIndex: 'endDate',
             className: 'date',
             key: 'end_date',
-            render: (value, record, i) => {
-              const date = find(record.activity_dates, d => {
-                return d.type.code === "3"; // Planned end date => code = 3
-              });
-              return (
-                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
-              );
-            }
         },
         {
       title: <SortHeader
               title={intl.formatMessage({id: 'donor.table.projects.header.budget', defaultMessage: 'Budget'})}
               sortValue={this.state.params.ordering}
-              defSortValue={'activity_budget_value'}
+              defSortValue={'budget'}
               onSort={this.handleChange}
              />,
-      dataIndex: 'aggregations.activity.budget_value',
+      dataIndex: 'budget',
       className: 'number',
       key: 'budget',
       render: (value) => <span>{usd}{format(",.0f")(value)}</span>
@@ -147,10 +134,10 @@ class DonorProjects extends Component {
       title: <SortHeader
               title={intl.formatMessage({id: 'donor.table.projects.header.status', defaultMessage: 'Project status'})}
               sortValue={this.state.params.ordering}
-              // defSortValue={'activity_status_name'}
-              onSort={() => console.log('backend functionality needs to be implemented')}
+              defSortValue={'status'}
+              onSort={this.handleChange}
               />,
-      dataIndex: 'activity_status.name',
+      dataIndex: 'status',
       className: 'Status',
       key: 'status'
     },{
@@ -163,7 +150,7 @@ class DonorProjects extends Component {
       className: 'Sector',
       key: 'sector',
       render: project =>
-        <Link to={`/services/${project.sectors[0].sector.code}`}>{project.sectors[0].sector.name}</Link>
+        <Link to={`/services/${project.sectorID}`}>{project.sector}</Link>
     },];
     return (
       <Spin spinning={donorProjects.request}>
@@ -177,7 +164,7 @@ class DonorProjects extends Component {
           {total > 10 &&
               <Pagination pageCount={Math.ceil(total/10)}
                           onPageChange={(value) => this.onPageChange(value.selected+1)}
-                          forcePage={this.state.params.page-1}
+                          forcePage={this.state.page-1}
               />
           }
       </Spin>

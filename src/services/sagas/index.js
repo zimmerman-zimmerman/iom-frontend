@@ -281,6 +281,15 @@ export function* homeMediaContentRequest(action) {
   }
 }
 
+export function * countryMappingJsonRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.countryMappingJsonSuccess(response));
+  } catch (error) {
+    yield put(actions.countryMappingJsonFailed(error));
+  }
+}
+
 export function* donorsGroupsJsonRequest(action) {
   try {
     const response = yield call(api.JSONContentRequest, action.slug);
@@ -376,6 +385,7 @@ function* sagas() {
     takeLatest('DONORS_GROUPS_JSON_REQUEST', donorsGroupsJsonRequest),
     takeLatest('DONOR_GROUP_JSON_REQUEST', donorGroupJsonRequest),
     takeLatest('HOME_FUNDING_GOES_REQUEST', homeFundingGoesRequest),
+    takeLatest('COUNTRY_MAPPING_JSON_REQUEST', countryMappingJsonRequest),
     takeLatest('COUNTRY_M49_MAPPING_REQUEST', countryM49MappingRequest),
     takeLatest('M49_REGION_REQUEST', m49RegionRequest),
   ]

@@ -128,6 +128,10 @@ import {
   HOME_FUNDING_GOES_REQUEST,
   HOME_FUNDING_GOES_SUCCESS,
   HOME_FUNDING_GOES_FAILED,
+  COUNTRY_MAPPING_JSON_INITIAL,
+  COUNTRY_MAPPING_JSON_REQUEST,
+  COUNTRY_MAPPING_JSON_SUCCESS,
+  COUNTRY_MAPPING_JSON_FAILED,
   COUNTRY_M49_MAPPING_INITIAL,
   COUNTRY_M49_MAPPING_REQUEST,
   COUNTRY_M49_MAPPING_SUCCESS,
@@ -722,6 +726,21 @@ function aboutMediaContent(state=initial, action) {
     }
 }
 
+function countryMappingJson(state=initial, action) {
+  switch (action.type) {
+      case COUNTRY_MAPPING_JSON_INITIAL:
+          return updateInitial(state, action);
+      case COUNTRY_MAPPING_JSON_REQUEST:
+          return updateRequest(state, action);
+      case COUNTRY_MAPPING_JSON_SUCCESS:
+          return updateSuccess(state, action);
+      case COUNTRY_MAPPING_JSON_FAILED:
+          return updateFailed(state, action);
+      default:
+          return state;
+  }
+}
+
 function countryM49Mapping(state=initial, action) {
   switch (action.type) {
     case COUNTRY_M49_MAPPING_INITIAL:
@@ -753,7 +772,7 @@ function m49Region(state=initial, action) {
 }
 
 const reducers = {
-    aboutMediaContent,
+  aboutMediaContent,
   projectTransactions,
   nonHumanServices,
   homeDonors,
@@ -787,6 +806,7 @@ const reducers = {
   donorsGroupsJson,
   donorGroupJson,
   homeFundingGoes,
+  countryMappingJson,
   countryM49Mapping,
   m49Region,
 };

@@ -10,7 +10,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from "../../../components/Pagination/Pagination";
 import { paginate, genericSort } from '../../../helpers/tableHelpers';
-import { countriesFormatter } from '../../../helpers/data-formatters';
+import { countriesFormatter } from '../dataFormatter';
 
 class CountriesTable extends BaseFilter {
   addKey(dataSource) {
