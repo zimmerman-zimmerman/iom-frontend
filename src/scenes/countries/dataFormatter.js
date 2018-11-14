@@ -11,4 +11,4 @@ export function countriesFormatter(data) {
             activity_count: get(c, 'activity_count', 0)
         };
     });
-} 
+}

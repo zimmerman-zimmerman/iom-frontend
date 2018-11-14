@@ -14,7 +14,8 @@ import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
 import { addFilterValues } from "../../../helpers/generic";
-import { donorProjectsFormatter, genericSort, paginate } from '../../../helpers/tableHelpers';
+import { genericSort, paginate } from '../../../helpers/tableHelpers';
+import { donorProjectsFormatter } from '../dataFormatter';
 
 class DonorProjects extends Component {
   constructor(props) {
