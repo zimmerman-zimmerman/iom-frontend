@@ -76,7 +76,7 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const { country, countryDonors, countryActivities, countrySectors, classes, project, countryMappingJson } = this.props;
+    const { country, countryDonors, countryActivities, countrySectors, classes, project, countryMappingJson, donorGroupJson } = this.props;
     const countryResult = get(this.props, 'country.data.results[0]');
     const donors = get(this.props, 'countryDonors.data.results');
     const sectors = get(this.props, 'countrySectors.data.results', []);
@@ -113,6 +113,7 @@ class Country extends BaseFilter {
                   sortBy={this.state.donorTableSortBy}
                   handleDonorSortBy={e => this.handleDonorSortBy(e)}
                   itemAmount={5}
+                  donorGroupJson={get(donorGroupJson, 'data.content', {})}
                 />
               </Col>
               <Col xs={12} md={6} lg={6}>
@@ -139,7 +140,8 @@ class Country extends BaseFilter {
                   <Trans id="country.table.projects.title" defaultMessage="Related projects"/>
                 </h2>
                 <TableProjects countryCode={ get(this.props, 'match.params.code')}
-                               itemAmount={7} filterValues={prevFilters}/>
+                               itemAmount={7} filterValues={prevFilters}
+                               donorGroupJson={get(donorGroupJson, 'data.content', {})} />
               </Col>
             </Row>
             {firstProject ? <ContactProject id={firstProject.id} code={get(this.props, 'match.params.code')} /> : null}
@@ -158,6 +160,7 @@ const mapStateToProps = (state, ) => {
     countrySectors: state.countrySectors,
     project: state.project,
     countryMappingJson: state.countryMappingJson,
+    donorGroupJson: state.donorGroupJson,
   }
 };
 

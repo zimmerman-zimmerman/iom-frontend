@@ -28,7 +28,7 @@ class TableDonors extends React.Component {
     }
 
     render(){
-        const { intl, classes, handleDonorSortBy } = this.props;
+        const { intl, classes, handleDonorSortBy, donorGroupJson } = this.props;
         const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
         const columns = [{
             title:
@@ -40,8 +40,14 @@ class TableDonors extends React.Component {
                 />,
             key: 'participating_organisation',
             width: '60%',
-            render: obj =>
-                <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
+            render: (obj) => {
+                let donorExtra = `${get(donorGroupJson, obj.participating_organisation_ref)}/`;
+                return (
+                    <Link to={`/donors/${donorExtra}${obj.participating_organisation_ref}`}>
+                        {obj.participating_organisation}
+                    </Link>   
+                )
+            }
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'country.table.donors.header.total', defaultMessage: 'Total donor funding value'})}
