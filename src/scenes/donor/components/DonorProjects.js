@@ -6,6 +6,7 @@ import Table from 'antd/es/table';
 import Spin from 'antd/es/spin';
 import { injectIntl, intlShape } from "react-intl";
 import get from 'lodash/get';
+import find from 'lodash/find';
 import { FormattedMessage } from "react-intl";
 import { format } from "d3-format";
 import injectSheet from 'react-jss';
@@ -102,10 +103,16 @@ class DonorProjects extends Component {
                     defSortValue={'start_date'}
                     onSort={this.handleChange}
                     />,
-            dataIndex: 'activity_dates[2].iso_date', //THe index 2 array element here is the ACTUAL START date
             className: 'date',
             key: 'start_date',
-            render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
+            render: (value, record, i) => {
+              const date = find(record.activity_dates, d => {
+                return d.type.code === "1"; // Planned start date => code = 1
+              });
+              return (
+                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
+              );
+            }
         },
         {
             title: <SortHeader
@@ -114,10 +121,16 @@ class DonorProjects extends Component {
                     defSortValue={'end_date'}
                     onSort={this.handleChange}
                     />,
-            dataIndex: 'activity_dates[0].iso_date', //THe index 0 array element here is the ACTUAL END date
             className: 'date',
             key: 'end_date',
-            render: (value) => <span>{dateFormat(value, 'DD-MM-YYYY')}</span>
+            render: (value, record, i) => {
+              const date = find(record.activity_dates, d => {
+                return d.type.code === "3"; // Planned end date => code = 3
+              });
+              return (
+                <span>{dateFormat(date.iso_date, 'DD-MM-YYYY')}</span>
+              );
+            }
         },
         {
       title: <SortHeader
