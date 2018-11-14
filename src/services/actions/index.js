@@ -980,3 +980,59 @@ export function countryMappingJsonFailed(error) {
     error: error
   }
 }
+
+export const COUNTRY_M49_MAPPING_INITIAL = 'COUNTRY_M49_MAPPING_INITIAL';
+export const COUNTRY_M49_MAPPING_REQUEST = 'COUNTRY_M49_MAPPING_REQUEST';
+export const COUNTRY_M49_MAPPING_SUCCESS = 'COUNTRY_M49_MAPPING_SUCCESS';
+export const COUNTRY_M49_MAPPING_FAILED = 'COUNTRY_M49_MAPPING_FAILED';
+export function countryM49MappingInitial() {
+  return {
+    type: COUNTRY_M49_MAPPING_INITIAL
+  }
+}
+export function countryM49MappingRequest(slug) {
+  return {
+    type: COUNTRY_M49_MAPPING_REQUEST,
+    slug: slug
+  }
+}
+export function countryM49MappingSuccess(data) {
+  return {
+    type: COUNTRY_M49_MAPPING_SUCCESS,
+    data: data
+  }
+}
+export function countryM49MappingFailed(error) {
+  return {
+    type: COUNTRY_M49_MAPPING_FAILED,
+    error: error
+  }
+}
+
+export const M49_REGION_INITIAL = 'M49_REGION_INITIAL';
+export const M49_REGION_REQUEST = 'M49_REGION_REQUEST';
+export const M49_REGION_SUCCESS = 'M49_REGION_SUCCESS';
+export const M49_REGION_FAILED = 'M49_REGION_FAILED';
+export function m49RegionInitial() {
+  return {
+    type: M49_REGION_INITIAL
+  }
+}
+export function m49RegionRequest(slug) {
+  return {
+    type: M49_REGION_REQUEST,
+    slug: slug
+  }
+}
+export function m49RegionSuccess(data) {
+  return {
+    type: M49_REGION_SUCCESS,
+    data: data
+  }
+}
+export function m49RegionFailed(error) {
+  return {
+    type: M49_REGION_FAILED,
+    error: error
+  }
+}
