@@ -68,14 +68,13 @@ class CountriesTable extends BaseFilter {
     },{
       // TODO: Temp no order by region, please change ordering process in the frontend side.
       title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
-      dataIndex: 'recipient_country',
       key: 'region',
-      render: recipient_country => (m49Region.success && countryM49Mapping.success &&
+      render: (country) => (m49Region.success && countryM49Mapping.success &&
         <span>
-          {get(m49Region.data.content,
-            get(countryM49Mapping.data.content, recipient_country.code.toLowerCase())
-          )}
-        </span>
+           {get(m49Region.data.content,
+             get(countryM49Mapping.data.content, country.code.toLowerCase())
+           )}
+         </span>
       )
     },];
     let data = countriesFormatter(this.props.data);
