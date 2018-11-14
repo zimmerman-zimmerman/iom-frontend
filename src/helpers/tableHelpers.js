@@ -36,8 +36,12 @@ export function donorProjectsFormatter(data) {
             end_date: dateFormat(raw_end_date, 'DD-MM-YYYY'),
             budget: get(d.aggregations, 'activity.budget_value', 0),
             status: get(d.activity_status, 'name', ''),
-            sector: get(d.sectors, '[0].sector.name', ''),
-            sector_id: get(d.sectors, '[0.sector.code', ''),
+            sector: get(find(d.sectors, s => {
+                return s.vocabulary.code === '99'; // Project type => code = 99
+            }), 'sector.name', ''),
+            sector_id: get(find(d.sectors, s => {
+                return s.vocabulary.code === '99'; // Project type => code = 99
+            }), 'sector.code', ''),
         }
     });
 }

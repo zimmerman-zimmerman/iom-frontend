@@ -28,7 +28,7 @@ class DonorProjects extends Component {
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         page_size: 300,
-        ordering: '-end_date',
+        ordering: '-raw_end_date',
       }
     };
     this.handleChange = this.handleChange.bind(this);
