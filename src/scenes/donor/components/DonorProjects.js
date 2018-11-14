@@ -28,7 +28,7 @@ class DonorProjects extends Component {
         participating_organisation: props.code.toUpperCase(),
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         page_size: 300,
-        ordering: '-raw_end_date',
+        ordering: '-rawEndDate',
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -99,10 +99,10 @@ class DonorProjects extends Component {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'raw_start_date'}
+                    defSortValue={'rawStartDate'}
                     onSort={this.handleChange}
                     />,
-            dataIndex: 'start_date',
+            dataIndex: 'startDate',
             className: 'date',
             key: 'start_date',
             
@@ -111,10 +111,10 @@ class DonorProjects extends Component {
             title: <SortHeader
                     title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
                     sortValue={this.state.params.ordering}
-                    defSortValue={'raw_end_date'}
+                    defSortValue={'rawEndDate'}
                     onSort={this.handleChange}
                     />,
-            dataIndex: 'end_date',
+            dataIndex: 'endDate',
             className: 'date',
             key: 'end_date',
         },

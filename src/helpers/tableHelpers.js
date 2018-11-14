@@ -20,28 +20,28 @@ export function genericSort(data, order) {
 }
 
 export function donorProjectsFormatter(data) {
-    return map(data, d => {
-        const raw_start_date = find(d.activity_dates, ad => {
+    return map(data, (d) => {
+        const rawStartDate = find(d.activity_dates, (ad) => {
             return ad.type.code === "1"; // Planned start date => code = 1
-          }).iso_date
-        const raw_end_date = find(d.activity_dates, ad => {
+          }).iso_date;
+        const rawEndDate = find(d.activity_dates, (ad) => {
             return ad.type.code === "3"; // Planned start date => code = 1
-          }).iso_date
+          }).iso_date;
         return {
             id: d.id,
             title: get(d.title, 'narratives[0].text', ''),
-            raw_start_date: raw_start_date,
-            start_date: dateFormat(raw_start_date, 'DD-MM-YYYY'),
-            raw_end_date: raw_end_date,
-            end_date: dateFormat(raw_end_date, 'DD-MM-YYYY'),
+            rawStartDate,
+            startDate: dateFormat(rawStartDate, 'DD-MM-YYYY'),
+            rawEndDate,
+            endDate: dateFormat(rawEndDate, 'DD-MM-YYYY'),
             budget: get(d.aggregations, 'activity.budget_value', 0),
             status: get(d.activity_status, 'name', ''),
-            sector: get(find(d.sectors, s => {
+            sector: get(find(d.sectors, (s) => {
                 return s.vocabulary.code === '99'; // Project type => code = 99
             }), 'sector.name', ''),
-            sector_id: get(find(d.sectors, s => {
+            sector_id: get(find(d.sectors, (s) => {
                 return s.vocabulary.code === '99'; // Project type => code = 99
             }), 'sector.code', ''),
-        }
+        };
     });
 }
