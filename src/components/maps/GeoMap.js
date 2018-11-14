@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
-import { namedGeoJson } from "./country_data";
 import { Map, TileLayer, ZoomControl } from "react-leaflet";
 import _ from "lodash";
 import { format } from "d3-format";
@@ -11,6 +10,8 @@ import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
+import { json as requestJson } from 'd3-request';
+import isEqual from 'lodash/isEqual';
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
@@ -26,6 +27,7 @@ class GeoMap extends Component {
     super(props);
 
     this.state = {
+      namedGeoJson: {},
       mapShouldBeReloaded: false,
       mapColour: "#fff",
       minYear: 1950,
@@ -78,7 +80,7 @@ class GeoMap extends Component {
 
       const features = _.chain(data)
         .map(o => {
-          let country = namedGeoJson[o.recipient_country.code];
+          let country = this.state.namedGeoJson[o.recipient_country.code];
           if (!country) {
             return null;
           }
@@ -109,7 +111,7 @@ class GeoMap extends Component {
   };
 
   getCenter() {
-    const country = namedGeoJson[this.props.country];
+    const country = this.state.namedGeoJson[this.props.country];
     if (country) {
       const polygon = L.polygon(country.geometry.coordinates);
       const center = polygon.getBounds().getCenter();
@@ -126,10 +128,21 @@ class GeoMap extends Component {
     if (prevProps.country !== this.props.country) {
       this.getCenter();
     }
+    if(!isEqual(prevState.bounds !== this.state.bounds) && Object.keys(this.state.bounds).length !== 0)
+    {
+      this.refs.map.leafletElement.fitBounds(this.state.bounds);
+    }
   }
 
   componentDidMount() {
-    this.initializeLayers();
+    //We load that country border data here
+      requestJson('/map/detailed_country_borders.json', (error, response) => {
+          if (!error) {
+            this.setState({
+                namedGeoJson: response,
+            }, this.initializeLayers);
+          }
+      });
   }
 
   getLegendValues(maxValue, minValue) {
@@ -170,11 +183,15 @@ class GeoMap extends Component {
         this.openPopup();
       });
 
+        if(this.props.detail)
+        {
+          this.setState({
+              bounds: layer.getBounds(),
+          });
+        }
       const that = this;
       layer.on("click", function(e) {
-        that.setState({
-          bounds: e.target._bounds
-        }, that.props.history.push(`/countries/${feature.properties.code}`));
+        that.props.history.push(`/countries/${feature.properties.code}`);
       });
     }
   }
@@ -236,7 +253,7 @@ class GeoMap extends Component {
               center={desiredCenter}
               boundsOptions={bounds}
               zoom={this.getZoomValue()}
-              minZoom={this.getZoomValue()}
+              minZoom={1}
               zoomControl={false}
               worldCopyJump={true}
               scrollWheelZoom={false}
