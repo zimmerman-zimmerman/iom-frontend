@@ -154,15 +154,19 @@ class GeoMap extends Component {
     for (let i = 0; i < initTicks.length; i++) {
       const t = initTicks[i];
       if (Math.floor(t) > 0) {
-        for (let i2 = 0; i2 < ticks.length; i2++) {
-          const t2 = ticks[i2];
-          if ((Math.ceil(t2) !== Math.ceil(t) && t2 !== t) || t !== 0) {
-            if (!find(ticks, (_t) => {
-              return Math.ceil(_t) === Math.ceil(t);
-            })) {
-              ticks.push(Math.ceil(t));
+        if (ticks.length > 0) {
+          for (let i2 = 0; i2 < ticks.length; i2++) {
+            const t2 = ticks[i2];
+            if ((Math.ceil(t2) !== Math.ceil(t) && t2 !== t) || t !== 0) {
+              if (!find(ticks, (_t) => {
+                return Math.ceil(_t) === Math.ceil(t);
+              })) {
+                ticks.push(Math.ceil(t));
+              }
             }
           }
+        } else {
+          ticks.push(Math.ceil(t));
         }
       }
     }
