@@ -53,13 +53,13 @@ class CountriesTable extends BaseFilter {
               defSortValue={'budget'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'value',
+      dataIndex: 'budget',
       key: 'value',
       render: value => <span>{usd}{format(",.0f")(value)}</span>
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'countries.table.count', defaultMessage: 'Project count'})}
-              sortValue={filters.values.order_by}
+              sortValue={countriesTableSortBy}
               defSortValue={'activity_count'}
               onSort={this.handleChange}
               />,
