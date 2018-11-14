@@ -952,3 +952,31 @@ export function aboutMediaContentFailed(error) {
         error: error
     }
 }
+
+export const COUNTRY_MAPPING_JSON_INITIAL = 'COUNTRY_MAPPING_JSON_INITIAL';
+export const COUNTRY_MAPPING_JSON_REQUEST = 'COUNTRY_MAPPING_JSON_REQUEST';
+export const COUNTRY_MAPPING_JSON_SUCCESS = 'COUNTRY_MAPPING_JSON_SUCCESS';
+export const COUNTRY_MAPPING_JSON_FAILED = 'COUNTRY_MAPPING_JSON_FAILED';
+export function countryMappingJsonInitial() {
+  return {
+    type: COUNTRY_MAPPING_JSON_INITIAL
+  }
+}
+export function countryMappingJsonRequest(slug) {
+  return {
+    type: COUNTRY_MAPPING_JSON_REQUEST,
+    slug: slug
+  }
+}
+export function countryMappingJsonSuccess(data) {
+  return {
+    type: COUNTRY_MAPPING_JSON_SUCCESS,
+    data: data
+  }
+}
+export function countryMappingJsonFailed(error) {
+  return {
+    type: COUNTRY_MAPPING_JSON_FAILED,
+    error: error
+  }
+}
