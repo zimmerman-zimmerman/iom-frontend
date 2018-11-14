@@ -149,7 +149,7 @@ class DonorProjects extends Component {
       className: 'Sector',
       key: 'sector',
       render: project =>
-        <Link to={`/services/${project.sector_id}`}>{project.sector}</Link>
+        <Link to={`/services/${project.sectorID}`}>{project.sector}</Link>
     },];
     return (
       <Spin spinning={donorProjects.request}>

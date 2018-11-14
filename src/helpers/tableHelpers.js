@@ -39,7 +39,7 @@ export function donorProjectsFormatter(data) {
             sector: get(find(d.sectors, (s) => {
                 return s.vocabulary.code === '99'; // Project type => code = 99
             }), 'sector.name', ''),
-            sector_id: get(find(d.sectors, (s) => {
+            sectorID: get(find(d.sectors, (s) => {
                 return s.vocabulary.code === '99'; // Project type => code = 99
             }), 'sector.code', ''),
         };
