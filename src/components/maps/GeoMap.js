@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
-import { namedGeoJson } from "./country_data";
 import { Map, TileLayer, ZoomControl } from "react-leaflet";
 import _ from "lodash";
 import { format } from "d3-format";
@@ -11,6 +10,7 @@ import Button from 'antd/es/button';
 import Control from "react-leaflet-control";
 import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
+import { json as requestJson } from 'd3-request';
 
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
@@ -26,6 +26,7 @@ class GeoMap extends Component {
     super(props);
 
     this.state = {
+      namedGeoJson: {},
       mapShouldBeReloaded: false,
       mapColour: "#fff",
       minYear: 1950,
@@ -78,7 +79,7 @@ class GeoMap extends Component {
 
       const features = _.chain(data)
         .map(o => {
-          let country = namedGeoJson[o.recipient_country.code];
+          let country = this.state.namedGeoJson[o.recipient_country.code];
           if (!country) {
             return null;
           }
@@ -109,7 +110,7 @@ class GeoMap extends Component {
   };
 
   getCenter() {
-    const country = namedGeoJson[this.props.country];
+    const country = this.state.namedGeoJson[this.props.country];
     if (country) {
       const polygon = L.polygon(country.geometry.coordinates);
       const center = polygon.getBounds().getCenter();
@@ -129,7 +130,14 @@ class GeoMap extends Component {
   }
 
   componentDidMount() {
-    this.initializeLayers();
+    //We load that country border data here
+      requestJson('/map/detailed_country_borders.json', (error, response) => {
+          if (!error) {
+            this.setState({
+                namedGeoJson: response,
+            }, this.initializeLayers);
+          }
+      });
   }
 
   getLegendValues(maxValue, minValue) {
