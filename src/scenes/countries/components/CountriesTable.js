@@ -33,7 +33,7 @@ class CountriesTable extends BaseFilter {
   }
 
   render() {
-    const { classes, intl, rootComponent } = this.props;
+    const { classes, intl, rootComponent, m49Region, countryM49Mapping } = this.props;
     const { filters } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -72,16 +72,17 @@ class CountriesTable extends BaseFilter {
       dataIndex: 'activity_count',
       key: 'count',
     },{
-      // TODO adjust this when we have region backend sorting
-      title: <SortHeader
-              title={intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}
-              sortValue={filters.values.order_by}
-              // defSortValue={'recipient_country'}
-              onSort={() => console.log('we need backend functionality for this')}
-              />,
+      // TODO: Temp no order by region, please change ordering process in the frontend side.
+      title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
       dataIndex: 'recipient_country',
       key: 'region',
-      render: recipient_country => <span>{recipient_country.region.name}</span>,
+      render: recipient_country => (m49Region.success && countryM49Mapping.success &&
+        <span>
+          {get(m49Region.data.content,
+            get(countryM49Mapping.data.content, recipient_country.code.toLowerCase())
+          )}
+        </span>
+      )
     },];
     const data = paginate(this.state.page, this.state.pageSize, this.props.data);
     return (
@@ -132,7 +133,10 @@ const styles = {
 };
 
 const mapStateToProps = (state, ) => {
-  return {}
+  return {
+    countryM49Mapping: state.countryM49Mapping,
+    m49Region: state.m49Region,
+  }
 };
 
 export default injectSheet(styles)(injectIntl(connect(mapStateToProps)(CountriesTable)));

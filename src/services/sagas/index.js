@@ -317,9 +317,27 @@ export function* aboutMediaContentRequest(action) {
     }
 }
 
+export function* countryM49MappingRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.countryM49MappingSuccess(response));
+  } catch (error) {
+    yield put(actions.countryM49MappingFailed(error));
+  }
+}
+
+export function* m49RegionRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.m49RegionSuccess(response));
+  } catch (error) {
+    yield put(actions.m49RegionFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
-      takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
+    takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
     takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
     takeLatest('TOGGLE_MODAL_REQUEST', toggleModalRequest),
@@ -358,6 +376,8 @@ function* sagas() {
     takeLatest('DONORS_GROUPS_JSON_REQUEST', donorsGroupsJsonRequest),
     takeLatest('DONOR_GROUP_JSON_REQUEST', donorGroupJsonRequest),
     takeLatest('HOME_FUNDING_GOES_REQUEST', homeFundingGoesRequest),
+    takeLatest('COUNTRY_M49_MAPPING_REQUEST', countryM49MappingRequest),
+    takeLatest('M49_REGION_REQUEST', m49RegionRequest),
   ]
 }
 
