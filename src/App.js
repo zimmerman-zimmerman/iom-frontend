@@ -41,7 +41,7 @@ class App extends Component {
         dispatch(actions.donorGroupJsonRequest('donor-group-json'));
       }
       if (countryMappingJson.data === null) {
-        dispatch(actions.countryMappingJsonRequest('country-mapping-json'))
+        dispatch(actions.countryMappingJsonRequest('country-mapping-json'));
       }
     } else {
       dispatch(actions.localeInitial());

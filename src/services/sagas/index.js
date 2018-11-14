@@ -281,7 +281,7 @@ export function* homeMediaContentRequest(action) {
   }
 }
 
-export function* countryMappingJsonRequest(action) {
+export function * countryMappingJsonRequest(action) {
   try {
     const response = yield call(api.JSONContentRequest, action.slug);
     yield put(actions.countryMappingJsonSuccess(response));
