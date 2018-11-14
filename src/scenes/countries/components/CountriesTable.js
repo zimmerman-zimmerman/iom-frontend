@@ -10,7 +10,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from "../../../components/Pagination/Pagination";
 import { paginate, genericSort } from '../../../helpers/tableHelpers';
-import { countriesFormatter } from '../../../helpers/data-formatters';
+import { countriesFormatter } from '../dataFormatter';
 
 class CountriesTable extends BaseFilter {
   addKey(dataSource) {
@@ -27,7 +27,7 @@ class CountriesTable extends BaseFilter {
   }
 
   render() {
-    const { classes, intl, rootComponent } = this.props;
+    const { classes, intl, rootComponent, m49Region, countryM49Mapping } = this.props;
     const { filters } = rootComponent.state;
     const { countriesTableSortBy } = this.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
@@ -66,15 +66,16 @@ class CountriesTable extends BaseFilter {
       dataIndex: 'activity_count',
       key: 'count',
     },{
-      // TODO adjust this when we have region backend sorting
-      title: <SortHeader
-              title={intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}
-              sortValue={countriesTableSortBy}
-              defSortValue={'region'}
-              onSort={this.handleChange}
-              />,
-      dataIndex: 'region',
+      // TODO: Temp no order by region, please change ordering process in the frontend side.
+      title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
       key: 'region',
+      render: (country) => (m49Region.success && countryM49Mapping.success &&
+        <span>
+           {get(m49Region.data.content,
+             get(countryM49Mapping.data.content, country.code.toLowerCase())
+           )}
+         </span>
+      )
     },];
     let data = countriesFormatter(this.props.data);
     data = genericSort(data, countriesTableSortBy);
@@ -127,7 +128,10 @@ const styles = {
 };
 
 const mapStateToProps = (state, ) => {
-  return {}
+  return {
+    countryM49Mapping: state.countryM49Mapping,
+    m49Region: state.m49Region,
+  }
 };
 
 export default injectSheet(styles)(injectIntl(connect(mapStateToProps)(CountriesTable)));

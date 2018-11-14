@@ -19,7 +19,7 @@ import { pageContainer } from '../../helpers/style';
 
 class Countries extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, countryM49RegionMappingSlug, m49RegionSlug } = this.props;
     const { params } = this.state;
     this.setState({showSummary: true});
     if (dispatch) {
@@ -30,6 +30,11 @@ class Countries extends BaseFilter {
         dispatch(actions.countriesInitial());
         dispatch(actions.countryDonorsInitial());
       }
+      dispatch(actions.m49RegionRequest(m49RegionSlug));
+      dispatch(actions.countryM49MappingRequest(countryM49RegionMappingSlug));
+    } else {
+      dispatch(actions.m49RegionInitial());
+      dispatch(actions.countryM49MappingInitial());
     }
   }
 
@@ -141,6 +146,8 @@ Countries.defaultProps = {
   groupBy: 'recipient_country',
   filterRequest: actions.countriesRequest,
   secondFilterRequest: actions.countryDonorsRequest,
+  m49RegionSlug: 'm49-region',
+  countryM49RegionMappingSlug: 'country-m49-region-mapping'
 };
 
 const mapStateToProps = (state, ) => {
