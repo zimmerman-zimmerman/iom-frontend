@@ -42,7 +42,7 @@ class ServiceCountries extends BaseFilter {
         </h2>
         { serviceCountries.success ?
           <GeoMap data={data} country='nl' height={geomapHeight} tooltipName="Activities:"
-                  tabName="activities"
+                  tabName="activities" service
           /> : null
         }
       </div>
@@ -67,9 +67,6 @@ const styles = {
         fontSize: '22px',
       },
     },
-    '& .leaflet-bottom': {
-      display: 'none'
-    }
   }
 };
 

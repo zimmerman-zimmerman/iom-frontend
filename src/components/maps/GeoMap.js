@@ -318,7 +318,7 @@ class GeoMap extends Component {
                     </Control>
                 }
 
-                {!this.props.detail &&
+                {!this.props.detail && !this.props.service &&
                     <Control position="bottomleft" className="supportLegend">
                         <div>
                             <label>N of activities</label>
