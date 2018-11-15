@@ -795,8 +795,9 @@ export function organisationDocumentLinksInitial() {
     type: ORGANISATION_DOCUMENT_LINKS_INITIAL
   }
 }
-export function organisationDocumentLinksRequest() {
+export function organisationDocumentLinksRequest(values) {
   return {
+    values: values,
     type: ORGANISATION_DOCUMENT_LINKS_REQUEST
   }
 }

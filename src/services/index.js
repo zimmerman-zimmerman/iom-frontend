@@ -71,12 +71,12 @@ export function localeRequest() {
   );
 }
 
-export function organisationDocumentLinksRequest() {
+export function organisationDocumentLinksRequest(values) {
   return handleRequest(
     process.env.REACT_APP_OIPA_YODA_HOST.concat('/api/organisations/organisation-file/')
       .concat(process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER)
       .concat('/organisation-document-link-list/'),
-    formatJSON({}), 'get'
+    formatJSON(values), 'get'
   );
 }
 
