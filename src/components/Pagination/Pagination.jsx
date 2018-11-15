@@ -6,7 +6,7 @@ import ArrowRight from '../../icons/ArrowRight';
 
 const Pagination = (props) => (
         <ReactPaginate
-            containerClassName={props.classes.component}
+            containerClassName={props.componentClass ? props.componentClass : props.classes.component}
             pageCount={props.pageCount}
             pageRangeDisplayed={5}
             onPageChange={props.onPageChange}
@@ -19,7 +19,8 @@ const Pagination = (props) => (
             previousClassName={props.classes.previousClassName}
             disabledClassName={props.classes.disabledClassName}
             forcePage={props.forcePage}
-            breakLabel={<div className={props.classes.elipsis}>...</div>}/>
+            breakLabel={<div className={props.classes.elipsis}>...</div>}
+            style={{margin: 0}}/>
 );
 
 const styles = {
@@ -50,10 +51,12 @@ const styles = {
         padding: '0 6px',
     },
     nextClassName: {
+        fontSize: 14,
         marginTop: 'auto',
         marginLeft: 10,
     },
     previousClassName: {
+        fontSize: 14,
         marginTop: 'auto',
         marginRight: 10,
     },
@@ -79,6 +82,7 @@ const styles = {
       },
     },
     elipsis: {
+        fontSize: 14,
       marginTop: 2,
     }
 };
