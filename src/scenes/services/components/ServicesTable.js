@@ -23,24 +23,23 @@ class ServicesTable extends BaseFilter {
 
   handleChange(value) {
     const { rootComponent } = this.props;
-    const { filters } = rootComponent.state;
-    if (get(filters.values, 'order_by')) {
-      delete filters.values['order_by'];
+    const filters = {
+      ...rootComponent.state.filters,
+      changed: true,
     }
-    filters.values['order_by'] = value;
-    filters.changed = true;
-    this.setState({filters: filters});
+    rootComponent.setState({servicesTableSortBy: value});
+    this.updateComponent(filters);
   }
 
   render() {
-    const { intl, data, classes, rootComponent } = this.props;
-    const { filters } = rootComponent.state;
+    const { data, intl, classes, rootComponent } = this.props;
+    const { filters, servicesTableSortBy } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
               title={intl.formatMessage({id: 'services.table.header.service', defaultMessage: 'Service Area'})}
-              sortValue={filters.values.order_by}
-              defSortValue={'sector'}
+              sortValue={servicesTableSortBy}
+              defSortValue={'name'}
               onSort={this.handleChange}
               />,
       dataIndex: 'sector.name',
@@ -57,8 +56,8 @@ class ServicesTable extends BaseFilter {
       {
       title: <SortHeader
               title={intl.formatMessage({id: 'services.table.header.budget', defaultMessage: 'Budget'})}
-              sortValue={filters.values.order_by}
-              defSortValue={'value'}
+              sortValue={servicesTableSortBy}
+              defSortValue={'totalValue'}
               onSort={this.handleChange}
               />,
       dataIndex: 'totalValue',
@@ -67,7 +66,7 @@ class ServicesTable extends BaseFilter {
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}
-              sortValue={filters.values.order_by}
+              sortValue={servicesTableSortBy}
               defSortValue={'activity_count'}
               onSort={this.handleChange}
               />,
