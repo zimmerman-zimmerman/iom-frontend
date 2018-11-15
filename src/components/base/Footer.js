@@ -74,7 +74,7 @@ const Footer = (props) => {
                 <div>
                     <Divider type="vertical"/>
                 </div>
-                  <div className={'link'}>
+                  <div>
                       <Trans  id="footer.term" text="Terms of use"/>
                   </div>
                   <div>
