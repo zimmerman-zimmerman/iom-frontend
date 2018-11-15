@@ -21,6 +21,8 @@ export function combineData(human, nonHuman) {
             let nonHumanItem = nonHuman[j];
             if(humanItem.sector.code === nonHumanItem.sector.code){
               let item = humanItem;
+              item.name = item.sector.name;
+              item.code = item.sector.code;
               item.activity_count = humanItem.activity_count + nonHumanItem.activity_count;
               item.nonHumanValue = nonHumanItem.value;
               data.push(item);
@@ -32,6 +34,8 @@ export function combineData(human, nonHuman) {
             {//SO here, if a human and nonHUman association has not been found
               //  We just add the human item to an array, and set the nonHumanValue to zero
               let item = humanItem;
+              item.name = item.sector.name;
+              item.code = item.sector.code;
               item.nonHumanValue = 0;
               data.push(item);
             }
@@ -39,6 +43,8 @@ export function combineData(human, nonHuman) {
         }else
         {
           let item = humanItem;
+          item.name = item.sector.name;
+          item.code = item.sector.code;
           item.nonHumanValue = 0;
           data.push(item);
         }
@@ -56,6 +62,8 @@ export function combineData(human, nonHuman) {
       nonHuman && nonHuman.forEach(nonHumanItem => {
         if(!nonHumanItem.foundHuman){
           let item = nonHumanItem;
+          item.name = item.sector.name;
+          item.code = item.sector.code;
           item.nonHumanValue = nonHumanItem.value;
           item.value = 0;
           data.push(item);
