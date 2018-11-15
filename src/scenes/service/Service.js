@@ -36,7 +36,7 @@ class Service extends BaseFilter {
   }
 
   render() {
-    const { service, serviceProjects, classes } = this.props;
+    const { service, serviceProjects, classes, donorGroupJson } = this.props;
     const sectorId = get(this.props, 'match.params.id');
     const data = get(service, 'data.results[0]');
     const breadcrumbItems = [
@@ -54,7 +54,7 @@ class Service extends BaseFilter {
           <Grid className={classes.service} fluid>
             <Row xs={12} lg={6}>
               <Col xs={12} lg={6} className={classes.listsContainer}>
-                <ServiceDonors sectorId={sectorId} filterValues={prevFilters}/>
+                <ServiceDonors sectorId={sectorId} filterValues={prevFilters} donorGroupJson={get(donorGroupJson, 'data.content', {})} />
                 <ServiceProjects sectorId={sectorId} filterValues={prevFilters}/>
               </Col>
             </Row>
@@ -73,6 +73,7 @@ class Service extends BaseFilter {
 const mapStateToProps = (state, ) => {
   return {
     service: state.service,
+    donorGroupJson: state.donorGroupJson,
     serviceProjects: state.serviceProjects,
   }
 };
