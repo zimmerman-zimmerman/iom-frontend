@@ -91,6 +91,13 @@ class AboutContent extends Component  {
                           {ReactHtmlParser(this.getTrans('about.content.two', 'content two'))}
                       </Col>
                   </Row>
+                  <Row center="xs">
+                    <Col xs={12} md={8} lg={8} style={{ textAlign: 'start' }}>
+                      <a href="https://iatiregistry.org/publisher/iom" target="_blank" rel="noopener noreferrer">
+                        https://iatiregistry.org/publisher/iom
+                      </a>
+                    </Col>
+                  </Row>
               </div>
           <Row center="xs" className="document-table">
             <Col xs={12} md={8} lg={8}>
