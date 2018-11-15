@@ -23,6 +23,11 @@ const Footer = (props) => {
           <h3 className={classes.text}><Trans id='footer.contact' text='Contact us' /></h3>
           <Row>
             <Col lg={12}>
+              <Trans id='footer.organisation.name' text='International Organization for Migration (IOM)' />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={12}>
               <Trans id='footer.address' text='17 Route des Morillos' />
             </Col>
           </Row>
@@ -70,7 +75,7 @@ const Footer = (props) => {
                     <Divider type="vertical"/>
                 </div>
                   <div className={'link'}>
-                      <Trans  id="footer.term" text="Term of use"/>
+                      <Trans  id="footer.term" text="Terms of use"/>
                   </div>
                   <div>
                       <Divider type="vertical"/>
