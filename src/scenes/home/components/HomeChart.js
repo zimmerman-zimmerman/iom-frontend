@@ -11,7 +11,6 @@ import List from 'antd/es/list';
 import Badge from 'antd/es/badge';
 import Button from 'antd/es/button';
 import { Link } from 'react-router-dom';
-import * as actions from "../../../services/actions";
 
 import { pieRadialChart as pieRadialChartStyle, variables as variablesStyle } from '../../../helpers/style';
 import {size as screenSize} from '../../../helpers/screen';
@@ -26,14 +25,12 @@ class HomeChart extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
-    const { dispatch, params, request, initial, donorGroupJsonSlug } = this.props;
+    const { dispatch, params, request, initial } = this.props;
     if (dispatch) {
       if (params) {
         dispatch(request(params));
-        dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
       } else {
         dispatch(initial());
-        dispatch(actions.donorGroupJsonInitial());
       }
     }
   }
@@ -211,10 +208,6 @@ const styles = {
 
 HomeChart.propTypes = {
   intl: intlShape.isRequired
-};
-
-HomeChart.defaultProps = {
-  donorGroupJsonSlug: 'donor-group-json',
 };
 
 const mapStateToProps = (state, ) => {

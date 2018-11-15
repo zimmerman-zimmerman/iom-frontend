@@ -20,16 +20,14 @@ import { pageContainer } from '../../helpers/style';
 
 class Donors extends BaseFilter {
   componentDidMount() {
-    const { dispatch, donorsGroupsJsonSlug, donorGroupJsonSlug } = this.props;
+    const { dispatch, donorsGroupsJsonSlug } = this.props;
     const { params } = this.state;
     if (dispatch) {
       if (params) {
         this.actionRequest(params, 'participating_organisation', actions.donorsRequest);
         dispatch(actions.donorsGroupsJsonRequest(donorsGroupsJsonSlug));
-        dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
       } else {
         dispatch(actions.donorsGroupsJsonInitial());
-        dispatch(actions.donorGroupJsonInitial());
       }
     }
   }
@@ -107,7 +105,6 @@ Donors.defaultProps = {
   groupBy: 'participating_organisation',
   filterRequest: actions.donorsRequest,
   donorsGroupsJsonSlug: 'donors-groups-json',
-  donorGroupJsonSlug: 'donor-group-json',
 };
 
 const mapStateToProps = (state, ) => {

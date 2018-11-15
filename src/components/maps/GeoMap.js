@@ -202,7 +202,7 @@ class GeoMap extends Component {
       layer.bindPopup(tooltipContent);
 
       layer.on("mouseover", function(e) {
-        this.openPopup();
+        this.openPopup(e.latlng);
       });
 
         if(this.props.detail)

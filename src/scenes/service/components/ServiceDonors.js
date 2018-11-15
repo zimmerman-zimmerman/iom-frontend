@@ -74,7 +74,7 @@ class ServiceDonors extends React.Component {
   }
 
   render() {
-    const { intl, serviceDonors, classes } = this.props;
+    const { intl, serviceDonors, classes, donorGroupJson } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
@@ -86,8 +86,14 @@ class ServiceDonors extends React.Component {
       key: 'participating_organisation',
         className: 'title',
       width: '50%',
-      render: obj =>
-        <Link to={`/donors/${obj.participating_organisation_ref}`}>{obj.participating_organisation}</Link>
+      render: (obj) => {
+          let donorExtra = `${get(donorGroupJson, obj.participating_organisation_ref)}/`;
+          return (
+              <Link to={`/donors/${donorExtra}${obj.participating_organisation_ref}`}>
+                  {obj.participating_organisation}
+              </Link>   
+          )
+      }
     }, {
       title:
           <SortHeader
