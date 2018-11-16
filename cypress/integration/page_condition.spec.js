@@ -1,7 +1,7 @@
 // const targetURL = 'http://localhost:8080/';
 // const targetURL = 'http://localhost:5000/';
 // const targetURL = 'https://iom-staging.zz-demos.net';
-const targetURL = 'https://iom-dev.zz-demos.net';
+const targetURL = Cypress.env('targetUrl');
 const targets = [
     targetURL + '/',
     targetURL + '/donors',

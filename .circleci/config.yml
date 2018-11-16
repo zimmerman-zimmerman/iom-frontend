@@ -4,7 +4,7 @@ jobs:
   checkout_repo:
     #    machine: true
     docker:
-    - image: circleci/node:9.10.0
+    - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
     - checkout
@@ -26,7 +26,7 @@ jobs:
   #  CHECKOUT FOR VULNERABILITIES IN LIBRARIES
   check_vulnerabilities:
     docker:
-    - image: circleci/node:9.10.0
+    - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
     - attach_workspace:
@@ -37,7 +37,7 @@ jobs:
   build_&_deploy:
     #    machine: true
     docker:
-    - image: circleci/node:9.10.0
+    - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
     - checkout
@@ -51,12 +51,12 @@ jobs:
         fingerprints:
         - "96:b4:44:5a:7c:d8:e4:3a:89:e1:79:ca:a6:42:79:78"
     - run: eval ssh-agent -s
-    - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/iom-frontend-test/build
+    - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/iom-frontend/build
 
   #  EVALUATE BROWSER PERFORMANCE WITH LIGHTHOUSE
   test_performance:
     docker:
-    - image: circleci/node:node:9.10.0-browsers
+    - image: circleci/node:node:9.10.1-browsers
     working_directory: ~/iom-frontend
     steps:
     - attach_workspace:
