@@ -77,19 +77,19 @@ jobs:
 # WORKFLOWS
 workflows:
   version: 2
+  branches:
+    only:
+    - master
+    - develop
   test_build_deploy:
     jobs:
-      branches:
-        only:
-        - master
-        - develop
-        - checkout_repo
-        - build_&_deploy:
-            requires:
-            - checkout_repo
-        - test_performance:
-            requires:
-            - build_&_deploy
-        - test_e2e:
-            requires:
-            - build_&_deploy
+      - checkout_repo
+      - build_&_deploy:
+          requires:
+          - checkout_repo
+      - test_performance:
+          requires:
+          - build_&_deploy
+      - test_e2e:
+          requires:
+          - build_&_deploy
