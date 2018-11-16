@@ -181,7 +181,7 @@ const styles = {
       maxWidth: '100%',
       fontSize: 21,
         fontWeight: 500,
-      lineHeight: 1.33,
+      lineHeight: 1.3,
       '@media only screen and (max-width: 767px)': {
         fontSize: 15,
       }
