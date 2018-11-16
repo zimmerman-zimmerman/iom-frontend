@@ -87,15 +87,15 @@ context('Test donor filter functionality', () => {
         cy.get('.ant-select-dropdown-menu-item').first().click({ force: true });
     }
     //This function needs to be here, because we want to save the applied filters value here
-    function goToProjectDetail(filterText){
+    function goToProjectDetail(){
         //Go to the donorgroup page
-        cy.get('td > a').first().click();
+        cy.get('td > a').first().click({ force: true });
         cy.wait(1000);
         //Go to the donor detail page
-        cy.get('td > a').first().click();
+        cy.get('td > a').first().click({ force: true });
         cy.wait(1000);
         //Go to the project detail page
-        cy.get('td > a').first().click();
+        cy.get('td > a').first().click({ force: true });
         cy.wait(1000);
     }
 });

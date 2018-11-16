@@ -24,7 +24,15 @@ context('Test country filter functionality', () => {
         //Goes to country detail
         goToCountryDetail();
         //Check if sector is listed in country detail
-        cy.contains(itemValue);
+        //So we need to check if each word of the applied sector can be found on the detail page
+        //Cause most likely the whole sector name(which is made up of several words)
+        //will be shown in the treemap component and in that component
+        //its very usual that long names/sentences are split up in seperate parts
+        //thus looking for the string as a whole will not work.
+        const wordArray = itemValue.split(' ');
+        wordArray.forEach(word => {
+            cy.contains(word);
+        });
     });
     it('Apply Project status filter', () => {
         applyFilter('Project status');
