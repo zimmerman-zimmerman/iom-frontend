@@ -3,7 +3,7 @@
   "viewportWidth": 1440,
   "viewportHeight": 900,
   "env": {
-    "targetUrl": "https://iom-dev.zz-demos.net"
+    "targetUrl": "http://localhost:3000"
   },
   "projectId": "unpr33"
 }
