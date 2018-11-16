@@ -27,7 +27,7 @@ jobs:
   #  CHECKOUT FOR VULNERABILITIES IN LIBRARIES
   check_vulnerabilities:
     docker:
-    - image: circleci/node:9.0.0
+    - image: circleci/node:9.11.1
     working_directory: ~/iom-frontend
     steps:
     - attach_workspace:
@@ -38,7 +38,7 @@ jobs:
   build_&_deploy:
     #    machine: true
     docker:
-    - image: circleci/node:9.0.0
+    - image: circleci/node:9.11.1
     working_directory: ~/iom-frontend
     steps:
     - checkout
@@ -57,7 +57,7 @@ jobs:
   #  EVALUATE BROWSER PERFORMANCE WITH LIGHTHOUSE
   test_performance:
     docker:
-    - image: circleci/node:node:9.0.0-browsers
+    - image: circleci/node:node:9.11.1-browsers
     working_directory: ~/iom-frontend
     steps:
     - attach_workspace:
