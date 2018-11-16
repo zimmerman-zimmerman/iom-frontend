@@ -4,5 +4,6 @@
   "viewportHeight": 900,
   "env": {
     "targetUrl": "https://iom-dev.zz-demos.net"
-  }
+  },
+  "projectId": "unpr33"
 }
