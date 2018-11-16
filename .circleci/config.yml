@@ -71,6 +71,7 @@ jobs:
     - attach_workspace:
         at: ~/iom-frontend
     - run: yarn add cypress
+    - run: yarn start
     - run: yarn cy:record
 
 # WORKFLOWS
