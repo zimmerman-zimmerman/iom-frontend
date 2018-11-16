@@ -1,5 +1,6 @@
 // const targetURL = 'http://localhost:8080/';
 // const targetURL = 'http://localhost:5000/';
+
 const targetURL = Cypress.env('targetUrl');
 const targets = [
     targetURL + '/',
