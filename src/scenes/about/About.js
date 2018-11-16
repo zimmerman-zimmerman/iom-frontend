@@ -4,7 +4,6 @@ import Page from '../../components/base/Page';
 import Trans from '../../locales/Trans';
 
 import AboutContent from './components/AboutContent';
-
 const About = () => {
   const breadcrumbItems = [
     {url: '/', text: <Trans id='main.menu.home' text='Home' />},
