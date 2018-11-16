@@ -357,7 +357,7 @@ module.exports = {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // Uglify
-    new webpack.optimize.DedupePlugin(), //dedupe similar code
+    // new webpack.optimize.DedupePlugin(), //dedupe similar code
     // new webpack.optimize.UglifyJsPlugin(), //minify everything
     new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
     new CompressionPlugin({
