@@ -10,6 +10,7 @@ const About = () => {
     {url: '/', text: <Trans id='main.menu.home' text='Home' />},
     {url: null, text: <Trans id='main.menu.about' text='About' />},
   ];
+
   return (
     <Page breadcrumbItems={breadcrumbItems}>
       <AboutContent/>
