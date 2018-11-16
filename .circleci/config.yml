@@ -77,10 +77,11 @@ jobs:
 # WORKFLOWS
 workflows:
   version: 2
-  branches:
-    only:
-    - master
-    - develop
+  triggers:
+    branches:
+      only:
+        - master
+        - develop
   test_build_deploy:
     jobs:
       - checkout_repo
