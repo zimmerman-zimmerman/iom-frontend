@@ -50,7 +50,7 @@ jobs:
     - add_ssh_keys:
         name: Add SSH KEY
         fingerprints:
-        - ""
+        - " "
     - run: eval ssh-agent -s
     - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/iom-frontend-test/build
 
