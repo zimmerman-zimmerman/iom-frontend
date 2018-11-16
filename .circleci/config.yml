@@ -49,7 +49,7 @@ jobs:
     - add_ssh_keys:
         name: Add SSH KEY
         fingerprints:
-        - "96:b4:44:5a:7c:d8:e4:3a:89:e1:79:ca:a6:42:79:78"
+        - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
     - run: eval ssh-agent -s
     - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/iom-frontend/build
 
