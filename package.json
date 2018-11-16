@@ -86,6 +86,7 @@
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "ci-build": "npm run build-css && react-scripts build",
     "test": "node scripts/test.js --env=jsdom",
     "cypress:open": "cypress open"
   },

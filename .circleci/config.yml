@@ -43,7 +43,7 @@ jobs:
     - checkout
     - attach_workspace:
         at: ~/iom-frontend
-    - run: yarn build
+    - run: yarn ci-build
     - run: sudo apt install rsync
     - run: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
     - add_ssh_keys:
