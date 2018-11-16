@@ -73,6 +73,7 @@ jobs:
     - run: yarn add cypress
     - run: yarn cy:record
 
+
 # WORKFLOWS
 workflows:
   version: 2
