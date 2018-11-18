@@ -21,7 +21,7 @@ class Project extends Component {
   }
 
   render() {
-    const { project, projectLocation } = this.props;
+    const { project, projectLocation, donorGroupJson } = this.props;
     const data = get(this.props.project, 'data', null);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -32,7 +32,7 @@ class Project extends Component {
       <Spin spinning={project.request || projectLocation.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           <ProjectBanner data={data} />
-          <ProjectLocation data={data} />
+          <ProjectLocation data={data} donorGroupJson={get(donorGroupJson, 'data.content', {})} />
         </Page>
       </Spin>
     )
@@ -42,7 +42,8 @@ class Project extends Component {
 const mapStateToProps = (state, ) => {
   return {
     project: state.project,
-    projectLocation: state.projectLocation
+    donorGroupJson: state.donorGroupJson,
+    projectLocation: state.projectLocation,
   }
 };
 

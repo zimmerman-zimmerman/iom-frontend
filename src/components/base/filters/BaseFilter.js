@@ -23,6 +23,7 @@ class BaseFilter extends Component {
       dataRange: [],
       countriesTableSortBy: '-budget',
       donorTableSortBy: 'participating_organisation',
+      servicesTableSortBy: '-totalValue',
     };
     this.actionRequest = this.actionRequest.bind(this);
     this.updateComponent = this.updateComponent.bind(this);

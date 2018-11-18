@@ -263,9 +263,9 @@ export function* localeRequest(action) {
   }
 }
 
-export function* organisationDocumentLinksRequest() {
+export function* organisationDocumentLinksRequest(action) {
   try {
-    const response = yield call(api.organisationDocumentLinksRequest);
+    const response = yield call(api.organisationDocumentLinksRequest, action.values);
     yield put(actions.organisationDocumentLinksSuccess(response));
   } catch (error) {
     yield put(actions.organisationDocumentLinksFailed(error));

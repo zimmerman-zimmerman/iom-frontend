@@ -14,12 +14,26 @@ import get from "lodash/get";
 import Spin from "antd/es/spin";
 import Trans from '../../../locales/Trans';
 import {injectIntl, intlShape} from "react-intl";
+import Pagination from "../../../components/Pagination/Pagination";
 
 class AboutContent extends Component  {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: 1,
+            page_size: 3,
+        };
+        this.handlePageChange = this.handlePageChange.bind(this);
+    }
+
   componentDidMount() {
     const { dispatch, aboutRequestSlug } = this.props;
     if (dispatch) {
-      dispatch(actions.organisationDocumentLinksRequest());
+      dispatch(actions.organisationDocumentLinksRequest({
+          page: this.state.page,
+          page_size: this.state.page_size,
+      }));
         dispatch(actions.aboutMediaContentRequest(aboutRequestSlug));
     } else {
       dispatch(actions.organisationDocumentLinksInitial());
@@ -40,9 +54,20 @@ class AboutContent extends Component  {
       return this.props.intl.formatMessage({id: id, defaultMessage: text});
   }
 
+  handlePageChange(page){
+        this.setState({
+            page,
+        });
+      this.props.dispatch(actions.organisationDocumentLinksRequest({
+          page,
+          page_size: this.state.page_size,
+      }));
+  }
+
   render() {
     const { classes, organisationDocumentLinks } = this.props;
     const data = get(organisationDocumentLinks, 'data.results');
+    const count = get(organisationDocumentLinks, 'data.count');
     const columns = [{
       title: 'Title',
       dataIndex: 'title.narratives[0].text',
@@ -91,11 +116,24 @@ class AboutContent extends Component  {
                           {ReactHtmlParser(this.getTrans('about.content.two', 'content two'))}
                       </Col>
                   </Row>
+                  <Row center="xs">
+                    <Col xs={12} md={8} lg={8} style={{ textAlign: 'start' }}>
+                      <a href="https://iatiregistry.org/publisher/iom" target="_blank" rel="noopener noreferrer">
+                        https://iatiregistry.org/publisher/iom
+                      </a>
+                    </Col>
+                  </Row>
               </div>
           <Row center="xs" className="document-table">
             <Col xs={12} md={8} lg={8}>
               <h3 className={classes.tableHeading}>DOCUMENTS</h3>
               <Table columns={columns} dataSource={data ? this.addKey(data) : dataTemp} pagination={false}/>
+                {count > this.state.page_size &&
+                <Pagination pageCount={Math.ceil(count/this.state.page_size)}
+                            onPageChange={(value) => this.handlePageChange(value.selected+1)}
+                            forcePage={this.state.page-1} componentClass={classes.pagination}
+                />
+                }
             </Col>
           </Row>
         </Grid>
@@ -152,7 +190,13 @@ const styles = {
     '@media (max-width: 767px)': {
       fontSize: 22,
     },
-  }
+  },
+    pagination: {
+        margin: '46px auto 0 auto',
+        width: 'fit-content',
+        display: 'flex',
+        listStyleType: 'none',
+    }
 };
 
 AboutContent.propTypes = {

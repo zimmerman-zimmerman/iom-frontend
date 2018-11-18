@@ -72,7 +72,7 @@ class TableProjects extends Component {
   }
 
   render() {
-    const { intl, countryActivities, classes } = this.props;
+    const { intl, countryActivities, classes, donorGroupJson } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
       title: <SortHeader
@@ -83,8 +83,14 @@ class TableProjects extends Component {
             />,
       key: 'donors',
       width: '20%',
-      render: obj =>
-        <Link to={`/donors/${obj.participating_organisations[0].ref}`}>{obj.participating_organisations[0].narratives[0].text}</Link>
+      render: (obj) => {
+          let donorExtra = `${get(donorGroupJson, obj.participating_organisations[0].ref)}/`;
+          return (
+              <Link to={`/donors/${donorExtra}${obj.participating_organisations[0].ref}`}>
+                  {obj.participating_organisations[0].narratives[0].text}
+              </Link>   
+          )
+      }
     },{
       title: <SortHeader
               title={intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}

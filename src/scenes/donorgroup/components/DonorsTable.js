@@ -14,8 +14,8 @@ import Pagination from "../../../components/Pagination/Pagination";
 class DonorsTable extends BaseFilter {
     addKey(dataSource) {
         let data = [];
-        dataSource.forEach(function(item) {
-            item.key = get(item, 'participating_organisation_ref');
+        dataSource.forEach(function(item, index) {
+            item.key = index; // removed participating_organisation_ref cause some donors have the same
             data.push(item);
         });
         return data;

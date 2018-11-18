@@ -66,18 +66,16 @@ class CountriesTable extends BaseFilter {
       dataIndex: 'activity_count',
       key: 'count',
     },{
-      // TODO: Temp no order by region, please change ordering process in the frontend side.
-      title: intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'}),
+      title: <SortHeader
+              title={intl.formatMessage({id: 'countries.table.region', defaultMessage: 'Region'})}
+              sortValue={countriesTableSortBy}
+              defSortValue={'region'}
+              onSort={this.handleChange}
+              />,
+      dataIndex: 'region',
       key: 'region',
-      render: (country) => (m49Region.success && countryM49Mapping.success &&
-        <span>
-           {get(m49Region.data.content,
-             get(countryM49Mapping.data.content, country.code.toLowerCase())
-           )}
-         </span>
-      )
     },];
-    let data = countriesFormatter(this.props.data);
+    let data = countriesFormatter(this.props.data, get(m49Region.data, 'content', {}), get(countryM49Mapping.data, 'content', {}));
     data = genericSort(data, countriesTableSortBy);
     data = paginate(this.state.page, this.state.pageSize, data);
     return (

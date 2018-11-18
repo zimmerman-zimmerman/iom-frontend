@@ -18,6 +18,7 @@ import { combineData } from './ServicesHelper';
 import {size as screenSize} from "../../helpers/screen";
 
 import { calcDividerMargTop } from './ServicesHelper';
+import { genericSort } from '../../helpers/tableHelpers';
 
 class Services extends BaseFilter {
   componentDidMount() {
@@ -37,10 +38,12 @@ class Services extends BaseFilter {
   }
 
   render() {
+    const { servicesTableSortBy } = this.state;
     const { humanServices, classes, nonHumanServices } = this.props;
     const humanData = this.filter(get(humanServices, 'data'));
     const nonHumanData = this.filter(get(nonHumanServices, 'data'));
-    const data = combineData(humanData, nonHumanData);
+    let data = combineData(humanData, nonHumanData);
+    data = genericSort(data, servicesTableSortBy);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.services' text='Our Service' />},
