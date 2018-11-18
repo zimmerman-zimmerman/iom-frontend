@@ -1036,3 +1036,31 @@ export function m49RegionFailed(error) {
     error: error
   }
 }
+
+export const SECTOR_MAPPING_INITIAL = 'SECTOR_MAPPING_INITIAL';
+export const SECTOR_MAPPING_REQUEST = 'SECTOR_MAPPING_REQUEST';
+export const SECTOR_MAPPING_SUCCESS = 'SECTOR_MAPPING_SUCCESS';
+export const SECTOR_MAPPING_FAILED = 'SECTOR_MAPPING_FAILED';
+export function sectorMappingInitial() {
+  return {
+    type: SECTOR_MAPPING_INITIAL
+  }
+}
+export function sectorMappingRequest(slug) {
+  return {
+    type: SECTOR_MAPPING_REQUEST,
+    slug: slug
+  }
+}
+export function sectorMappingSuccess(data) {
+  return {
+    type: SECTOR_MAPPING_SUCCESS,
+    data: data
+  }
+}
+export function sectorMappingFailed(error) {
+  return {
+    type: SECTOR_MAPPING_FAILED,
+    error: error
+  }
+}

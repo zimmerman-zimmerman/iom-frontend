@@ -15,9 +15,9 @@ class BaseFilter extends Component {
         hierarchy: 1,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
       },
-        orderBy: 'value',
-        page: 1,
-        pageSize: 10,
+      orderBy: 'value',
+      page: 1,
+      pageSize: 10,
       update: false,
       filters: {values: { order_by: '-value'}, changed: false, chips: {}},
       dataRange: [],
@@ -98,32 +98,32 @@ class BaseFilter extends Component {
   }
 
   componentDidUpdate() {
-    this.updateComponent()
+    this.updateComponent();
   }
 
   updateComponent(filterz=undefined){
-      const rootComponent = get(this.props, 'rootComponent');
-      if (rootComponent) {
-          const filters = filterz ? filterz : rootComponent.state.filters;
-          const { groupBy, filterRequest, secondFilterRequest, nonHumanFilterRequest } = rootComponent.props;
-          if (filters.changed) {
-              const { params } = rootComponent.state;
-              if(params['humanitarian'] !== undefined) {
-                  let paramz = params;
-                  paramz.humanitarian = 1;
-                  this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
-                  params.humanitarian = 0;
-                  this.actionRequest(extend({}, params, filters.values), groupBy, nonHumanFilterRequest);
-              } else {
-                  this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
-                  if (secondFilterRequest) {
-                      this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
-                  }
-              }
-              filters.changed = false;
-              rootComponent.setState({filters: filters})
+    const rootComponent = get(this.props, 'rootComponent');
+    if (rootComponent) {
+      const filters = filterz ? filterz : rootComponent.state.filters;
+      const { groupBy, filterRequest, secondFilterRequest, nonHumanFilterRequest } = rootComponent.props;
+      if (filters.changed) {
+        const { params } = rootComponent.state;
+        if(params['humanitarian'] !== undefined) {
+          let paramz = params;
+          paramz.humanitarian = 1;
+          this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+          params.humanitarian = 0;
+          this.actionRequest(extend({}, params, filters.values), groupBy, nonHumanFilterRequest);
+        } else {
+          this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+          if (secondFilterRequest) {
+            this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
           }
+        }
+        filters.changed = false;
+        rootComponent.setState({filters: filters})
       }
+    }
   }
 }
 

@@ -344,6 +344,15 @@ export function* m49RegionRequest(action) {
   }
 }
 
+export function* sectorMappingRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.sectorMappingSuccess(response));
+  } catch (error) {
+    yield put(actions.sectorMappingFailed(error));
+  }
+}
+
 function* sagas() {
   yield [
     takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
@@ -388,6 +397,7 @@ function* sagas() {
     takeLatest('COUNTRY_MAPPING_JSON_REQUEST', countryMappingJsonRequest),
     takeLatest('COUNTRY_M49_MAPPING_REQUEST', countryM49MappingRequest),
     takeLatest('M49_REGION_REQUEST', m49RegionRequest),
+    takeLatest('SECTOR_MAPPING_REQUEST', sectorMappingRequest),
   ]
 }
 
