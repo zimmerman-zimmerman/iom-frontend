@@ -71,7 +71,7 @@ context('Test country filter functionality', () => {
         cy.get('.ant-select-dropdown-menu-item').first().click({ force: true });
     }
     function goToProjectDetail() {
-        cy.get('td > a').first().click();
+        cy.get('td > a').first().click({force: true});
         cy.wait(1000);
     }
 });
