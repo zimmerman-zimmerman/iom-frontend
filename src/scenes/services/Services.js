@@ -22,18 +22,18 @@ import { genericSort } from '../../helpers/tableHelpers';
 
 class Services extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, sectorMapping } = this.props;
     let params = this.state.params;
     params.humanitarian = 1;
+    params.sector = get(sectorMapping.data, 'content.serviceAreaFilter.allCodes');
     if (dispatch) {
-      if (params) {
-        this.actionRequest(params, 'sector', actions.servicesRequest);
-        params.humanitarian = 0;
-        this.actionRequest(params, 'sector', actions.nonHumanServicesRequest);
-      } else {
-        dispatch(actions.servicesInitial());
-          dispatch(actions.nonHumanServicesInitial());
-      }
+      this.actionRequest(params, 'sector', actions.servicesRequest);
+      params.humanitarian = 0;
+      this.actionRequest(params, 'sector', actions.nonHumanServicesRequest);
+      this.setState({params: params});
+    } else {
+      dispatch(actions.servicesInitial());
+      dispatch(actions.nonHumanServicesInitial());
     }
   }
 
@@ -90,13 +90,14 @@ class Services extends BaseFilter {
 Services.defaultProps = {
   groupBy: 'sector',
   filterRequest: actions.servicesRequest,
-    nonHumanFilterRequest: actions.nonHumanServicesRequest,
+  nonHumanFilterRequest: actions.nonHumanServicesRequest
 };
 
 const mapStateToProps = (state, ) => {
   return {
     humanServices: state.services,
-      nonHumanServices: state.nonHumanServices,
+    nonHumanServices: state.nonHumanServices,
+    sectorMapping: state.sectorMapping,
   }
 };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import get from 'lodash/get';
+import Spin from "antd/es/spin";
 
 import './styles/App.less';
 import './styles/App.scss';
@@ -10,7 +11,6 @@ import enMessages from "./locales/en";
 import {IntlProvider} from "react-intl";
 import connect from "react-redux/es/connect/connect";
 import * as actions from './services/actions/index';
-
 
 const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
 const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
@@ -25,68 +25,64 @@ const AsyncProject = AsyncComponent(() => import('./scenes/project/Project'));
 const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      localeRequest: true,
-    }
-  }
-
   componentDidMount() {
-    const { dispatch, enLocaleSlug, donorGroupJson, countryMappingJson } = this.props;
-    const { localeRequest } = this.state;
-    if (dispatch && localeRequest ) {
+    const { dispatch, enLocaleSlug, countryMappingJsonSlug, sectorMappingSlug } = this.props;
+    if (dispatch) {
       dispatch(actions.localeRequest(enLocaleSlug));
-      if (donorGroupJson.data === null) {
-        dispatch(actions.donorGroupJsonRequest('donor-group-json'));
-      }
-      if (countryMappingJson.data === null) {
-        dispatch(actions.countryMappingJsonRequest('country-mapping-json'));
-      }
+      dispatch(actions.countryMappingJsonRequest(countryMappingJsonSlug));
+      dispatch(actions.sectorMappingRequest(sectorMappingSlug));
     } else {
       dispatch(actions.localeInitial());
+      dispatch(actions.countryMappingJsonInitial());
+      dispatch(actions.sectorMappingInitial());
     }
   }
 
   render() {
-    const { locale, language, languageWithoutRegionCode } = this.props;
+    const {locale, language, languageWithoutRegionCode, sectorMapping} = this.props;
     const messages = {en: enMessages};
     return (
-      <IntlProvider
-        locale={language}
-        messages={locale.success ? get(locale.data, 'content') : messages[languageWithoutRegionCode]}
-      >
-        <Router>
-          <Switch>
-            <Route exact path="/" component={AsyncHome}/>
-            <Route exact path="/donors" component={AsyncDonors}/>
-            <Route exact path="/donors/:group" component={AsyncDonorGroup}/>
-            <Route exact path="/donors/:group/:code" component={AsyncDonor}/>
-            <Route exact path="/countries" component={AsyncCountries}/>
-            <Route exact path="/countries/:code" component={AsyncCountry}/>
-            <Route exact path="/services" component={AsyncServices}/>
-            <Route exact path="/services/:id" component={AsyncService}/>
-            <Route exact path="/projects" component={AsyncProjects}/>
-            <Route exact path="/projects/:id" component={AsyncProject}/>
-            <Route exact path="/about" component={AsyncAbout}/>
-          </Switch>
-        </Router>
-      </IntlProvider>
+      <Spin spinning={locale.request || sectorMapping.request}>
+        {locale.success && sectorMapping.success &&
+          <IntlProvider
+            locale={language}
+            messages={locale.success ? get(locale.data, 'content') : messages[languageWithoutRegionCode]}
+          >
+            <Router>
+              <Switch>
+                <Route exact path="/" component={AsyncHome}/>
+                <Route exact path="/donors" component={AsyncDonors}/>
+                <Route exact path="/donors/:group" component={AsyncDonorGroup}/>
+                <Route exact path="/donors/:group/:code" component={AsyncDonor}/>
+                <Route exact path="/countries" component={AsyncCountries}/>
+                <Route exact path="/countries/:code" component={AsyncCountry}/>
+                <Route exact path="/services" component={AsyncServices}/>
+                <Route exact path="/services/:id" component={AsyncService}/>
+                <Route exact path="/projects" component={AsyncProjects}/>
+                <Route exact path="/projects/:id" component={AsyncProject}/>
+                <Route exact path="/about" component={AsyncAbout}/>
+              </Switch>
+            </Router>
+          </IntlProvider>
+        }
+      </Spin>
     );
   }
 }
 
 App.defaultProps = {
-  enLocaleSlug: 'en-locale',
   languageWithoutRegionCode: 'en',
-  language: 'en-US'
+  language: 'en-US',
+  enLocaleSlug: 'en-locale',
+  countryMappingJsonSlug: 'country-mapping-json',
+  sectorMappingSlug: 'sector-mapping'
 };
 
 const mapStateToProps = (state, ) => {
   return {
     locale: state.locale,
-    donorGroupJson: state.donorGroupJson,
     countryMappingJson: state.countryMappingJson,
+    sectorMapping: state.sectorMapping
   }
 };
 

@@ -140,6 +140,10 @@ import {
   M49_REGION_REQUEST,
   M49_REGION_SUCCESS,
   M49_REGION_FAILED,
+  SECTOR_MAPPING_INITIAL,
+  SECTOR_MAPPING_REQUEST,
+  SECTOR_MAPPING_SUCCESS,
+  SECTOR_MAPPING_FAILED
 } from '../actions/index';
 import {
     ABOUT_MEDIA_CONTENT_FAILED,
@@ -771,6 +775,21 @@ function m49Region(state=initial, action) {
   }
 }
 
+function sectorMapping(state=initial, action) {
+  switch (action.type) {
+    case SECTOR_MAPPING_INITIAL:
+      return updateInitial(state, action);
+    case SECTOR_MAPPING_REQUEST:
+      return updateRequest(state, action);
+    case SECTOR_MAPPING_SUCCESS:
+      return updateSuccess(state, action);
+    case SECTOR_MAPPING_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
+
 const reducers = {
   aboutMediaContent,
   projectTransactions,
@@ -809,6 +828,7 @@ const reducers = {
   countryMappingJson,
   countryM49Mapping,
   m49Region,
+  sectorMapping
 };
 
 export default reducers;
