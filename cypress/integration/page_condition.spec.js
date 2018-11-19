@@ -46,8 +46,8 @@ context('Check page condition', () => {
         targets.forEach(function (url) {
             cy.visit(url);
             cy.location().should((location) => {
-                expect(location.port).to.eq('');
-                expect(location.protocol).to.eq('https:');
+                expect(location.port).to.eq('3000');
+                expect(location.protocol).to.eq('http:');
             })
         });
     });

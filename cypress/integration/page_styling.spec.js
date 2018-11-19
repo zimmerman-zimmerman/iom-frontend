@@ -33,7 +33,7 @@ const targets = [
     targetURL + '/about'
 ];
 
-context('Check page condition', () => {
+context('Check page styling', () => {
 
     it('Scroll down and up', () => {
         cy.visit(targetURL);
@@ -43,9 +43,9 @@ context('Check page condition', () => {
 
     it('Check body text formatting', () => {
         cy.visit(targetURL);
-        cy.get('p')
+        cy.get('[class*=\'BannerImage-description\']')
             .should('have.css', 'font-family', '"Open Sans"')
-            .should('have.css', 'font-size', '22px')
+            .should('have.css', 'font-size', '21px')
             .should('have.css', 'font-weight', '600');
     });
 });
