@@ -65,7 +65,7 @@ class Filter extends BaseFilter {
         if(this.props.fieldName === 'sector')
         {
             const fieldLabel = fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
-            this.handleChange(values, names, false, fieldName, fieldLabel)
+            this.handleChange(values, names, false, fieldName, fieldLabel);
         }else
         {
             this.handleChange(values, names);
@@ -114,7 +114,7 @@ class Filter extends BaseFilter {
                               key="1">
                         {serviceAreaOptions.map(service => {
                             return <TreeNode className={classes.childOption} value={service.sector.code}
-                                             title={service.sector.name} key="random" />
+                                             title={service.sector.name} key="random" />;
                         })}
                     </TreeNode>
                     <TreeNode value={projectCodes}
@@ -125,7 +125,7 @@ class Filter extends BaseFilter {
                               key="2">
                         {projectTypeOptions.map(project => {
                             return <TreeNode className={classes.childOption} value={project.sector.code}
-                                             title={project.sector.name} key="random" />
+                                             title={project.sector.name} key="random" />;
                         })}
                     </TreeNode>
                     <TreeNode value={dacCodes}
@@ -136,7 +136,7 @@ class Filter extends BaseFilter {
                               key="3">
                         {DACSectorsOptions.map(sector => {
                             return <TreeNode className={classes.childOption} value={sector.sector.code}
-                                             title={sector.sector.name} key="random" />
+                                             title={sector.sector.name} key="random" />;
                         })}
                     </TreeNode>
                 </TreeSelect>
