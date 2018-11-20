@@ -42,6 +42,14 @@ class Projects extends BaseFilter {
       order_by: '-value',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
+    let values = filters.values;
+
+    if(values.participating_organisation)
+    {
+      values.participating_organisation_ref = values.participating_organisation;
+      delete values['participating_organisation'];
+    }
+
     this.actionRequest(
       extend({}, params, filters.values), 'recipient_country', actions.countriesRequest
     );
@@ -119,7 +127,7 @@ class Projects extends BaseFilter {
                 <Filters rootComponent={this} countResults={get(dataProjects, 'count', 0)}
                          pluralMessage={<Trans id="projects.filters.projects" defaultMessage="Projects" />}
                          singularMessage={<Trans id="projects.filters.project" defaultMessage="Project" />}
-
+                          projects
                 />
               </Col>
               <Col xs={12} md={8} lg={9} className={classes.map}>

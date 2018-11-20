@@ -57,6 +57,7 @@ class Services extends BaseFilter {
                 <Filters rootComponent={this} countResults={get(data, 'length', 0)}
                          pluralMessage={<Trans id="services.filters.services" defaultMessage="Services" />}
                          singularMessage={<Trans id="services.filters.service" defaultMessage="Service" />}
+                         services
                 />
               </Col>
               <Col xs={12} md={8} lg={9}>
