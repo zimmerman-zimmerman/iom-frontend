@@ -13,7 +13,7 @@ class ServiceProjects extends BaseFilter {
     super(props);
     this.state = {
       params: {
-        fields: 'id,iati_identifier,reporting_organisation,activity_dates,aggregations,sectors,title,humanitarian',
+        fields: 'id,iati_identifier,participating_organisations,activity_dates,activity_status,aggregations,sectors,title,humanitarian',
         ordering: '-activity_budget_value',
         convert_to: 'usd',
         hierarchy: 1,

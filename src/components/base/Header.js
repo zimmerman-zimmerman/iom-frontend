@@ -45,6 +45,9 @@ class Header extends Component {
       case '/services/:id':
         urlPath = '/services';
         break;
+        case '/services/project-type/:id':
+            urlPath = '/services';
+            break;
       default:
     }
 

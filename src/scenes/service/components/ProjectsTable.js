@@ -40,47 +40,71 @@ class ProjectsTable extends BaseFilter {
     const columns = [{
       title:
           <SortHeader
-              title={intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Donor'})}
+              title={intl.formatMessage({id: 'service.projects.header.project', defaultMessage: 'Project title'})}
               sortValue={selectedSortBy}
               defSortValue={'title'}
               onSort={handleSortBy}
-              style={{ fontSize: 22, fontWeight: 'bold' }}
           />,
       key: 'title.narratives[0].text',
-      width: '45%',
       render: obj =>
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
-    }, {
-      title: <SortHeader
+    },
+        {title:
+                <SortHeader
+                    title={intl.formatMessage({id: 'service.projects.header.donor', defaultMessage: 'Donor'})}
+                    sortValue={selectedSortBy}
+                    // defSortValue={'donor'}
+                    onSort={() => console.log('We need backend sorting functionality for this')}
+                />,
+            dataIndex: 'participating_organisations[0].narratives[0].text',
+            render: obj => <span>{obj}</span>
+        },
+        {title: <SortHeader
               title={intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}
               sortValue={selectedSortBy}
               defSortValue={'activity_budget_value'}
               onSort={handleSortBy}
-              style={{ fontSize: 22, fontWeight: 'bold' }}
               />,
-      dataIndex: 'aggregations.activity.budget_value',
-      key: 'aggregations.activity.budget_value',
-      className: 'number',
-      render: value => <span>{usd}{format(',.0f')(value)}</span>
-    }, {
-      title: <SortHeader
-            title={intl.formatMessage({id: 'service.projects.header.humanitarian', defaultMessage: 'Humanitarian'})}
-            sortValue={selectedSortBy}
-            // defSortValue={'activity_budget_value'}
-            onSort={() => console.log('we need backend functionality for this')}
-            style={{ fontSize: 22, fontWeight: 'bold' }}
+              dataIndex: 'aggregations.activity.budget_value',
+              key: 'aggregations.activity.budget_value',
+              render: value => <span>{usd}{format(',.0f')(value)}</span>
+        },
+        {title: <SortHeader
+                title={intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project Status'})}
+                sortValue={selectedSortBy}
+                defSortValue={'activity_status'}
+                onSort={handleSortBy}
             />,
-      dataIndex: 'humanitarian',
-      key: 'humanitarian',
-      render: value =>
-        <span>{value ? intl.formatMessage({id: 'service.projects.yes', defaultMessage: 'Yes'}) :
-          intl.formatMessage({id: 'service.projects.no', defaultMessage: 'No'})}
-        </span>
-    },];
+            dataIndex: 'activity_status.name',
+            render: name => <span>{name}</span>
+        },
+        {
+            title: <SortHeader
+                title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}
+                sortValue={selectedSortBy}
+                defSortValue={'start_date'}
+                onSort={handleSortBy}
+            />,
+            dataIndex: 'activity_dates',
+            key: 'start_date',
+            render: activity_dates => <div className={classes.dates}>{activity_dates[2].iso_date}</div>
+        }, {
+            title: <SortHeader
+                title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
+                sortValue={selectedSortBy}
+                defSortValue={'end_date'}
+                onSort={handleSortBy}
+            />,
+            dataIndex: 'activity_dates',
+            key: 'end_date',
+            render: activity_dates => <div className={classes.dates}>{activity_dates[0].iso_date}</div>
+        },
+    ];
+
     return(
       <div className={classes.projectsTable}>
         <h2 className="title">
-          <Trans id="service.projects.title" defaultMessage="Where the funds go"/>
+          <Trans id="country.table.projects.title" defaultMessage="Related Projects"/>
         </h2>
         <Table dataSource={data ? this.addKey(data.results) : null}
                columns={columns}
@@ -121,6 +145,9 @@ const styles = {
                 },
             },
         },
+    },
+    dates: {
+      width: 'max-content',
     },
   projectsTable: {
       width: '100%',
