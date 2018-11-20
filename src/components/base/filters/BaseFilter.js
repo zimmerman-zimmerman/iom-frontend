@@ -84,8 +84,9 @@ class BaseFilter extends Component {
 
     if (!isEmpty(value)) {
       const valuez = Array.isArray(value) ? value.join() : value;
+      const valuezz = fieldLabel === 'Sector type' ? value : valuez.split(',');
       filters.chips[fieldName] = {
-          values: valuez.split(','),
+          values: valuezz,
           labels: fieldLabel === 'Key word' ? valuez.split(',') : names,
           type: fieldLabel,
       };
@@ -109,16 +110,53 @@ class BaseFilter extends Component {
       const { groupBy, filterRequest, secondFilterRequest, nonHumanFilterRequest } = rootComponent.props;
       if (filters.changed) {
         const { params } = rootComponent.state;
+        let values = {};
+
+        if(filters.values['sector type'])
+        {
+
+            for (let key in filters.values){
+                if (filters.values.hasOwnProperty(key)) {
+                  if(key !== 'sector type')
+                  {
+                    values[key] = filters.values[key];
+                  }
+                }
+            }
+
+            if(values['sector'])
+            {
+                values['sector'] = values['sector'].concat(',').concat(filters.values['sector type']);
+            }else
+            {
+                values['sector'] = filters.values['sector type'];
+            }
+
+        }else
+        {
+            values = filters.values;
+        }
+
+        if(values['sector type'] && values['sector'])
+        {
+          values['sector'] = values['sector'].concat(',').concat(values['sector type']);
+          delete values['sector type'];
+        }else if(values['sector type'] && !values['sector'])
+        {
+            values['sector'] = values['sector type'];
+            delete values['sector type'];
+        }
+
         if(params['humanitarian'] !== undefined) {
           let paramz = params;
           paramz.humanitarian = 1;
-          this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+          this.actionRequest(extend({}, params, values), groupBy, filterRequest);
           params.humanitarian = 0;
-          this.actionRequest(extend({}, params, filters.values), groupBy, nonHumanFilterRequest);
+          this.actionRequest(extend({}, params, values), groupBy, nonHumanFilterRequest);
         } else {
-          this.actionRequest(extend({}, params, filters.values), groupBy, filterRequest);
+          this.actionRequest(extend({}, params, values), groupBy, filterRequest);
           if (secondFilterRequest) {
-            this.actionRequest(extend({}, params, filters.values), 'participating_organisation', secondFilterRequest);
+            this.actionRequest(extend({}, params, values), 'participating_organisation', secondFilterRequest);
           }
         }
         filters.changed = false;

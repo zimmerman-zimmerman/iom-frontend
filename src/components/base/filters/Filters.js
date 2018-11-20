@@ -40,13 +40,13 @@ class Filters extends Component {
                 actionRequest={actions.transactionsAggregationsCountriesRequest}
         />
     },{
-      headerString: intl.formatMessage({id: 'filters.panel.project.type', defaultMessage: 'Project type'}),
+      headerString: intl.formatMessage({id: 'filters.panel.project.type', defaultMessage: 'Sectors'}),
       component:
         <Filter rootComponent={rootComponent}
                 placeholder={
                   intl.formatMessage({
                     id: 'filters.select.project.type.placeholder',
-                    defaultMessage: 'Select project type'
+                    defaultMessage: 'Select sector'
                   })
                 }
                 reducerName="transactionsAggregationsSector"
@@ -54,7 +54,8 @@ class Filters extends Component {
                 optionValueName="sector.name"
                 groupBy="sector"
                 fieldName="sector"
-                fieldLabel='Project type'
+                sectors
+                fieldLabel='Sectors'
                 actionRequest={actions.transactionsAggregationsSectorRequest}
         />
     },{
