@@ -87,7 +87,7 @@ class ProjectsTable extends BaseFilter {
             />,
             dataIndex: 'activity_dates',
             key: 'start_date',
-            render: activity_dates => <div className={classes.dates}>{activity_dates[2].iso_date}</div>
+            render: activityDates => <div className={classes.dates}>{activityDates[2].iso_date}</div>
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
@@ -97,7 +97,7 @@ class ProjectsTable extends BaseFilter {
             />,
             dataIndex: 'activity_dates',
             key: 'end_date',
-            render: activity_dates => <div className={classes.dates}>{activity_dates[0].iso_date}</div>
+            render: activityDates => <div className={classes.dates}>{activityDates[0].iso_date}</div>
         },
     ];
 

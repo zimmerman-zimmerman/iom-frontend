@@ -33,7 +33,6 @@ class ServiceProjectTypes extends BaseFilter {
                 ...params,
                 sector: serviceProjectTypes,
             }, 'sector', actions.nonHumanServicesRequest);
-            this.setState({params: params});
         } else {
             dispatch(actions.servicesInitial());
             dispatch(actions.nonHumanServicesInitial());
@@ -120,7 +119,7 @@ class ServiceProjectTypes extends BaseFilter {
                 />
                 }
             </div>
-        )
+        );
     }
 }
 
@@ -133,7 +132,7 @@ const mapStateToProps = (state, ) => {
         humanServices: state.services,
         nonHumanServices: state.nonHumanServices,
         sectorMapping: state.sectorMapping,
-    }
+    };
 };
 
 const styles = {

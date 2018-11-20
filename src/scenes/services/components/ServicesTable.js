@@ -45,7 +45,7 @@ class ServicesTable extends BaseFilter {
       dataIndex: 'sector.name',
       key: 'sector',
       width: '55%',
-      render: (name, record) =>{
+      render: (name, record) => {
                 const projectTypeCodes = get(sectorMapping, 'data.content.projectTypeFilter', '');
                 const url = projectTypeCodes.indexOf(record.sector.code) !== -1 ?
                     `/services/project-type/${record.sector.code}` : `/services/${record.sector.code}`;
@@ -54,7 +54,7 @@ class ServicesTable extends BaseFilter {
               state: { filterValues: filters.values }
           }}>
               {name}
-          </Link>
+          </Link>;
       }
     },
       {
