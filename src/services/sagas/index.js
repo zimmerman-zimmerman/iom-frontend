@@ -113,7 +113,7 @@ export function* servicesRequest(action) {
 
 export function* serviceRequest(action) {
   try {
-    const response = yield call(api.transactionsAggregationsRequest, action.values);
+    const response = yield call(api.budgetsAggregationsRequest, action.values);
     yield put(actions.serviceSuccess(response));
   } catch (error) {
     yield put(actions.serviceFailed(error));
