@@ -11,7 +11,7 @@ import Trans from '../../../locales/Trans';
 
 class ServiceBanner extends Component {
   render() {
-    const { data, classes } = this.props;
+    const { data, classes, projectType } = this.props;
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     const Line = (props) => {
       return (
@@ -23,9 +23,14 @@ class ServiceBanner extends Component {
       )
     }
     const RightColumn = () => {
+
+      const budgetName = projectType ?
+          <Trans id="service.banner.right.budget" defaultMessage="Total service budget"/> :
+          <Trans id="service.banner.project.type.right.budget" defaultMessage="Total project budget"/>;
+
       const lines = [
         [
-          {line: <Trans id="service.banner.right.budget" defaultMessage="Total project budget"/>, className: 'financialLabel'},
+          {line: budgetName, className: 'financialLabel'},
           {line: <span>{usd}{format(',')(get(data, 'value', 0))}</span>, className: 'financialText'},
           {
             line: <Trans id="service.banner.right.incoming" defaultMessage="Total incoming funds"/>,
@@ -73,7 +78,8 @@ class ServiceBanner extends Component {
       )
     };
     return (
-      <Row className={classes.serviceBanner}>
+      <Row className={classes.serviceBanner}
+           style={ projectType ? {backgroundColor: '#f29d70'} : {backgroundColor: '#fdc973'} }>
         <Col xs={12} md={6} lg={6} className="left">
           <span className='title'>{data.sector.name}</span>
           <Menu className="menu" selectedKeys={['overview']} mode="horizontal">
@@ -167,7 +173,6 @@ const styles = {
       '@media (max-width: 767px)': {
         padding: '20px 25px'
       },
-      backgroundColor: '#fdc973',
       color: 'white',
       fontWeight: 600,
         '& .financialLabel': {

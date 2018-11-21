@@ -58,6 +58,7 @@ class App extends Component {
                 <Route exact path="/countries/:code" component={AsyncCountry}/>
                 <Route exact path="/services" component={AsyncServices}/>
                 <Route exact path="/services/:id" component={AsyncService}/>
+                  <Route exact path="/services/project-type/:id" component={AsyncService}/>
                 <Route exact path="/projects" component={AsyncProjects}/>
                 <Route exact path="/projects/:id" component={AsyncProject}/>
                 <Route exact path="/about" component={AsyncAbout}/>

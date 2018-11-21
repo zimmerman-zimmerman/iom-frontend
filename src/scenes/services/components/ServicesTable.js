@@ -26,13 +26,13 @@ class ServicesTable extends BaseFilter {
     const filters = {
       ...rootComponent.state.filters,
       changed: true,
-    }
+    };
     rootComponent.setState({servicesTableSortBy: value});
     this.updateComponent(filters);
   }
 
   render() {
-    const { data, intl, classes, rootComponent } = this.props;
+    const { data, intl, classes, rootComponent, sectorMapping } = this.props;
     const { filters, servicesTableSortBy } = rootComponent.state;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const columns = [{
@@ -45,13 +45,17 @@ class ServicesTable extends BaseFilter {
       dataIndex: 'sector.name',
       key: 'sector',
       width: '55%',
-      render: (name, record) =>
-        <Link to={{
-            pathname: `/services/${record.sector.code}`,
-            state: { filterValues: filters.values }
-        }}>
-            {name}
-        </Link>
+      render: (name, record) => {
+                const projectTypeCodes = get(sectorMapping, 'data.content.projectTypeFilter', '');
+                const url = projectTypeCodes.indexOf(record.sector.code) !== -1 ?
+                    `/services/project-type/${record.sector.code}` : `/services/${record.sector.code}`;
+          return <Link to={{
+              pathname: url,
+              state: { filterValues: filters.values }
+          }}>
+              {name}
+          </Link>;
+      }
     },
       {
       title: <SortHeader
@@ -87,7 +91,9 @@ ServicesTable.propTypes = {
 };
 
 const mapStateToProps = (state, ) => {
-  return {}
+  return {
+      sectorMapping: state.sectorMapping,
+  }
 };
 
 const styles = {

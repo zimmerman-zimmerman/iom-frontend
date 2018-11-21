@@ -13,6 +13,7 @@ import Trans from '../../locales/Trans';
 import ServiceBanner from './components/ServiceBanner';
 import ServiceDonors from './components/ServiceDonors';
 import ServiceProjects from './components/ServiceProjects';
+import ServiceProjectTypes from './components/ServiceProjectTypes';
 import ServiceCountries from './components/ServiceCountries';
 import ServicesJSON from '../../services/data/services';
 import find from 'lodash/find';
@@ -36,13 +37,16 @@ class Service extends BaseFilter {
   }
 
   render() {
-    const { service, serviceProjects, classes, donorGroupJson } = this.props;
+    const { service, serviceProjects, classes, donorGroupJson, match } = this.props;
     const sectorId = get(this.props, 'match.params.id');
     const data = get(service, 'data.results[0]');
+    const currentBreadTxt = this.props.match.url.indexOf('project-type') !== -1 ?
+        <Trans id='services.breadcrumb.project.detail' text='Project type detail page' /> :
+        <Trans id='services.breadcrumb.service.detail' text='Service area detail page' />;
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/countries', text: <Trans id='main.menu.services' text='Our Service' />},
-      {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
+      {url: null, text: currentBreadTxt},
     ];
     const code = get(this.props, 'match.params.id');
     const serviceJSON = find(ServicesJSON, {'code': code.toUpperCase()});
@@ -50,12 +54,20 @@ class Service extends BaseFilter {
     return (
       <Spin spinning={service.request || serviceProjects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
-          {data ? <ServiceBanner description={serviceJSON['description']} data={get(service, 'data.results[0]')}/> : null}
+          {data ? <ServiceBanner projectType={this.props.match.url.indexOf('project-type') !== -1}
+                                 description={serviceJSON['description']}
+                                 data={get(service, 'data.results[0]')}/> : null}
           <Grid className={classes.service} fluid>
             <Row xs={12} lg={6}>
               <Col xs={12} lg={6} className={classes.listsContainer}>
-                <ServiceDonors sectorId={sectorId} filterValues={prevFilters} donorGroupJson={get(donorGroupJson, 'data.content', {})} />
-                <ServiceProjects sectorId={sectorId} filterValues={prevFilters}/>
+                  {match.url.indexOf('project-type') !== -1 ?
+                      //This is the projects table which is shown only in the project detail page.
+                      <ServiceProjects sectorId={sectorId} filterValues={prevFilters}/> :
+                  <div className={classes.twoLists}>
+                    <ServiceDonors sectorId={sectorId} filterValues={prevFilters} donorGroupJson={get(donorGroupJson, 'data.content', {})} />
+                    <ServiceProjectTypes serviceId={sectorId} />
+                  </div>
+                  }
               </Col>
             </Row>
             <Row className="map-row">
@@ -86,6 +98,9 @@ const styles = {
       flexBasis: 'unset !important',
       width: '100%',
   },
+    twoLists: {
+      display: 'flex',
+    },
   service: {
     marginTop: 60,
     '& .map-row': {

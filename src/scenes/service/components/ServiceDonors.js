@@ -22,7 +22,7 @@ class ServiceDonors extends React.Component {
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         order_by: 'participating_organisation',
           page: 1,
-          page_size: 7,
+          page_size: 5,
       },
     };
     this.handleSortBy = this.handleSortBy.bind(this);
@@ -145,6 +145,7 @@ const mapStateToProps = (state, ) => {
 
 const styles = {
   serviceDonors: {
+      width: '50%',
     paddingTop: 20,
     marginRight: 10,
     '& .title': {
@@ -161,6 +162,8 @@ const styles = {
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',
+        paddingTop: 12,
+        paddingBottom: 12,
       }
     },
       '& .title': {
