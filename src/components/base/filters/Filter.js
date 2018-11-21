@@ -102,7 +102,6 @@ class Filter extends BaseFilter {
                     value={undefined}
                     placeholder={placeholder}
                     onChange={this.handleFilterChange}
-                    multiple
                     className={classes.filter}
                     dropdownClassName={classes.treeDropDown}
                 >
