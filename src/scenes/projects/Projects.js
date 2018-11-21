@@ -42,19 +42,34 @@ class Projects extends BaseFilter {
       order_by: '-value',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
-    let values = filters.values;
 
-    if(values.participating_organisation)
+      let values = {};
+    if(filters.values.participating_organisation)
     {
-      values.participating_organisation_ref = values.participating_organisation;
-      delete values['participating_organisation'];
+        //And this kids, is how we avoid references in dictionaries... That javascript man
+        const target = filters.values;
+        for (let key in target){
+            if (target.hasOwnProperty(key)) {
+                if(key === 'participating_organisation')
+                {
+                    values['participating_organisation_ref'] = target[key]
+                }else
+                {
+                    values[key] = target[key]
+                }
+            }
+        }
+    }
+    else
+    {
+      values = filters.values;
     }
 
     this.actionRequest(
-      extend({}, params, filters.values), 'recipient_country', actions.countriesRequest
+      extend({}, params, values), 'recipient_country', actions.countriesRequest
     );
     this.actionRequest(
-      extend({}, params, filters.values), 'participating_organisation', actions.countryDonorsRequest
+      extend({}, params, values), 'participating_organisation', actions.countryDonorsRequest
     );
   }
 
