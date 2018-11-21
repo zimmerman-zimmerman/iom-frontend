@@ -162,6 +162,8 @@ const styles = {
     '& tr': {
       '& td, th': {
         paddingLeft: '0px !important',
+        paddingTop: 12,
+        paddingBottom: 12,
       }
     },
       '& .title': {

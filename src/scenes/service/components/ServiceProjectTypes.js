@@ -165,7 +165,16 @@ const styles = {
         }
     },
     table: {
-        marginTop: 20,
+        marginTop: 30,
+        '& thead': {
+            '& tr': {
+                '& td, th': {
+                    paddingLeft: '0px !important',
+                    paddingTop: 12,
+                    paddingBottom: 10,
+                }
+            }
+        },
         '& tr': {
             '& td, th': {
                 paddingLeft: '0px !important',
