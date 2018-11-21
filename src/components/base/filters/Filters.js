@@ -94,7 +94,8 @@ class Filters extends Component {
                 optionKeyName="participating_organisation_ref"
                 optionValueName="participating_organisation"
                 groupBy="participating_organisation"
-                fieldName="participating_organisation_ref"
+                fieldName={this.props.projects || this.props.services ? "participating_organisation"
+                    : "participating_organisation_ref"}
                 fieldLabel='Donor type'
                 actionRequest={actions.transactionsAggregationsParticipatingOrganisationRequest}
         />

@@ -95,7 +95,7 @@ class BaseFilter extends Component {
     }
     filters.values['page'] = 1;
     filters.changed = true;
-    rootComponent.setState({filters: filters});
+    rootComponent.setState({ filters });
     this.updateComponent(filters);
   }
 
