@@ -25,11 +25,32 @@ class Services extends BaseFilter {
     const { dispatch, sectorMapping } = this.props;
     let params = this.state.params;
     params.humanitarian = 1;
-    params.sector = get(sectorMapping.data, 'content.serviceAreaFilter.allCodes');
+
+    const values = get(sectorMapping.data, 'content.serviceAreaFilter.allCodes');
+
+    const filters = this.state.filters;
+    filters.chips['sector type'] = {
+        labels: [
+            <Trans id="filters.select.sectors.service.area" defaultMessage="Service Area" />,
+        ],
+        type: 'Sector type',
+        values:[[values]]
+      };
+    filters.values['sector type'] = values;
+    this.setState({
+      filters,
+    });
+
     if (dispatch) {
-      this.actionRequest(params, 'sector', actions.servicesRequest);
+      this.actionRequest({
+          ...params,
+          sector: values,
+      }, 'sector', actions.servicesRequest);
       params.humanitarian = 0;
-      this.actionRequest(params, 'sector', actions.nonHumanServicesRequest);
+      this.actionRequest({
+          ...params,
+          sector: values,
+      }, 'sector', actions.nonHumanServicesRequest);
       this.setState({params: params});
     } else {
       dispatch(actions.servicesInitial());

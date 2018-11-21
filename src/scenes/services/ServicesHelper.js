@@ -15,7 +15,7 @@ export function combineData(human, nonHuman) {
       //according to the length and values of the human array
       for(let i = 0; i < human.length; i++){
         let humanItem = human[i];
-        if(nonHuman)
+        if(nonHuman && nonHuman.length > 0)
         {
           for(let j = 0; j < nonHuman.length; j++){
             let nonHumanItem = nonHuman[j];

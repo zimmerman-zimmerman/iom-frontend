@@ -5,14 +5,18 @@ import sortBy from 'lodash/sortBy';
 import Select from 'antd/es/select';
 import Spin from 'antd/es/spin';
 import Layout from 'antd/es/layout';
-import { connect } from "react-redux";
-import injectSheet from "react-jss";
+import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
 import PropsType from 'prop-types';
+import { TreeSelect } from 'antd';
 
-import BaseFilter from "./BaseFilter";
+import BaseFilter from './BaseFilter';
+import { injectIntl } from 'react-intl';
+import { getSectors } from './FilterHelper';
 
 const Option = Select.Option;
 const { Content } = Layout;
+const TreeNode = TreeSelect.TreeNode;
 
 class Filter extends BaseFilter {
     constructor(props) {
@@ -32,16 +36,40 @@ class Filter extends BaseFilter {
         const chips = this.props.rootComponent.state.filters.chips;
         let values = [];
         let names = [];
-        if(Object.keys(chips).length !== 0 && chips[this.props.fieldName])
+        let fieldName = this.props.fieldName;
+
+        //So if the value contains ',' that means that it will be a value for a sector group
+        //Cause those values are made up of several values which are seperated by ','
+        if(fieldName === 'sector')
         {
-            values = chips[this.props.fieldName].values;
-            names = chips[this.props.fieldName].labels;
+            if(value.indexOf(',') !== -1){
+                fieldName='sector type';
+            }else
+            {
+                fieldName='sector';
+            }
         }
-        if(values.indexOf(value) === -1){
+
+        if(Object.keys(chips).length !== 0 && chips[fieldName])
+        {
+            values = chips[fieldName].values;
+            names = chips[fieldName].labels;
+        }
+
+        const name = component.props ? component.props.children : component[0];
+        if(values.indexOf(value) === -1 && names.indexOf(name) === -1){
             values.push(value);
-            names.push(component.props.children);
+            names.push(name);
         }
-        this.handleChange(values, names);
+
+        if(this.props.fieldName === 'sector')
+        {
+            const fieldLabel = fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
+            this.handleChange(values, names, false, fieldName, fieldLabel);
+        }else
+        {
+            this.handleChange(values, names);
+        }
     }
 
     options(results) {
@@ -50,8 +78,69 @@ class Filter extends BaseFilter {
     }
 
     select(options) {
-        const { placeholder, classes } = this.props;
-        if (/Android/i.test(navigator.userAgent)) {
+        const { placeholder, classes, sectors, sectorMapping, reducer, intl } = this.props;
+        if(sectors)
+        {
+            const mapping = get(sectorMapping, 'data.content', false);
+            const sectors = get(reducer, 'data.results', []);
+            let serviceCodes = '';
+            let projectCodes = '';
+            let dacCodes = '';
+            if(mapping)
+            {
+                serviceCodes = mapping.serviceAreaFilter.allCodes;
+                projectCodes = mapping.projectTypeFilter;
+                dacCodes = mapping.dacCodeFilter.allCodes;
+            }
+
+            const serviceAreaOptions = getSectors(sectors, serviceCodes);
+            const projectTypeOptions = getSectors(sectors, projectCodes);
+            const DACSectorsOptions = getSectors(sectors, dacCodes);
+
+            return(
+                <TreeSelect
+                    value={undefined}
+                    placeholder={placeholder}
+                    onChange={this.handleFilterChange}
+                    className={classes.filter}
+                    dropdownClassName={classes.treeDropDown}
+                >
+                    <TreeNode value={serviceCodes}
+                              title={intl.formatMessage({
+                                id: 'filters.select.sectors.service.area',
+                                defaultMessage: 'Service Area'
+                                    })}
+                              key="1">
+                        {serviceAreaOptions.map(service => {
+                            return <TreeNode className={classes.childOption} value={service.sector.code}
+                                             title={service.sector.name} key={service.sector.code} />;
+                        })}
+                    </TreeNode>
+                    <TreeNode value={projectCodes}
+                              title={intl.formatMessage({
+                                  id: 'filters.select.sectors.project.type',
+                                  defaultMessage: 'Project Type'
+                              })}
+                              key="2">
+                        {projectTypeOptions.map(project => {
+                            return <TreeNode className={classes.childOption} value={project.sector.code}
+                                             title={project.sector.name} key={project.sector.code} />;
+                        })}
+                    </TreeNode>
+                    <TreeNode value={dacCodes}
+                              title={intl.formatMessage({
+                                  id: 'filters.select.sectors.dac.sector',
+                                  defaultMessage: 'DAC Sector'
+                              })}
+                              key="3">
+                        {DACSectorsOptions.map(sector => {
+                            return <TreeNode className={classes.childOption} value={sector.sector.code}
+                                             title={sector.sector.name} key={sector.sector.code} />;
+                        })}
+                    </TreeNode>
+                </TreeSelect>
+            );
+        }else if (/Android/i.test(navigator.userAgent)) {
             return (
                 <Select placeholder={placeholder}
                         className={classes.filter}
@@ -62,6 +151,7 @@ class Filter extends BaseFilter {
                 </Select>
             )
         }
+
         return (
             <Select showSearch
                     placeholder={placeholder}
@@ -98,6 +188,17 @@ Filter.propTypes = {
 };
 
 const styles = {
+    treeDropDown: {
+        maxHeight: '250px !important',
+        overflow: 'unset !important',
+        overflowY: 'auto !important',
+    },
+    childOption: {
+        '& .ant-select-tree-node-content-wrapper':{
+            overflowX: 'hidden',
+            textOverflow: 'ellipsis',
+        },
+    },
     filter: {
         fontSize: 15,
         backgroundColor:'#e9ebf7',
@@ -117,8 +218,9 @@ const styles = {
 const mapStateToProps = (state, props) => {
     const { reducerName } = props;
     return {
-        reducer: get(state, reducerName)
+        reducer: get(state, reducerName),
+        sectorMapping: state.sectorMapping,
     }
 };
 
-export default injectSheet(styles)(connect(mapStateToProps)(Filter));
+export default injectSheet(styles)(connect(mapStateToProps)(injectIntl(Filter)));
