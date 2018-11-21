@@ -42,7 +42,7 @@ class Filter extends BaseFilter {
         //Cause those values are made up of several values which are seperated by ','
         if(fieldName === 'sector')
         {
-            if(value[0].indexOf(',') !== -1){
+            if(value.indexOf(',') !== -1){
                 fieldName='sector type';
             }else
             {
@@ -113,7 +113,7 @@ class Filter extends BaseFilter {
                               key="1">
                         {serviceAreaOptions.map(service => {
                             return <TreeNode className={classes.childOption} value={service.sector.code}
-                                             title={service.sector.name} key="random" />;
+                                             title={service.sector.name} key={service.sector.code} />;
                         })}
                     </TreeNode>
                     <TreeNode value={projectCodes}
@@ -124,7 +124,7 @@ class Filter extends BaseFilter {
                               key="2">
                         {projectTypeOptions.map(project => {
                             return <TreeNode className={classes.childOption} value={project.sector.code}
-                                             title={project.sector.name} key="random" />;
+                                             title={project.sector.name} key={project.sector.code} />;
                         })}
                     </TreeNode>
                     <TreeNode value={dacCodes}
@@ -135,7 +135,7 @@ class Filter extends BaseFilter {
                               key="3">
                         {DACSectorsOptions.map(sector => {
                             return <TreeNode className={classes.childOption} value={sector.sector.code}
-                                             title={sector.sector.name} key="random" />;
+                                             title={sector.sector.name} key={sector.sector.code} />;
                         })}
                     </TreeNode>
                 </TreeSelect>
