@@ -9,16 +9,15 @@ context('Test country filter functionality', () => {
     it('Check if geo location chip exists', () => {
         cy.get('.chip-label').should('contain', itemValue);
     });
-    it('Check if geo location filter applied correctly', () => {
-        // Will check if the projects project location of one of the services
-        // is of the specified geolocation
-        goToServicesDetail();
-        goToProjectDetail();
-        //Check if project location is correct
-        cy.get('.country-name').should('contain', itemValue);
-    });
     it('Apply Sector filter', () => {
-        applyFilter('Sector');
+        cy.visit(Cypress.env('targetUrl').concat('/services'));
+        cy.get('.ant-collapse > div:nth-child(2)').click();
+        cy.get('.ant-select-selection').click({ force: true });
+        cy.get('.ant-select-tree-switcher').first().click({ force: true });
+        cy.get('.ant-select-tree-node-content-wrapper-normal').first().should(($li) => {
+            itemValue = $li.text();
+        });
+        cy.get('.ant-select-tree-node-content-wrapper-normal').first().click({ force: true });
     });
     it('Check if sector chip exists', () => {
         cy.get('.chip-label').should('contain', itemValue);
@@ -32,12 +31,6 @@ context('Test country filter functionality', () => {
     });
     it('Check if Project status chip exists', () => {
         cy.get('.chip-label').should('contain', itemValue);
-    });
-    it('Check if Project status filter applied correctly', () => {
-        //Will check if the related projects list contains only the projects of the specified project status
-        goToServicesDetail();
-        goToProjectDetail();
-        cy.contains(itemValue);
     });
     it('Apply Donors filter', () => {
         applyFilter('.ant-collapse-item:nth-of-type(5)', true);
@@ -73,17 +66,6 @@ context('Test country filter functionality', () => {
     }
     function goToServicesDetail() {
         cy.get('td > a').first().click();
-        cy.wait(1000);
-    }
-    function goToProjectDetail() {
-        cy.get('tbody').each(($el, index) => {
-            //Because we want this to work for the second tables
-            //children only. We do this in an each, cause next doesn't work
-            if(index === 1)
-            {
-                cy.wrap($el).children('.ant-table-row').children('td').children('a').first().click();
-            }
-        });
         cy.wait(1000);
     }
 });
