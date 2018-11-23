@@ -143,7 +143,7 @@ class TableProjects extends Component {
               defSortValue={'start_date'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'activity_dates[1].iso_date',
+      dataIndex: 'activity_dates[0].iso_date',
       key: 'start'
     },{
       title: <SortHeader
@@ -154,7 +154,7 @@ class TableProjects extends Component {
               // defSortValue={'type'}
               onSort={() => console.log('we need backend functionality for this')}
               />,
-      dataIndex: 'activity_dates[0].iso_date',
+      dataIndex: 'activity_dates[2].iso_date',
       key: 'end'
     },];
       const allData = get(countryActivities, 'data.results');
