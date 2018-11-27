@@ -33,7 +33,7 @@ class Filter extends BaseFilter {
     }
 
     handleFilterChange(valuez, component){
-        const value = this.props.fieldName === 'participating_organisation_ref' ? component.key : valuez;
+        const value = this.props.fieldName.indexOf('participating_organisation') !== -1 ? component.key : valuez;
         const chips = this.props.rootComponent.state.filters.chips;
         let values = [];
         let names = [];
@@ -79,7 +79,8 @@ class Filter extends BaseFilter {
         return sortBy(results, optionValueName).map(item =>{
             //Work around for messy dropdown list scrolling, happens when there are several values which are the same
             //And this happens with those donors... Cause IOM.
-            const value = fieldName === 'participating_organisation_ref' ? get(item, optionValueName) :
+            console.log(fieldName);
+            const value = fieldName.indexOf('participating_organisation') !== -1 ? get(item, optionValueName) :
                 get(item, optionKeyName);
 
             return <Option key={get(item, optionKeyName)} value={value}>
