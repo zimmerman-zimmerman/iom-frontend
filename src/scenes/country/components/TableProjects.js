@@ -82,13 +82,13 @@ class TableProjects extends Component {
               onSort={() => console.log('we need backend functionality for this')}
             />,
       key: 'donors',
-      width: '20%',
+        width: '15%',
       render: (obj) => {
           let donorExtra = `${get(donorGroupJson, obj.participating_organisations[0].ref)}/`;
           return (
               <Link to={`/donors/${donorExtra}${obj.participating_organisations[0].ref}`}>
                   {obj.participating_organisations[0].narratives[0].text}
-              </Link>   
+              </Link>
           )
       }
     },{
@@ -99,7 +99,7 @@ class TableProjects extends Component {
               onSort={() => console.log('we need backend functionality for this')}
               />,
       key: 'title',
-      width: '30%',
+      width: '26%',
       render: obj =>
         <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
     },{
@@ -112,6 +112,7 @@ class TableProjects extends Component {
       dataIndex: 'aggregations.activity.budget_value',
       className: 'number',
       key: 'budget',
+        width: '12%',
       render: value => <span>{usd}{format(',.0f')(value)}</span>
     },{
       title: <SortHeader
@@ -121,6 +122,7 @@ class TableProjects extends Component {
               onSort={() => console.log('we need backend functionality for this')}
               />,
       dataIndex: 'activity_status.name',
+        width: '12%',
       key: 'status'
     },{
       title: <SortHeader
@@ -132,6 +134,7 @@ class TableProjects extends Component {
           onSort={() => console.log('we need backend functionality for this')}
       />,
       key: 'type',
+        width: '15%',
       render: obj =>
         <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
     },{
@@ -144,6 +147,7 @@ class TableProjects extends Component {
               onSort={this.handleChange}
               />,
       dataIndex: 'activity_dates[0].iso_date',
+        width: '10%',
       key: 'start'
     },{
       title: <SortHeader
@@ -155,6 +159,7 @@ class TableProjects extends Component {
               onSort={() => console.log('we need backend functionality for this')}
               />,
       dataIndex: 'activity_dates[2].iso_date',
+        width: '10%',
       key: 'end'
     },];
       const allData = get(countryActivities, 'data.results');
@@ -163,7 +168,7 @@ class TableProjects extends Component {
         <Fragment>
             <Table dataSource={data ? this.addKey(data) : null} columns={columns} size='middle'
                    pagination={false}
-                   scroll={{ x: 1800 }}
+                   // scroll={{ x: 1800 }}
                    loading={countryActivities.request}
                    rowClassName={classes.row}
             />
