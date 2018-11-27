@@ -2,6 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import sortBy from 'lodash/sortBy';
+import find from 'lodash/find';
 import Select from 'antd/es/select';
 import Spin from 'antd/es/spin';
 import Layout from 'antd/es/layout';
@@ -32,7 +33,8 @@ class Filter extends BaseFilter {
         }
     }
 
-    handleFilterChange(value, component){
+    handleFilterChange(valuez, component){
+        const value = this.props.fieldName !== 'sector' ? component.key : valuez;
         const chips = this.props.rootComponent.state.filters.chips;
         let values = [];
         let names = [];
@@ -74,7 +76,27 @@ class Filter extends BaseFilter {
 
     options(results) {
         const { optionKeyName, optionValueName } = this.props;
-        return sortBy(results, optionValueName).map(item => <Option key={get(item, optionKeyName)}>{get(item, optionValueName)}</Option>)
+
+        const donorsRendered = [];
+
+        return sortBy(results, optionValueName).map( item =>{
+
+            let value = get(item, optionValueName);
+
+            if(this.props.fieldName.indexOf('participating_organisation') !== -1)
+            {
+                //This is used to add an extra number to donors that have the same name
+                //because there are donors like that and they mess up the dropdown #JustIOMThings
+                //And we gonna just add an empty space to the end of these kind of names.
+                value = find(donorsRendered, [optionValueName, value]) ? value.concat(' ') : value;
+
+                //Here we just store the rendered donor options
+                donorsRendered.push(item);
+            }
+
+            return <Option key={get(item, optionKeyName)} value={value}>
+                {get(item, optionValueName)}</Option>
+        });
     }
 
     select(options) {
