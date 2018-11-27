@@ -76,11 +76,10 @@ class Filter extends BaseFilter {
     options(results) {
         const { optionKeyName, optionValueName, fieldName } = this.props;
 
-        return sortBy(results, optionValueName).map(item =>{
+        return sortBy(results, optionValueName).map((item, index) =>{
             //Work around for messy dropdown list scrolling, happens when there are several values which are the same
             //And this happens with those donors... Cause IOM.
-            console.log(fieldName);
-            const value = fieldName.indexOf('participating_organisation') !== -1 ? get(item, optionValueName) :
+            const value = fieldName.indexOf('participating_organisation') !== -1 ? index :
                 get(item, optionKeyName);
 
             return <Option key={get(item, optionKeyName)} value={value}>
