@@ -59,9 +59,12 @@ class ServiceDonors extends React.Component {
     if (dispatch && sectorId) {
         if(this.props.filterValues)
         {
+            const filterValues = this.props.filterValues;
+            filterValues.participating_organisation_ref = filterValues.participating_organisation;
+            delete filterValues['participating_organisation'];
             //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
             // params works as a reference when passed in this function
-            addFilterValues(this.props.filterValues, params);
+            addFilterValues(filterValues, params);
         }
       dispatch(actions.serviceDonorsRequest({ ...params, sector: sectorId }));
     } else {
