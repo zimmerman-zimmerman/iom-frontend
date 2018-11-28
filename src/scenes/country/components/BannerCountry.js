@@ -89,7 +89,10 @@ const BannerCountry = (props) => {
                   <Icon type="appstore"/>
                   <Trans id="country.banner.overview" defaultMessage="Overview"/>
                 </Menu.Item>
-                <Menu.Item key="related">
+                <Menu.Item key="related" onClick={() => {
+                  const table = document.getElementById("related-projects-table");
+                  table.scrollIntoView({ block: 'start', behavior: 'smooth' });
+                }}>
                   <Icon type="book"/>
                   <Trans id="country.banner.related" defaultMessage="Related projects"/>
                 </Menu.Item>
