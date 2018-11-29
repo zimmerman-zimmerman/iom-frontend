@@ -232,8 +232,7 @@ const styles = {
           marginTop: 40,
       },
     },
-      padding: '0 !important',
-    margin: '60px 65px 60px 100px',
+    margin: '60px 0',
     '& .title': {
       color: '#1f4283',
       marginTop: 10,
