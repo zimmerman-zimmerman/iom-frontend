@@ -13,13 +13,11 @@ import { formatNumberComma } from '../../../helpers/generic';
 
 class Summary extends Component {
   render() {
-    const { data, fieldValue, fieldCount, onHideSummary, donorsCount, classes } = this.props;
+    const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
     let totalBudget = 0;
-    let totalActivity = 0;
     if (data) {
       data.forEach(function (item) {
         totalBudget += get(item, fieldValue, 0);
-        totalActivity += get(item, fieldCount, 1);
       });
     }
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
@@ -44,7 +42,7 @@ class Summary extends Component {
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong className={classes.number}>{totalActivity}</strong>
+            <strong className={classes.number}>{projectsCount}</strong>
           </Col>
         </Row>
         <Row>
