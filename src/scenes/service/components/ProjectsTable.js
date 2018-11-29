@@ -11,8 +11,17 @@ import { Link } from 'react-router-dom';
 import Trans from '../../../locales/Trans';
 import SortHeader from "../../../components/SortHeader/SortHeader";
 import Pagination from "../../../components/Pagination/Pagination";
+import * as actions from "../../../services/actions";
 
 class ProjectsTable extends BaseFilter {
+
+    componentDidMount(){
+        const { dispatch, donorGroupJson, donorGroupJsonSlug } = this.props;
+        if(!donorGroupJson.data) {
+            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
+    }
+
   addKey(dataSource) {
     let data = [];
     dataSource.forEach(function(item) {
@@ -34,7 +43,7 @@ class ProjectsTable extends BaseFilter {
     }
 
   render() {
-    const { intl, data, classes, selectedSortBy, handleSortBy } = this.props;
+    const { intl, data, classes, selectedSortBy, handleSortBy, donorGroupJson } = this.props;
     const usd = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const total = get(data, 'count', 0);
     const columns = [{
@@ -56,8 +65,15 @@ class ProjectsTable extends BaseFilter {
                     // defSortValue={'donor'}
                     onSort={() => console.log('We need backend sorting functionality for this')}
                 />,
-            dataIndex: 'participating_organisations[0].narratives[0].text',
-            render: obj => <span>{obj}</span>
+            dataIndex: 'participating_organisations[0]',
+            render: obj => {
+                let donorExtra = `${get(donorGroupJson, `data.content.${obj.ref}`)}/`;
+                return (
+                    <Link to={`/donors/${donorExtra}${obj.ref}`}>
+                        {obj.narratives[0].text}
+                    </Link>
+                )
+            }
         },
         {title: <SortHeader
               title={intl.formatMessage({id: 'service.projects.header.value', defaultMessage: 'Total donor funding value'})}
@@ -128,8 +144,14 @@ ProjectsTable.propTypes = {
   intl: intlShape.isRequired
 };
 
+ProjectsTable.defaultProps = {
+    donorGroupJsonSlug: 'donor-group-json',
+};
+
 const mapStateToProps = (state, ) => {
-  return {}
+  return {
+      donorGroupJson: state.donorGroupJson,
+  }
 };
 
 const styles = {

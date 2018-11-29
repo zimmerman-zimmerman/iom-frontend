@@ -23,7 +23,7 @@ import { addFilterValues, formatMapData } from '../../helpers/generic';
 
 class Country extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, donorGroupJsonSlug, donorGroupJson } = this.props;
     const { params } = this.state;
     const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
@@ -50,6 +50,14 @@ class Country extends BaseFilter {
           'participating_organisation',
           actions.countryDonorsRequest
         );
+        this.actionRequest(
+              extend({}, params, {recipient_country: code.toUpperCase()}, {page_size: 30}),
+              'participating_organisation',
+              actions.countryDonorsRequest
+          );
+        if(!donorGroupJson.data) {
+            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
       } else {
         dispatch(actions.countryInitial());
         dispatch(actions.countryDonorsInitial());
@@ -163,6 +171,11 @@ const mapStateToProps = (state, ) => {
     donorGroupJson: state.donorGroupJson,
   }
 };
+
+Country.defaultProps = {
+    donorGroupJsonSlug: 'donor-group-json',
+};
+
 
 const styles = {
   country: {
