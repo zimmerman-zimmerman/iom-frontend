@@ -11,10 +11,13 @@ import Trans from '../../locales/Trans';
 
 class Project extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, donorGroupJson, donorGroupJsonSlug } = this.props;
     const id = get(this.props, 'match.params.id');
     if (dispatch && id) {
       dispatch(actions.projectRequest(id));
+        if(!donorGroupJson.data) {
+            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
     } else {
       dispatch(actions.projectInitial());
     }
@@ -38,6 +41,10 @@ class Project extends Component {
     )
   }
 }
+
+Project.defaultProps = {
+    donorGroupJsonSlug: 'donor-group-json',
+};
 
 const mapStateToProps = (state, ) => {
   return {

@@ -21,7 +21,7 @@ import { addFilterValues } from '../../helpers/generic';
 
 class Service extends BaseFilter {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, donorGroupJson, donorGroupJsonSlug } = this.props;
     const { params } = this.state;
     const id = get(this.props, 'match.params.id');
     if (dispatch && id) {
@@ -31,6 +31,9 @@ class Service extends BaseFilter {
             addFilterValues(this.props.location.state.filterValues, params);
         }
       this.actionRequest(extend({}, params, {sector: id}), 'sector', actions.serviceRequest);
+        if(!donorGroupJson.data) {
+            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
     } else {
       actions.serviceInitial();
     }
@@ -89,6 +92,11 @@ const mapStateToProps = (state, ) => {
     serviceProjects: state.serviceProjects,
   }
 };
+
+Service.defaultProps = {
+    donorGroupJsonSlug: 'donor-group-json',
+};
+
 
 const styles = {
   listsContainer: {
