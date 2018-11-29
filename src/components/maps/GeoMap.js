@@ -20,8 +20,11 @@ import {connect} from "react-redux";
 import GenericDialog from "../dialogWindow/GenericDialog/GenericDialog";
 import MapToolTip from "./MapToolTip/MapToolTip";
 
+//Yellowish
+// const colors = ["rgb(255, 244, 221)", "rgb(255, 220, 142)", "rgb(255, 184,28)"];
 
-const colors = ["#CDDC39", "#4CAF50", "#795548"];
+//Orange'ish
+const colors = ["rgb(255, 232, 221)",  "rgb(255, 179, 143)", "rgb(255, 103, 31)"];
 
 class GeoMap extends Component {
   constructor(props) {
@@ -188,7 +191,7 @@ class GeoMap extends Component {
       .range(colors);
 
     layer.setStyle({
-      fillOpacity: 0.6,//0.2 + (feature.properties.value / this.state.maxValue * 0.6),
+      fillOpacity: 0.8,//0.2 + (feature.properties.value / this.state.maxValue * 0.6),
       fillColor: getColor(feature.properties.value)
     });
     // TODO: value is project_amount or value
