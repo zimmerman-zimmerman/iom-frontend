@@ -142,9 +142,9 @@ class Country extends BaseFilter {
                 <SectorsMap data={sectors} />
               </Col>
             </Row>
-            <Row>
+            <Row id="related-projects-table">
               <Col xs={12}>
-                <h2 className="title">
+                <h2 className="title" >
                   <Trans id="country.table.projects.title" defaultMessage="Related projects"/>
                 </h2>
                 <TableProjects countryCode={ get(this.props, 'match.params.code')}
