@@ -79,6 +79,11 @@ class Projects extends BaseFilter {
       if (prevState.dataRange !== this.state.dataRange) {
         const { params, filters } = this.state;
         delete filters.values['page'];
+
+        const filterValues = filters.values;
+        filterValues.total_budget_gte = this.state.dataRange[0];
+          filterValues.total_budget_lte = this.state.dataRange[1];
+
         this.actionRequest(
           extend({}, params, filters.values),
           null,
