@@ -79,7 +79,6 @@ class Projects extends BaseFilter {
       if (prevState.dataRange !== this.state.dataRange) {
         const { params, filters } = this.state;
         delete filters.values['page'];
-        console.log(params);
         this.actionRequest(
           extend({}, params, filters.values),
           null,
