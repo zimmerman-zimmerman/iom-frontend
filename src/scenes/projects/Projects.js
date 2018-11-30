@@ -116,6 +116,7 @@ class Projects extends BaseFilter {
     const donorsCount = get(donors, 'data.count');
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data.results', []);
+    const projectsCount = get(dataProjects, 'count', 0);
     const showMap = get(dataCountries, '[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -133,6 +134,7 @@ class Projects extends BaseFilter {
         </div>
       )
     };
+
     return (
       <Spin spinning={projects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
@@ -165,6 +167,7 @@ class Projects extends BaseFilter {
                                    fieldCount="activity_count"
                                    donorsCount={donorsCount}
                                    height={geomapHeight}
+                                   projectsCount={projectsCount}
                           />
                         </div>
                       </Col> : null
@@ -188,6 +191,7 @@ class Projects extends BaseFilter {
                                    onShowSummary={this.onToggleSummary.bind(this)}
                                    showSummary={showSummary}
                                    height={geomapHeight}
+                                   projectsCount={projectsCount}
                           />
                         </div>
                       </Col> : null

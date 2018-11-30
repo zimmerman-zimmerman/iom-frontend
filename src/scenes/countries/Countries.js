@@ -16,6 +16,8 @@ import Trans from '../../locales/Trans';
 import Page from '../../components/base/Page';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
+import extend from "lodash/extend";
+import isEqual from 'lodash/isEqual';
 
 class Countries extends BaseFilter {
   componentDidMount() {
@@ -24,6 +26,7 @@ class Countries extends BaseFilter {
     this.setState({showSummary: true});
     if (dispatch) {
       if (params) {
+        this.actionRequest({ fields: 'count', format: 'json' }, '', actions.projectsRequest);
         this.actionRequest(params, 'recipient_country', actions.countriesRequest);
         this.actionRequest(params, 'participating_organisation', actions.countryDonorsRequest);
       } else {
@@ -38,14 +41,40 @@ class Countries extends BaseFilter {
     }
   }
 
+    componentDidUpdate(prevProps, prevState) {
+            if (!isEqual(this.props.countries.data, prevProps.countries.data)) {
+                let values = {};
+                //work around for stupid js referencing
+                //cause in the way this is set up
+                // the filter values change without setState
+                for (let key in this.state.filters.values) {
+                    if (this.state.filters.values.hasOwnProperty(key)) {
+                        if(key === 'participating_organisation_ref')
+                        {
+                          values['participating_organisation'] = this.state.filters.values[key];
+                        }else
+                        {
+                            values[key] = this.state.filters.values[key];
+                        }
+                    }
+                }
+                this.actionRequest(
+                    extend({}, { fields: 'count', format: 'json' }, values),
+                    null,
+                    actions.projectsRequest
+                );
+            }
+    }
+
   onToggleSummary() {
     this.setState({showSummary: !this.state.showSummary});
   }
 
   render() {
-    const { countries, donors, classes } = this.props;
+    const { countries, donors, classes, projects } = this.props;
     const { showSummary } = this.state;
     const data = this.filter(get(countries, 'data'));
+    const projectsCount = get(projects, 'data.count', 0);
     const donorsCount = get(donors, 'data.count');
     const showMap = get(data, '[0].recipient_country.code');
     const breadcrumbItems = [
@@ -99,6 +128,7 @@ class Countries extends BaseFilter {
                                      fieldCount="activity_count"
                                      donorsCount={donorsCount}
                                      height={geomapHeight}
+                                     projectsCount={projectsCount}
                             />
                           </div>
                         </Col> : null
@@ -120,6 +150,7 @@ class Countries extends BaseFilter {
                                    fieldCount="activity_count"
                                    donorsCount={donorsCount}
                                    height={geomapHeight}
+                                   projectsCount={projectsCount}
                           />
                         </div>
                       </Col> : null
@@ -152,6 +183,7 @@ Countries.defaultProps = {
 
 const mapStateToProps = (state, ) => {
   return {
+    projects: state.projects,
     countries: state.countries,
     donors: state.countryDonors,
   }
