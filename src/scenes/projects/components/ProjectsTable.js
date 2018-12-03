@@ -13,6 +13,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 
 import './ProjectsTable.scss';
 import SortHeader from "../../../components/SortHeader/SortHeader";
+import {getDate} from "../../../helpers/tableHelpers";
 
 class ProjectsTable extends BaseFilter {
   handleChange(value, fieldName='ordering') {
@@ -62,7 +63,7 @@ class ProjectsTable extends BaseFilter {
               />,
       dataIndex: 'activity_dates',
       key: 'start_date',
-      render: activity_dates => <span>{activity_dates[1].iso_date}</span>
+      render: activity_dates => <span>{getDate(activity_dates, 'start')}</span>
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
@@ -72,7 +73,7 @@ class ProjectsTable extends BaseFilter {
               />,
       dataIndex: 'activity_dates',
       key: 'end_date',
-      render: activity_dates => <span>{activity_dates[2].iso_date}</span>
+      render: activity_dates => <span>{getDate(activity_dates, 'end')}</span>
     },{
       title: <SortHeader
               title={intl.formatMessage({id: 'projects.table.budget', defaultMessage: 'Budget'})}

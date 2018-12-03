@@ -39,13 +39,16 @@ class Donors extends BaseFilter {
     let dataGroup = [];
     if (donorsGroupsJson.success && donorGroupJson.success) {
       forEach(donors, function (donor) {
-        const code = get(donorGroupJson.data.content, donor.participating_organisation_ref);
+
+        const code = get(donorGroupJson.data.content,
+            donor.participating_organisation_ref, donor.participating_organisation_ref);
         const group = get(donorsGroupsJson.data.content, code);
+
         let donorGroup = find(dataGroup, {code: code});
         if (!donorGroup) {
           donorGroup = {
             code: code,
-            name: group.name,
+            name: group ? group.name : donor.participating_organisation,
             value: donor.value,
             project: donor.activity_count,
           };
