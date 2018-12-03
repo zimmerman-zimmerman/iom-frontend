@@ -14,16 +14,6 @@ import DonorsTable from './components/DonorsTable';
 import { addFilterValues } from '../../helpers/generic';
 
 class DonorGroup extends BaseFilter {
-  componentWillMount() {
-    // This is used for donors that are not part of a group, to instantly go to its donor detail page,
-      // but do we really need that?
-    // if (get(this.props, 'match.params.group.length', 0) > 2) {
-    //   const groupCode = get(this.props.donorGroupJson.data, `content.${this.props.match.params.group}`, '');
-    //   const group = typeof groupCode === 'string' ? groupCode.toLowerCase() : groupCode;
-    //   this.props.history.replace(`${group}/${this.props.match.params.group}`);
-    // }
-  }
-
   componentDidMount() {
     const { dispatch, donorsGroupsJsonSlug } = this.props;
     this.setState({actionRequest: true});
@@ -50,7 +40,14 @@ class DonorGroup extends BaseFilter {
     const { params, filters, actionRequest } = this.state;
     const group = get(this.props, 'match.params.group', '');
     const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
-    if (donorGroup && actionRequest){
+
+    if(donorGroup === undefined)
+    {
+      //So if the donorGroup is not found in the cms, that means that a donor with the specified
+      //  ref was not added to the cms, thus we redirect the user to the donors detail page
+      this.props.history.replace(`${group}/${group}`);
+    }
+    else if (donorGroup && actionRequest){
       this.actionRequest(
         extend({}, params, filters.values, {participating_organisation_ref: donorGroup.filter}),
         'participating_organisation',

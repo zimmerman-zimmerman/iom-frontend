@@ -36,15 +36,23 @@ class Donor extends BaseFilter {
     const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
     const code = get(this.props, 'match.params.code');
     const data = get(this.props, 'donor.data.results[0]');
-    const breadcrumbItems =  donorsGroupsJson.success ? [
+    let breadcrumbItems =  donorsGroupsJson.success ? [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: '/donors', text: <Trans id='main.menu.donors' text='Donors' />},
       {
-        url: `/donors/${donorGroup.code}`,
-        text: donorGroup ? donorGroup.name : <Trans id='main.menu.donors' text='Donors' />
+        url: donorGroup === undefined ? `/donors/${group}` : `/donors/${donorGroup.code}`,
+        text: donorGroup ? donorGroup.name : <Trans id='main.menu.detail' text='Detail' />,
       },
       {url: null, text: data ? data.participating_organisation : <Trans id='main.menu.detail' text='Detail' />},
     ] : null;
+
+    //so if donorGroup is undefined that means that this is the donor detail and this donor doesn't have a group
+    //  thus we don't need the donor group bread crumb
+    if(donorGroup === undefined)
+    {
+      breadcrumbItems.splice(2, 1);
+    }
+
     const prevFilters = this.props.location.state ? this.props.location.state.filterValues : false;
     return (
       <Page breadcrumbItems={breadcrumbItems}>

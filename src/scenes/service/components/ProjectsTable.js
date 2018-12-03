@@ -12,6 +12,7 @@ import Trans from '../../../locales/Trans';
 import SortHeader from "../../../components/SortHeader/SortHeader";
 import Pagination from "../../../components/Pagination/Pagination";
 import * as actions from "../../../services/actions";
+import {getDate} from "../../../helpers/tableHelpers";
 
 class ProjectsTable extends BaseFilter {
 
@@ -103,7 +104,7 @@ class ProjectsTable extends BaseFilter {
             />,
             dataIndex: 'activity_dates',
             key: 'start_date',
-            render: activityDates => <div className={classes.dates}>{activityDates[2].iso_date}</div>
+            render: activityDates => <div className={classes.dates}>{getDate(activityDates, 'start')}</div>
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'projects.table.end.date', defaultMessage: 'End date'})}
@@ -113,7 +114,7 @@ class ProjectsTable extends BaseFilter {
             />,
             dataIndex: 'activity_dates',
             key: 'end_date',
-            render: activityDates => <div className={classes.dates}>{activityDates[0].iso_date}</div>
+            render: activityDates => <div className={classes.dates}>{getDate(activityDates, 'end')}</div>
         },
     ];
 

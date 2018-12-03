@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
-import { paginate } from '../../../helpers/tableHelpers';
+import {getDate, paginate} from '../../../helpers/tableHelpers';
 import { addFilterValues } from '../../../helpers/generic';
 
 class TableProjects extends Component {
@@ -146,7 +146,8 @@ class TableProjects extends Component {
               defSortValue={'start_date'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'activity_dates[0].iso_date',
+        dataIndex: 'activity_dates',
+        render: activity_dates => <span>{getDate(activity_dates, 'start')}</span>,
         width: '10%',
       key: 'start'
     },{
@@ -158,7 +159,8 @@ class TableProjects extends Component {
               // defSortValue={'type'}
               onSort={() => console.log('we need backend functionality for this')}
               />,
-      dataIndex: 'activity_dates[2].iso_date',
+        dataIndex: 'activity_dates',
+        render: activity_dates => <span>{getDate(activity_dates, 'end')}</span>,
         width: '10%',
       key: 'end'
     },];
