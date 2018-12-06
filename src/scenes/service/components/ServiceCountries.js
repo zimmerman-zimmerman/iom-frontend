@@ -31,6 +31,27 @@ class ServiceCountries extends BaseFilter {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { dispatch, sectorId } = this.props;
+    const { params } = this.state;
+    if (prevProps.sectorId !== sectorId) {
+      if (dispatch) {
+        if (params) {
+          if (this.props.filterValues) {
+              //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+              // params works as a reference when passed in this function
+              addFilterValues(this.props.filterValues, params);
+          }
+          this.actionRequest(
+            extend({}, params, {sector: sectorId}), 'recipient_country', actions.serviceCountriesRequest
+          );
+        } else {
+          dispatch(actions.serviceCountriesInitial());
+        }
+      }
+    }
+  }
+
   render() {
     const { serviceCountries, classes } = this.props;
     const data = get(serviceCountries, 'data.results');

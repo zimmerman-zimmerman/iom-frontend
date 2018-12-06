@@ -25,17 +25,39 @@ class Service extends BaseFilter {
     const { params } = this.state;
     const id = get(this.props, 'match.params.id');
     if (dispatch && id) {
-        if(this.props.location.state){
-            //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
-            // params works as a reference when passed in this function
-            addFilterValues(this.props.location.state.filterValues, params);
-        }
+      if(this.props.location.state){
+        //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+        // params works as a reference when passed in this function
+        addFilterValues(this.props.location.state.filterValues, params);
+      }
       this.actionRequest(extend({}, params, {sector: id}), 'sector', actions.serviceRequest);
-        if(!donorGroupJson.data) {
-            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
-        }
+      if(!donorGroupJson.data) {
+        dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+      }
     } else {
       actions.serviceInitial();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { dispatch, donorGroupJson, donorGroupJsonSlug } = this.props;
+    const { params } = this.state;
+    const id = get(this.props, 'match.params.id');
+    const prevId = get(prevProps, 'match.params.id');
+    if (prevId !== id) {
+      if (dispatch && id) {
+        if(this.props.location.state){
+          //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+          // params works as a reference when passed in this function
+          // addFilterValues(this.props.location.state.filterValues, params);
+        }
+        this.actionRequest(extend({}, params, {sector: id}), 'sector', actions.serviceRequest);
+        if(!donorGroupJson.data) {
+          dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
+      } else {
+        actions.serviceInitial();
+      }
     }
   }
 
@@ -48,7 +70,7 @@ class Service extends BaseFilter {
         <Trans id='services.breadcrumb.service.detail' text='Service area detail page' />;
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/countries', text: <Trans id='main.menu.services' text='Our Service' />},
+      {url: '/services', text: <Trans id='main.menu.services' text='Our Service' />},
       {url: null, text: currentBreadTxt},
     ];
     const code = get(this.props, 'match.params.id');
@@ -68,7 +90,7 @@ class Service extends BaseFilter {
                       <ServiceProjects sectorId={sectorId} filterValues={prevFilters}/> :
                   <div className={classes.twoLists}>
                     <ServiceDonors sectorId={sectorId} filterValues={prevFilters} donorGroupJson={get(donorGroupJson, 'data.content', {})} />
-                    <ServiceProjectTypes serviceId={sectorId} />
+                    <ServiceProjectTypes serviceId={sectorId} filterValues={prevFilters} />
                   </div>
                   }
               </Col>
