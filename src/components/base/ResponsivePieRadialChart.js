@@ -3,11 +3,12 @@ import PieRadialChart from './PieRadialChart';
 import injectSheet from "react-jss";
 
 const ResponsivePieRadialChart = (props) => {
-  const { data, prefixLegend, innerRadius, linkPage, donorGroupJson, outerRadius, height, classes } = props;
+  const { data, prefixLegend, innerRadius, outerRadius, height, classes } = props;
   return (
     <div style={{height: height}} className={classes.chart}>
-      <PieRadialChart data={data} prefixLegend={prefixLegend} innerRadius={innerRadius} outerRadius={outerRadius}
-                      linkPage={linkPage} donorGroupJson={donorGroupJson}/>
+      <PieRadialChart
+          data={data} prefixLegend={prefixLegend} innerRadius={innerRadius} outerRadius={outerRadius}
+      />
     </div>
   )
 };

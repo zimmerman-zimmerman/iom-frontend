@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 import { pieRadialChart as style } from "../../helpers/style";
 
 const PieRadialChart = (props) => {
-  const {data, prefixLegend, innerRadius, outerRadius, linkPage, donorGroupJson} = props;
+  const {data, prefixLegend, innerRadius, outerRadius} = props;
   const CustomToolTip = (props) => {
     const data = get(props, 'payload[0].payload');
     return data ?
@@ -25,13 +25,6 @@ const PieRadialChart = (props) => {
           innerRadius={innerRadius}
           fill={style.fillColor}
           dataKey="value"
-          onClick={(e) => {
-            let donorExtra = '';
-            if(linkPage === '/donors') {
-              donorExtra = `${get(donorGroupJson.data.content, e.payload.id)}/`;
-            }
-            return e.payload.id !== '-' ? props.history.push(`${linkPage}/${donorExtra}${e.payload.id}`) : null;
-        }}
         >
           {data.map((entry, index) => <Cell fill={style.colors[index % style.colors.length]} key={index}/>)}
         </Pie>

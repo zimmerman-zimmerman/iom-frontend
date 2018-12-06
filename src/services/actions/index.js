@@ -1065,3 +1065,31 @@ export function sectorMappingFailed(error) {
     error: error
   }
 }
+
+export const DONUT_DATA_JSON_INITIAL = 'DONUT_DATA_JSON_INITIAL';
+export const DONUT_DATA_JSON_REQUEST = 'DONUT_DATA_JSON_REQUEST';
+export const DONUT_DATA_JSON_SUCCESS = 'DONUT_DATA_JSON_SUCCESS';
+export const DONUT_DATA_JSON_FAILED = 'DONUT_DATA_JSON_FAILED';
+export function donutDataJsonInitial() {
+    return {
+        type: DONUT_DATA_JSON_INITIAL
+    }
+}
+export function donutDataJsonRequest(slug) {
+    return {
+        type: DONUT_DATA_JSON_REQUEST,
+        slug: slug
+    }
+}
+export function donutDataJsonSuccess(data) {
+    return {
+        type: DONUT_DATA_JSON_SUCCESS,
+        data: data
+    }
+}
+export function donutDataJsonFailed(error) {
+    return {
+        type: DONUT_DATA_JSON_FAILED,
+        error: error
+    }
+}

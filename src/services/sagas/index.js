@@ -353,8 +353,18 @@ export function* sectorMappingRequest(action) {
   }
 }
 
+export function* donutDataJsonRequest(action) {
+    try {
+        const response = yield call(api.JSONContentRequest, action.slug);
+        yield put(actions.donutDataJsonSuccess(response));
+    } catch (error) {
+        yield put(actions.donutDataJsonFailed(error));
+    }
+}
+
 function* sagas() {
   yield [
+      takeLatest('DONUT_DATA_JSON_REQUEST', donutDataJsonRequest),
     takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
     takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
