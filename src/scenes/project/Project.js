@@ -28,7 +28,7 @@ class Project extends Component {
     const data = get(this.props.project, 'data', null);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
-      {url: '/countries', text: <Trans id='main.menu.projects' text='Projects' />},
+      {url: '/projects', text: <Trans id='main.menu.projects' text='Projects' />},
       {url: null, text: <Trans id='main.menu.detail' text='Detail' />},
     ];
     return(

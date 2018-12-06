@@ -13,6 +13,7 @@ import Pagination from "../../../components/Pagination/Pagination";
 import * as actions from "../../../services/actions";
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 import { genericSort, paginate } from "../../../helpers/tableHelpers";
+import {addFilterValues} from "../../../helpers/generic";
 
 class ServiceProjectTypes extends BaseFilter {
 
@@ -23,6 +24,16 @@ class ServiceProjectTypes extends BaseFilter {
         const serviceAreas = get(sectorMapping, 'data.content.serviceAreaFilter');
         const serviceProjectTypes = dacSectors[serviceId] ? dacSectors[serviceId] : serviceAreas[serviceId];
         if (dispatch) {
+            if(this.props.filterValues){
+                const filterValues = this.props.filterValues;
+                if (filterValues.participating_organisation_ref) {
+                    filterValues.participating_organisation = filterValues.participating_organisation_ref;
+                    delete filterValues['participating_organisation_ref'];
+                }
+                //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
+                // params works as a reference when passed in this function
+                addFilterValues(filterValues, params);
+            }
             params.humanitarian = 1;
             this.actionRequest({
                 ...params,
@@ -75,7 +86,7 @@ class ServiceProjectTypes extends BaseFilter {
                 />,
             dataIndex: 'sector',
             render: sector =>
-                <Link to={`/services/project-type/${sector.code}`}>{sector.name}</Link>
+                <Link to={{ pathname: `/services/project-type/${sector.code}`, state: { filterValues: this.props.filterValues }}}>{sector.name}</Link>
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'service.project.types.funding', defaultMessage: 'Total funding value'})}

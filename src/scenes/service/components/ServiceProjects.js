@@ -41,8 +41,12 @@ class ServiceProjects extends BaseFilter {
     const { params } = this.state;
     if (dispatch) {
       if (params) {
-          if(this.props.filterValues)
-          {
+          if(this.props.filterValues){
+              const filterValues = this.props.filterValues;
+              if (filterValues.participating_organisation_ref) {
+                filterValues.participating_organisation = filterValues.participating_organisation_ref;
+                delete filterValues['participating_organisation_ref'];
+              }
               //NOTE! this fucntion actually changes the states variable WITHOUT calling this.setState()
               // params works as a reference when passed in this function
               addFilterValues(this.props.filterValues, params);
