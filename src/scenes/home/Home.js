@@ -10,8 +10,8 @@ import BannerText from '../../components/base/BannerText';
 import Trans from '../../locales/Trans';
 import {size as screenSize} from "../../helpers/screen";
 import HomeDonors from './components/HomeDonors';
-import HomeSectors from './components/HomeSectors';
-import HomeFundingGoes from './components/HomeFundingGoes';
+import HomeActivities from './components/HomeActivities';
+import HomeServices from './components/HomeServices';
 import connect from "react-redux/es/connect/connect";
 import * as actions from "../../services/actions";
 
@@ -19,27 +19,52 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reload: true
+      reload: true,
+        servParams: {
+          aggregations: 'activity_count,incoming_fund,disbursement,value',
+              group_by: 'sector',
+              order_by: '-value',
+              sector: '1,2,3,4,5,6,7',
+              hierarchy: 1,
+              page_size: 5,
+              reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
+      },
     }
   }
 
   componentDidMount() {
-    const { dispatch, homeBackgroundSlug } = this.props;
+    const { dispatch, homeBackgroundSlug, donutSlug, sectorMapping } = this.props;
     if (dispatch && this.state.reload) {
+
       dispatch(actions.homeMediaContentRequest(homeBackgroundSlug));
-      this.setState({reload: false});
+        dispatch(actions.donutDataJsonRequest(donutSlug));
+
+        const servParams = this.state.servParams;
+        servParams.sector = get(sectorMapping,
+            'data.content.serviceAreaFilter.allCodes',
+            servParams.sector);
+        dispatch(actions.homeSectorsRequest(servParams));
+
+      this.setState({reload: false, servParams});
     } else {
       dispatch(actions.homeMediaContentInitial());
     }
   }
 
   render() {
-    const { homeMediaContent, simpleContentHost } = this.props;
+    const { homeMediaContent, simpleContentHost, homeService, donutData } = this.props;
+
+    const donutContent = get(donutData, 'data.content', []);
+    const donutRequest = donutData.request;
+    const serviceResults = get(homeService, 'data.results', []);
+    const serviceRequest = homeService.request;
+
     const imageBanner = homeMediaContent.success ? simpleContentHost.concat(get(homeMediaContent.data, 'image')) : null;
     const title = <Trans id="banner.title" text="Title"/>;
     const description = <Trans id="banner.description" text="Description"/>;
     const detail = <Trans id="banner.detail" text="Detail"/>;
     const bannerText = <Trans id="banner.text.text" text="Text"/>;
+
     const Banner = (props) => {
       const { height, size } = props;
       return (
@@ -52,9 +77,7 @@ class Home extends Component {
       )
     };
     return (
-      <Spin spinning={
-        this.props.homeActivities.request || this.props.homeSectors.request || this.props.homeDonors.request
-      }>
+      <Spin spinning={ homeService.request || donutData.request }>
         <Page pageName={<Trans id='main.menu.home' text='Home' />}>
           <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
             <Banner height={250} size="xs" />
@@ -68,13 +91,13 @@ class Home extends Component {
           <Grid fluid>
             <Row middle="xs">
               <Col xs={12} md={12} lg={4}>
-                <HomeDonors />
+                <HomeDonors dataResults={donutContent.Donors} request={donutRequest} />
               </Col>
               <Col xs={12} md={12} lg={4}>
-                <HomeFundingGoes />
+                <HomeServices dataResults={serviceResults} request={serviceRequest} />
               </Col>
               <Col xs={12} md={12} lg={4}>
-                <HomeSectors />
+                <HomeActivities dataResults={donutContent.Projects} request={donutRequest} />
               </Col>
             </Row>
           </Grid>
@@ -85,15 +108,16 @@ class Home extends Component {
 }
 
 Home.defaultProps = {
+  donutSlug: 'donut-data',
   homeBackgroundSlug: 'home-background',
   simpleContentHost: process.env.REACT_APP_SIMPLECONTENT_HOST
 };
 
 const mapStateToProps = (state, ) => {
   return {
-    homeDonors: state.homeDonors,
-    homeSectors: state.homeSectors,
-    homeActivities: state.homeActivities,
+      donutData: state.donutData,
+    homeService: state.homeSectors,
+      sectorMapping: state.sectorMapping,
     homeMediaContent: state.homeMediaContent
   }
 };

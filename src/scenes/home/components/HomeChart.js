@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Spin from 'antd/es/spin';
-import forEach from 'lodash/forEach';
-import get from 'lodash/get';
 import MediaQuery from 'react-responsive';
 import { injectIntl, intlShape } from 'react-intl';
 import { Row, Col } from 'react-flexbox-grid';
@@ -20,34 +18,25 @@ class HomeChart extends Component {
   resize = () => this.forceUpdate();
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize)
+    window.removeEventListener('resize', this.resize);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)
-    const { dispatch, params, request, initial } = this.props;
-    if (dispatch) {
-      if (params) {
-        dispatch(request(params));
-      } else {
-        dispatch(initial());
-      }
-    }
+    window.addEventListener('resize', this.resize);
   }
 
   render() {
-    const {
-      reducer, localeTitle, intl, idField, nameField, valueField,
-      localeButtonText, linkPage, donorGroupJson, dataResult
-    } = this.props;
-    const data = [];
-    forEach(get(reducer, dataResult), function(item){
-      data.push({
-        id: get(item, idField),
-        name: get(item, nameField),
-        value: parseFloat(get(item, valueField)),
+    const {localeTitle, intl, localeButtonText, dataResults, linkPage, request} = this.props;
+
+    let data = dataResults ? dataResults : [];
+
+      data.forEach( (item) => {
+          item.value = parseFloat(item.value);
       });
-    });
+
+      //Cause we need to show only the first five items
+      data = data.length > 5 ? data.slice(0, 5) : data;
+
     const prefixLegend = intl.formatMessage({id: 'currency.usd', defaultMessage: 'US$ '});
     const title = intl.formatMessage(localeTitle);
     const Title = (props) => {
@@ -69,8 +58,7 @@ class HomeChart extends Component {
       const desiredHeight = height / 5 + outerRadius + 120;
       return (
         <ResponsivePieRadialChart height={desiredHeight} data={data} prefixLegend={prefixLegend}
-                                  innerRadius={innerRadius} outerRadius={outerRadius} linkPage={linkPage}
-                                  donorGroupJson={donorGroupJson}
+                                  innerRadius={innerRadius} outerRadius={outerRadius}
         />
       )
     };
@@ -83,17 +71,12 @@ class HomeChart extends Component {
               itemLayout="horizontal"
               dataSource={data}
               renderItem={(item, index) => {
-                let donorExtra = '';
-                if(linkPage === '/donors' && donorGroupJson.success) {
-                  donorExtra = `${get(donorGroupJson.data.content, item.id)}/`;
-                }
                 return (
                   <List.Item>
                     <List.Item.Meta
                       avatar={<Badge dot={true} style={{ backgroundColor: pieRadialChartStyle.colors[index]}} />}
-                      title={item.id !== '-' ?
-                        <Link to={`${linkPage}/${donorExtra}${item.id}`}>{item.name}</Link> : item.name
-                      }
+                      title={item.name ? item.name :
+                          <Link to={`services/${item.sector.code}`}>{item.sector.name}</Link>}
                     />
                   </List.Item>
                 )
@@ -121,7 +104,7 @@ class HomeChart extends Component {
     };
     const StyledLinkButton = injectSheet(styles)(LinkButton);
     return (
-      <Spin spinning={reducer.request}>
+      <Spin spinning={request}>
         <StyledTitle />
         <Row middle="xs" start="xs" center="xs">
           <Col xs={12}>
