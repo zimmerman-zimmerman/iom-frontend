@@ -50,8 +50,11 @@ class DonorsTable extends BaseFilter {
             render: (participating_organisation, row, index) => {
                 const code = typeof donorGroup.code === 'string' ? donorGroup.code.toLowerCase() : donorGroup.code;
                 return (
+                    //So because filtering by participating organisation ref does not work properly,
+                    //casue there can be several donors with the same ref...
+                    //we use the donors name as the identifier, and encode it ofcourse
                     <Link to={{
-                              pathname: `/donors/${code}/${row.participating_organisation_ref}`,
+                              pathname: `/donors/${code}/${encodeURIComponent(participating_organisation)}`,
                               state: { filterValues: filters.values }
                           }}>
                         {participating_organisation}

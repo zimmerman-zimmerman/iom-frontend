@@ -44,8 +44,8 @@ class DonorGroup extends BaseFilter {
     if(donorGroup === undefined)
     {
       //So if the donorGroup is not found in the cms, that means that a donor with the specified
-      //  ref was not added to the cms, thus we redirect the user to the donors detail page
-      this.props.history.replace(`${group}/${group}`);
+      //ref was not added to the cms, thus we redirect the user to the donors detail page
+      this.props.history.replace(`no-donor-group/${group}`);
     }
     else if (donorGroup && actionRequest){
       this.actionRequest(

@@ -44,7 +44,11 @@ class DonorsTable extends BaseFilter {
             key: 'participating_organisation',
             width: '55%',
             render: (participating_organisation, row, index) => {
-                const code = typeof row.code === 'string' ? row.code.toLowerCase() : row.code;
+                let code = typeof row.code === 'string' ? row.code.toLowerCase() : row.code;
+                //so if the code is false, that means that this si a donor without a group
+                //and because we filter donor projects by their name, we put this name as
+                //the code in the url
+                code = code ? code : encodeURIComponent(participating_organisation);
                 return (
                     <Link to={{
                               pathname: `/donors/${code}`,
