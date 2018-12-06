@@ -135,6 +135,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "brotli-gzip-webpack-plugin": "^0.5.0",
     "compression-webpack-plugin": "^1.1.11",
     "less": "2.7.2",
     "less-loader": "^4.1.0",
