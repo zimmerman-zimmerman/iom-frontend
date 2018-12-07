@@ -68,9 +68,10 @@ class ProjectsTable extends BaseFilter {
                 />,
             dataIndex: 'participating_organisations[0]',
             render: obj => {
-                let donorExtra = `${get(donorGroupJson, `data.content.${obj.ref}`)}/`;
+                let donorExtra = get(donorGroupJson, 'data.content.'+obj.ref);
+                donorExtra = donorExtra ? `${donorExtra}/` : '';
                 return (
-                    <Link to={`/donors/${donorExtra}${obj.ref}`}>
+                    <Link to={`/donors/${donorExtra}${obj.narratives[0].text}`}>
                         {obj.narratives[0].text}
                     </Link>
                 )

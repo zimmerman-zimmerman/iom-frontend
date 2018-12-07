@@ -41,9 +41,10 @@ class TableDonors extends React.Component {
             key: 'participating_organisation',
             width: '60%',
             render: (obj) => {
-                let donorExtra = `${get(donorGroupJson, obj.participating_organisation_ref)}/`;
+                let donorExtra = get(donorGroupJson, obj.participating_organisation_ref);
+                donorExtra = donorExtra ? `${donorExtra}/` : '';
                 return (
-                    <Link to={`/donors/${donorExtra}${obj.participating_organisation_ref}`}>
+                    <Link to={`/donors/${donorExtra}${obj.participating_organisation}`}>
                         {obj.participating_organisation}
                     </Link>   
                 )

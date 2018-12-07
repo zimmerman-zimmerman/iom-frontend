@@ -8,9 +8,11 @@ export function formatSectors(sectors, code) {
 
     if(sector.vocabulary.code === code)
     {
+      const url = code === '99' ? `/services/project-type/${sector.sector.code}` :
+          `/services/${sector.sector.code}`;
       dacSectors.push({
         name: sector.sector.name,
-        url: `/services/${sector.sector.code}`
+        url,
       });
     }
   });

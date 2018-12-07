@@ -100,7 +100,8 @@ class ProjectLocation extends Component {
         ? <Trans id='project.location.humanitarian' text='Humanitarian' />
         : <Trans id='project.location.development' text='Development' />;
 
-      const donorExtra = `${get(donorGroupJson, get(data, 'participating_organisations[0].ref', ''))}/`;
+      let donorExtra = get(donorGroupJson, get(data, 'participating_organisations[0].ref'));
+      donorExtra = donorExtra ? `${donorExtra}/` : '';
 
       const fields = [{
             title: {id: "project.location.title", defaultMessage: "Project Location"},
@@ -119,7 +120,7 @@ class ProjectLocation extends Component {
                 },
                 {
                     name: {id: "project.location.fields.funding", defaultMessage: "Funding donor:"},
-                    value: <Link to={`/donors/${donorExtra}${get(data, 'participating_organisations[0].ref','')}`}>{get(data, 'participating_organisations[0].narratives[0].text','-')}</Link>
+                    value: <Link to={`/donors/${donorExtra}${get(data, 'participating_organisations[0].primary_name','')}`}>{get(data, 'participating_organisations[0].primary_name','-')}</Link>
                 },
                 {
                     name: {id: "project.location.fields.donor.type", defaultMessage: "Donor type:"},
