@@ -45,9 +45,10 @@ class Donors extends BaseFilter {
         const group = get(donorsGroupsJson.data.content, code);
 
         let donorGroup = find(dataGroup, {code: code});
-        if (!donorGroup) {
+
+        if (!donorGroup || !group) {
           donorGroup = {
-            code: code,
+            code: group ? code : false,
             name: group ? group.name : donor.participating_organisation,
             value: donor.value,
             project: donor.activity_count,
@@ -70,6 +71,7 @@ class Donors extends BaseFilter {
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
       {url: null, text: <Trans id='main.menu.donors' text='Donors' />},
     ];
+
     return (
       <Spin spinning={donors.request}>
         <Page breadcrumbItems={breadcrumbItems}>

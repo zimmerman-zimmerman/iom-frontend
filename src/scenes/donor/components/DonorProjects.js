@@ -26,7 +26,7 @@ class DonorProjects extends Component {
         fields: 'id,title,iati_identifier,activity_dates,activity_status,sectors,' +
         'participating_organisations,aggregations',
         convert_to: 'usd',
-        participating_organisation: props.code.toUpperCase(),
+        participating_organisation_name: props.code,
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
         page_size: 300,
         ordering: '-rawEndDate',

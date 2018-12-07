@@ -19,7 +19,7 @@ class Donor extends BaseFilter {
     const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
       this.actionRequest(
-        extend({}, params, {participating_organisation_ref: code.toUpperCase()}),
+        extend({}, params, {participating_organisation_name: decodeURIComponent(code)}),
         'participating_organisation',
         actions.donorRequest
       );
@@ -34,7 +34,7 @@ class Donor extends BaseFilter {
     const { classes, donorsGroupsJson } = this.props;
     const group = get(this.props, 'match.params.group', '');
     const donorGroup = donorsGroupsJson.success ? get(donorsGroupsJson.data.content, group.toUpperCase()) : null;
-    const code = get(this.props, 'match.params.code');
+    const code = decodeURIComponent(get(this.props, 'match.params.code'));
     const data = get(this.props, 'donor.data.results[0]');
     let breadcrumbItems =  donorsGroupsJson.success ? [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
