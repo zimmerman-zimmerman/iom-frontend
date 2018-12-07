@@ -18,7 +18,6 @@ export function combineData(human, nonHuman) {
           for (let j = 0; j < nonHuman.length; j++) {
             let nonHumanItem = nonHuman[j];
             if (humanItem.sector.code === nonHumanItem.sector.code) {
-              console.log(nonHumanItem)
               let item = humanItem;
               item.name = item.sector.name;
               item.code = item.sector.code;
