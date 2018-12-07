@@ -22,7 +22,7 @@ const CustomToolTip = props => {
     <Card title={get(props, 'label', '')}>
       <Content>
         <h5 className={props.classes.tooltipHuman}>
-          Humanitarian: <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.value)}
+          Humanitarian: <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.humanValue)}
         </h5>
         <h5 className={props.classes.tooltipNonhuman}>        
           Non-humanitarian: <Trans id="currency.usd" defaultMessage="US$ "/> {format(",.0f")(data.nonHumanValue)}
@@ -80,7 +80,7 @@ class ServicesCharts extends Component {
                     payload={[{ value: 'Humanitarian', type: 'rect', id: 'a', color: '#418fde'},
                         { value: 'Non-humanitarian', type: 'rect', id: 'a', color: '#1f4283' },]}
                     content={<BarChartLegend/>}/>
-            <Bar dataKey="value" stackId='a' fill="#418fde"/>
+            <Bar dataKey="humanValue" stackId='a' fill="#418fde"/>
             <Bar dataKey="nonHumanValue" stackId='a' fill="#1f4283"/>
           </BarChart>
           : <div></div>

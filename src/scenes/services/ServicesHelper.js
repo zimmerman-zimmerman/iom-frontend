@@ -4,8 +4,7 @@
 export function combineData(human, nonHuman) {
     const data = [];
 
-    if(human)
-    {
+    if (human) {
       //We are using simple for loops here, cause the are
       //one of the loops from which we can break out
       //its not possible to do it with .map or .forEach
@@ -13,42 +12,52 @@ export function combineData(human, nonHuman) {
 
       //So here we first map out the nonHuman values into the main data array
       //according to the length and values of the human array
-      for(let i = 0; i < human.length; i++){
+      for (let i = 0; i < human.length; i++) {
         let humanItem = human[i];
-        if(nonHuman && nonHuman.length > 0)
-        {
-          for(let j = 0; j < nonHuman.length; j++){
+        if (nonHuman && nonHuman.length > 0) {
+          for (let j = 0; j < nonHuman.length; j++) {
             let nonHumanItem = nonHuman[j];
-            if(humanItem.sector.code === nonHumanItem.sector.code){
+            if (humanItem.sector.code === nonHumanItem.sector.code) {
+              console.log(nonHumanItem)
               let item = humanItem;
               item.name = item.sector.name;
               item.code = item.sector.code;
-              item.activity_count = humanItem.activity_count + nonHumanItem.activity_count;
+              item.totalActivityCount = humanItem.activity_count + nonHumanItem.activity_count;
+              item.humanValue = item.value;
               item.nonHumanValue = nonHumanItem.value;
               data.push(item);
               //So if a human and nonhuman data association is found we give the nonHuman item
               //the foundHUman and set it to true.
               nonHuman[j].foundHuman = true;
               break;
-            }else if(j === nonHuman.length-1)
-            {//SO here, if a human and nonHUman association has not been found
+            } else if (j === nonHuman.length-1) {
+              //SO here, if a human and nonHUman association has not been found
               //  We just add the human item to an array, and set the nonHumanValue to zero
               let item = humanItem;
               item.name = item.sector.name;
               item.code = item.sector.code;
+              item.totalActivityCount = item.activity_count;
+              item.humanValue = item.value;
               item.nonHumanValue = 0;
               data.push(item);
             }
           }
-        }else
-        {
+        } else {
           let item = humanItem;
           item.name = item.sector.name;
           item.code = item.sector.code;
+          item.totalActivityCount = item.activity_count;
+          item.humanValue = item.value;
           item.nonHumanValue = 0;
           data.push(item);
         }
       }
+
+      //Here we just add the human and nonHuman values to the variable 'totalValue'
+      //Cause some places requires a combined number of these two
+      data.forEach(item => {
+        item.totalValue = item.nonHumanValue + item.value;
+      });
 
       //And here we make a final addition to the array
       //THis does a final check to see if we have some nonHUman values that have NOT found a human association :D
@@ -60,22 +69,18 @@ export function combineData(human, nonHuman) {
       //HAHAHAHAHAHAHA
       //Im so funny
       nonHuman && nonHuman.forEach(nonHumanItem => {
-        if(!nonHumanItem.foundHuman){
+        if(!nonHumanItem.foundHuman) {
           let item = nonHumanItem;
           item.name = item.sector.name;
           item.code = item.sector.code;
+          item.humanValue = 0;
           item.nonHumanValue = nonHumanItem.value;
-          item.value = 0;
+          item.totalValue = nonHumanItem.value;
+          item.totalActivityCount = item.activity_count;
           data.push(item);
         }
       });
     }
-
-    //Here we just add the human and nonHuman values to the variable 'totalValue'
-    //Cause some places requires a combined number of these two
-    data.forEach(item => {
-        item.totalValue = item.nonHumanValue + item.value;
-    });
 
     return data;
 }

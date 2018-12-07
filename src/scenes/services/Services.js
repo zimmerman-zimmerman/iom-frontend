@@ -61,10 +61,10 @@ class Services extends BaseFilter {
   render() {
     const { servicesTableSortBy } = this.state;
     const { humanServices, classes, nonHumanServices } = this.props;
-    const humanData = this.filter(get(humanServices, 'data'));
-    const nonHumanData = this.filter(get(nonHumanServices, 'data'));
+    const humanData = get(humanServices, 'data.results', []);
+    const nonHumanData = get(nonHumanServices, 'data.results', []);
 
-    let data = combineData(humanData, nonHumanData);
+    let data = this.filter({ results: combineData(humanData, nonHumanData) }, 'totalValue');
     data = genericSort(data, servicesTableSortBy);
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},

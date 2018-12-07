@@ -71,11 +71,11 @@ class ServicesTable extends BaseFilter {
       title: <SortHeader
               title={intl.formatMessage({id: 'services.table.header.projects', defaultMessage: 'Implementation Projects'})}
               sortValue={servicesTableSortBy}
-              defSortValue={'activity_count'}
+              defSortValue={'totalActivityCount'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'activity_count',
-      key: 'activity_count',
+      dataIndex: 'totalActivityCount',
+      key: 'totalActivityCount',
     },];
     return (
       <Table dataSource={this.addKey(data)} columns={columns} size="middle"
