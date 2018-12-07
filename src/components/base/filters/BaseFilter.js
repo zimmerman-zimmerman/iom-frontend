@@ -30,11 +30,11 @@ class BaseFilter extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  filter(data) {
+  filter(data, valueKey = 'value') {
     let dataSource = get(data, 'results');
     if (this.state.dataRange.length > 0 && dataSource) {
       return dataSource.filter(
-        d => (d.value >= this.state.dataRange[0] &&  d.value <= this.state.dataRange[1])
+        d => (d[valueKey] >= this.state.dataRange[0] &&  d[valueKey] <= this.state.dataRange[1])
       );
     }
     return dataSource;
