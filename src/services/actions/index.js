@@ -1093,3 +1093,60 @@ export function donutDataJsonFailed(error) {
         error: error
     }
 }
+
+export const SECTORS_DESC_JSON_INITIAL = 'SECTORS_DESC_JSON_INITIAL';
+export const SECTORS_DESC_JSON_REQUEST = 'SECTORS_DESC_JSON_REQUEST';
+export const SECTORS_DESC_JSON_SUCCESS = 'SECTORS_DESC_JSON_SUCCESS';
+export const SECTORS_DESC_JSON_FAILED = 'SECTORS_DESC_JSON_FAILED';
+export function sectorsDescJsonInitial() {
+    return {
+        type: SECTORS_DESC_JSON_INITIAL
+    }
+}
+export function sectorsDescJsonRequest(slug) {
+    return {
+        type: SECTORS_DESC_JSON_REQUEST,
+        slug: slug
+    }
+}
+export function sectorsDescJsonSuccess(data) {
+    return {
+        type: SECTORS_DESC_JSON_SUCCESS,
+        data: data
+    }
+}
+export function sectorsDescJsonFailed(error) {
+    return {
+        type: SECTORS_DESC_JSON_FAILED,
+        error: error
+    }
+}
+
+
+export const COUNTRIES_DESC_JSON_INITIAL = 'COUNTRIES_DESC_JSON_INITIAL';
+export const COUNTRIES_DESC_JSON_REQUEST = 'COUNTRIES_DESC_JSON_REQUEST';
+export const COUNTRIES_DESC_JSON_SUCCESS = 'COUNTRIES_DESC_JSON_SUCCESS';
+export const COUNTRIES_DESC_JSON_FAILED = 'COUNTRIES_DESC_JSON_FAILED';
+export function countriesDescJsonInitial() {
+    return {
+        type: COUNTRIES_DESC_JSON_INITIAL
+    }
+}
+export function countriesDescJsonRequest(slug) {
+    return {
+        type: COUNTRIES_DESC_JSON_REQUEST,
+        slug: slug
+    }
+}
+export function countriesDescJsonSuccess(data) {
+    return {
+        type: COUNTRIES_DESC_JSON_SUCCESS,
+        data: data
+    }
+}
+export function countriesDescJsonFailed(error) {
+    return {
+        type: COUNTRIES_DESC_JSON_FAILED,
+        error: error
+    }
+}

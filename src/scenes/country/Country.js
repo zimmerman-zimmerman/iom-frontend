@@ -17,13 +17,12 @@ import Trans from '../../locales/Trans';
 import ContactProject from './components/ContactProject';
 import SectorsMap from './components/SectorsMap';
 import { pageContainer } from '../../helpers/style';
-import CountriesJSON from '../../services/data/countries.json';
 import GeoMap from '../../components/maps/GeoMap';
 import { addFilterValues, formatMapData } from '../../helpers/generic';
 
 class Country extends BaseFilter {
   componentDidMount() {
-    const { dispatch, donorGroupJsonSlug, donorGroupJson } = this.props;
+    const { dispatch, donorGroupJsonSlug, donorGroupJson, countriesDescSlug, countriesDesc } = this.props;
     const { params } = this.state;
     const code = get(this.props, 'match.params.code');
     if (dispatch && code) {
@@ -55,8 +54,12 @@ class Country extends BaseFilter {
               'participating_organisation',
               actions.countryDonorsRequest
           );
+
         if(!donorGroupJson.data) {
             dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
+        if(!countriesDesc.data){
+            dispatch(actions.countriesDescJsonRequest(countriesDescSlug));
         }
       } else {
         dispatch(actions.countryInitial());
@@ -84,15 +87,18 @@ class Country extends BaseFilter {
   }
 
   render() {
-    const { country, countryDonors, countryActivities, countrySectors, classes, project, countryMappingJson, donorGroupJson } = this.props;
+    const { country, countryDonors, countryActivities, countrySectors, classes, project,
+        countryMappingJson, donorGroupJson, countriesDesc } = this.props;
     const countryResult = get(this.props, 'country.data.results[0]');
     const donors = get(this.props, 'countryDonors.data.results');
     const sectors = get(this.props, 'countrySectors.data.results', []);
     const firstProject = get(countryActivities, 'data.results[0]');
     const code = get(this.props, 'match.params.code');
-    const countryJSON = find(CountriesJSON, {'code': code.toUpperCase()});
+
+    const countriesDescz = get(countriesDesc, 'data.content', []);
+    const countryJSON = find(countriesDescz, {'code': code.toUpperCase()});
     if (countryResult) {
-      countryResult.recipient_country['description'] = countryJSON ? countryJSON['description'] : null;
+      countryResult.recipient_country['description'] = get(countryJSON, 'description', null);
     }
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -169,11 +175,13 @@ const mapStateToProps = (state, ) => {
     project: state.project,
     countryMappingJson: state.countryMappingJson,
     donorGroupJson: state.donorGroupJson,
+      countriesDesc: state.countriesDesc,
   }
 };
 
 Country.defaultProps = {
     donorGroupJsonSlug: 'donor-group-json',
+    countriesDescSlug: 'countries-descriptions',
 };
 
 

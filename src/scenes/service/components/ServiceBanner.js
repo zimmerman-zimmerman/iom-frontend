@@ -11,7 +11,7 @@ import Trans from '../../../locales/Trans';
 
 class ServiceBanner extends Component {
   render() {
-    const { data, classes, projectType } = this.props;
+    const { data, classes, projectType, description } = this.props;
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     const Line = (props) => {
       return (
@@ -93,7 +93,7 @@ class ServiceBanner extends Component {
             </Menu.Item>
           </Menu>
           <div className="description">
-            {this.props.description}
+            {description ? description : <Trans id="sector.not.found" defaultMessage="Not Found on Site"/>}
           </div>
         </Col>
         <Col xs={12} md={6} lg={6}  className="right">

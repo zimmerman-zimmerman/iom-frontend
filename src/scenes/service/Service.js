@@ -15,13 +15,13 @@ import ServiceDonors from './components/ServiceDonors';
 import ServiceProjects from './components/ServiceProjects';
 import ServiceProjectTypes from './components/ServiceProjectTypes';
 import ServiceCountries from './components/ServiceCountries';
-import ServicesJSON from '../../services/data/services';
 import find from 'lodash/find';
 import { addFilterValues } from '../../helpers/generic';
 
 class Service extends BaseFilter {
+
   componentDidMount() {
-    const { dispatch, donorGroupJson, donorGroupJsonSlug } = this.props;
+    const { dispatch, donorGroupJson, donorGroupJsonSlug, sectorsDescSlug, sectorsDesc } = this.props;
     const { params } = this.state;
     const id = get(this.props, 'match.params.id');
     if (dispatch && id) {
@@ -34,6 +34,12 @@ class Service extends BaseFilter {
       if(!donorGroupJson.data) {
         dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
       }
+        if(!donorGroupJson.data) {
+            dispatch(actions.donorGroupJsonRequest(donorGroupJsonSlug));
+        }
+        if(!sectorsDesc.data){
+            dispatch(actions.sectorsDescJsonRequest(sectorsDescSlug));
+        }
     } else {
       actions.serviceInitial();
     }
@@ -62,7 +68,7 @@ class Service extends BaseFilter {
   }
 
   render() {
-    const { service, serviceProjects, classes, donorGroupJson, match } = this.props;
+    const { service, serviceProjects, classes, donorGroupJson, match, sectorsDesc } = this.props;
     const sectorId = get(this.props, 'match.params.id');
     const data = get(service, 'data.results[0]');
     const currentBreadTxt = this.props.match.url.indexOf('project-type') !== -1 ?
@@ -74,13 +80,14 @@ class Service extends BaseFilter {
       {url: null, text: currentBreadTxt},
     ];
     const code = get(this.props, 'match.params.id');
-    const serviceJSON = find(ServicesJSON, {'code': code.toUpperCase()});
+    const sectorsDescz = get(sectorsDesc, 'data.content', []);
+    const serviceJSON = find(sectorsDescz, {'code': code.toUpperCase()});
     const prevFilters = this.props.location.state ? this.props.location.state.filterValues : false;
     return (
       <Spin spinning={service.request || serviceProjects.request}>
         <Page breadcrumbItems={breadcrumbItems}>
           {data ? <ServiceBanner projectType={this.props.match.url.indexOf('project-type') !== -1}
-                                 description={serviceJSON['description']}
+                                 description={get(serviceJSON, 'description', null)}
                                  data={get(service, 'data.results[0]')}/> : null}
           <Grid className={classes.service} fluid>
             <Row xs={12} lg={6}>
@@ -112,11 +119,13 @@ const mapStateToProps = (state, ) => {
     service: state.service,
     donorGroupJson: state.donorGroupJson,
     serviceProjects: state.serviceProjects,
+      sectorsDesc: state.sectorsDesc,
   }
 };
 
 Service.defaultProps = {
     donorGroupJsonSlug: 'donor-group-json',
+    sectorsDescSlug: 'sectors-descriptions',
 };
 
 
