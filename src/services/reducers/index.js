@@ -147,13 +147,25 @@ import {
     DONUT_DATA_JSON_INITIAL,
     DONUT_DATA_JSON_REQUEST,
     DONUT_DATA_JSON_SUCCESS,
-    DONUT_DATA_JSON_FAILED
+    DONUT_DATA_JSON_FAILED,
+    COUNTRIES_DESC_JSON_INITIAL,
+    COUNTRIES_DESC_JSON_REQUEST,
+    COUNTRIES_DESC_JSON_SUCCESS,
+    COUNTRIES_DESC_JSON_FAILED
 } from '../actions/index';
 import {
     ABOUT_MEDIA_CONTENT_FAILED,
-    ABOUT_MEDIA_CONTENT_INITIAL, ABOUT_MEDIA_CONTENT_REQUEST, ABOUT_MEDIA_CONTENT_SUCCESS,
-    NON_HUMAN_SERVICES_FAILED, NON_HUMAN_SERVICES_INITIAL, NON_HUMAN_SERVICES_REQUEST,
-    NON_HUMAN_SERVICES_SUCCESS
+    ABOUT_MEDIA_CONTENT_INITIAL,
+    ABOUT_MEDIA_CONTENT_REQUEST,
+    ABOUT_MEDIA_CONTENT_SUCCESS,
+    NON_HUMAN_SERVICES_FAILED,
+    NON_HUMAN_SERVICES_INITIAL,
+    NON_HUMAN_SERVICES_REQUEST,
+    NON_HUMAN_SERVICES_SUCCESS,
+    SECTORS_DESC_JSON_FAILED,
+    SECTORS_DESC_JSON_INITIAL,
+    SECTORS_DESC_JSON_REQUEST,
+    SECTORS_DESC_JSON_SUCCESS
 } from "../actions";
 
 const initial = {
@@ -809,7 +821,40 @@ function donutData(state=initial, action) {
     }
 }
 
+function sectorsDesc(state=initial, action) {
+    switch (action.type) {
+        case SECTORS_DESC_JSON_INITIAL:
+            return updateInitial(state, action);
+        case SECTORS_DESC_JSON_REQUEST:
+            return updateRequest(state, action);
+        case SECTORS_DESC_JSON_SUCCESS:
+            return updateSuccess(state, action);
+        case SECTORS_DESC_JSON_FAILED:
+            return updateFailed(state, action);
+        default:
+            return state;
+    }
+}
+
+function countriesDesc(state=initial, action) {
+    switch (action.type) {
+        case COUNTRIES_DESC_JSON_INITIAL:
+            return updateInitial(state, action);
+        case COUNTRIES_DESC_JSON_REQUEST:
+            return updateRequest(state, action);
+        case COUNTRIES_DESC_JSON_SUCCESS:
+            return updateSuccess(state, action);
+        case COUNTRIES_DESC_JSON_FAILED:
+            return updateFailed(state, action);
+        default:
+            return state;
+    }
+}
+
+
 const reducers = {
+    countriesDesc,
+    sectorsDesc,
     donutData,
   aboutMediaContent,
   projectTransactions,

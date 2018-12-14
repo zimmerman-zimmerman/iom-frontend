@@ -362,8 +362,29 @@ export function* donutDataJsonRequest(action) {
     }
 }
 
+export function* sectorsDescJsonRequest(action) {
+    try {
+        const response = yield call(api.JSONContentRequest, action.slug);
+        yield put(actions.sectorsDescJsonSuccess(response));
+    } catch (error) {
+        yield put(actions.sectorsDescJsonFailed(error));
+    }
+}
+
+export function* countriesDescJsonRequest(action) {
+    try {
+        const response = yield call(api.JSONContentRequest, action.slug);
+        yield put(actions.countriesDescJsonSuccess(response));
+    } catch (error) {
+        yield put(actions.countriesDescJsonFailed(error));
+    }
+}
+
+
 function* sagas() {
   yield [
+      takeLatest('COUNTRIES_DESC_JSON_REQUEST', countriesDescJsonRequest),
+      takeLatest('SECTORS_DESC_JSON_REQUEST', sectorsDescJsonRequest),
       takeLatest('DONUT_DATA_JSON_REQUEST', donutDataJsonRequest),
     takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
