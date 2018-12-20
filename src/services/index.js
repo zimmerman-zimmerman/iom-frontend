@@ -53,7 +53,7 @@ export function activityRequest(id) {
 }
 
 export function activitiesRequest(values) {
-  return handleRequest(hostURL('/api/activities/'), formatJSON(values), 'get');
+  return handleRequest(hostURL('/iom/activity-list/'), formatJSON(values), 'get');
 }
 
 export function transactionsAggregationsRequest(values) {

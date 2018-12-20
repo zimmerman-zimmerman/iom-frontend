@@ -19,7 +19,7 @@ class TableProjects extends Component {
     this.state = {
       params: {
         fields: 'id,title,iati_identifier,activity_dates,activity_status,sectors,' +
-        'participating_organisations,aggregations',
+        'participating_organisations,aggregations,projecttype',
         convert_to: 'usd',
         recipient_country: props.countryCode.toUpperCase(),
         page_size: 50,
@@ -78,8 +78,8 @@ class TableProjects extends Component {
       title: <SortHeader
               title={intl.formatMessage({id: 'country.table.projects.header.donors', defaultMessage: 'Donors'})}
               sortValue={this.state.params.ordering}
-              // defSortValue={'title'}
-              onSort={() => console.log('we need backend functionality for this')}
+              defSortValue={'participating_organisations__primary_name'}
+              onSort={this.handleChange}
             />,
       key: 'donors',
         width: '15%',
@@ -95,8 +95,8 @@ class TableProjects extends Component {
       title: <SortHeader
               title={intl.formatMessage({id: 'country.table.projects.header.title', defaultMessage: 'Project Title'})}
               sortValue={this.state.params.ordering}
-              // defSortValue={'title'}
-              onSort={() => console.log('we need backend functionality for this')}
+              defSortValue={'title'}
+              onSort={this.handleChange}
               />,
       key: 'title',
       width: '26%',
@@ -118,8 +118,8 @@ class TableProjects extends Component {
       title: <SortHeader
               title={intl.formatMessage({id: 'country.table.projects.header.status', defaultMessage: 'Project status'})}
               sortValue={this.state.params.ordering}
-              // defSortValue={'status'}
-              onSort={() => console.log('we need backend functionality for this')}
+              defSortValue={'activity_status'}
+              onSort={this.handleChange}
               />,
       dataIndex: 'activity_status.name',
         width: '12%',
@@ -130,13 +130,14 @@ class TableProjects extends Component {
               id: 'country.table.projects.header.type', defaultMessage: 'Sector by IOM project type'
           })}
           sortValue={this.state.params.ordering}
-          // defSortValue={'type'}
-          onSort={() => console.log('we need backend functionality for this')}
+          defSortValue={'projecttype__sector__name'}
+          onSort={this.handleChange}
       />,
+        dataIndex: 'projecttype',
       key: 'type',
         width: '15%',
-      render: obj =>
-        <Link to={`/services/${obj.sectors[0].sector.code}`}>{obj.sectors[0].sector.name}</Link>
+      render: projecttype =>
+          <Link to={`/services/project-type/${get(projecttype, 'code', '')}`}>{get(projecttype, 'name', '')}</Link>,
     },{
       title: <SortHeader
               title={intl.formatMessage({
@@ -156,8 +157,8 @@ class TableProjects extends Component {
                   id: 'country.table.projects.header.end', defaultMessage: 'End date'
               })}
               sortValue={this.state.params.ordering}
-              // defSortValue={'type'}
-              onSort={() => console.log('we need backend functionality for this')}
+              defSortValue={'end_date'}
+              onSort={this.handleChange}
               />,
         dataIndex: 'activity_dates',
         render: activity_dates => <span>{getDate(activity_dates, 'end')}</span>,

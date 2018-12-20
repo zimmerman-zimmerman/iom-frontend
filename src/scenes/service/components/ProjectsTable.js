@@ -63,8 +63,8 @@ class ProjectsTable extends BaseFilter {
                 <SortHeader
                     title={intl.formatMessage({id: 'service.projects.header.donor', defaultMessage: 'Donor'})}
                     sortValue={selectedSortBy}
-                    // defSortValue={'donor'}
-                    onSort={() => console.log('We need backend sorting functionality for this')}
+                    defSortValue={'participating_organisations__primary_name'}
+                    onSort={handleSortBy}
                 />,
             dataIndex: 'participating_organisations[0]',
             render: obj => {
