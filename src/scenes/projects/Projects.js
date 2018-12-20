@@ -24,7 +24,7 @@ class Projects extends BaseFilter {
     super(props);
     this.state = {
       params: {
-        fields: 'id,iati_identifier,title,activity_dates,budgets,recipient_countries,sectors',
+        fields: 'id,iati_identifier,title,activity_dates,budgets,recipient_countries,sectors,projecttype',
         order_by: '-id',
         reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER,
           ordering: '-activity_budget_value',

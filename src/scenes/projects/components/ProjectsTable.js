@@ -89,14 +89,14 @@ class ProjectsTable extends BaseFilter {
       title: <SortHeader
               title={intl.formatMessage({id: 'projects.table.sector', defaultMessage: 'Sector by IOM project type'})}
               sortValue={filters.values.ordering}
-              // defSortValue={'sectors'}
-              onSort={() => console.log('we need backend functionality for this')}
+              defSortValue={'projecttype__sector__name'}
+              onSort={this.handleChange}
               />,
-      dataIndex: 'sectors',
-      key: 'sectors',
+      dataIndex: 'projecttype',
+      key: 'projecttype',
       width: '25%',
-      render: sectors =>
-        <Link to={`/services/${sectors[0].sector.code}`}>{get(sectors, '[0].sector.name')}</Link>,
+      render: projecttype =>
+        <Link to={`/services/project-type/${get(projecttype, 'code', '')}`}>{get(projecttype, 'name', '')}</Link>,
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'projects.table.country', defaultMessage: 'Country'})}
