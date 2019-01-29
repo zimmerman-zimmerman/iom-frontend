@@ -20,7 +20,7 @@ function handleResponse(response) {
 function handleRequest(url, values=null, method='post') {
   let request = {
     method: method,
-    mode: 'no-cors',
+    mode: 'cors',
   };
   if (values) {
     if (method === 'post') {
