@@ -19,7 +19,8 @@ function handleResponse(response) {
 
 function handleRequest(url, values=null, method='post') {
   let request = {
-    method: method
+    method: method,
+    mode: 'no-cors',
   };
   if (values) {
     if (method === 'post') {
