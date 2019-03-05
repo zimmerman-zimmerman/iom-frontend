@@ -12,7 +12,7 @@ import Trans from '../../../locales/Trans';
 import SortHeader from "../../../components/SortHeader/SortHeader";
 import Pagination from "../../../components/Pagination/Pagination";
 import * as actions from "../../../services/actions";
-import {getDate} from "../../../helpers/tableHelpers";
+import {getDate, getProjectTitle} from "../../../helpers/tableHelpers";
 
 class ProjectsTable extends BaseFilter {
 
@@ -57,7 +57,7 @@ class ProjectsTable extends BaseFilter {
           />,
       key: 'title.narratives[0].text',
       render: obj =>
-        <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
+        <Link to={`/projects/${obj.id}`}>{getProjectTitle(obj.title.narratives)}</Link>
     },
         {title:
                 <SortHeader
@@ -68,13 +68,24 @@ class ProjectsTable extends BaseFilter {
                 />,
             dataIndex: 'participating_organisations[0]',
             render: obj => {
-                let donorExtra = get(donorGroupJson, 'data.content.'+obj.ref);
-                donorExtra = donorExtra ? `${donorExtra}/` : '';
-                return (
-                    <Link to={`/donors/${donorExtra}${obj.narratives[0].text}`}>
-                        {obj.narratives[0].text}
-                    </Link>
-                )
+                if(obj)
+                {
+                    let donorExtra = get(donorGroupJson, 'data.content.'+obj.ref);
+                    donorExtra = donorExtra ? `${donorExtra}/` : '';
+                    return (
+                        <Link to={`/donors/${donorExtra}${obj.narratives[0].text}`}>
+                            {obj.narratives[0].text}
+                        </Link>
+                    )
+                }else
+                {
+                    return (
+                        <Link to={`#`}>
+                            -
+                        </Link>
+                    )
+                }
+
             }
         },
         {title: <SortHeader
