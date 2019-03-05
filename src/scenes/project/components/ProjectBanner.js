@@ -8,6 +8,7 @@ import injectSheet from 'react-jss';
 import ReactTooltip from 'react-tooltip';
 
 import Trans from '../../../locales/Trans';
+import {getProjectTitle} from "../../../helpers/tableHelpers";
 
 const ProjectBanner= (props) => {
   const { data, classes, key } = props;
@@ -21,6 +22,7 @@ const ProjectBanner= (props) => {
       </Row>
     )
   };
+
   const RightColumn = () => {
     const lines = [
       [
@@ -71,10 +73,12 @@ const ProjectBanner= (props) => {
       </Row>
     )
   };
+
+  const titleNarritives = get(data, 'title.narratives', []);
   return (
     <Row className={classes.projectBanner}>
       <Col xs={12} md={6} lg={6} className="left">
-        <span className="title">{get(data, 'title.narratives[0].text', 'Title')}</span>
+        <span className="title">{getProjectTitle(titleNarritives)}</span>
         <Menu className="menu" selectedKeys={['overview']} mode="horizontal">
           <Menu.Item key="overview">
             <Icon type="appstore"/>
