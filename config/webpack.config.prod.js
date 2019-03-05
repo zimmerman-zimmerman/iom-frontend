@@ -22,6 +22,8 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -476,13 +478,6 @@ module.exports = {
           minRatio: 0.8,
           quality: 11
       }),
-      new BrotliGzipPlugin({
-          asset: '[path].gz[query]',
-          algorithm: 'gzip',
-          test: /\.(js|json|css|html|svg)$/,
-          threshold: 10240,
-          minRatio: 0.8
-      }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
@@ -540,6 +535,7 @@ module.exports = {
         silent: true,
         formatter: typescriptFormatter,
       }),
+      new BundleAnalyzerPlugin()
   ].filter(Boolean),
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

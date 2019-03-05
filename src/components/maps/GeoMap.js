@@ -13,7 +13,7 @@ import GeoJsonUpdatable from "./GeoJsonUpdatable";
 import { injectIntl, intlShape } from "react-intl";
 import { json as requestJson } from 'd3-request';
 import isEqual from 'lodash/isEqual';
-
+import mapBorderData from './data/detailed_country_borders';
 import '../../styles/GeoMap.scss';
 import * as genericActions from "../../services/actions/generic";
 import {connect} from "react-redux";
@@ -139,14 +139,9 @@ class GeoMap extends Component {
   }
 
   componentDidMount() {
-    //We load that country border data here
-      requestJson('/map/detailed_country_borders.json', (error, response) => {
-          if (!error) {
-            this.setState({
-                namedGeoJson: response,
-            }, this.initializeLayers);
-          }
-      });
+      this.setState({
+          namedGeoJson: mapBorderData,
+      }, this.initializeLayers);
   }
 
   getLegendValues(maxValue, minValue) {
