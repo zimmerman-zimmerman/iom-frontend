@@ -139,9 +139,14 @@ class GeoMap extends Component {
   }
 
   componentDidMount() {
-      this.setState({
-          namedGeoJson: mapBorderData,
-      }, this.initializeLayers);
+    //We load that country border data here
+      requestJson('/map/detailed_country_borders.json', (error, response) => {
+          if (!error) {
+            this.setState({
+                namedGeoJson: response,
+            }, this.initializeLayers);
+          }
+      });
   }
 
   getLegendValues(maxValue, minValue) {
@@ -155,7 +160,7 @@ class GeoMap extends Component {
         if (ticks.length > 0) {
           for (let i2 = 0; i2 < ticks.length; i2++) {
             const t2 = ticks[i2];
-            if ((Math.ceil(t2) !== Math.ceil(t) && t2 !== t) || t !== 0) {
+            if ((Math.ceil(t2) !== Math.ceil(t) && t2 !== t)|| t !== 0) {
               if (!find(ticks, (_t) => {
                 return Math.ceil(_t) === Math.ceil(t);
               })) {

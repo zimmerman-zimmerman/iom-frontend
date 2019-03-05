@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { lazy, Suspense,Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import get from 'lodash/get';
 import Spin from "antd/es/spin";
@@ -6,23 +6,37 @@ import Spin from "antd/es/spin";
 import './styles/App.less';
 import './styles/App.scss';
 
-import AsyncComponent from './components/AsyncComponent';
+// import AsyncComponent from './components/AsyncComponent';
 import enMessages from "./locales/en";
 import {IntlProvider} from "react-intl";
 import connect from "react-redux/es/connect/connect";
 import * as actions from './services/actions/index';
 
-const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
-const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
-const AsyncDonorGroup = AsyncComponent(() => import('./scenes/donorgroup/DonorGroup'));
-const AsyncDonor = AsyncComponent(() => import('./scenes/donor/Donor'));
-const AsyncCountries = AsyncComponent(() => import('./scenes/countries/Countries'));
-const AsyncCountry = AsyncComponent(() => import('./scenes/country/Country'));
-const AsyncServices = AsyncComponent(() => import('./scenes/services/Services'));
-const AsyncService = AsyncComponent(() => import('./scenes/service/Service'));
-const AsyncProjects = AsyncComponent(() => import('./scenes/projects/Projects'));
-const AsyncProject = AsyncComponent(() => import('./scenes/project/Project'));
-const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
+// const AsyncHome = AsyncComponent(() => import('./scenes/home/Home'));
+
+const Home = lazy(() =>
+    import('./scenes/home/Home')
+);
+
+// const AsyncDonors = AsyncComponent(() => import('./scenes/donors/Donors'));
+
+const Donors = lazy(() =>
+    import('./scenes/donors/Donors')
+);
+
+
+const AsyncDonorGroup = lazy(() => import('./scenes/donorgroup/DonorGroup'));
+
+
+
+const AsyncDonor = lazy(() => import('./scenes/donor/Donor'));
+const AsyncCountries = lazy(() => import('./scenes/countries/Countries'));
+const AsyncCountry = lazy(() => import('./scenes/country/Country'));
+const AsyncServices = lazy(() => import('./scenes/services/Services'));
+const AsyncService = lazy(() => import('./scenes/service/Service'));
+const AsyncProjects = lazy(() => import('./scenes/projects/Projects'));
+const AsyncProject = lazy(() => import('./scenes/project/Project'));
+const AsyncAbout = lazy(() => import('./scenes/about/About'));
 
 class App extends Component {
   componentDidMount() {
@@ -49,20 +63,22 @@ class App extends Component {
             messages={locale.success ? get(locale.data, 'content') : messages[languageWithoutRegionCode]}
           >
             <Router>
-              <Switch>
-                <Route exact path="/" component={AsyncHome}/>
-                <Route exact path="/donors" component={AsyncDonors}/>
-                <Route exact path="/donors/:group" component={AsyncDonorGroup}/>
-                <Route exact path="/donors/:group/:code" component={AsyncDonor}/>
-                <Route exact path="/countries" component={AsyncCountries}/>
-                <Route exact path="/countries/:code" component={AsyncCountry}/>
-                <Route exact path="/services" component={AsyncServices}/>
-                <Route exact path="/services/:id" component={AsyncService}/>
-                  <Route exact path="/services/project-type/:id" component={AsyncService}/>
-                <Route exact path="/projects" component={AsyncProjects}/>
-                <Route exact path="/projects/:id" component={AsyncProject}/>
-                <Route exact path="/about" component={AsyncAbout}/>
-              </Switch>
+                <Suspense fallback={<div>loading</div>}>
+                  <Switch>
+                    <Route exact path="/" render={() => (<Home/>)}/>
+                    <Route exact path="/donors" render={() => (<Donors/>)}/>
+                    <Route exact path="/donors/:group" render={() => (<AsyncDonorGroup/>)}/>
+                    <Route exact path="/donors/:group/:code" render={() => (<AsyncDonor/>)}/>
+                    <Route exact path="/countries" render={() => (<AsyncCountries/>)}/>
+                    <Route exact path="/countries/:code" render={() => (<AsyncCountry/>)}/>
+                    <Route exact path="/services" render={() => (<AsyncServices/>)}/>
+                    <Route exact path="/services/:id" render={() => (<AsyncService/>)}/>
+                      <Route exact path="/services/project-type/:id" render={() => (<AsyncService/>)}/>
+                    <Route exact path="/projects" render={() => (<AsyncProjects/>)}/>
+                    <Route exact path="/projects/:id" render={() => (<AsyncProject/>)}/>
+                    <Route exact path="/about" render={() => (<AsyncAbout/>)}/>
+                  </Switch>
+                </Suspense>
             </Router>
           </IntlProvider>
         }

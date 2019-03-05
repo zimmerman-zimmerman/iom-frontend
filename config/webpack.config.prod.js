@@ -470,14 +470,14 @@ module.exports = {
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
-      new BrotliGzipPlugin({
+      /*new BrotliGzipPlugin({
           asset: '[path].br[query]',
           algorithm: 'brotli',
           test: /\.(js|json|css|html|svg)$/,
           threshold: 10240,
           minRatio: 0.8,
           quality: 11
-      }),
+      }),*/
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
@@ -495,7 +495,7 @@ module.exports = {
     // the HTML & assets that are part of the Webpack build.
     new WorkboxWebpackPlugin.GenerateSW({
       clientsClaim: true,
-      exclude: [/\.map$/, /asset-manifest\.json$/],
+      exclude: [/asset-manifest\.json$/],
       importWorkboxFrom: 'cdn',
       navigateFallback: publicUrl + '/index.html',
       navigateFallbackBlacklist: [
