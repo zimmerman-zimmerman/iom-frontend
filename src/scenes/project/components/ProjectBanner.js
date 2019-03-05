@@ -75,6 +75,7 @@ const ProjectBanner= (props) => {
   };
 
   const titleNarritives = get(data, 'title.narratives', []);
+  const descNarritives = get(data, 'descriptions[0].narratives', []);
   return (
     <Row className={classes.projectBanner}>
       <Col xs={12} md={6} lg={6} className="left">
@@ -89,7 +90,7 @@ const ProjectBanner= (props) => {
                 <Trans id="project.banner.left.menu.detail" defaultMessage="Detail report"/>
           </Menu.Item>
         </Menu>
-        <div className="description">{get(data, 'descriptions[0].narratives[0].text', 'Descriptions')}</div>
+        <div className="description">{getProjectTitle(descNarritives)}</div>
       </Col>
       <Col xs={12} md={6} lg={6}  className="right">
         <span className={classes.financialTitle}>
