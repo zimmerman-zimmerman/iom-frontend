@@ -13,7 +13,7 @@ import BaseFilter from "../../../components/base/filters/BaseFilter";
 
 import './ProjectsTable.scss';
 import SortHeader from "../../../components/SortHeader/SortHeader";
-import {getDate} from "../../../helpers/tableHelpers";
+import {getDate, getProjectTitle} from "../../../helpers/tableHelpers";
 
 class ProjectsTable extends BaseFilter {
   handleChange(value, fieldName='ordering') {
@@ -53,7 +53,7 @@ class ProjectsTable extends BaseFilter {
       className: 'Title',
       width: '25%',
       render: (title, record) =>
-        <Link to={`/projects/${record.id}`}>{title.narratives[0].text}</Link>,
+        <Link to={`/projects/${record.id}`}>{getProjectTitle(title.narratives)}</Link>,
     }, {
       title: <SortHeader
               title={intl.formatMessage({id: 'projects.table.start.date', defaultMessage: 'Start date'})}

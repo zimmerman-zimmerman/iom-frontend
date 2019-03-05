@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import * as actions from '../../../services/actions/index';
 import SortHeader from '../../../components/SortHeader/SortHeader';
 import Pagination from '../../../components/Pagination/Pagination';
-import {getDate, paginate} from '../../../helpers/tableHelpers';
+import {getDate, getProjectTitle, paginate} from '../../../helpers/tableHelpers';
 import { addFilterValues } from '../../../helpers/generic';
 
 class TableProjects extends Component {
@@ -84,10 +84,12 @@ class TableProjects extends Component {
       key: 'donors',
         width: '15%',
       render: (obj) => {
-          let donorExtra = `${get(donorGroupJson, obj.participating_organisations[0].ref)}/`;
+          const donorRef = get(obj, 'participating_organisations[0].ref', '-');
+          const donorTitles = get(obj, 'obj.participating_organisations[0].narratives', []);
+          let donorExtra = `${get(donorGroupJson, donorRef)}/`;
           return (
-              <Link to={`/donors/${donorExtra}${obj.participating_organisations[0].ref}`}>
-                  {obj.participating_organisations[0].narratives[0].text}
+              <Link to={`/donors/${donorExtra}${donorRef}`}>
+                  {getProjectTitle(donorTitles)}
               </Link>
           )
       }
@@ -101,7 +103,7 @@ class TableProjects extends Component {
       key: 'title',
       width: '26%',
       render: obj =>
-        <Link to={`/projects/${obj.id}`}>{obj.title.narratives[0].text}</Link>
+        <Link to={`/projects/${obj.id}`}>{getProjectTitle(obj.title.narratives)}</Link>
     },{
       title: <SortHeader
               title={intl.formatMessage({id: 'country.table.projects.header.budget', defaultMessage: 'Budget'})}
