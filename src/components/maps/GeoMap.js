@@ -20,6 +20,7 @@ import {connect} from "react-redux";
 import GenericDialog from "../dialogWindow/GenericDialog/GenericDialog";
 import MapToolTip from "./MapToolTip/MapToolTip";
 
+
 //Yellowish
 // const colors = ["rgb(255, 244, 221)", "rgb(255, 220, 142)", "rgb(255, 184,28)"];
 
@@ -140,13 +141,18 @@ class GeoMap extends Component {
 
   componentDidMount() {
     //We load that country border data here
-      requestJson('/map/detailed_country_borders.json', (error, response) => {
+      /*requestJson('/map/detailed_country_borders.json', (error, response) => {
           if (!error) {
             this.setState({
                 namedGeoJson: response,
             }, this.initializeLayers);
           }
       });
+*/
+
+      this.setState({
+          namedGeoJson: mapBorderData,
+      }, this.initializeLayers)
   }
 
   getLegendValues(maxValue, minValue) {

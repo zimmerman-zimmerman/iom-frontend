@@ -200,12 +200,19 @@ module.exports = {
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
     splitChunks: {
-      chunks: 'all',
-      name: true,
+        chunks: 'async'
+        // chunks: 'async'
+        /*cacheGroups: {
+            node_vendors:{
+                test:/[\\/]]node_modules[\\/]/,
+                chunks: 'all',
+                priority:1
+            }
+        }*/
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    runtimeChunk: 'single',
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -301,6 +308,7 @@ module.exports = {
               // Save disk space when time isn't as important
               cacheCompression: true,
               compact: true,
+
             },
           },
           // Process any JS outside of the app with Babel.
@@ -534,6 +542,9 @@ module.exports = {
         watch: paths.appSrc,
         silent: true,
         formatter: typescriptFormatter,
+      }),
+      new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 4,
       }),
       new BundleAnalyzerPlugin()
   ].filter(Boolean),
