@@ -26,15 +26,17 @@ const AsyncAbout = AsyncComponent(() => import('./scenes/about/About'));
 
 class App extends Component {
   componentDidMount() {
-    const { dispatch, enLocaleSlug, countryMappingJsonSlug, sectorMappingSlug } = this.props;
+    const { dispatch, enLocaleSlug, countryMappingJsonSlug, sectorMappingSlug, cebCategoriesSlug } = this.props;
     if (dispatch) {
       dispatch(actions.localeRequest(enLocaleSlug));
       dispatch(actions.countryMappingJsonRequest(countryMappingJsonSlug));
       dispatch(actions.sectorMappingRequest(sectorMappingSlug));
+      dispatch(actions.cebCategoriesJsonRequest(cebCategoriesSlug));
     } else {
       dispatch(actions.localeInitial());
       dispatch(actions.countryMappingJsonInitial());
       dispatch(actions.sectorMappingInitial());
+      dispatch(actions.cebCategoriesJsonInitial());
     }
   }
 
@@ -76,7 +78,8 @@ App.defaultProps = {
   language: 'en-US',
   enLocaleSlug: 'en-locale',
   countryMappingJsonSlug: 'country-mapping-json',
-  sectorMappingSlug: 'sector-mapping'
+  sectorMappingSlug: 'sector-mapping',
+  cebCategoriesSlug: 'ceb-categories',
 };
 
 const mapStateToProps = (state, ) => {
