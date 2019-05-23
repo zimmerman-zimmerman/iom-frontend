@@ -151,7 +151,11 @@ import {
     COUNTRIES_DESC_JSON_INITIAL,
     COUNTRIES_DESC_JSON_REQUEST,
     COUNTRIES_DESC_JSON_SUCCESS,
-    COUNTRIES_DESC_JSON_FAILED
+    COUNTRIES_DESC_JSON_FAILED,
+    CEB_CATEGORIES_JSON_INITIAL,
+    CEB_CATEGORIES_JSON_REQUEST,
+    CEB_CATEGORIES_JSON_SUCCESS,
+    CEB_CATEGORIES_JSON_FAILED
 } from '../actions/index';
 import {
     ABOUT_MEDIA_CONTENT_FAILED,
@@ -851,11 +855,25 @@ function countriesDesc(state=initial, action) {
     }
 }
 
+function cebCategories(state=initial, action) {
+  switch (action.type) {
+    case CEB_CATEGORIES_JSON_INITIAL:
+      return updateInitial(state, action);
+    case CEB_CATEGORIES_JSON_REQUEST:
+      return updateRequest(state, action);
+    case CEB_CATEGORIES_JSON_SUCCESS:
+      return updateSuccess(state, action);
+    case CEB_CATEGORIES_JSON_FAILED:
+      return updateFailed(state, action);
+    default:
+      return state;
+  }
+}
 
 const reducers = {
-    countriesDesc,
-    sectorsDesc,
-    donutData,
+  countriesDesc,
+  sectorsDesc,
+  donutData,
   aboutMediaContent,
   projectTransactions,
   nonHumanServices,
@@ -893,7 +911,8 @@ const reducers = {
   countryMappingJson,
   countryM49Mapping,
   m49Region,
-  sectorMapping
+  sectorMapping,
+  cebCategories
 };
 
 export default reducers;

@@ -380,12 +380,20 @@ export function* countriesDescJsonRequest(action) {
     }
 }
 
+export function* cebCategoriesJsonRequest(action) {
+  try {
+    const response = yield call(api.JSONContentRequest, action.slug);
+    yield put(actions.cebCategoriesJsonSuccess(response));
+  } catch (error) {
+    yield put(actions.cebCategoriesJsonFailed(error));
+  }
+}
 
 function* sagas() {
   yield [
-      takeLatest('COUNTRIES_DESC_JSON_REQUEST', countriesDescJsonRequest),
-      takeLatest('SECTORS_DESC_JSON_REQUEST', sectorsDescJsonRequest),
-      takeLatest('DONUT_DATA_JSON_REQUEST', donutDataJsonRequest),
+    takeLatest('COUNTRIES_DESC_JSON_REQUEST', countriesDescJsonRequest),
+    takeLatest('SECTORS_DESC_JSON_REQUEST', sectorsDescJsonRequest),
+    takeLatest('DONUT_DATA_JSON_REQUEST', donutDataJsonRequest),
     takeLatest('ABOUT_MEDIA_CONTENT_REQUEST', aboutMediaContentRequest),
     takeLatest('PROJECT_TRANSACTIONS_REQUEST', projectTransactionsRequest),
     takeLatest('NON_HUMAN_SERVICES_REQUEST', nonHumanServicesRequest),
@@ -429,6 +437,7 @@ function* sagas() {
     takeLatest('COUNTRY_M49_MAPPING_REQUEST', countryM49MappingRequest),
     takeLatest('M49_REGION_REQUEST', m49RegionRequest),
     takeLatest('SECTOR_MAPPING_REQUEST', sectorMappingRequest),
+    takeLatest('CEB_CATEGORIES_JSON_REQUEST', cebCategoriesJsonRequest),
   ]
 }
 

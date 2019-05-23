@@ -19,7 +19,8 @@ class ProjectLocation extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          requestProjectLocation: true
+          requestProjectLocation: true,
+          cebCategory: null
       };
   }
 
@@ -30,9 +31,26 @@ class ProjectLocation extends Component {
       dispatch(actions.projectTransactionsRequest(projectID));
   }
 
+  getCEBCategory(data, cebCategories) {
+    if (data && cebCategories) {
+      data.forEach(item => {
+        const code = get(item, 'sector.code');
+        if (code.toString().length === 5) {
+          const category = get(cebCategories, code);
+          if (category) {
+            this.setState({cebCategory: category});
+          }
+        }
+      })
+    }
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-      const { data, dispatch } = this.props;
+      const { data, cebCategories, dispatch } = this.props;
       const code = get(data, 'recipient_countries[0].country.code', null);
+      if (!this.state.cebCategory && data && cebCategories) {
+        this.getCEBCategory(get(data, 'sectors'), get(cebCategories, 'data.content'));
+      }
       if (code && this.state.requestProjectLocation) {
           dispatch(actions.projectLocationRequest(code));
           dispatch(actions.countryRequest({
@@ -96,10 +114,6 @@ class ProjectLocation extends Component {
       const websiteLink = get(data, 'contact_info[0].website','-').includes('http') ? get(data, 'contact_info[0].website','-') : 'https://' + get(data, 'contact_info[0].website','-');
       const countryFlag = get(data, 'recipient_countries[0].country.code','');
 
-      const cebCategory = get(data, 'humanitarian','-')
-        ? <Trans id='project.location.humanitarian' text='Humanitarian' />
-        : <Trans id='project.location.development' text='Development' />;
-
       let donorExtra = get(donorGroupJson, get(data, 'participating_organisations[0].ref'));
       donorExtra = donorExtra ? `${donorExtra}/` : '';
 
@@ -144,7 +158,7 @@ class ProjectLocation extends Component {
               },
               {
                 name: {id: "project.location.fields.ceb.category", defaultMessage:"CEB Category:"},
-                value: cebCategory,
+                value: this.state.cebCategory ? this.state.cebCategory : '-',
               },
               {
                 name: {id: "project.location.fields.service", defaultMessage: "Service area:"},
@@ -219,6 +233,7 @@ const mapStateToProps = (state, ) => {
     projectTransactions: state.projectTransactions,
     projectLocation: state.projectLocation,
     country: state.country,
+    cebCategories: state.cebCategories
   }
 };
 

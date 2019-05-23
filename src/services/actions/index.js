@@ -1122,7 +1122,6 @@ export function sectorsDescJsonFailed(error) {
     }
 }
 
-
 export const COUNTRIES_DESC_JSON_INITIAL = 'COUNTRIES_DESC_JSON_INITIAL';
 export const COUNTRIES_DESC_JSON_REQUEST = 'COUNTRIES_DESC_JSON_REQUEST';
 export const COUNTRIES_DESC_JSON_SUCCESS = 'COUNTRIES_DESC_JSON_SUCCESS';
@@ -1149,4 +1148,32 @@ export function countriesDescJsonFailed(error) {
         type: COUNTRIES_DESC_JSON_FAILED,
         error: error
     }
+}
+
+export const CEB_CATEGORIES_JSON_INITIAL = 'CEB_CATEGORIES_JSON_INITIAL';
+export const CEB_CATEGORIES_JSON_REQUEST = 'CEB_CATEGORIES_JSON_REQUEST';
+export const CEB_CATEGORIES_JSON_SUCCESS = 'CEB_CATEGORIES_JSON_SUCCESS';
+export const CEB_CATEGORIES_JSON_FAILED = 'CEB_CATEGORIES_JSON_FAILED';
+export function cebCategoriesJsonInitial() {
+  return {
+    type: CEB_CATEGORIES_JSON_INITIAL
+  }
+}
+export function cebCategoriesJsonRequest(slug) {
+  return {
+    type: CEB_CATEGORIES_JSON_REQUEST,
+    slug: slug
+  }
+}
+export function cebCategoriesJsonSuccess(data) {
+  return {
+    type: CEB_CATEGORIES_JSON_SUCCESS,
+    data: data
+  }
+}
+export function cebCategoriesJsonFailed(error) {
+  return {
+    type: CEB_CATEGORIES_JSON_FAILED,
+    error: error
+  }
 }
