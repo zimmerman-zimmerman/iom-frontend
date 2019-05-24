@@ -85,7 +85,7 @@ class TableProjects extends Component {
         width: '15%',
       render: (obj) => {
           const donorRef = get(obj, 'participating_organisations[0].ref', '-');
-          const donorTitles = get(obj, 'obj.participating_organisations[0].narratives', []);
+          const donorTitles = get(obj, 'participating_organisations[0].narratives', []);
           let donorExtra = `${get(donorGroupJson, donorRef)}/`;
           return (
               <Link to={`/donors/${donorExtra}${donorRef}`}>
