@@ -21,9 +21,10 @@ class BaseFilter extends Component {
       update: false,
       filters: {values: { order_by: '-value'}, changed: false, chips: {}},
       dataRange: [],
-      countriesTableSortBy: '-budget',
+      countriesTableSortBy: 'title',
       donorTableSortBy: 'participating_organisation',
       servicesTableSortBy: '-totalValue',
+      donorsTableSortby: 'name'
     };
     this.actionRequest = this.actionRequest.bind(this);
     this.updateComponent = this.updateComponent.bind(this);

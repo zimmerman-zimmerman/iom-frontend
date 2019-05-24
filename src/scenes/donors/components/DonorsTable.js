@@ -25,7 +25,7 @@ class DonorsTable extends BaseFilter {
 
     handleSort(value) {
         this.setState({
-            orderBy: value,
+            donorsTableSortby: value,
         });
     }
 
@@ -36,7 +36,7 @@ class DonorsTable extends BaseFilter {
         const columns = [{
             title: <SortHeader
                 title={intl.formatMessage({id: 'donors.table.donors.header.donor', defaultMessage: 'Donor'})}
-                sortValue={this.state.orderBy}
+                sortValue={this.state.donorsTableSortby}
                 defSortValue={'name'}
                 onSort={(value) => this.handleSort(value)}
             />,
@@ -61,7 +61,7 @@ class DonorsTable extends BaseFilter {
         }, {
             title: <SortHeader
                 title={intl.formatMessage({id: 'donors.table.donors.header.budget', defaultMessage: 'Budget'})}
-                sortValue={this.state.orderBy}
+                sortValue={this.state.donorsTableSortby}
                 defSortValue={'value'}
                 onSort={(value) => this.handleSort(value)}
             />,
@@ -75,7 +75,7 @@ class DonorsTable extends BaseFilter {
                     id: 'donors.table.donors.header.projects.count',
                     defaultMessage: 'Number of projects',
                 })}
-                sortValue={this.state.orderBy}
+                sortValue={this.state.donorsTableSortby}
                 defSortValue={'project'}
                 onSort={(value) => this.handleSort(value)}
             />,
@@ -84,7 +84,7 @@ class DonorsTable extends BaseFilter {
             className: 'number',
         },];
         //Frontend sort
-        let data = genericSort(this.props.data, this.state.orderBy);
+        let data = genericSort(this.props.data, this.state.donorsTableSortby);
         //Frontend paginate
         data = paginate(this.state.page, this.state.pageSize, data);
         return (
