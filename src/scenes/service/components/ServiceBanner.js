@@ -31,12 +31,12 @@ class ServiceBanner extends Component {
       const lines = [
         [
           {line: budgetName, className: 'financialLabel'},
-          {line: <span>{usd}{format(',')(get(data, 'value', 0))}</span>, className: 'financialText'},
+          {line: <span>{usd}{format(',')(Math.round(get(data, 'value', 0)))}</span>, className: 'financialText'},
           {
             line: <Trans id="service.banner.right.incoming" defaultMessage="Total incoming funds"/>,
             className: 'financialLabel'
           },
-          {line: <span>{usd}{format(',')(get(data, 'incoming_fund', 0))}</span>, className: 'financialText'},
+          {line: <span>{usd}{format(',')(Math.round(get(data, 'incoming_fund', 0)))}</span>, className: 'financialText'},
           {line: <Trans id="service.banner.right.projects" defaultMessage="Project count"/>, className: 'financialLabel'},
           {line: <span>{get(data, 'activity_count', 0)}</span>, className: 'financialText'}
         ],
@@ -45,12 +45,12 @@ class ServiceBanner extends Component {
             line: <Trans id="service.banner.right.disbursements" defaultMessage="Total disbursements"/>,
             className: 'financialLabel'
           },
-          {line: <span>{usd}{format(',')(get(data, 'expenditure', 0))}</span>, className: 'financialText'},
+          {line: <span>{usd}{format(',')(Math.round(get(data, 'expenditure', 0)))}</span>, className: 'financialText'},
           {
             line: <Trans id="service.banner.right.expenditure" defaultMessage="Total expenditure"/>,
             className: 'financialLabel'
           },
-          {line: <span>{usd}{get(data, 'expenditure', 0)}</span>, className: 'financialText'},
+          {line: <span>{usd}{Math.round(get(data, 'expenditure', 0))}</span>, className: 'financialText'},
           {line: <Trans id="service.banner.right.source.title" defaultMessage="Data source" />, className: 'financialLabel'},
           {line: <Trans id="service.banner.right.source" defaultMessage="IATI Registry" />, className: 'financialText'}
         ]

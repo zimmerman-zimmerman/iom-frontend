@@ -27,12 +27,12 @@ const ProjectBanner= (props) => {
     const lines = [
       [
         {line: <Trans id="project.banner.right.budget" defaultMessage="Total activity budget"/>, className: 'financialLabel'},
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.budget_value', 0))}</span>, className: 'financialText'},
+        {line: <span>{usd}{format(',')(Math.round(get(data, 'aggregations.activity.budget_value', 0)))}</span>, className: 'financialText'},
         {
           line: <Trans id="project.banner.right.incoming" defaultMessage="Total incoming funds"/>,
           className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.incoming_commitment_value', 0))}</span>, className: 'financialText'},
+        {line: <span>{usd}{format(',')(Math.round(get(data, 'aggregations.activity.incoming_commitment_value', 0)))}</span>, className: 'financialText'},
         {line: <Trans id="project.banner.right.start" defaultMessage="Start date"/>, className: 'financialLabel'},
         {line: <span>{get(data, 'activity_dates[1].iso_date', '-')}</span>, className: 'financialText'}
       ],
@@ -41,12 +41,12 @@ const ProjectBanner= (props) => {
           line: <Trans id="project.banner.right.disbursement" defaultMessage="Total disbursements"/>,
           className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.disbursement_value', 0))}</span>, className: 'financialText'},
+        {line: <span>{usd}{format(',')(Math.round(get(data, 'aggregations.activity.disbursement_value', 0)))}</span>, className: 'financialText'},
         {
           line: <Trans id="project.banner.right.expenditures" defaultMessage="Total expenditure"/>,
           className: 'financialLabel'
         },
-        {line: <span>{usd}{format(',')(get(data, 'aggregations.activity.expenditure_value', 0))}</span>, className: 'financialText'},
+        {line: <span>{usd}{format(',')(Math.round(get(data, 'aggregations.activity.expenditure_value', 0)))}</span>, className: 'financialText'},
         {line: <Trans id="project.banner.right.end" defaultMessage="End date" />, className: 'financialLabel'},
         {line: <span>{get(data, 'activity_dates[2].iso_date', '-')}</span>, className: 'financialText'}
       ]
