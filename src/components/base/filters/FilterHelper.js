@@ -16,5 +16,5 @@ export function getSectors(sectors, sectorTypeCodes){
         }
     });
 
-    return sortBy(typedSectors, ['sector.name']);
+    return typedSectors;
 }

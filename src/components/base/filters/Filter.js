@@ -135,7 +135,7 @@ class Filter extends BaseFilter {
                               key="1">
                         {serviceAreaOptions.map(service => {
                             return <TreeNode className={classes.childOption} value={service.sector.code}
-                                             title={service.sector.name} key={service.sector.code} />;
+                                             title={`${service.sector.code} - ${service.sector.name}`} key={service.sector.code} />;
                         })}
                     </TreeNode>
                     <TreeNode value={projectCodes}
@@ -146,7 +146,7 @@ class Filter extends BaseFilter {
                               key="2">
                         {projectTypeOptions.map(project => {
                             return <TreeNode className={classes.childOption} value={project.sector.code}
-                                             title={project.sector.name} key={project.sector.code} />;
+                                             title={`${project.sector.code} - ${project.sector.name}`} key={project.sector.code} />;
                         })}
                     </TreeNode>
                     <TreeNode value={dacCodes}
@@ -157,7 +157,7 @@ class Filter extends BaseFilter {
                               key="3">
                         {DACSectorsOptions.map(sector => {
                             return <TreeNode className={classes.childOption} value={sector.sector.code}
-                                             title={sector.sector.name} key={sector.sector.code} />;
+                                             title={`${sector.sector.code} - ${sector.sector.name}`} key={sector.sector.code} />;
                         })}
                     </TreeNode>
                 </TreeSelect>
