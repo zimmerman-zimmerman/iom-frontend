@@ -34,7 +34,7 @@ jobs:
       - run: yarn validate:dependencies
 
   #  BUILD SOURCE AND DEPLOY TO SERVER
-  build_&_deploy:
+  build_deploy:
     #    machine: true
     docker:
       - image: circleci/node:9.10.1
