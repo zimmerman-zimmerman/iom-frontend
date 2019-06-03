@@ -39,6 +39,9 @@ const styles = {
       },
     '@media (max-width: 1277px)': {
       fontSize: 15,
+    },
+    '@media (min-width: 1100px)': {
+      width: '750px'
     }
   },
 };

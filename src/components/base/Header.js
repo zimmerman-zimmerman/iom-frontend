@@ -111,10 +111,10 @@ class Header extends Component {
         <MediaQuery maxWidth={screenSize.mobile.maxWidth}>
           <Content size="xs"/>
         </MediaQuery>
-        <MediaQuery minWidth={screenSize.tablet.minWidth} maxWidth={screenSize.tablet.maxWidth}>
+        <MediaQuery minWidth={screenSize.tablet.minWidth} maxWidth={screenSize.tablet.headerMaxWidth}>
           <Content size="md"/>
         </MediaQuery>
-        <MediaQuery minWidth={screenSize.desktop.minWidth}>
+        <MediaQuery minWidth={screenSize.desktop.headerMinWidth}>
           <Content size="lg"/>
         </MediaQuery>
       </Grid>

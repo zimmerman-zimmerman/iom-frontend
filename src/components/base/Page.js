@@ -38,12 +38,12 @@ class Page extends Component {
           <Header menuItems={menuItems} onOpenSlider={this.onOpenSlider} openSlider={openSlider} />
           {breadcrumbItems ? <Breadcrumbs items={breadcrumbItems} /> : null}
           <div >
-              <MediaQuery maxWidth={screenSize.tablet.maxWidth}>
+              <MediaQuery maxWidth={screenSize.tablet.headerMaxWidth}>
                   <Slider menuItems={menuItems} open={openSlider} onOpenChange={this.onOpenSlider}>
                       {children}
                   </Slider>
               </MediaQuery>
-              <MediaQuery minWidth={screenSize.desktop.minWidth}>
+              <MediaQuery minWidth={screenSize.desktop.headerMinWidth}>
                   {children}
               </MediaQuery>
           </div>

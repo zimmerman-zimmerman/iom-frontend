@@ -5,8 +5,10 @@ export const size = {
   tablet: {
     minWidth: 768,
     maxWidth: 991,
+    headerMaxWidth: 1100
   },
   desktop: {
     minWidth: 992,
+    headerMinWidth: 1101
   }
 };
