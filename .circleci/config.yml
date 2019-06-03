@@ -50,6 +50,7 @@ jobs:
           fingerprints:
             - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
       - run: eval ssh-agent -s
+      - run: sudo apt-get update
       - run: sudo apt install rsync
       - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/projects/iom-frontend/build
 
