@@ -87,7 +87,7 @@ workflows:
             - checkout_repo
       - test_performance:
           requires:
-            - build_&_deploy
+            - build_deploy
       - test_e2e:
           requires:
-            - build_&_deploy
+            - build_deploy
