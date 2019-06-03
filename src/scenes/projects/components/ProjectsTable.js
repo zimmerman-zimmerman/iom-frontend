@@ -104,17 +104,18 @@ class ProjectsTable extends BaseFilter {
               defSortValue={'recipient_country'}
               onSort={this.handleChange}
               />,
-      dataIndex: 'recipient_countries',
+      dataIndex: '',
       key: 'recipient_country',
       width: '20%',
-      render: recipient_countries => {
-        if (size(recipient_countries) > 0) {
-          return <Link to={`/countries/${recipient_countries[0].country.code}`}>{get(recipient_countries, '[0].country.name')}</Link>
-        } else {
+      render: data => {
+        if (size(data.recipient_countries) > 0) {
+          return <Link to={`/countries/${data.recipient_countries[0].country.code}`}>{get(data.recipient_countries, '[0].country.name')}</Link>
+        } else if (size(data.recipient_regions) > 0) {
+          return <span>{get(data.recipient_regions, '[0].region.name')}</span>
+        } else
           return <span></span>
         }
-      }
-    },];
+    }];
     return (
       <Fragment>
         <Table dataSource={data ? this.addKey(data.results) : null}
