@@ -153,9 +153,9 @@ const styles = {
       order:2,
         margin: '28px 0 0 auto',
         width: 'max-content',
-        '@media (max-width: 990px)': {
+        '@media (max-width: 1100px)': {
             minHeight: '60px',
-            margin: '0 5px 0 5px',
+            margin: '16px 5px 0 5px',
         },
     },
   logo: {
