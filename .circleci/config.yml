@@ -50,9 +50,9 @@ jobs:
           fingerprints:
             - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
       - run: eval ssh-agent -s
-      - run: printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+      - run: sudo printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
       - run: sudo apt-get update
-      - run: printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+      - run: sudo printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
       - run: sudo apt install rsync
       - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/projects/iom-frontend/build
 
