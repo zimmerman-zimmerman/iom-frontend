@@ -1,93 +1,93 @@
-version: 2
+version: 2.1
 jobs:
   #  CHECKOUT REPOSITORY
   checkout_repo:
     #    machine: true
     docker:
-    - image: circleci/node:9.10.1
+      - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
-    - checkout
-    - attach_workspace:
-        at: ~/iom-frontend
-    - restore_cache:
-        keys:
-        - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - yarn-cache-{{ .Branch }}
-        - yarn-cache-
-    - run: yarn install
-    - save_cache:
-        key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        paths: node_modules
-    - persist_to_workspace:
-        root: .
-        paths: .
+      - checkout
+      - attach_workspace:
+          at: ~/iom-frontend
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}
+            - yarn-cache-
+      - run: yarn install
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths: node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
 
   #  CHECKOUT FOR VULNERABILITIES IN LIBRARIES
   check_vulnerabilities:
     docker:
-    - image: circleci/node:9.10.1
+      - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
-    - attach_workspace:
-        at: ~/iom-frontend
-    - run: yarn validate:dependencies
+      - attach_workspace:
+          at: ~/iom-frontend
+      - run: yarn validate:dependencies
 
   #  BUILD SOURCE AND DEPLOY TO SERVER
   build_&_deploy:
     #    machine: true
     docker:
-    - image: circleci/node:9.10.1
+      - image: circleci/node:9.10.1
     working_directory: ~/iom-frontend
     steps:
-    - checkout
-    - attach_workspace:
-        at: ~/iom-frontend
-    - run: yarn build
-    - run: sudo apt install rsync
-    - run: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-    - add_ssh_keys:
-        name: Add SSH KEY
-        fingerprints:
-        - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
-    - run: eval ssh-agent -s
-    - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/iom-frontend/build
+      - checkout
+      - attach_workspace:
+          at: ~/iom-frontend
+      - run: yarn build
+      - run: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          name: Add SSH KEY
+          fingerprints:
+            - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/projects/iom-frontend/build
 
   #  EVALUATE BROWSER PERFORMANCE WITH LIGHTHOUSE
   test_performance:
     docker:
-    - image: circleci/node:9.10.1-browsers
+      - image: circleci/node:9.10.1-browsers
     working_directory: ~/iom-frontend
     steps:
-    - attach_workspace:
-        at: ~/iom-frontend
-    - run: CI=true yarn lighthouse
+      - attach_workspace:
+          at: ~/iom-frontend
+      - run: CI=true yarn lighthouse
 
   test_e2e:
     docker:
-    - image: cypress/browsers:chrome67
+      - image: cypress/browsers:chrome67
     working_directory: ~/iom-frontend
     steps:
-    - attach_workspace:
-        at: ~/iom-frontend
-    - run: yarn add cypress
-    - run:
-        command: yarn start
-        background: true
-    - run: yarn cy:record
+      - attach_workspace:
+          at: ~/iom-frontend
+      - run: yarn add cypress
+      - run:
+          command: yarn start
+          background: true
+      - run: yarn cy:record
 
 # WORKFLOWS
 workflows:
   version: 2
   test_build_deploy:
     jobs:
-    - checkout_repo
-    - build_&_deploy:
-        requires:
-        - checkout_repo
-    - test_performance:
-        requires:
-        - build_&_deploy
-    - test_e2e:
-        requires:
-        - build_&_deploy
+      - checkout_repo
+      - build_&_deploy:
+          requires:
+            - checkout_repo
+      - test_performance:
+          requires:
+            - build_&_deploy
+      - test_e2e:
+          requires:
+            - build_&_deploy
