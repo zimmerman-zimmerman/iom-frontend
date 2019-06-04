@@ -94,7 +94,7 @@ class ProjectsTable extends BaseFilter {
               />,
       dataIndex: 'projecttype',
       key: 'projecttype',
-      width: '25%',
+      width: '15%',
       render: projecttype =>
         <Link to={`/services/project-type/${get(projecttype, 'code', '')}`}>{get(projecttype, 'name', '')}</Link>,
     }, {
@@ -106,15 +106,30 @@ class ProjectsTable extends BaseFilter {
               />,
       dataIndex: 'recipient_countries',
       key: 'recipient_country',
-      width: '20%',
+      // width: '20%',
       render: recipient_countries => {
         if (size(recipient_countries) > 0) {
           return <Link to={`/countries/${recipient_countries[0].country.code}`}>{get(recipient_countries, '[0].country.name')}</Link>
-        } else {
+        } else
           return <span></span>
         }
-      }
-    },];
+    }, {
+      title: <SortHeader
+              title={intl.formatMessage({id: 'projects.table.region', defaultMessage: 'Region'})}
+              sortValue={filters.values.ordering}
+              defSortValue={'recipient_region__name'}
+              onSort={this.handleChange}
+              />,
+      dataIndex: 'recipient_regions',
+      key: 'recipient_region',
+      // width: '20%',
+      render: recipient_regions => {
+        if (size(recipient_regions) > 0) {
+          return <span>{get(recipient_regions, '[0].region.name')}</span>
+        } else
+          return <span></span>
+        }
+    }];
     return (
       <Fragment>
         <Table dataSource={data ? this.addKey(data.results) : null}

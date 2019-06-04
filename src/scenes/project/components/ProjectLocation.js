@@ -122,10 +122,15 @@ class ProjectLocation extends Component {
             rows: [
                 {
                     value: <Col xs={12} className="flag-country">
+                        {get(data, 'recipient_countries', []).length > 0 ? (<React.Fragment>
                         <div className='flag-icon'>
                             {countryFlag !== '' && <ReactCountryFlag code={countryFlag} svg />}
                         </div>
                         <span className="country-name">{get(data, 'recipient_countries[0].country.name','')}</span>
+                    </React.Fragment>)
+                    : (
+                      <span className="region-name">{get(data, 'recipient_regions[0].region.name','')}</span>
+                    )}
                     </Col>
                 },
                 {
@@ -269,6 +274,16 @@ const styles = {
       fontSize: 22,
       marginTop: '14px',
       marginLeft: '12px',
+      '@media (max-width: 767px)': {
+        fontSize: 17,
+      },
+    },
+    '& .region-name': {
+      order: 2,
+      fontWeight: 600,
+      color: '#1f4283',
+      fontSize: 22,
+      marginTop: -10,
       '@media (max-width: 767px)': {
         fontSize: 17,
       },
