@@ -48,7 +48,7 @@ jobs:
       - add_ssh_keys:
           name: Add SSH KEY
           fingerprints:
-            - "f9:41:55:a6:62:3b:a1:06:46:e3:02:c9:56:26:08:51"
+            - "69:70:5c:6f:c0:c3:40:45:44:4a:f5:f7:ef:0f:8d:43"
       - run: eval ssh-agent -s
       - run: sudo sh -c 'echo "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list'
       - run: sudo apt-get update
