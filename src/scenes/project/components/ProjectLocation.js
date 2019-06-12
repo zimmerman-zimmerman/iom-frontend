@@ -104,6 +104,8 @@ class ProjectLocation extends Component {
           )
       };
 
+      //DAC SECTORS are where vocabulary code === 1
+      const dacSectors = formatSectors(get(data, 'sectors',[]), '1');
       //Service area(at least in this context) are where vocabulary code === 98
       const serviceAreas = formatSectors(get(data, 'sectors',[]), '98');
       //Project type (at least in this context) are where vocabulary code === 99
@@ -164,6 +166,14 @@ class ProjectLocation extends Component {
               {
                 name: {id: "project.location.fields.ceb.category", defaultMessage:"CEB Category:"},
                 value: this.state.cebCategory ? this.state.cebCategory : '-',
+              },
+              {
+                name: {id: "project.location.fields.dac", defaultMessage: "DAC 5 sector:"},
+                value: <div className={classes.sectorLinks}>{
+                    dacSectors.map( sector => {
+                      return <Link to={sector.url}>{sector.name} </Link>
+                    })
+                } </div>
               },
               {
                 name: {id: "project.location.fields.service", defaultMessage: "Service area:"},
