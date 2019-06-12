@@ -12,6 +12,7 @@ export function formatSectors(sectors, code) {
           `/services/${sector.sector.code}`;
       dacSectors.push({
         name: sector.sector.name,
+        id: sector.sector.code,
         url,
       });
     }

@@ -171,7 +171,7 @@ class ProjectLocation extends Component {
                 name: {id: "project.location.fields.dac", defaultMessage: "DAC 5 sector:"},
                 value: <div className={classes.sectorLinks}>{
                     dacSectors.map( sector => {
-                      return <Link to={sector.url}>{sector.name} </Link>
+                      return <Link to={sector.url}>{sector.id} - {sector.name} </Link>
                     })
                 } </div>
               },
