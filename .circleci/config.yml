@@ -75,7 +75,12 @@ jobs:
           at: ~/iom-frontend
       - run: yarn add cypress
       - run:
-          command: yarn start
+          name: Set CYPRESS_BASEURL
+          command: |
+            echo 'export CYPRESS_baseUrl="https://iom-develop.zz-demos.net"' >> $BASH_ENV
+        # @Juan - Uncommented this command, because running against the actual url would bypass the fw
+#      - run:
+#          command: yarn start
         # @Juan - Uncommented this command, because yarn cypress was running while the local server was still starting.
         # background: true
       - run: yarn cy:record
