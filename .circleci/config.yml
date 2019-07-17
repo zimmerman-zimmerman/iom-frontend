@@ -76,7 +76,8 @@ jobs:
       - run: yarn add cypress
       - run:
           command: yarn start
-          background: true
+        # @Juan - Uncommented this command, because yarn cypress was running while the local server was still starting.
+        # background: true
       - run: yarn cy:record
 
 # WORKFLOWS
