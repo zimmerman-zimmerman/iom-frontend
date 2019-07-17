@@ -14,7 +14,8 @@ context('Test country filter functionality', () => {
         cy.get('.ant-table-tbody').should('contain', itemValue);
     });
     it('Apply Sector filter', () => {
-        cy.visit(Cypress.env('targetUrl').concat('/countries'));
+        // cy.visit(Cypress.env('targetUrl').concat('/countries'));
+        cy.visit('/countries');
         cy.contains('Sector').click({ force: true });
         cy.get('.ant-select-selection').click({ force: true });
         cy.get('.ant-select-tree-switcher').first().click({ force: true });
@@ -63,7 +64,8 @@ context('Test country filter functionality', () => {
         });
     });
     it('Check Start - End filter', () => {
-        cy.visit(Cypress.env('targetUrl').concat('/countries'));
+        // cy.visit(Cypress.env('targetUrl').concat('/countries'));
+        cy.visit('/countries');
         const startDate = '2008-01-01';
         const endDate = '2018-09-30';
         //Apply filter

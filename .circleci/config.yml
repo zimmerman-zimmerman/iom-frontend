@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Set CYPRESS_BASEURL
           command: |
-            echo 'export CYPRESS_baseUrl="http://iom-develop.zz-demos.net"' >> $BASH_ENV
+            echo 'export CYPRESS_baseUrl="https://iom-develop.zz-demos.net"' >> $BASH_ENV
         # @Juan - Uncommented this command, because running against the actual url would bypass the fw
 #      - run:
 #          command: yarn start
