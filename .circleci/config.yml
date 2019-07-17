@@ -74,15 +74,14 @@ jobs:
       - attach_workspace:
           at: ~/iom-frontend
       - run: yarn add cypress
+      - run: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          name: Add SSH KEY
+          fingerprints:
+            - "69:70:5c:6f:c0:c3:40:45:44:4a:f5:f7:ef:0f:8d:43"
       - run:
-          name: Set CYPRESS_BASEURL
-          command: |
-            echo 'export CYPRESS_baseUrl="https://iom-develop.zz-demos.net"' >> $BASH_ENV
-        # @Juan - Uncommented this command, because running against the actual url would bypass the fw
-#      - run:
-#          command: yarn start
-        # @Juan - Uncommented this command, because yarn cypress was running while the local server was still starting.
-        # background: true
+          command: yarn start
+          background: true
       - run: yarn cy:record
 
 # WORKFLOWS
