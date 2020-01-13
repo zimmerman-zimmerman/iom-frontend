@@ -119,6 +119,7 @@ class Projects extends BaseFilter {
     const { showSummary } = this.state;
     const dataProjects = get(projects, 'data');
     const donorsCount = get(donors, 'data.count');
+    const dataDonors = get(donors, 'data.results', []);
     const existProjects = get(dataProjects, 'results[0].id');
     const dataCountries = get(countries, 'data.results', []);
     const projectsCount = get(dataProjects, 'count', 0);
@@ -166,7 +167,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
                         <div >
-                          <Summary data={showMap ? dataCountries : null}
+                          <Summary data={showMap ? dataDonors : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
@@ -188,7 +189,7 @@ class Projects extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div >
-                          <Summary data={showMap ? dataCountries : null}
+                          <Summary data={showMap ? dataDonors : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
