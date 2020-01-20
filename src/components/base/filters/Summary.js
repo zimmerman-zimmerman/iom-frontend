@@ -5,6 +5,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
 import Button from 'antd/es/button';
 import get from 'lodash/get';
+import countBy from 'lodash/countBy';
+import map from 'lodash/map';
 import PropsType from 'prop-types';
 
 import Trans from '../../../locales/Trans';
@@ -14,6 +16,7 @@ import { formatNumberComma } from '../../../helpers/generic';
 class Summary extends Component {
   render() {
     const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
+    let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({ date: key, total: val }));
     let totalBudget = 0;
     if (data) {
       data.forEach(function (item) {
@@ -52,7 +55,7 @@ class Summary extends Component {
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong className={classes.number}>{donorsCount}</strong>
+            <strong className={classes.number}>{get(donors, 'length')}</strong>
           </Col>
         </Row>
         <Row>

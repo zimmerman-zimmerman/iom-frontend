@@ -42,8 +42,7 @@ class Projects extends BaseFilter {
       order_by: '-value',
       reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
     };
-
-      let values = {};
+    let values = {};
     if(filters.values.participating_organisation)
     {
         //And this kids, is how we avoid references in dictionaries... That javascript man
@@ -64,7 +63,6 @@ class Projects extends BaseFilter {
     {
       values = filters.values;
     }
-
     this.actionRequest(
       extend({}, params, values), 'recipient_country', actions.countriesRequest
     );
@@ -82,7 +80,7 @@ class Projects extends BaseFilter {
 
         const filterValues = filters.values;
         filterValues.total_budget_gte = this.state.dataRange[0];
-          filterValues.total_budget_lte = this.state.dataRange[1];
+        filterValues.total_budget_lte = this.state.dataRange[1];
 
         this.actionRequest(
           extend({}, params, filters.values),
