@@ -76,6 +76,7 @@ class Countries extends BaseFilter {
     const data = this.filter(get(countries, 'data'));
     const projectsCount = get(projects, 'data.count', 0);
     const donorsCount = get(donors, 'data.count');
+    const dataDonors = get(donors, 'data.results', []);
     const showMap = get(data, '[0].recipient_country.code');
     const breadcrumbItems = [
       {url: '/', text: <Trans id='main.menu.home' text='Home' />},
@@ -122,7 +123,7 @@ class Countries extends BaseFilter {
                       {showSummary ?
                         <Col lg={3} className={showSummary ? classes.noPaddingLeftAndRight : null}>
                           <div>
-                            <Summary data={showMap ? data : null}
+                            <Summary data={showMap ? dataDonors : null}
                                      onHideSummary={this.onToggleSummary.bind(this)}
                                      fieldValue="value"
                                      fieldCount="activity_count"
@@ -144,7 +145,7 @@ class Countries extends BaseFilter {
                     {showSummary ?
                       <Col lg={3} className={showSummary ? classes.noPaddingLeft : null}>
                         <div>
-                          <Summary data={showMap ? data : null}
+                          <Summary data={showMap ? dataDonors : null}
                                    onHideSummary={this.onToggleSummary.bind(this)}
                                    fieldValue="value"
                                    fieldCount="activity_count"
