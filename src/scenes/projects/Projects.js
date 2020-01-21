@@ -72,20 +72,33 @@ class Projects extends BaseFilter {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // TODO: this really complicated, please make this more simple from chips module.
+    const { params, filters } = this.state;
+    if (get(filters, 'chips.participating_organisation_ref.values.length', 0) === 0) {
+      delete filters.values['participating_organisation'];
+    }
+    let participatingOrganisationFilter = get(filters.values, 'participating_organisation_ref');
+    if (participatingOrganisationFilter) {
+      delete filters.values['participating_organisation_ref'];
+      filters.values['participating_organisation'] = participatingOrganisationFilter;
+    }
     if (prevState !== this.state) {
       this.countriesRequest();
       if (prevState.dataRange !== this.state.dataRange) {
-        const { params, filters } = this.state;
-        delete filters.values['page'];
-
+        delete filters.values['page']
         const filterValues = filters.values;
         filterValues.total_budget_gte = this.state.dataRange[0];
         filterValues.total_budget_lte = this.state.dataRange[1];
-
         this.actionRequest(
           extend({}, params, filters.values),
           null,
           actions.projectsRequest
+        );
+      } else {
+        this.actionRequest(
+            extend({}, params, filters.values),
+            null,
+            actions.projectsRequest
         );
       }
     }
