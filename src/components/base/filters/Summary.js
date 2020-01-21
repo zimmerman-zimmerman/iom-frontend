@@ -19,15 +19,11 @@ class Summary extends Component {
     const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
     let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({ date: key, total: val }));
     let sumActivityCount = sumBy(data, function (item) {
-        return item.activity_count;
+        return get(item, 'activity_count', 0);
     });
-    let totalBudget = 0;
-    console.log(data);
-    if (data) {
-      data.forEach(function (item) {
-        totalBudget += get(item, fieldValue, 0);
-      });
-    }
+    let sumBudget = sumBy(data, function (item) {
+        return get(item, fieldValue, 0);
+    });
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     return (
       <Card className={classes.summary}>
@@ -40,7 +36,7 @@ class Summary extends Component {
           <Divider className="Divider"/>
         <Row>
           <Col xs={12}>
-            <strong className={classes.number}>{usd}{formatNumberComma(totalBudget)}</strong>
+            <strong className={classes.number}>{usd}{formatNumberComma(sumBudget)}</strong>
           </Col>
         </Row>
         <Row>
