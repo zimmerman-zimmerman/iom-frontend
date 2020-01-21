@@ -7,6 +7,7 @@ import Button from 'antd/es/button';
 import get from 'lodash/get';
 import countBy from 'lodash/countBy';
 import map from 'lodash/map';
+import sumBy from 'lodash/sumBy';
 import PropsType from 'prop-types';
 
 import Trans from '../../../locales/Trans';
@@ -17,7 +18,11 @@ class Summary extends Component {
   render() {
     const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
     let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({ date: key, total: val }));
+    let sumActivityCount = sumBy(data, function (item) {
+        return item.activity_count;
+    });
     let totalBudget = 0;
+    console.log(data);
     if (data) {
       data.forEach(function (item) {
         totalBudget += get(item, fieldValue, 0);
@@ -45,7 +50,7 @@ class Summary extends Component {
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong className={classes.number}>{projectsCount}</strong>
+            <strong className={classes.number}>{sumActivityCount}</strong>
           </Col>
         </Row>
         <Row>

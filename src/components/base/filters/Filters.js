@@ -91,10 +91,10 @@ class Filters extends Component {
                   })
                 }
                 reducerName="transactionsAggregationsParticipatingOrganisation"
-                optionKeyName="participating_organisation"
+                optionKeyName="participating_organisation_ref"
                 optionValueName="participating_organisation"
                 groupBy="participating_organisation"
-                fieldName={"participating_organisation_name"}
+                fieldName={"participating_organisation_ref"}
                 fieldLabel='Donor type'
                 actionRequest={actions.transactionsAggregationsParticipatingOrganisationRequest}
         />
