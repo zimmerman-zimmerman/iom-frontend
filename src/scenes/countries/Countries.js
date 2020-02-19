@@ -17,7 +17,6 @@ import Page from '../../components/base/Page';
 import {size as screenSize} from "../../helpers/screen";
 import { pageContainer } from '../../helpers/style';
 import extend from "lodash/extend";
-import isEqual from 'lodash/isEqual';
 
 class Countries extends BaseFilter {
   componentDidMount() {
@@ -41,30 +40,69 @@ class Countries extends BaseFilter {
     }
   }
 
-    componentDidUpdate(prevProps, prevState) {
-            if (!isEqual(this.props.countries.data, prevProps.countries.data)) {
-                let values = {};
-                //work around for stupid js referencing
-                //cause in the way this is set up
-                // the filter values change without setState
-                for (let key in this.state.filters.values) {
-                    if (this.state.filters.values.hasOwnProperty(key)) {
-                        if(key === 'participating_organisation_ref')
-                        {
-                          values['participating_organisation'] = this.state.filters.values[key];
-                        }else
-                        {
-                            values[key] = this.state.filters.values[key];
-                        }
-                    }
-                }
-                this.actionRequest(
-                    extend({}, { fields: 'count', format: 'json' }, values),
-                    null,
-                    actions.projectsRequest
-                );
-            }
+  countriesRequest() {
+    const { filters } = this.state;
+    const params = {
+      aggregations: 'activity_count,incoming_fund,disbursement,value',
+      group_by: '',
+      order_by: '-value',
+      reporting_organisation_identifier: process.env.REACT_APP_REPORTING_ORGANISATION_IDENTIFIER
+    };
+    let values = {};
+    if(filters.values.participating_organisation) {
+      const target = filters.values;
+      for (let key in target){
+        if (target.hasOwnProperty(key)) {
+          if(key === 'participating_organisation') {
+            values['participating_organisation_ref'] = target[key]
+          } else {
+            values[key] = target[key]
+          }
+        }
+      }
+    } else {
+      values = filters.values;
     }
+    this.actionRequest(
+      extend({}, params, values), 'recipient_country', actions.countriesRequest
+    );
+    this.actionRequest(
+      extend({}, params, values), 'participating_organisation', actions.countryDonorsRequest
+    );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // TODO: this really complicated, please make this more simple from chips module.
+    const { params, filters } = this.state;
+    if (get(filters, 'chips.participating_organisation_ref.values.length', 0) === 0) {
+      delete filters.values['participating_organisation'];
+    }
+    let participatingOrganisationFilter = get(filters.values, 'participating_organisation_ref');
+    if (participatingOrganisationFilter) {
+      delete filters.values['participating_organisation_ref'];
+      filters.values['participating_organisation'] = participatingOrganisationFilter;
+    }
+    if (prevState !== this.state) {
+      this.countriesRequest();
+      if (prevState.dataRange !== this.state.dataRange) {
+        delete filters.values['page'];
+        const filterValues = filters.values;
+        filterValues.total_budget_gte = this.state.dataRange[0];
+        filterValues.total_budget_lte = this.state.dataRange[1];
+        this.actionRequest(
+          extend({}, params, filters.values),
+          null,
+          actions.projectsRequest
+        );
+      } else {
+        this.actionRequest(
+          extend({}, params, filters.values),
+          null,
+          actions.projectsRequest
+        );
+      }
+    }
+  }
 
   onToggleSummary() {
     this.setState({showSummary: !this.state.showSummary});
