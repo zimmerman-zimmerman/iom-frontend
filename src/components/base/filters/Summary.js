@@ -17,11 +17,17 @@ import { formatNumberComma } from '../../../helpers/generic';
 class Summary extends Component {
   render() {
     const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
-    let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({ date: key, total: val }));
+    let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({
+        date: key, total: val
+    }));
     let sumActivityCount = sumBy(data, function (item) {
         return get(item, 'activity_count', 0);
     });
-    let sumBudget = sumBy(data, function (item) {
+
+    const data_for_total_budgets = data == null ? null : data.filter(function (value) {
+        return value["participating_organisation_ref"] == "XM-DAC-47066"
+    });
+    let sumBudget = sumBy(data_for_total_budgets, function (item) {
         return get(item, fieldValue, 0);
     });
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
@@ -46,7 +52,7 @@ class Summary extends Component {
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong className={classes.number}>{sumActivityCount}</strong>
+            <strong className={classes.number}>{projectsCount}</strong>
           </Col>
         </Row>
         <Row>
