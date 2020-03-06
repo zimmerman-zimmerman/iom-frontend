@@ -25,7 +25,7 @@ class Summary extends Component {
     });
 
     const data_for_total_budgets = data == null ? null : data.filter(function (value) {
-        return value["participating_organisation"] !== "International Organization for Migration (IOM)"
+        return value["participating_organisation_role"] === "1"
     });
     let sumBudget = sumBy(data_for_total_budgets, function (item) {
         return get(item, fieldValue, 0);
