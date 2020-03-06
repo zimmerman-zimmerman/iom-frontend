@@ -5,6 +5,9 @@ import { Row, Col } from 'react-flexbox-grid';
 import injectSheet from 'react-jss';
 import Button from 'antd/es/button';
 import get from 'lodash/get';
+import countBy from 'lodash/countBy';
+import map from 'lodash/map';
+import sumBy from 'lodash/sumBy';
 import PropsType from 'prop-types';
 
 import Trans from '../../../locales/Trans';
@@ -14,12 +17,19 @@ import { formatNumberComma } from '../../../helpers/generic';
 class Summary extends Component {
   render() {
     const { data, fieldValue, onHideSummary, donorsCount, classes, projectsCount } = this.props;
-    let totalBudget = 0;
-    if (data) {
-      data.forEach(function (item) {
-        totalBudget += get(item, fieldValue, 0);
-      });
-    }
+    let donors = map(countBy(data, "participating_organisation_ref"), (val, key) => ({
+        date: key, total: val
+    }));
+    let sumActivityCount = sumBy(data, function (item) {
+        return get(item, 'activity_count', 0);
+    });
+
+    const data_for_total_budgets = data == null ? null : data.filter(function (value) {
+        return value["participating_organisation_role"] === "1"
+    });
+    let sumBudget = sumBy(data_for_total_budgets, function (item) {
+        return get(item, fieldValue, 0);
+    });
     const usd = <Trans id="currency.usd" defaultMessage="US$ " />;
     return (
       <Card className={classes.summary}>
@@ -32,7 +42,7 @@ class Summary extends Component {
           <Divider className="Divider"/>
         <Row>
           <Col xs={12}>
-            <strong className={classes.number}>{usd}{formatNumberComma(totalBudget)}</strong>
+            <strong className={classes.number}>{usd}{formatNumberComma(sumBudget)}</strong>
           </Col>
         </Row>
         <Row>
@@ -52,7 +62,7 @@ class Summary extends Component {
         </Row>
         <Row className="gap-row">
           <Col xs={12}>
-            <strong className={classes.number}>{donorsCount}</strong>
+            <strong className={classes.number}>{get(donors, 'length')}</strong>
           </Col>
         </Row>
         <Row>

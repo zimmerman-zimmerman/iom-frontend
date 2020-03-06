@@ -147,6 +147,7 @@
   "projects.table.budget": "Budget",
   "projects.table.sector": "Sector by IOM project type",
   "projects.table.country": "Country",
+  "projects.table.region": "Region",
   "projects.filters.projects": "Projects",
   "projects.filters.project": "Projects",
 

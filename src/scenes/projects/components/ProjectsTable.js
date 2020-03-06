@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import injectSheet from 'react-jss';
 import size from 'lodash/size';
 
+import Trans from '../../../locales/Trans';
 import BaseFilter from "../../../components/base/filters/BaseFilter";
 
 import './ProjectsTable.scss';
@@ -115,7 +116,7 @@ class ProjectsTable extends BaseFilter {
         }
     }, {
       title: <SortHeader
-              title={intl.formatMessage({id: 'projects.table.region', defaultMessage: 'Region'})}
+              title={'Region'}
               sortValue={filters.values.ordering}
               defSortValue={'recipient_region__name'}
               onSort={this.handleChange}
