@@ -90,7 +90,7 @@ workflows:
       #       - checkout_repo
       - test_performance:
           requires:
-            - build_deploy
+            - checkout_repo
       # - test_e2e:
       #     requires:
       #       - build_deploy
