@@ -221,11 +221,7 @@ class ProjectLocation extends Component {
               id: "project.location.fields.donor.reference",
               defaultMessage: "Funding donor IATI reference:",
             },
-            value: (
-              <span>
-                {get(data, "participating_organisations[0].ref", "-")}
-              </span>
-            ),
+            value: <span>{get(fundingDonor, "ref", "-")}</span>,
           },
           {
             name: {
