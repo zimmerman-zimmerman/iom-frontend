@@ -54,7 +54,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo sh -c 'echo "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list'
       - run: sudo apt install rsync
-      - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/projects/iom-frontend/build
+      - run: rsync -ave  ssh ~/iom-frontend/build $SSH_USER@$SSH_HOST:~/projects/iom-frontend/
 
   #  EVALUATE BROWSER PERFORMANCE WITH LIGHTHOUSE
   test_performance:
@@ -85,12 +85,12 @@ workflows:
   test_build_deploy:
     jobs:
       - checkout_repo
-      - build_deploy:
-          requires:
-            - checkout_repo
+      # - build_deploy:
+      #     requires:
+      #       - checkout_repo
       - test_performance:
           requires:
-            - build_deploy
+            - checkout_repo
       # - test_e2e:
       #     requires:
       #       - build_deploy
