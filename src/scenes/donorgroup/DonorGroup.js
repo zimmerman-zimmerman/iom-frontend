@@ -5,6 +5,8 @@ import injectSheet from "react-jss";
 import Page from "../../components/base/Page";
 import BaseFilter from "../../components/base/filters/BaseFilter";
 import get from "lodash/get";
+import find from "lodash/find";
+import isEqual from "lodash/isEqual";
 import extend from "lodash/extend";
 import * as actions from "../../services/actions/index";
 import { connect } from "react-redux";
@@ -14,6 +16,14 @@ import DonorsTable from "./components/DonorsTable";
 import { addFilterValues } from "../../helpers/generic";
 
 class DonorGroup extends BaseFilter {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+      data: [],
+    };
+  }
+
   componentDidMount() {
     const { dispatch, donorsGroupsJsonSlug } = this.props;
     this.setState({ actionRequest: true });
@@ -59,15 +69,32 @@ class DonorGroup extends BaseFilter {
       );
       this.setState({ actionRequest: false });
     }
+
+    if (!isEqual(prevProps.donor, this.props.donor)) {
+      const rawData = get(this.props, "donor.data.results", []);
+      const data = [];
+      if (donorGroup) {
+        const splits = donorGroup.filter.split(",");
+        splits.forEach((split) => {
+          const fDonor = find(rawData, {
+            participating_organisation_ref: split,
+          });
+          if (fDonor) {
+            data.push(fDonor);
+          }
+        });
+        this.setState({ data });
+      }
+    }
   }
 
   render() {
+    const { data } = this.state;
     const { classes, donorsGroupsJson } = this.props;
     const group = get(this.props, "match.params.group", "");
     const donorGroup = donorsGroupsJson.success
       ? get(donorsGroupsJson.data.content, group.toUpperCase())
       : null;
-    const data = get(this.props, "donor.data.results");
     const breadcrumbItems = [
       { url: "/", text: <Trans id="main.menu.home" text="Home" /> },
       { url: "/donors", text: <Trans id="main.menu.donors" text="Donors" /> },
