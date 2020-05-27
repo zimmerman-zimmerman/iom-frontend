@@ -75,12 +75,13 @@ class DonorGroup extends BaseFilter {
       const data = [];
       if (donorGroup) {
         const splits = donorGroup.filter.split(",");
-        splits.forEach((split) => {
-          const fDonor = find(rawData, {
-            participating_organisation_ref: split,
-          });
+        rawData.forEach((donor) => {
+          const fDonor = find(
+            splits,
+            (s) => s === donor.participating_organisation_ref
+          );
           if (fDonor) {
-            data.push(fDonor);
+            data.push(donor);
           }
         });
         this.setState({ data });
